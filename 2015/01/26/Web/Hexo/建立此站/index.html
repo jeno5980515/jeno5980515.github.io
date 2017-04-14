@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://jeno5980515.github.io/img/Blog/hexo_d2.bmp">
 <meta property="og:image" content="http://jeno5980515.github.io/img/Blog/key.bmp">
 <meta property="og:image" content="http://jeno5980515.github.io/img/Blog/key2.bmp">
-<meta property="og:updated_time" content="2017-04-08T02:42:50.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:56:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Hexo] 環境建置">
 <meta name="twitter:description" content="一直想寫網誌很久了，想找一個地方記錄一下所學過的東西，剛好就趁著寒假的空檔來學習如何利用GitHub架設Blog。由於對於這些東西一概不知，即便看起來簡單的步驟也是折騰了好一陣子，希望這篇文章可以幫助到其他人。  詳細的內容還在研究，目前只能提供初步的內容。">
@@ -120,24 +120,23 @@
         <p>一直想寫網誌很久了，想找一個地方記錄一下所學過的東西，剛好就趁著寒假的空檔來學習如何利用GitHub架設Blog。由於對於這些東西一概不知，即便看起來簡單的步驟也是折騰了好一陣子，希望這篇文章可以幫助到其他人。 </p>
 <p>詳細的內容還在研究，目前只能提供初步的內容。</p>
 <a id="more"></a>
-<p>##申請GitHub </p><h2><br>首先先到<a href="https://github.com/" target="_blank" rel="external">GitHub</a>申請帳號<br>申請完後，點選<code>New Repository</code><br><img src="/img/Blog/new_repository.bmp" alt="">  <p></p>
+<h2 id="申請GitHub"><a href="#申請GitHub" class="headerlink" title="申請GitHub "></a>申請GitHub <h2></h2><p>首先先到<a href="https://github.com/" target="_blank" rel="external">GitHub</a>申請帳號<br>申請完後，點選<code>New Repository</code><br><img src="/img/Blog/new_repository.bmp" alt="">  </p>
 <p>在名字填入<code>使用者名稱.github.io</code><br><img src="/img/Blog/new_repository2.bmp" alt=""></p>
-<p>##安裝Git、Node.js </p><h2><br>下載並安裝<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a>和<a href="http://git-scm.com/" target="_blank" rel="external">Git</a><p></p>
-<p>##安裝Hexo </p><h2><br>打開cmd輸入<code>npm install hexo -g</code><br><img src="/img/Blog/npm_install.bmp" alt=""><p></p>
+<h2 id="安裝Git、Node-js"><a href="#安裝Git、Node-js" class="headerlink" title="安裝Git、Node.js "></a>安裝Git、Node.js <h2></h2><p>下載並安裝<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a>和<a href="http://git-scm.com/" target="_blank" rel="external">Git</a></p>
+<h2 id="安裝Hexo"><a href="#安裝Hexo" class="headerlink" title="安裝Hexo "></a>安裝Hexo <h2></h2><p>打開cmd輸入<code>npm install hexo -g</code><br><img src="/img/Blog/npm_install.bmp" alt=""></p>
 <p>安裝完<br><img src="/img/Blog/npm_install2.bmp" alt=""></p>
-<p>##使用Hexo </p><h2><br>先建立一個資料夾，之後到資料夾內點右鍵<code>Git Bash</code><br><img src="/img/Blog/git_bash.bmp" alt=""><p></p>
+<h2 id="使用Hexo"><a href="#使用Hexo" class="headerlink" title="使用Hexo "></a>使用Hexo <h2></h2><p>先建立一個資料夾，之後到資料夾內點右鍵<code>Git Bash</code><br><img src="/img/Blog/git_bash.bmp" alt=""></p>
 <p>輸入<code>hexo init</code>並等候建立完成<br><img src="/img/Blog/hexo_init.bmp" alt=""></p>
 <p>輸入<code>npm install</code>安裝套件<br><img src="/img/Blog/npm_install3.bmp" alt=""></p>
 <p>輸入<code>hexo g</code>產生public檔<br><img src="/img/Blog/hexo_g.bmp" alt=""></p>
 <p>輸入<code>hexo s</code>啟動伺服器<br><img src="/img/Blog/hexo_s.bmp" alt=""></p>
 <p>瀏覽器輸入<code>localhost:4000</code>即可看到網站囉<br><img src="/img/Blog/localhost.bmp" alt=""></p>
-<p>##發佈到GitHub </p><h2><br>打開<code>_config.yml</code><br><img src="/img/Blog/config.bmp" alt=""><p></p>
+<h2 id="發佈到GitHub"><a href="#發佈到GitHub" class="headerlink" title="發佈到GitHub "></a>發佈到GitHub <h2></h2><p>打開<code>_config.yml</code><br><img src="/img/Blog/config.bmp" alt=""></p>
 <p>拉至最下面找到<code>deploy</code><br><img src="/img/Blog/deploy.bmp" alt=""></p>
 <p>改成<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: github</div><div class="line">  repository: git@github.com:使用者名稱/使用者名稱.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
 <p>輸入<code>hexo d</code>並等候一段時間後<br><img src="/img/Blog/hexo_d2.bmp" alt=""></p>
 <p>接下來只要到<code>使用者名稱.github.io</code>就可以看到Blog了</p>
-<p>##Bug </p><h2><p></p>
-<ul>
+<h2 id="Bug"><a href="#Bug" class="headerlink" title="Bug "></a>Bug <h2></h2><ul>
 <li>如果發佈途中顯示<code>Permission denied (publickey)</code><ul>
 <li>可照著<a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="external">官方指示</a>做即可，如果在<code>$ ssh-add</code>步驟遇到問題，可參照以下步驟<br>  建立好Key後將<code>id_rsa.pub</code>檔案內容複製<br>  <img src="/img/Blog/key.bmp" alt=""><br>  並在GitHub中的<code>settings</code>中找到<code>SSH Keys</code>將內容貼上即可<br>  <img src="/img/Blog/key2.bmp" alt=""></li>
 </ul>
@@ -147,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/01/26/Web/Hexo/建立此站/" data-id="cj1hupfj2003s6b3hpekcef1y" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/01/26/Web/Hexo/建立此站/" data-id="cj1hweght005eb93h4naf9c45" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/01/26/Web/Hexo/建立此站/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -206,7 +205,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -273,7 +272,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

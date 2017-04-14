@@ -5,17 +5,17 @@
   
   <title>[UVa] 10271 - Chopsticks | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
+  <meta name="description" content="前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
 <meta name="keywords" content="UVa,dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[UVa] 10271 - Chopsticks">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/28/Online Judge/UVa/10271 - Chopsticks/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
-<meta property="og:updated_time" content="2017-04-08T02:37:15.000Z">
+<meta property="og:description" content="前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
+<meta property="og:updated_time" content="2017-04-14T13:27:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[UVa] 10271 - Chopsticks">
-<meta name="twitter:description" content="#前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
+<meta name="twitter:description" content="前言要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,21 +101,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>要講這題之前先看一下基本題，今天有N雙筷子，每一個人拿兩雙，請算出每個人所拿筷子差的平方和最小值為多少。</p>
 <a id="more"></a>
 <p>先將筷子從小到大排序，可以知道說對於每一雙筷子來說，與它差最小的一定是和這雙筷子相鄰的那雙。</p>
 <p>因此假設dp(i,j)代表i個人，到第j雙筷子的最小值，可以得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dp(i,j) = min(dp(i,j-1),dp(i-1,j-2) + (l[j] - l[j-1])^2 )</div></pre></td></tr></table></figure></p>
 <p>接下來看這一題。</p>
-<p>#題意<br>每個人必須拿三雙筷子，但只計算較小的兩雙差的平方和，最長不計，另外不論客人多少人都要加上8個人。</p>
-<p>#解法<br>原本是由小排到大，所以第j雙一定是到目前為止最大的那一雙，但如此一來就不能保證還有更大的一雙可以拿，所以換個方式改成由大排到小。</p>
+<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>每個人必須拿三雙筷子，但只計算較小的兩雙差的平方和，最長不計，另外不論客人多少人都要加上8個人。</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>原本是由小排到大，所以第j雙一定是到目前為止最大的那一雙，但如此一來就不能保證還有更大的一雙可以拿，所以換個方式改成由大排到小。</p>
 <p>因此得到下式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dp(i,j) = min(dp(i,j-1),dp(i-1,j-2) + (l[j] - l[j-1])^2 ) if j &gt;= i * 3</div></pre></td></tr></table></figure></p>
-<p>#程式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXNUM 999999999</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[<span class="number">1001</span>][<span class="number">5001</span>] ;</div><div class="line"><span class="keyword">int</span> chopsticks[<span class="number">5001</span>] ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> number , K , N ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">1001</span> ; i ++ )</div><div class="line">		dp[i][<span class="number">0</span>] = MAXNUM ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">5001</span> ; i ++ )</div><div class="line">		dp[<span class="number">0</span>][i] = <span class="number">0</span> ;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; number ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> n = <span class="number">0</span> ; n &lt; number ; n ++ )&#123;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; K &gt;&gt; N ;</div><div class="line">		K += <span class="number">8</span> ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = N  ; i &gt; <span class="number">0</span> ; i -- )&#123;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; chopsticks[i] ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; K + <span class="number">1</span> ; i ++ )&#123;</div><div class="line">			<span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt; N + <span class="number">1</span> ; j ++ )&#123;</div><div class="line">				<span class="keyword">if</span> ( j &lt; i * <span class="number">3</span> )&#123;</div><div class="line">					dp[i][j] = MAXNUM ;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( j &gt;= i * <span class="number">3</span> )&#123;</div><div class="line">					dp[i][j] = min(dp[i][j<span class="number">-1</span>],dp[i<span class="number">-1</span>][j<span class="number">-2</span>]+(chopsticks[j]-chopsticks[j<span class="number">-1</span>])*(chopsticks[j]-chopsticks[j<span class="number">-1</span>])) ;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; dp[K][N] &lt;&lt; <span class="built_in">endl</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXNUM 999999999</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> dp[<span class="number">1001</span>][<span class="number">5001</span>] ;</div><div class="line"><span class="keyword">int</span> chopsticks[<span class="number">5001</span>] ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> number , K , N ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">1001</span> ; i ++ )</div><div class="line">		dp[i][<span class="number">0</span>] = MAXNUM ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">5001</span> ; i ++ )</div><div class="line">		dp[<span class="number">0</span>][i] = <span class="number">0</span> ;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; number ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> n = <span class="number">0</span> ; n &lt; number ; n ++ )&#123;</div><div class="line">		<span class="built_in">cin</span> &gt;&gt; K &gt;&gt; N ;</div><div class="line">		K += <span class="number">8</span> ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = N  ; i &gt; <span class="number">0</span> ; i -- )&#123;</div><div class="line">			<span class="built_in">cin</span> &gt;&gt; chopsticks[i] ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; K + <span class="number">1</span> ; i ++ )&#123;</div><div class="line">			<span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span> ; j &lt; N + <span class="number">1</span> ; j ++ )&#123;</div><div class="line">				<span class="keyword">if</span> ( j &lt; i * <span class="number">3</span> )&#123;</div><div class="line">					dp[i][j] = MAXNUM ;</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( j &gt;= i * <span class="number">3</span> )&#123;</div><div class="line">					dp[i][j] = min(dp[i][j<span class="number">-1</span>],dp[i<span class="number">-1</span>][j<span class="number">-2</span>]+(chopsticks[j]-chopsticks[j<span class="number">-1</span>])*(chopsticks[j]-chopsticks[j<span class="number">-1</span>])) ;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; dp[K][N] &lt;&lt; <span class="built_in">endl</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/28/Online Judge/UVa/10271 - Chopsticks/" data-id="cj1hupfhw00286b3hi39vnb6m" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/28/Online Judge/UVa/10271 - Chopsticks/" data-id="cj1hwegf30026b93hdf6o4jdr" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/28/Online Judge/UVa/10271 - Chopsticks/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -174,7 +173,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -241,7 +240,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="Animation提供了許多動畫效果，像是縮放、旋轉等等，利用其函式可達到按鈕放大的效果。">
 <meta property="og:image" content="http://jeno5980515.github.io/img/App設計/Android/Animation/1.gif">
-<meta property="og:updated_time" content="2017-04-08T02:35:09.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:24:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Android] Animation動畫效果">
 <meta name="twitter:description" content="Animation提供了許多動畫效果，像是縮放、旋轉等等，利用其函式可達到按鈕放大的效果。">
@@ -107,13 +107,12 @@
 <a id="more"></a>
 <p><img src="/img/App設計/Android/Animation/1.gif" alt=""></p>
 <p>另外推薦一個好用的模擬器，<a href="http://www.amiduos.com/" target="_blank" rel="external">DuOS</a></p>
-<p>##Java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">button.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()&#123; </div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</div><div class="line">		Animation am = <span class="keyword">null</span> ;</div><div class="line">		am = AnimationUtils.loadAnimation(context , R.anim.larger);</div><div class="line">		<span class="keyword">if</span>(event.getAction() == MotionEvent.ACTION_DOWN)&#123;</div><div class="line">			button.startAnimation(am);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(event.getAction() == MotionEvent.ACTION_UP) &#123;</div><div class="line">			button.clearAnimation();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>##XML<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">scale</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:duration</span>=<span class="string">"300"</span></div><div class="line">    <span class="attr">android:fromXScale</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:fromYScale</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:pivotX</span>=<span class="string">"50%"</span></div><div class="line">    <span class="attr">android:pivotY</span>=<span class="string">"50%"</span></div><div class="line">    <span class="attr">android:toXScale</span>=<span class="string">"1.3"</span></div><div class="line">    <span class="attr">android:toYScale</span>=<span class="string">"1.3"</span> </div><div class="line">    <span class="attr">android:fillAfter</span>=<span class="string">"true"</span>&gt; </div><div class="line"><span class="tag">&lt;/<span class="name">scale</span>&gt;</span></div></pre></td></tr></table></figure></p>
-
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">button.setOnTouchListener(<span class="keyword">new</span> OnTouchListener()&#123; </div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View v, MotionEvent event)</span> </span>&#123;</div><div class="line">		Animation am = <span class="keyword">null</span> ;</div><div class="line">		am = AnimationUtils.loadAnimation(context , R.anim.larger);</div><div class="line">		<span class="keyword">if</span>(event.getAction() == MotionEvent.ACTION_DOWN)&#123;</div><div class="line">			button.startAnimation(am);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(event.getAction() == MotionEvent.ACTION_UP) &#123;</div><div class="line">			button.clearAnimation();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="XML"><a href="#XML" class="headerlink" title="XML"></a>XML</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">scale</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:duration</span>=<span class="string">"300"</span></div><div class="line">    <span class="attr">android:fromXScale</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:fromYScale</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:pivotX</span>=<span class="string">"50%"</span></div><div class="line">    <span class="attr">android:pivotY</span>=<span class="string">"50%"</span></div><div class="line">    <span class="attr">android:toXScale</span>=<span class="string">"1.3"</span></div><div class="line">    <span class="attr">android:toYScale</span>=<span class="string">"1.3"</span> </div><div class="line">    <span class="attr">android:fillAfter</span>=<span class="string">"true"</span>&gt; </div><div class="line"><span class="tag">&lt;/<span class="name">scale</span>&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/Animation效果/" data-id="cj1hupffz000l6b3ho1qiabql" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/Animation效果/" data-id="cj1hwegd1000nb93hb5squs9u" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/Animation效果/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -126,19 +125,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/02/07/Mobile Application/Android/頁面切換及子頁面/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          [Android] 頁面切換及子頁面
+          [Android] 自定義ListView加入RadioGroup
         
       </div>
     </a>
   
   
-    <a href="/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/08/Mobile Application/Android/Spinner字體大小/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[Android] 自定義ListView加入RadioGroup</div>
+      <div class="article-nav-title">[Android] Spinner字體大小</div>
     </a>
   
 </nav>
@@ -172,7 +171,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -239,7 +238,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

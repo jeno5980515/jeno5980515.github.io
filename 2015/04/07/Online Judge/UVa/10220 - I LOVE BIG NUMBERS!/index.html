@@ -5,17 +5,17 @@
   
   <title>[UVa] 10220 - I LOVE BIG NUMBERS! | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意 求出階層的位數相加值。">
+  <meta name="description" content="題意求出階層的位數相加值。">
 <meta name="keywords" content="UVa,Big Number">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[UVa] 10220 - I LOVE BIG NUMBERS!">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/07/Online Judge/UVa/10220 - I LOVE BIG NUMBERS!/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意 求出階層的位數相加值。">
-<meta property="og:updated_time" content="2017-04-08T02:37:09.000Z">
+<meta property="og:description" content="題意求出階層的位數相加值。">
+<meta property="og:updated_time" content="2017-04-14T13:26:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[UVa] 10220 - I LOVE BIG NUMBERS!">
-<meta name="twitter:description" content="#題意 求出階層的位數相加值。">
+<meta name="twitter:description" content="題意求出階層的位數相加值。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,17 +101,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意</p>
-<p>求出階層的位數相加值。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求出階層的位數相加值。</p>
 <a id="more"></a>
-<p>#解法</p>
-<p>硬幹。</p>
-<p>#程式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> t[<span class="number">1001</span>][<span class="number">2600</span>] = &#123;&#125; , a[<span class="number">1001</span>] = &#123;&#125; ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	t[<span class="number">0</span>][<span class="number">0</span>] = t[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">0</span>] = a[<span class="number">1</span>] = <span class="number">1</span> ;</div><div class="line">	<span class="keyword">int</span> count1 = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; <span class="number">1001</span> ; i ++ )&#123;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; count1 + <span class="number">1</span> ; j ++ )&#123;</div><div class="line">			t[i][j] += t[i<span class="number">-1</span>][j] * i ;</div><div class="line">			<span class="keyword">if</span> ( t[i][j] &gt; <span class="number">9</span> )&#123;</div><div class="line">				t[i][j+<span class="number">1</span>] += t[i][j] / <span class="number">10</span> ;</div><div class="line">				t[i][j] %= <span class="number">10</span> ;</div><div class="line">				<span class="keyword">if</span> ( j + <span class="number">1</span> &gt; count1 )</div><div class="line">					count1 = j + <span class="number">1</span> ;</div><div class="line">			&#125;</div><div class="line">			a[i] += t[i][j] ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> input ;</div><div class="line">	<span class="keyword">while</span> ( <span class="built_in">cin</span> &gt;&gt; input )&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; a[input] &lt;&lt; <span class="built_in">endl</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>硬幹。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> t[<span class="number">1001</span>][<span class="number">2600</span>] = &#123;&#125; , a[<span class="number">1001</span>] = &#123;&#125; ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	t[<span class="number">0</span>][<span class="number">0</span>] = t[<span class="number">1</span>][<span class="number">0</span>] = a[<span class="number">0</span>] = a[<span class="number">1</span>] = <span class="number">1</span> ;</div><div class="line">	<span class="keyword">int</span> count1 = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; <span class="number">1001</span> ; i ++ )&#123;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; count1 + <span class="number">1</span> ; j ++ )&#123;</div><div class="line">			t[i][j] += t[i<span class="number">-1</span>][j] * i ;</div><div class="line">			<span class="keyword">if</span> ( t[i][j] &gt; <span class="number">9</span> )&#123;</div><div class="line">				t[i][j+<span class="number">1</span>] += t[i][j] / <span class="number">10</span> ;</div><div class="line">				t[i][j] %= <span class="number">10</span> ;</div><div class="line">				<span class="keyword">if</span> ( j + <span class="number">1</span> &gt; count1 )</div><div class="line">					count1 = j + <span class="number">1</span> ;</div><div class="line">			&#125;</div><div class="line">			a[i] += t[i][j] ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> input ;</div><div class="line">	<span class="keyword">while</span> ( <span class="built_in">cin</span> &gt;&gt; input )&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; a[input] &lt;&lt; <span class="built_in">endl</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/07/Online Judge/UVa/10220 - I LOVE BIG NUMBERS!/" data-id="cj1hupfho00236b3heh7ez19e" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/07/Online Judge/UVa/10220 - I LOVE BIG NUMBERS!/" data-id="cj1hwegew001zb93htya2622a" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/07/Online Judge/UVa/10220 - I LOVE BIG NUMBERS!/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -170,7 +167,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -237,7 +234,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

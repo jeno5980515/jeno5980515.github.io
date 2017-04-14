@@ -5,17 +5,17 @@
   
   <title>[LeetCode] 204 - Count Primes | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意輸出小於n的質數有幾個。">
+  <meta name="description" content="題意輸出小於n的質數有幾個。">
 <meta name="keywords" content="LeetCode,204,Prime">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 204 - Count Primes">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/204 - Count Primes/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意輸出小於n的質數有幾個。">
-<meta property="og:updated_time" content="2017-04-08T02:36:41.000Z">
+<meta property="og:description" content="題意輸出小於n的質數有幾個。">
+<meta property="og:updated_time" content="2017-04-14T13:26:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LeetCode] 204 - Count Primes">
-<meta name="twitter:description" content="#題意輸出小於n的質數有幾個。">
+<meta name="twitter:description" content="題意輸出小於n的質數有幾個。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,16 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>輸出小於n的質數有幾個。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>輸出小於n的質數有幾個。</p>
 <a id="more"></a>
-<p>#解法<br>質數的演算法有許多種，這邊選擇<code>Sieve of Eratosthenes</code>。</p>
-<p>#心得<br>不知道測資範圍及如何檢驗，所以乾脆每次都重新建表。</p>
-<p>#程式<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> prime_count = <span class="number">0</span> ;</div><div class="line">		<span class="keyword">bool</span> prime[n] ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; n ; i ++ )&#123;</div><div class="line">			prime[i] = <span class="literal">true</span> ;</div><div class="line">		&#125;</div><div class="line">		prime[<span class="number">0</span>] = prime[<span class="number">1</span>] = <span class="literal">false</span> ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; n ; i ++ )&#123;</div><div class="line">			<span class="keyword">if</span> ( prime[i] == <span class="literal">true</span> )&#123;</div><div class="line">				prime_count ++ ;</div><div class="line">				<span class="keyword">for</span> ( <span class="keyword">int</span> j = i + i ; j &lt; n ; j += i )</div><div class="line">					prime[j] = <span class="literal">false</span> ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> prime_count ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>質數的演算法有許多種，這邊選擇<code>Sieve of Eratosthenes</code>。</p>
+<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>不知道測資範圍及如何檢驗，所以乾脆每次都重新建表。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> prime_count = <span class="number">0</span> ;</div><div class="line">		<span class="keyword">bool</span> prime[n] ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; n ; i ++ )&#123;</div><div class="line">			prime[i] = <span class="literal">true</span> ;</div><div class="line">		&#125;</div><div class="line">		prime[<span class="number">0</span>] = prime[<span class="number">1</span>] = <span class="literal">false</span> ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt; n ; i ++ )&#123;</div><div class="line">			<span class="keyword">if</span> ( prime[i] == <span class="literal">true</span> )&#123;</div><div class="line">				prime_count ++ ;</div><div class="line">				<span class="keyword">for</span> ( <span class="keyword">int</span> j = i + i ; j &lt; n ; j += i )</div><div class="line">					prime[j] = <span class="literal">false</span> ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> prime_count ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/204 - Count Primes/" data-id="cj1hupfhb001n6b3hekrxm7ue" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/204 - Count Primes/" data-id="cj1hwegei001kb93hw9oulqil" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/204 - Count Primes/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -169,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -236,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

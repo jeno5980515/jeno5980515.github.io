@@ -14,7 +14,7 @@
 <meta property="og:description" content="最近由於微接班人，所以開始惡補網頁技術，只好把前一陣子做好但Bug重重的壓縮軟體延後了。 由於專案需求，開始研究PhoneGap，紀錄一下建置過程，關於PhoneGap的心得等到熟悉後再補上，而此文介紹的是Windows環境下的Android。 簡單介紹一下PhoneGap，就是將html包裝成App，夠簡單吧。">
 <meta property="og:image" content="http://jeno5980515.github.io/img/PhoneGap/Install/1.png">
 <meta property="og:image" content="http://jeno5980515.github.io/img/PhoneGap/Install/2.png">
-<meta property="og:updated_time" content="2017-04-08T02:35:38.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:24:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[PhoneGap] 環境建置">
 <meta name="twitter:description" content="最近由於微接班人，所以開始惡補網頁技術，只好把前一陣子做好但Bug重重的壓縮軟體延後了。 由於專案需求，開始研究PhoneGap，紀錄一下建置過程，關於PhoneGap的心得等到熟悉後再補上，而此文介紹的是Windows環境下的Android。 簡單介紹一下PhoneGap，就是將html包裝成App，夠簡單吧。">
@@ -108,7 +108,7 @@
 <p>由於專案需求，開始研究<code>PhoneGap</code>，紀錄一下建置過程，關於<code>PhoneGap</code>的心得等到熟悉後再補上，而此文介紹的是<code>Windows</code>環境下的<code>Android</code>。</p>
 <p>簡單介紹一下<code>PhoneGap</code>，就是將<code>html</code>包裝成<code>App</code>，夠簡單吧。</p>
 <a id="more"></a>
-<p>##前置安裝 </p><h2><br>以前是採用<code>import</code>的方法，但現在改為<code>npm</code>安裝了，所以記得先安裝<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a><p></p>
+<h2 id="前置安裝"><a href="#前置安裝" class="headerlink" title="前置安裝 "></a>前置安裝 <h2></h2><p>以前是採用<code>import</code>的方法，但現在改為<code>npm</code>安裝了，所以記得先安裝<a href="http://nodejs.org/" target="_blank" rel="external">Node.js</a></p>
 <p>要使用PhoneGap前先確認下列安裝完成</p>
 <ul>
 <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">Java JDK</a> </li>
@@ -122,12 +122,11 @@
 <li><code>ANT_HOME</code>，路徑為Ant路徑</li>
 <li>PATH，後面加上<code>;%JAVA_HOME%\bin\;%ANT_HOME%\bin\;SDK路徑\tools\;SDK路徑\platform-tools\</code></li>
 </ul>
-<p>##PhoneGap </p><h2><br>安裝PhoneGap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g phonegap</div></pre></td></tr></table></figure><p></p>
+<h2 id="PhoneGap"><a href="#PhoneGap" class="headerlink" title="PhoneGap "></a>PhoneGap <h2></h2><p>安裝PhoneGap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g phonegap</div></pre></td></tr></table></figure></p>
 <p>安裝完即可建立App<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">phonegap create myapp</div></pre></td></tr></table></figure></p>
 <p>之後在<code>www</code>裡的就可以使用<code>HTML</code>、<code>CSS</code>等等編寫</p>
 <p>在虛擬機上執行App，但得先設定好模擬器<br>而Apk檔會在<code>myapp\platforms\android\ant-build</code>裡，<br>如果要輸出<code>Release</code>版本的則得另外設定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">phonegap run android</div></pre></td></tr></table></figure></p>
-<p>##Error </p><h2> <p></p>
-<ul>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error "></a>Error <h2></h2><ul>
 <li><p>安裝PhoneGap時顯示錯誤<br><img src="/img/PhoneGap/Install/1.png" alt=""></p>
 <ul>
 <li>目前還不清楚原因和解決方法<br>  可以試試看先安裝<code>cordova</code></li>
@@ -148,12 +147,12 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova build android</div></pre></td></tr></table></figure>
-<p>##工具 </p><h2><br>另外發現<code>PhoneGap</code>也提供了方便的<a href="http://phonegap.com/blog/2014/12/11/phonegap-desktop-app-beta/" target="_blank" rel="external">工具</a>可直接開發 <p></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具 "></a>工具 <h2></h2><p>另外發現<code>PhoneGap</code>也提供了方便的<a href="http://phonegap.com/blog/2014/12/11/phonegap-desktop-app-beta/" target="_blank" rel="external">工具</a>可直接開發 </p>
 </h2></h2></h2></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/02/02/Mobile Application/PhoneGap/安裝建置/" data-id="cj1hupfgc000y6b3hr423zoca" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/02/02/Mobile Application/PhoneGap/安裝建置/" data-id="cj1hwegdm0011b93h7fr3y1qm" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/02/02/Mobile Application/PhoneGap/安裝建置/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -212,7 +211,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -279,7 +278,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

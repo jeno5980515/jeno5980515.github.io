@@ -5,18 +5,18 @@
   
   <title>[Web] 整個網頁都是我的繪圖板 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言將之前做的畫圖做成小插件。">
+  <meta name="description" content="前言將之前做的畫圖做成小插件。">
 <meta name="keywords" content="JavaScript,HTML5,jsGraphics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] 整個網頁都是我的繪圖板">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/14/Web/Other/整個網頁都是我的繪圖板/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言將之前做的畫圖做成小插件。">
+<meta property="og:description" content="前言將之前做的畫圖做成小插件。">
 <meta property="og:image" content="http://jeno5980515.github.io/img/JavaScript/paint.png">
-<meta property="og:updated_time" content="2017-04-08T03:12:55.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:44:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] 整個網頁都是我的繪圖板">
-<meta name="twitter:description" content="#前言將之前做的畫圖做成小插件。">
+<meta name="twitter:description" content="前言將之前做的畫圖做成小插件。">
 <meta name="twitter:image" content="http://jeno5980515.github.io/img/JavaScript/paint.png">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
@@ -103,19 +103,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>將之前做的畫圖做成小插件。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>將之前做的畫圖做成小插件。</p>
 <a id="more"></a>
-<p>#介紹<br>點擊<a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);" target="_self" onclick="var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);">開始亂畫</a>就可以開始畫圖囉。</p>
-<p>#使用方法<br>將<a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);" target="_self" onclick="var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);">開始亂畫</a>拉到書籤或我的最愛，如此一來在想畫畫的網頁按下連結就可以開始作畫了。</p>
+<h1 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h1><p>點擊<a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);" target="_self" onclick="var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);">開始亂畫</a>就可以開始畫圖囉。</p>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>將<a href="javascript:var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);" target="_self" onclick="var s = document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//cdn.rawgit.com/jeno5980515/Paint/master/paint.js';void(0);">開始亂畫</a>拉到書籤或我的最愛，如此一來在想畫畫的網頁按下連結就可以開始作畫了。</p>
 <p>大概就是像這樣。<br><img src="/img/JavaScript/paint.png" alt=""></p>
-<p>#程式<br>將之前做的程式稍微修改一下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">var cnv = document.createElement(&quot;div&quot;);</div><div class="line">cnv.style.position = &quot;absolute&quot;;</div><div class="line">cnv.style.height = &quot;0px&quot;;</div><div class="line">cnv.style.width = &quot;0px&quot;;</div><div class="line">cnv.style.top = &quot;0px&quot;;</div><div class="line">cnv.style.left = &quot;0px&quot;;</div><div class="line">cnv.style.zIndex = &quot;9999&quot;;</div><div class="line">document.body.appendChild(cnv);</div><div class="line">var jg = new jsGraphics(cnv);</div><div class="line">jg.setStroke(3);</div><div class="line"></div><div class="line">var mousePress = false ;</div><div class="line">var nowMouseX , nowMouseY;</div><div class="line">var pastMouseX , pastMouseY ;</div><div class="line"></div><div class="line">$(document).mousemove(function (e) &#123;</div><div class="line">	pastMouseX = nowMouseX , paseMouseY = nowMouseY ;</div><div class="line">	nowMouseX = e.pageX + document.documentElement.scrollTop;</div><div class="line">	nowMouseY = e.pageY + document.documentElement.scrollLeft;</div><div class="line">	if ( mousePress === true )&#123;</div><div class="line">		jg.drawLine(pastMouseX,paseMouseY,nowMouseX,nowMouseY);</div><div class="line">		jg.paint();</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(document).mousedown(function (e) &#123;</div><div class="line">	mousePress = true ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(document).mouseup(function (e) &#123;</div><div class="line">	mousePress = false ;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><p>將之前做的程式稍微修改一下。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cnv = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</div><div class="line">cnv.style.position = <span class="string">"absolute"</span>;</div><div class="line">cnv.style.height = <span class="string">"0px"</span>;</div><div class="line">cnv.style.width = <span class="string">"0px"</span>;</div><div class="line">cnv.style.top = <span class="string">"0px"</span>;</div><div class="line">cnv.style.left = <span class="string">"0px"</span>;</div><div class="line">cnv.style.zIndex = <span class="string">"9999"</span>;</div><div class="line"><span class="built_in">document</span>.body.appendChild(cnv);</div><div class="line"><span class="keyword">var</span> jg = <span class="keyword">new</span> jsGraphics(cnv);</div><div class="line">jg.setStroke(<span class="number">3</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> mousePress = <span class="literal">false</span> ;</div><div class="line"><span class="keyword">var</span> nowMouseX , nowMouseY;</div><div class="line"><span class="keyword">var</span> pastMouseX , pastMouseY ;</div><div class="line"></div><div class="line">$(<span class="built_in">document</span>).mousemove(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">	pastMouseX = nowMouseX , paseMouseY = nowMouseY ;</div><div class="line">	nowMouseX = e.pageX + <span class="built_in">document</span>.documentElement.scrollTop;</div><div class="line">	nowMouseY = e.pageY + <span class="built_in">document</span>.documentElement.scrollLeft;</div><div class="line">	<span class="keyword">if</span> ( mousePress === <span class="literal">true</span> )&#123;</div><div class="line">		jg.drawLine(pastMouseX,paseMouseY,nowMouseX,nowMouseY);</div><div class="line">		jg.paint();</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="built_in">document</span>).mousedown(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">	mousePress = <span class="literal">true</span> ;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">$(<span class="built_in">document</span>).mouseup(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">	mousePress = <span class="literal">false</span> ;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>不知道為什麼有的網頁不能用，像是FB。</p>
-<p>#GitHub<br><a href="https://github.com/jeno5980515/Paint/blob/master/paint.js" target="_blank" rel="external">Paint.js</a></p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/Paint/blob/master/paint.js" target="_blank" rel="external">Paint.js</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/14/Web/Other/整個網頁都是我的繪圖板/" data-id="cj1hupfkn005m6b3hkv8u7baa" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/14/Web/Other/整個網頁都是我的繪圖板/" data-id="cj1hweghy005ob93hfdtup1n4" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/14/Web/Other/整個網頁都是我的繪圖板/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -174,7 +174,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -241,7 +241,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

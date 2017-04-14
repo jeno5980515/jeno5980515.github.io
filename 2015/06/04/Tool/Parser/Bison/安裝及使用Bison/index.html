@@ -5,17 +5,17 @@
   
   <title>[Bison] 安裝及使用Bison | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#介紹Unix底下的yacc在Windows有Bison可使用。">
+  <meta name="description" content="介紹Unix底下的yacc在Windows有Bison可使用。">
 <meta name="keywords" content="Parser,Bison">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Bison] 安裝及使用Bison">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/安裝及使用Bison/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#介紹Unix底下的yacc在Windows有Bison可使用。">
-<meta property="og:updated_time" content="2017-04-08T02:41:33.000Z">
+<meta property="og:description" content="介紹Unix底下的yacc在Windows有Bison可使用。">
+<meta property="og:updated_time" content="2017-04-14T13:30:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Bison] 安裝及使用Bison">
-<meta name="twitter:description" content="#介紹Unix底下的yacc在Windows有Bison可使用。">
+<meta name="twitter:description" content="介紹Unix底下的yacc在Windows有Bison可使用。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,19 +101,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#介紹<br>Unix底下的yacc在Windows有Bison可使用。</p>
+        <h1 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h1><p>Unix底下的yacc在Windows有Bison可使用。</p>
 <a id="more"></a>
-<p>#安裝<br>到<a href="http://gnuwin32.sourceforge.net/packages/bison.htm" target="_blank" rel="external">Bison</a>網站下載，其它設定可看<a href="http://jeno5980515.github.io/2015/04/30/%E5%B7%A5%E5%85%B7/Scanner/Flex/%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8Flex/#more">[Flex] 安裝及使用Flex</a>。</p>
-<p>#使用</p>
-<p>加法的範例。</p>
-<p>##ex1.l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">#include &quot;ex1.tab.h&quot;</div><div class="line">%&#125;</div><div class="line">%%</div><div class="line">\n	&#123;return(0) ;&#125;</div><div class="line">[ \t]+ &#123;;&#125;</div><div class="line">[0-9]+ &#123;yylval.ival = atoi(yytext);return(INUMBER);&#125;</div><div class="line">&quot;+&quot;|&quot;(&quot;|&quot;)&quot;	&#123;return(yytext[0]);&#125;</div><div class="line">.	&#123;return(yytext[0]);&#125;</div><div class="line">%%</div></pre></td></tr></table></figure></p>
-<p>##ex1.y<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">void yyerror(const char *message);</div><div class="line">%&#125;</div><div class="line">%union&#123;</div><div class="line">	int ival ;</div><div class="line">&#125;</div><div class="line">%token&lt;ival&gt; INUMBER</div><div class="line">%type&lt;ival&gt; expr</div><div class="line">%left &apos;+&apos;</div><div class="line">%%</div><div class="line">line :expr	&#123;printf(&quot;%d\n&quot;,$1);&#125;</div><div class="line">	;</div><div class="line">expr : expr &apos;+&apos; expr	&#123;$$=$1+$3;&#125;</div><div class="line">	| INUMBER</div><div class="line">	;</div><div class="line">%%</div><div class="line">void yyerror(const char *message)&#123;</div><div class="line">	;</div><div class="line">&#125; </div><div class="line"></div><div class="line">int main(int argc, char** argv)</div><div class="line">&#123;</div><div class="line">    yyparse();</div><div class="line">    return(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>到<a href="http://gnuwin32.sourceforge.net/packages/bison.htm" target="_blank" rel="external">Bison</a>網站下載，其它設定可看<a href="http://jeno5980515.github.io/2015/04/30/%E5%B7%A5%E5%85%B7/Scanner/Flex/%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8Flex/#more">[Flex] 安裝及使用Flex</a>。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>加法的範例。</p>
+<h2 id="ex1-l"><a href="#ex1-l" class="headerlink" title="ex1.l"></a>ex1.l</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">#include &quot;ex1.tab.h&quot;</div><div class="line">%&#125;</div><div class="line">%%</div><div class="line">\n	&#123;return(0) ;&#125;</div><div class="line">[ \t]+ &#123;;&#125;</div><div class="line">[0-9]+ &#123;yylval.ival = atoi(yytext);return(INUMBER);&#125;</div><div class="line">&quot;+&quot;|&quot;(&quot;|&quot;)&quot;	&#123;return(yytext[0]);&#125;</div><div class="line">.	&#123;return(yytext[0]);&#125;</div><div class="line">%%</div></pre></td></tr></table></figure>
+<h2 id="ex1-y"><a href="#ex1-y" class="headerlink" title="ex1.y"></a>ex1.y</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">void yyerror(const char *message);</div><div class="line">%&#125;</div><div class="line">%union&#123;</div><div class="line">	int ival ;</div><div class="line">&#125;</div><div class="line">%token&lt;ival&gt; INUMBER</div><div class="line">%type&lt;ival&gt; expr</div><div class="line">%left &apos;+&apos;</div><div class="line">%%</div><div class="line">line :expr	&#123;printf(&quot;%d\n&quot;,$1);&#125;</div><div class="line">	;</div><div class="line">expr : expr &apos;+&apos; expr	&#123;$$=$1+$3;&#125;</div><div class="line">	| INUMBER</div><div class="line">	;</div><div class="line">%%</div><div class="line">void yyerror(const char *message)&#123;</div><div class="line">	;</div><div class="line">&#125; </div><div class="line"></div><div class="line">int main(int argc, char** argv)</div><div class="line">&#123;</div><div class="line">    yyparse();</div><div class="line">    return(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>依序輸入以下指令即可產生執行檔。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flex ex1.l</div><div class="line">bison -d ex1.y</div><div class="line">gcc -c -g -I.. ex1.tab.c</div><div class="line">gcc -c -g -I.. lex.yy.c</div><div class="line">gcc -o ex1 ex1.tab.o lex.yy.o -lfl</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/安裝及使用Bison/" data-id="cj1hupfpl00lj6b3hkhh3vbzt" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/安裝及使用Bison/" data-id="cj1hwegl200lhb93h82zzg0uo" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/安裝及使用Bison/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -172,7 +171,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -239,7 +238,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

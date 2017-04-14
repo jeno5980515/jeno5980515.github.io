@@ -5,17 +5,17 @@
   
   <title>[CentOS] 使用sftp傳輸檔案 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
+  <meta name="description" content="前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
 <meta name="keywords" content="CentOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[CentOS] 使用sftp傳輸檔案">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
-<meta property="og:updated_time" content="2017-04-08T02:53:19.000Z">
+<meta property="og:description" content="前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
+<meta property="og:updated_time" content="2017-04-14T13:30:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[CentOS] 使用sftp傳輸檔案">
-<meta name="twitter:description" content="#前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
+<meta name="twitter:description" content="前言想遠端傳輸檔案可以使用sftp，但要產生ssh key。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,16 +101,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>想遠端傳輸檔案可以使用<code>sftp</code>，但要產生<code>ssh key</code>。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想遠端傳輸檔案可以使用<code>sftp</code>，但要產生<code>ssh key</code>。</p>
 <a id="more"></a>
-<p>#過程<br>先在本機產生ssh key。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure></p>
+<h1 id="過程"><a href="#過程" class="headerlink" title="過程"></a>過程</h1><p>先在本機產生ssh key。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure></p>
 <p>開啟檔案<code>xxx.pub</code>後將內容複製，再到伺服器端輸入以下指令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir ~/.ssh</div><div class="line">vim ~/ssh/authorized_keys</div></pre></td></tr></table></figure></p>
 <p>再將剛剛複製的內容貼在最後即可，若使用FileZilla則在設定中加入剛剛產生的檔案即可。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/" data-id="cj1hupfiw003m6b3he5nzc35e" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/" data-id="cj1hweggw003pb93hsk36v6l9" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -169,7 +169,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -236,7 +236,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

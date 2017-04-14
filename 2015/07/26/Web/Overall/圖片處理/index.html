@@ -5,17 +5,17 @@
   
   <title>[Web] 圖片處理 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
+  <meta name="description" content="前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
 <meta name="keywords" content="PHP,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] 圖片處理">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
-<meta property="og:updated_time" content="2017-04-08T03:26:44.000Z">
+<meta property="og:description" content="前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
+<meta property="og:updated_time" content="2017-04-14T13:41:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] 圖片處理">
-<meta name="twitter:description" content="#前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
+<meta name="twitter:description" content="前言圖片可以經由Base64編碼在網路間傳遞，再存成檔案。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,18 +101,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>圖片可以經由<code>Base64</code>編碼在網路間傳遞，再存成檔案。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>圖片可以經由<code>Base64</code>編碼在網路間傳遞，再存成檔案。</p>
 <a id="more"></a>
-<p>#File API<br>首先使用<code>File API</code>將圖片轉成<code>Base64</code>編碼，這邊使用的是選擇多個檔案。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"files"</span> <span class="attr">name</span>=<span class="string">"files[]"</span> <span class="attr">multiple</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">output</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">output</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileSelect</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> files = evt.target.files; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, f; f = files[i]; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (!f.type.match(<span class="string">'image.*'</span>)) &#123;</div><div class="line">      	  <span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">		reader.onload = (<span class="function"><span class="keyword">function</span>(<span class="params">theFile</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">				span.innerHTML = [<span class="string">'&lt;img class="thumb"  height="50" width="50" src="'</span>, e.target.result, <span class="string">'" title="'</span>, <span class="built_in">escape</span>(theFile.name), <span class="string">'"/&gt;'</span>].join(<span class="string">''</span>);</div><div class="line">				<span class="built_in">document</span>.getElementById(<span class="string">'list'</span>).insertBefore(span, <span class="literal">null</span>);</div><div class="line">			&#125;;</div><div class="line">		&#125;)(f);</div><div class="line">		reader.readAsDataURL(f);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'files'</span>).addEventListener(<span class="string">'change'</span>, handleFileSelect, <span class="literal">false</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>#PHP<br>取得<code>span</code>中圖片的<code>src</code>傳給PHP。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$img = $_POST[<span class="string">'IMG'</span>] ;</div><div class="line">$img = str_replace(<span class="string">'data:image/png;base64,'</span>, <span class="string">''</span>, $img);</div><div class="line">$img = str_replace(<span class="string">' '</span>, <span class="string">'+'</span>, $img);</div><div class="line">file_put_contents(<span class="string">"pic.png"</span>, $data);</div></pre></td></tr></table></figure></p>
-<p>#Lossy Gif Compressor<br>PNG壓縮的套件許多，這邊找一個GIF壓縮的。</p>
+<h1 id="File-API"><a href="#File-API" class="headerlink" title="File API"></a>File API</h1><p>首先使用<code>File API</code>將圖片轉成<code>Base64</code>編碼，這邊使用的是選擇多個檔案。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"files"</span> <span class="attr">name</span>=<span class="string">"files[]"</span> <span class="attr">multiple</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">output</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">output</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileSelect</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> files = evt.target.files; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, f; f = files[i]; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (!f.type.match(<span class="string">'image.*'</span>)) &#123;</div><div class="line">      	  <span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">		reader.onload = (<span class="function"><span class="keyword">function</span>(<span class="params">theFile</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">				span.innerHTML = [<span class="string">'&lt;img class="thumb"  height="50" width="50" src="'</span>, e.target.result, <span class="string">'" title="'</span>, <span class="built_in">escape</span>(theFile.name), <span class="string">'"/&gt;'</span>].join(<span class="string">''</span>);</div><div class="line">				<span class="built_in">document</span>.getElementById(<span class="string">'list'</span>).insertBefore(span, <span class="literal">null</span>);</div><div class="line">			&#125;;</div><div class="line">		&#125;)(f);</div><div class="line">		reader.readAsDataURL(f);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'files'</span>).addEventListener(<span class="string">'change'</span>, handleFileSelect, <span class="literal">false</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><p>取得<code>span</code>中圖片的<code>src</code>傳給PHP。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$img = $_POST[<span class="string">'IMG'</span>] ;</div><div class="line">$img = str_replace(<span class="string">'data:image/png;base64,'</span>, <span class="string">''</span>, $img);</div><div class="line">$img = str_replace(<span class="string">' '</span>, <span class="string">'+'</span>, $img);</div><div class="line">file_put_contents(<span class="string">"pic.png"</span>, $data);</div></pre></td></tr></table></figure></p>
+<h1 id="Lossy-Gif-Compressor"><a href="#Lossy-Gif-Compressor" class="headerlink" title="Lossy Gif Compressor"></a>Lossy Gif Compressor</h1><p>PNG壓縮的套件許多，這邊找一個GIF壓縮的。</p>
 <p>首先先安裝<a href="http://www.lcdf.org/gifsicle/" target="_blank" rel="external">Gifsicle</a>，再將<a href="https://pornel.net/lossygif" target="_blank" rel="external">lossygif</a>放到目錄下。</p>
 <p>可以透過PHP下指令執行將圖片壓縮，但要記得修改<code>php.ini</code>中的設定。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/" data-id="cj1hupfl5006e6b3hbrr2a5s3" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/" data-id="cj1hwegi40065b93h1zqyd4d8" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -171,7 +171,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -238,7 +238,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

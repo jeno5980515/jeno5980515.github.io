@@ -5,17 +5,17 @@
   
   <title>[LeetCode] 152 - Maximum Product Subarray | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意求連續一段區間相乘最大的值。">
+  <meta name="description" content="題意求連續一段區間相乘最大的值。">
 <meta name="keywords" content="LeetCode,152,Maximum Product Subarray">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 152 - Maximum Product Subarray">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/152 - Maximum Product Subarray/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意求連續一段區間相乘最大的值。">
-<meta property="og:updated_time" content="2017-04-08T02:36:34.000Z">
+<meta property="og:description" content="題意求連續一段區間相乘最大的值。">
+<meta property="og:updated_time" content="2017-04-14T13:25:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LeetCode] 152 - Maximum Product Subarray">
-<meta name="twitter:description" content="#題意求連續一段區間相乘最大的值。">
+<meta name="twitter:description" content="題意求連續一段區間相乘最大的值。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>求連續一段區間相乘最大的值。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求連續一段區間相乘最大的值。</p>
 <a id="more"></a>
-<p>#解法<br>跟相加題目很像，但乘法複雜一點，要特別記錄連續乘到目前為止的最小值。</p>
-<p>#程式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> max_num , now_max , now_min ; </div><div class="line">		max_num = now_max = now_min = nums[<span class="number">0</span>] ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; nums.size()  ; i ++ )&#123;</div><div class="line">			<span class="keyword">int</span> last_max = now_max ;</div><div class="line">			now_max = max(nums[i],max(now_max * nums[i],now_min * nums[i]));</div><div class="line">			now_min = min(nums[i],min(last_max * nums[i],now_min * nums[i]));</div><div class="line">			max_num = max(max_num,now_max) ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> max_num ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>跟相加題目很像，但乘法複雜一點，要特別記錄連續乘到目前為止的最小值。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> max_num , now_max , now_min ; </div><div class="line">		max_num = now_max = now_min = nums[<span class="number">0</span>] ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; nums.size()  ; i ++ )&#123;</div><div class="line">			<span class="keyword">int</span> last_max = now_max ;</div><div class="line">			now_max = max(nums[i],max(now_max * nums[i],now_min * nums[i]));</div><div class="line">			now_min = min(nums[i],min(last_max * nums[i],now_min * nums[i]));</div><div class="line">			max_num = max(max_num,now_max) ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> max_num ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/152 - Maximum Product Subarray/" data-id="cj1hupfgt001e6b3h5y2narj2" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/152 - Maximum Product Subarray/" data-id="cj1hwegeb001fb93hw9vxaj5j" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/152 - Maximum Product Subarray/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +167,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +234,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

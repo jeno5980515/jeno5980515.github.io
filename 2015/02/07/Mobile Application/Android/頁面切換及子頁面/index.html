@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/頁面切換及子頁面/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="不論是哪種程式都會使用到切換頁面，在此介紹一下Android的方法。">
-<meta property="og:updated_time" content="2017-04-08T02:35:23.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:24:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Android] 頁面切換及子頁面">
 <meta name="twitter:description" content="不論是哪種程式都會使用到切換頁面，在此介紹一下Android的方法。">
@@ -109,13 +109,12 @@
 <p>這種方式會在同一個<code>Activity</code>裡，不會有頁面切換的效果。</p>
 <h2 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">intent.setClass(現在.<span class="keyword">this</span>, 要切換的.class);</div><div class="line">startActivity(intent); </div><div class="line">現在.<span class="keyword">this</span>.finish(); <span class="comment">//是否關閉現在的Activity</span></div></pre></td></tr></table></figure>
 <p>這種方式可以跳轉到不同的<code>Activity</code>。</p>
-<p>##子頁面</p>
-<p>使Activity以<code>Dialog</code>方式呈現，沿用<code>Intent</code>的方法，並在<code>AndroidManifest.xml</code>的建好的<code>Class</code>下加入此行即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:theme=&quot;@android:style/Theme.Dialog&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="子頁面"><a href="#子頁面" class="headerlink" title="子頁面"></a>子頁面</h2><p>使Activity以<code>Dialog</code>方式呈現，沿用<code>Intent</code>的方法，並在<code>AndroidManifest.xml</code>的建好的<code>Class</code>下加入此行即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">android:theme=&quot;@android:style/Theme.Dialog&quot;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/頁面切換及子頁面/" data-id="cj1hupfg8000t6b3h4ydwpvd9" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/頁面切換及子頁面/" data-id="cj1hwegdb000ub93hfb7pev0w" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/頁面切換及子頁面/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -138,9 +137,9 @@
     </a>
   
   
-    <a href="/2015/02/07/Mobile Application/Android/Animation效果/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[Android] Animation動畫效果</div>
+      <div class="article-nav-title">[Android] 自定義ListView加入RadioGroup</div>
     </a>
   
 </nav>
@@ -174,7 +173,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -241,7 +240,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

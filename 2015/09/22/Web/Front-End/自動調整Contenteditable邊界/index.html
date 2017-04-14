@@ -5,17 +5,17 @@
   
   <title>[Front-End] 自動調整Contenteditable邊界 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
+  <meta name="description" content="前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] 自動調整Contenteditable邊界">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
-<meta property="og:updated_time" content="2017-04-08T03:24:16.000Z">
+<meta property="og:description" content="前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
+<meta property="og:updated_time" content="2017-04-14T13:31:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] 自動調整Contenteditable邊界">
-<meta name="twitter:description" content="#前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
+<meta name="twitter:description" content="前言HTML5有contenteditable屬性，可以達到類似textarea的效果。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>HTML5有<code>contenteditable</code>屬性，可以達到類似<code>textarea</code>的效果。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>HTML5有<code>contenteditable</code>屬性，可以達到類似<code>textarea</code>的效果。</p>
 <a id="more"></a>
-<p>#差異<br>原理大致上和<code>textarea</code>差不多，但如果換行會產生新的子區塊而不是產生換行字元，因此必須使用<code>keydown</code>將動作替換成插入<code>&lt;br&gt;</code>，但若只插入一個<code>&lt;br&gt;</code>在文字的最後無法換行，等待之後尋求更好的解法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">text.onkeydown = function(e)&#123;</div><div class="line">	if ( e.keyCode === 13) &#123;</div><div class="line">		document.execCommand(&apos;insertHTML&apos;, false, &apos;&lt;br&gt;&lt;br&gt;&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var getTextMaxLength = function(text,font,size)&#123;</div><div class="line">	var s = &quot;&quot; ;</div><div class="line">	var t = (text.innerHTML).replace(&quot;&amp;nbsp;&quot;,&apos; &apos;) ;</div><div class="line">	var max = 0 ;</div><div class="line">	var row = 0 ;</div><div class="line">	for ( var i = 0 ; t.indexOf(&quot;&lt;br&gt;&quot;) !== -1 ; i ++ , row = i )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t.substring(0,t.indexOf(&quot;&lt;br&gt;&quot;)-1),font,size)) ;</div><div class="line">		t = t.substring(t.indexOf(&quot;&lt;br&gt;&quot;)+4,t.length) ;</div><div class="line">	&#125;</div><div class="line">	if ( t !== &quot;&quot; )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t,font,size)) ;</div><div class="line">		row ++ ;</div><div class="line">	&#125;</div><div class="line">	return &#123;row:row,length:max&#125; ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#GitHub<br><a href="https://github.com/jeno5980515/contenteditable-autosize" target="_blank" rel="external">GitHub</a></p>
+<h1 id="差異"><a href="#差異" class="headerlink" title="差異"></a>差異</h1><p>原理大致上和<code>textarea</code>差不多，但如果換行會產生新的子區塊而不是產生換行字元，因此必須使用<code>keydown</code>將動作替換成插入<code>&lt;br&gt;</code>，但若只插入一個<code>&lt;br&gt;</code>在文字的最後無法換行，等待之後尋求更好的解法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">text.onkeydown = function(e)&#123;</div><div class="line">	if ( e.keyCode === 13) &#123;</div><div class="line">		document.execCommand(&apos;insertHTML&apos;, false, &apos;&lt;br&gt;&lt;br&gt;&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var getTextMaxLength = function(text,font,size)&#123;</div><div class="line">	var s = &quot;&quot; ;</div><div class="line">	var t = (text.innerHTML).replace(&quot;&amp;nbsp;&quot;,&apos; &apos;) ;</div><div class="line">	var max = 0 ;</div><div class="line">	var row = 0 ;</div><div class="line">	for ( var i = 0 ; t.indexOf(&quot;&lt;br&gt;&quot;) !== -1 ; i ++ , row = i )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t.substring(0,t.indexOf(&quot;&lt;br&gt;&quot;)-1),font,size)) ;</div><div class="line">		t = t.substring(t.indexOf(&quot;&lt;br&gt;&quot;)+4,t.length) ;</div><div class="line">	&#125;</div><div class="line">	if ( t !== &quot;&quot; )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t,font,size)) ;</div><div class="line">		row ++ ;</div><div class="line">	&#125;</div><div class="line">	return &#123;row:row,length:max&#125; ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/contenteditable-autosize" target="_blank" rel="external">GitHub</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/" data-id="cj1hupfk800566b3hnnqffp9n" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/" data-id="cj1hwegho0053b93hgtfaprty" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

@@ -5,17 +5,17 @@
   
   <title>[Front-End] Cavnas取得文字高度 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
+  <meta name="description" content="前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
 <meta name="keywords" content="JavaScript,Canvas,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] Cavnas取得文字高度">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
-<meta property="og:updated_time" content="2017-04-08T03:14:52.000Z">
+<meta property="og:description" content="前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
+<meta property="og:updated_time" content="2017-04-14T13:32:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] Cavnas取得文字高度">
-<meta name="twitter:description" content="#前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
+<meta name="twitter:description" content="前言最近在利用Canvas製作類似修圖的App，在fillText的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,17 +101,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>最近在利用Canvas製作類似修圖的App，在<code>fillText</code>的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在利用Canvas製作類似修圖的App，在<code>fillText</code>的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？</p>
 <a id="more"></a>
-<p>#measureText<br>可以利用<code>measureText</code>取得文字的寬度，但無法取得高度。</p>
-<p>#做法<br>在網頁上新增兩個元素，透過<code>verticalAlign</code>讓物件對齊文字的底部，兩物件offsetTop的差值即是文字的高度。</p>
-<p>#程式碼<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line"></div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line"></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#參考<br><a href="http://stackoverflow.com/questions/1134586/how-can-you-find-the-height-of-text-on-an-html-canvas" target="_blank" rel="external">How can you find the height of text on an HTML canvas?</a></p>
+<h1 id="measureText"><a href="#measureText" class="headerlink" title="measureText"></a>measureText</h1><p>可以利用<code>measureText</code>取得文字的寬度，但無法取得高度。</p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>在網頁上新增兩個元素，透過<code>verticalAlign</code>讓物件對齊文字的底部，兩物件offsetTop的差值即是文字的高度。</p>
+<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line"></div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line"></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="http://stackoverflow.com/questions/1134586/how-can-you-find-the-height-of-text-on-an-html-canvas" target="_blank" rel="external">How can you find the height of text on an HTML canvas?</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/" data-id="cj1hupfjb00456b3hb26omyyq" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/" data-id="cj1hwegh40042b93heyiyyr57" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -170,7 +170,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -237,7 +237,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

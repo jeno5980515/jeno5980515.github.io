@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://jeno5980515.github.io/2015/02/15/Web/Node.js/Socketio/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="原本在研究WebSocket的Server端該怎麼寫，但發現原來已經有Socket.io套件可以使用。 Socket.io包含了非常多種方法，如此一來即便不支援WebSocket也有其他的方法可以連線，但最優先的仍是使用WebSocket。">
-<meta property="og:updated_time" content="2017-04-08T02:54:03.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:34:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Node.js] Socket.io">
 <meta name="twitter:description" content="原本在研究WebSocket的Server端該怎麼寫，但發現原來已經有Socket.io套件可以使用。 Socket.io包含了非常多種方法，如此一來即便不支援WebSocket也有其他的方法可以連線，但最優先的仍是使用WebSocket。">
@@ -104,18 +104,16 @@
         <p>原本在研究<code>WebSocket</code>的<code>Server</code>端該怎麼寫，但發現原來已經有<code>Socket.io</code>套件可以使用。</p>
 <p><code>Socket.io</code>包含了非常多種方法，如此一來即便不支援<code>WebSocket</code>也有其他的方法可以連線，但最優先的仍是使用<code>WebSocket</code>。</p>
 <a id="more"></a>
-<p>##Server</p>
-<p>先安裝套件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install socket.io</div></pre></td></tr></table></figure></p>
-<p>#####JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>).listen(<span class="number">8080</span>);</div><div class="line"></div><div class="line">io.sockets.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;  </div><div class="line">    socket.emit(<span class="string">'news'</span>, &#123; <span class="attr">hello</span>: <span class="string">'world'</span> &#125;);</div><div class="line">    socket.on(<span class="string">'my other event'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>##Client</p>
-<p>記得引入來源檔<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">'<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.socket.io/socket.io-1.3.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>'</div></pre></td></tr></table></figure></p>
-<p>#####JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> socket = io.connect(<span class="string">'http://localhost:8080'</span>);</div><div class="line">socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(data);</div><div class="line">	socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>##Cloud9<br><a href="https://c9.io/" target="_blank" rel="external">Cloud9</a>是一個好用的線上開發環境，但詳細內容還在研究中。</p>
+<h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><p>先安裝套件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install socket.io</div></pre></td></tr></table></figure></p>
+<h5 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>).listen(<span class="number">8080</span>);</div><div class="line"></div><div class="line">io.sockets.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;  </div><div class="line">    socket.emit(<span class="string">'news'</span>, &#123; <span class="attr">hello</span>: <span class="string">'world'</span> &#125;);</div><div class="line">    socket.on(<span class="string">'my other event'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(data);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Client"><a href="#Client" class="headerlink" title="Client"></a>Client</h2><p>記得引入來源檔<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">'<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.socket.io/socket.io-1.3.4.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>'</div></pre></td></tr></table></figure></p>
+<h5 id="JavaScript-1"><a href="#JavaScript-1" class="headerlink" title="JavaScript"></a>JavaScript</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> socket = io.connect(<span class="string">'http://localhost:8080'</span>);</div><div class="line">socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(data);</div><div class="line">	socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="Cloud9"><a href="#Cloud9" class="headerlink" title="Cloud9"></a>Cloud9</h2><p><a href="https://c9.io/" target="_blank" rel="external">Cloud9</a>是一個好用的線上開發環境，但詳細內容還在研究中。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/02/15/Web/Node.js/Socketio/" data-id="cj1hupfkg005h6b3h927rgjs8" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/02/15/Web/Node.js/Socketio/" data-id="cj1hweghu005hb93hp39j90kr" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/02/15/Web/Node.js/Socketio/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -128,19 +126,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/02/15/Web/Other/Bingo/Bingo遊戲/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/02/13/Web/Overall/WebScket API/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          [Web] Bingo遊戲
+          [Web] WebSocket API
         
       </div>
     </a>
   
   
-    <a href="/2015/02/16/Web/Node.js/Socketio的Broadcast/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/02/15/Web/Other/Bingo/Bingo遊戲/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[Node.js] Socket.io的Broadcast</div>
+      <div class="article-nav-title">[Web] Bingo遊戲</div>
     </a>
   
 </nav>
@@ -174,7 +172,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -241,7 +239,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

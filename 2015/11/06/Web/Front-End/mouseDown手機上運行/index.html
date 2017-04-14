@@ -5,17 +5,17 @@
   
   <title>[Front-End] mouseDown手機上運行 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
+  <meta name="description" content="前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] mouseDown手機上運行">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
-<meta property="og:updated_time" content="2017-04-08T03:19:32.000Z">
+<meta property="og:description" content="前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
+<meta property="og:updated_time" content="2017-04-14T13:33:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] mouseDown手機上運行">
-<meta name="twitter:description" content="#前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
+<meta name="twitter:description" content="前言手機上無法使用mouseDown等等的事件，必須使用touchStart，網路上找到別人寫的替換方法。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,14 +101,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>手機上無法使用<code>mouseDown</code>等等的事件，必須使用<code>touchStart</code>，網路上找到別人寫的替換方法。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>手機上無法使用<code>mouseDown</code>等等的事件，必須使用<code>touchStart</code>，網路上找到別人寫的替換方法。</p>
 <a id="more"></a>
-<p>#程式碼<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mouseEventTypes = &#123;</div><div class="line">	<span class="attr">touchstart</span> : <span class="string">"mousedown"</span>,</div><div class="line">	<span class="attr">touchmove</span> : <span class="string">"mousemove"</span>,</div><div class="line">	<span class="attr">touchend</span> : <span class="string">"mouseup"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (originalType <span class="keyword">in</span> mouseEventTypes) &#123;</div><div class="line">	<span class="built_in">document</span>.addEventListener(originalType, <span class="function"><span class="keyword">function</span>(<span class="params">originalEvent</span>) </span>&#123;</div><div class="line">		event = <span class="built_in">document</span>.createEvent(<span class="string">"MouseEvents"</span>);</div><div class="line">		touch = originalEvent.changedTouches[<span class="number">0</span>];</div><div class="line">		event.initMouseEvent(mouseEventTypes[originalEvent.type], <span class="literal">true</span>, <span class="literal">true</span>,</div><div class="line">		<span class="built_in">window</span>, <span class="number">0</span>, touch.screenX, touch.screenY, touch.clientX,</div><div class="line">		touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,</div><div class="line">		touch.metaKey, <span class="number">0</span>, <span class="literal">null</span>);</div><div class="line">		originalEvent.target.dispatchEvent(event);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mouseEventTypes = &#123;</div><div class="line">	<span class="attr">touchstart</span> : <span class="string">"mousedown"</span>,</div><div class="line">	<span class="attr">touchmove</span> : <span class="string">"mousemove"</span>,</div><div class="line">	<span class="attr">touchend</span> : <span class="string">"mouseup"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (originalType <span class="keyword">in</span> mouseEventTypes) &#123;</div><div class="line">	<span class="built_in">document</span>.addEventListener(originalType, <span class="function"><span class="keyword">function</span>(<span class="params">originalEvent</span>) </span>&#123;</div><div class="line">		event = <span class="built_in">document</span>.createEvent(<span class="string">"MouseEvents"</span>);</div><div class="line">		touch = originalEvent.changedTouches[<span class="number">0</span>];</div><div class="line">		event.initMouseEvent(mouseEventTypes[originalEvent.type], <span class="literal">true</span>, <span class="literal">true</span>,</div><div class="line">		<span class="built_in">window</span>, <span class="number">0</span>, touch.screenX, touch.screenY, touch.clientX,</div><div class="line">		touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,</div><div class="line">		touch.metaKey, <span class="number">0</span>, <span class="literal">null</span>);</div><div class="line">		originalEvent.target.dispatchEvent(event);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/" data-id="cj1hupfjl004j6b3hzttr3w1u" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/" data-id="cj1hweghd004kb93hfwcshubc" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -167,7 +166,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -234,7 +233,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

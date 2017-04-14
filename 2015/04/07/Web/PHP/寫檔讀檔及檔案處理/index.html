@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/07/Web/PHP/寫檔讀檔及檔案處理/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="最近寫了一個存放信件的地方，其實要用資料庫也不是不可以 …">
-<meta property="og:updated_time" content="2017-04-08T02:54:46.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:35:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[PHP] 寫檔讀檔及檔案處理">
 <meta name="twitter:description" content="最近寫了一個存放信件的地方，其實要用資料庫也不是不可以 …">
@@ -103,28 +103,23 @@
       
         <p>最近寫了一個存放信件的地方，其實要用資料庫也不是不可以 … </p>
 <a id="more"></a>
-<p>#開檔</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$file = fopen(<span class="string">"file.txt"</span>, <span class="string">"r"</span>);</div></pre></td></tr></table></figure>
+<h1 id="開檔"><a href="#開檔" class="headerlink" title="開檔"></a>開檔</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$file = fopen(<span class="string">"file.txt"</span>, <span class="string">"r"</span>);</div></pre></td></tr></table></figure>
 <p>後面參數請參考<a href="http://php.net/manual/zh/function.fopen.php" target="_blank" rel="external">網站</a></p>
-<p>#讀檔</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$text = fgets($file);</div></pre></td></tr></table></figure>
+<h1 id="讀檔"><a href="#讀檔" class="headerlink" title="讀檔"></a>讀檔</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$text = fgets($file);</div></pre></td></tr></table></figure>
 <p>不同讀取方式請參考<a href="http://php.net/manual/en/function.fgets.php" target="_blank" rel="external">網站</a></p>
-<p>#寫檔</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fwrite($file,$text) ;</div></pre></td></tr></table></figure>
-<p>#取得目錄底下所有檔案<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$list = glob(<span class="string">"*.txt"</span>);</div></pre></td></tr></table></figure></p>
+<h1 id="寫檔"><a href="#寫檔" class="headerlink" title="寫檔"></a>寫檔</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fwrite($file,$text) ;</div></pre></td></tr></table></figure>
+<h1 id="取得目錄底下所有檔案"><a href="#取得目錄底下所有檔案" class="headerlink" title="取得目錄底下所有檔案"></a>取得目錄底下所有檔案</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$list = glob(<span class="string">"*.txt"</span>);</div></pre></td></tr></table></figure>
 <p>後面參數請參考<a href="http://php.net/manual/en/function.glob.php" target="_blank" rel="external">網站</a></p>
-<p>#自然排序</p>
-<p>由於排序是按照字串來比較，所以<code>11</code>會排在<code>2</code>前面，如果不想要手刻就可以使用<code>natsort</code></p>
+<h1 id="自然排序"><a href="#自然排序" class="headerlink" title="自然排序"></a>自然排序</h1><p>由於排序是按照字串來比較，所以<code>11</code>會排在<code>2</code>前面，如果不想要手刻就可以使用<code>natsort</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">natsort($list);</div></pre></td></tr></table></figure>
 <p>但注意必須用<code>foreach</code>才能達到排序後的效果。</p>
-<p>#修改檔案權限</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod(<span class="string">"file.txt"</span>,<span class="number">0000</span>);</div></pre></td></tr></table></figure>
+<h1 id="修改檔案權限"><a href="#修改檔案權限" class="headerlink" title="修改檔案權限"></a>修改檔案權限</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod(<span class="string">"file.txt"</span>,<span class="number">0000</span>);</div></pre></td></tr></table></figure>
 <p>詳細參數請參考<a href="http://php.net/manual/en/function.chmod.php" target="_blank" rel="external">網站</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/07/Web/PHP/寫檔讀檔及檔案處理/" data-id="cj1hupfkt005w6b3h4o7dy2p3" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/07/Web/PHP/寫檔讀檔及檔案處理/" data-id="cj1hwegi7006fb93hk9j09sp5" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/07/Web/PHP/寫檔讀檔及檔案處理/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -183,7 +178,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -250,7 +245,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

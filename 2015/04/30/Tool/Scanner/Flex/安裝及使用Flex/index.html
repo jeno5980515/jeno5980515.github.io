@@ -5,17 +5,17 @@
   
   <title>[Flex] 安裝及使用Flex | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+  <meta name="description" content="介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
 <meta name="keywords" content="Scanner,Flex">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Flex] 安裝及使用Flex">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
-<meta property="og:updated_time" content="2017-04-08T02:41:38.000Z">
+<meta property="og:description" content="介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+<meta property="og:updated_time" content="2017-04-14T13:30:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Flex] 安裝及使用Flex">
-<meta name="twitter:description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+<meta name="twitter:description" content="介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,12 +101,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#介紹<br>在<code>Compiler</code>中，首先就是利用<code>Scanner</code>把程式碼轉成一個一個token，而其中有名的工具就是<code>lex</code>，但那是在<code>Unix</code>系統底下的，而<code>Flex</code>則可在<code>Windows</code>底下執行。</p>
+        <h1 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h1><p>在<code>Compiler</code>中，首先就是利用<code>Scanner</code>把程式碼轉成一個一個token，而其中有名的工具就是<code>lex</code>，但那是在<code>Unix</code>系統底下的，而<code>Flex</code>則可在<code>Windows</code>底下執行。</p>
 <a id="more"></a>
-<p>#安裝<br>到<a href="http://gnuwin32.sourceforge.net/packages/flex.htm" target="_blank" rel="external">Flex</a>的網站，懶人可直接下載<code>Complete package, except sources</code>自動安裝。</p>
-<p>#環境設定<br>免不了還是得手動環境設定，到<code>PATH</code>增加<code>;C:\Program Files\GnuWin32\bin;</code>，看你的安裝在哪裡，在命令列輸入<code>flex -V</code>如果沒有出現錯誤就代表成功。</p>
-<p>#使用</p>
-<p>先借用Compiler助教的範例，產生一個名為<code>word_count.l</code>的檔案，並輸入以下內容。</p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>到<a href="http://gnuwin32.sourceforge.net/packages/flex.htm" target="_blank" rel="external">Flex</a>的網站，懶人可直接下載<code>Complete package, except sources</code>自動安裝。</p>
+<h1 id="環境設定"><a href="#環境設定" class="headerlink" title="環境設定"></a>環境設定</h1><p>免不了還是得手動環境設定，到<code>PATH</code>增加<code>;C:\Program Files\GnuWin32\bin;</code>，看你的安裝在哪裡，在命令列輸入<code>flex -V</code>如果沒有出現錯誤就代表成功。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>先借用Compiler助教的範例，產生一個名為<code>word_count.l</code>的檔案，並輸入以下內容。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">unsigned int charCount=0, wordCount=0, lineCount=0;</div><div class="line">%&#125;</div><div class="line">word	[^ \t\n]+</div><div class="line">eol	\n</div><div class="line">%%</div><div class="line">&#123;word&#125;	&#123; wordCount++; charCount += yyleng; &#125;</div><div class="line">&#123;eol&#125;	&#123; charCount++; lineCount++; &#125;</div><div class="line">.	charCount++;</div><div class="line">%%</div><div class="line">int main(int argc, char *argv[])&#123;</div><div class="line">	yylex();</div><div class="line">	printf(&quot;%u %u %u\n&quot;, lineCount, wordCount, charCount);</div><div class="line">	return(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在命令列執行下列指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">flex word_count.l</div><div class="line">gcc lex.yy.c -o word_count.exe -lfl</div></pre></td></tr></table></figure></p>
 <p>接著產生一個<code>input.txt</code>檔，並輸入以下內容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">This is an apple.</div></pre></td></tr></table></figure></p>
@@ -116,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/" data-id="cj1hupfpk00li6b3hdtwlw5lq" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/" data-id="cj1hwegl200lib93h703xatub" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -175,7 +174,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -242,7 +241,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

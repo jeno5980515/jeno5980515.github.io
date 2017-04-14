@@ -5,17 +5,17 @@
   
   <title>[Front-End] 利用getUserMedia拍照 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
+  <meta name="description" content="前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
 <meta name="keywords" content="JavaScript,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] 利用getUserMedia拍照">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
-<meta property="og:updated_time" content="2017-04-08T03:10:56.000Z">
+<meta property="og:description" content="前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
+<meta property="og:updated_time" content="2017-04-14T13:31:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] 利用getUserMedia拍照">
-<meta name="twitter:description" content="#前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
+<meta name="twitter:description" content="前言現在HTML5可以直接使用getUserMedia開啟裝置的相機。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,17 +101,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>現在HTML5可以直接使用getUserMedia開啟裝置的相機。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>現在HTML5可以直接使用getUserMedia開啟裝置的相機。</p>
 <a id="more"></a>
-<p>#使用<br>先加上video和canvas的tag。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span> = <span class="string">'video'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span> = <span class="string">'img'</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span> &gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span> = <span class="string">'canvas'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>先加上video和canvas的tag。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span> = <span class="string">'video'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span> = <span class="string">'img'</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span> &gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span> = <span class="string">'canvas'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>偵測瀏覽器是否支援getUserMedia。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.URL = <span class="built_in">window</span>.URL || <span class="built_in">window</span>.webkitURL;</div><div class="line">navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||</div><div class="line">                          navigator.mozGetUserMedia || navigator.msGetUserMedia;</div><div class="line"></div><div class="line"><span class="keyword">var</span>	video = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>) ;</div><div class="line"><span class="keyword">var</span> localMediaStream = <span class="literal">null</span> ;</div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (navigator.getUserMedia) &#123;</div><div class="line">	navigator.getUserMedia(&#123;<span class="attr">video</span>: <span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">stream</span>) </span>&#123;</div><div class="line">		video.src = <span class="built_in">window</span>.URL.createObjectURL(stream);</div><div class="line">		video.play();</div><div class="line">		localMediaStream = stream ;</div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</div><div class="line">		alert(error) ;</div><div class="line">	&#125;);</div><div class="line">&#125; </div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">	alert(<span class="string">'Unable'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>將video的畫面畫在canvas上且做成Image，如此一來img就是拍照後的結果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (localMediaStream) &#123;</div><div class="line">	<span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>) ;</div><div class="line">	ctx.drawImage(video,<span class="number">0</span>,<span class="number">0</span>) ;</div><div class="line">	img.src = tempCanvas.toDataURL(<span class="string">'image/webp'</span>);</div><div class="line">	video.pause();</div><div class="line">	localMediaStream.stop();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#範例<br><a href="https://rawgit.com/jeno5980515/Snapshot/master/index.html" target="_blank" rel="external">極陽春的仿修圖軟體</a><br>第一頁拍照、第二頁灰階效果、第三階加上物件。</p>
+<h1 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h1><p><a href="https://rawgit.com/jeno5980515/Snapshot/master/index.html" target="_blank" rel="external">極陽春的仿修圖軟體</a><br>第一頁拍照、第二頁灰階效果、第三階加上物件。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/" data-id="cj1hupfk0004y6b3hdggcpidm" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/" data-id="cj1hweghi004ub93hx9q8qqcz" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -170,7 +170,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -237,7 +237,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

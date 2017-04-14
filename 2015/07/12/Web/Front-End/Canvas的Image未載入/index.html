@@ -5,17 +5,17 @@
   
   <title>[Front-End] Canvas的Image未載入 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
+  <meta name="description" content="前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
 <meta name="keywords" content="JavaScript,Canvas,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] Canvas的Image未載入">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
-<meta property="og:updated_time" content="2017-04-08T03:15:30.000Z">
+<meta property="og:description" content="前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
+<meta property="og:updated_time" content="2017-04-14T13:32:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] Canvas的Image未載入">
-<meta name="twitter:description" content="#前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
+<meta name="twitter:description" content="前言同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。</p>
 <a id="more"></a>
-<p>#原因<br>動態載入圖案的話往往是非同步的，所以可能造成尚未載好圖片就繪製上去的錯誤，如此一來當然沒有東西。</p>
-<p>#改善<br>加入onload確保圖案載入完畢。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">"1.png"</span> ;</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	ctx.drawImage(img,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>動態載入圖案的話往往是非同步的，所以可能造成尚未載好圖片就繪製上去的錯誤，如此一來當然沒有東西。</p>
+<h1 id="改善"><a href="#改善" class="headerlink" title="改善"></a>改善</h1><p>加入onload確保圖案載入完畢。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">"1.png"</span> ;</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	ctx.drawImage(img,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/" data-id="cj1hupfji004d6b3h1v3wi4np" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/" data-id="cj1hwegh8004bb93htp15g2qu" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

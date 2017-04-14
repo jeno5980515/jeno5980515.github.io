@@ -5,17 +5,17 @@
   
   <title>[LeetCode] 124 - Binary Tree Maximum Path Sum | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意求出一條路徑的和最大，起點和終點可以是任意點。">
+  <meta name="description" content="題意求出一條路徑的和最大，起點和終點可以是任意點。">
 <meta name="keywords" content="LeetCode,124,Binary Tree Maximum Path Sum">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 124 - Binary Tree Maximum Path Sum">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/07/Online Judge/LeetCode/124 - Binary Tree Maximum Path Sum/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意求出一條路徑的和最大，起點和終點可以是任意點。">
-<meta property="og:updated_time" content="2017-04-08T02:36:23.000Z">
+<meta property="og:description" content="題意求出一條路徑的和最大，起點和終點可以是任意點。">
+<meta property="og:updated_time" content="2017-04-14T13:25:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LeetCode] 124 - Binary Tree Maximum Path Sum">
-<meta name="twitter:description" content="#題意求出一條路徑的和最大，起點和終點可以是任意點。">
+<meta name="twitter:description" content="題意求出一條路徑的和最大，起點和終點可以是任意點。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,23 +101,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>求出一條路徑的和最大，起點和終點可以是任意點。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求出一條路徑的和最大，起點和終點可以是任意點。</p>
 <a id="more"></a>
-<p>#解法</p>
-<p>對經過當前的node來說，最大路徑有下面幾種可能：</p>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>對經過當前的node來說，最大路徑有下面幾種可能：</p>
 <ol>
 <li>node</li>
 <li>左邊+node</li>
 <li>node+右邊</li>
 <li>左邊+node+右邊 </li>
 </ol>
-<p>#心得<br>乍看之下覺得似乎很簡單，但沒想到負數會這麼麻煩，也沒想到把最大值拉到外層就能解決許多問題 .. </p>
-<p>#程式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *	 int val;</div><div class="line"> *	 TreeNode *left;</div><div class="line"> *	 TreeNode *right;</div><div class="line"> *	 TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> maxnum = <span class="number">-999999</span> ;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">FindMax</span><span class="params">(TreeNode* node)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span> ( node == <span class="literal">NULL</span> )</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">		<span class="keyword">int</span> left = FindMax(node-&gt;left) ;</div><div class="line">		<span class="keyword">int</span> right = FindMax(node-&gt;right) ;</div><div class="line">		<span class="keyword">int</span> nowmax = node-&gt;val ;</div><div class="line">		<span class="keyword">if</span> ( left &gt; <span class="number">0</span> )</div><div class="line">			nowmax += left ;</div><div class="line">		<span class="keyword">if</span> ( right &gt; <span class="number">0</span> )</div><div class="line">			nowmax += right ;</div><div class="line">		<span class="keyword">if</span> ( nowmax &gt; maxnum )</div><div class="line">			maxnum = nowmax ;</div><div class="line">		<span class="keyword">return</span> max(node-&gt;val,max(node-&gt;val+left,node-&gt;val+right)) ;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">		FindMax(root) ;</div><div class="line">		<span class="keyword">return</span> maxnum ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>乍看之下覺得似乎很簡單，但沒想到負數會這麼麻煩，也沒想到把最大值拉到外層就能解決許多問題 .. </p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *	 int val;</div><div class="line"> *	 TreeNode *left;</div><div class="line"> *	 TreeNode *right;</div><div class="line"> *	 TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> maxnum = <span class="number">-999999</span> ;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">FindMax</span><span class="params">(TreeNode* node)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span> ( node == <span class="literal">NULL</span> )</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">		<span class="keyword">int</span> left = FindMax(node-&gt;left) ;</div><div class="line">		<span class="keyword">int</span> right = FindMax(node-&gt;right) ;</div><div class="line">		<span class="keyword">int</span> nowmax = node-&gt;val ;</div><div class="line">		<span class="keyword">if</span> ( left &gt; <span class="number">0</span> )</div><div class="line">			nowmax += left ;</div><div class="line">		<span class="keyword">if</span> ( right &gt; <span class="number">0</span> )</div><div class="line">			nowmax += right ;</div><div class="line">		<span class="keyword">if</span> ( nowmax &gt; maxnum )</div><div class="line">			maxnum = nowmax ;</div><div class="line">		<span class="keyword">return</span> max(node-&gt;val,max(node-&gt;val+left,node-&gt;val+right)) ;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">maxPathSum</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">		FindMax(root) ;</div><div class="line">		<span class="keyword">return</span> maxnum ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/07/Online Judge/LeetCode/124 - Binary Tree Maximum Path Sum/" data-id="cj1hupfgm00176b3hkqgq290m" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/07/Online Judge/LeetCode/124 - Binary Tree Maximum Path Sum/" data-id="cj1hwegdw001ab93h570o11te" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/07/Online Judge/LeetCode/124 - Binary Tree Maximum Path Sum/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -176,7 +174,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -243,7 +241,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

@@ -5,17 +5,17 @@
   
   <title>[JavaScript] JavaScript小技巧 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言記錄一下看到的有趣的寫法。">
+  <meta name="description" content="前言記錄一下看到的有趣的寫法。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[JavaScript] JavaScript小技巧">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言記錄一下看到的有趣的寫法。">
-<meta property="og:updated_time" content="2017-04-08T03:18:31.000Z">
+<meta property="og:description" content="前言記錄一下看到的有趣的寫法。">
+<meta property="og:updated_time" content="2017-04-14T13:29:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[JavaScript] JavaScript小技巧">
-<meta name="twitter:description" content="#前言記錄一下看到的有趣的寫法。">
+<meta name="twitter:description" content="前言記錄一下看到的有趣的寫法。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,17 +101,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>記錄一下看到的有趣的寫法。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>記錄一下看到的有趣的寫法。</p>
 <a id="more"></a>
-<p>#利用||給予定義或初始值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b || <span class="number">9</span> ;</div></pre></td></tr></table></figure></p>
-<p>#函式參數少於需求<br>有時候會好奇為什麼API有些參數可選擇，原來是沒輸入的都會當作undefined，如此一來就可以設置default值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	a = a || <span class="number">0</span> ; b = b || <span class="number">0</span> ; c = c || <span class="number">0</span> ;</div><div class="line">	<span class="keyword">return</span> a + b + c ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#函式參數多於需求<br>多的可以利用arguments獲得。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> sum = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++ ) &#123;</div><div class="line">		sum += <span class="built_in">arguments</span>[i] ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="利用-給予定義或初始值"><a href="#利用-給予定義或初始值" class="headerlink" title="利用||給予定義或初始值"></a>利用||給予定義或初始值</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b || <span class="number">9</span> ;</div></pre></td></tr></table></figure>
+<h1 id="函式參數少於需求"><a href="#函式參數少於需求" class="headerlink" title="函式參數少於需求"></a>函式參數少於需求</h1><p>有時候會好奇為什麼API有些參數可選擇，原來是沒輸入的都會當作undefined，如此一來就可以設置default值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	a = a || <span class="number">0</span> ; b = b || <span class="number">0</span> ; c = c || <span class="number">0</span> ;</div><div class="line">	<span class="keyword">return</span> a + b + c ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="函式參數多於需求"><a href="#函式參數多於需求" class="headerlink" title="函式參數多於需求"></a>函式參數多於需求</h1><p>多的可以利用arguments獲得。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> sum = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++ ) &#123;</div><div class="line">		sum += <span class="built_in">arguments</span>[i] ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>有看到新的再補充。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/" data-id="cj1hupfis003i6b3hkewswkg1" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/" data-id="cj1hweggy003sb93htzboq7yv" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -170,7 +170,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -237,7 +237,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

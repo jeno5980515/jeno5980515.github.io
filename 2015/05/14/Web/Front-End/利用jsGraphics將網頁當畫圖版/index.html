@@ -5,17 +5,17 @@
   
   <title>[Front-End] 利用jsGraphics將網頁當畫布 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
+  <meta name="description" content="前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
 <meta name="keywords" content="JavaScript,jsGraphics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] 利用jsGraphics將網頁當畫布">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/14/Web/Front-End/利用jsGraphics將網頁當畫圖版/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
-<meta property="og:updated_time" content="2017-04-08T03:11:18.000Z">
+<meta property="og:description" content="前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
+<meta property="og:updated_time" content="2017-04-14T13:31:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] 利用jsGraphics將網頁當畫布">
-<meta name="twitter:description" content="#前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
+<meta name="twitter:description" content="前言jsGraphics是一個可以讓你直接在網頁上繪圖的套件，HTML5的Canvas雖然也可以畫圖，但不知道能不能像jsGraphics跨區域，有空再研究看看。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br><a href="http://www.walterzorn.de/en/jsgraphics/jsgraphics_e.htm" target="_blank" rel="external">jsGraphics</a>是一個可以讓你直接在網頁上繪圖的套件，<code>HTML5</code>的<code>Canvas</code>雖然也可以畫圖，但不知道能不能像<code>jsGraphics</code>跨區域，有空再研究看看。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="http://www.walterzorn.de/en/jsgraphics/jsgraphics_e.htm" target="_blank" rel="external">jsGraphics</a>是一個可以讓你直接在網頁上繪圖的套件，<code>HTML5</code>的<code>Canvas</code>雖然也可以畫圖，但不知道能不能像<code>jsGraphics</code>跨區域，有空再研究看看。</p>
 <a id="more"></a>
-<p>#jQuery<br>由於需要取得滑鼠座標，直接使用<code>jQuery</code>。</p>
-<p>#畫布<br>原本直接畫到<code>document</code>裡，但不知為何畫一個點就卡住了，最後還是給個區塊作畫，詳細原因有待研究。</p>
+<h1 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h1><p>由於需要取得滑鼠座標，直接使用<code>jQuery</code>。</p>
+<h1 id="畫布"><a href="#畫布" class="headerlink" title="畫布"></a>畫布</h1><p>原本直接畫到<code>document</code>裡，但不知為何畫一個點就卡住了，最後還是給個區塊作畫，詳細原因有待研究。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span> <span class="attr">style</span>=<span class="string">"position:absolute;height:0px;width:0px;top:0px;left:0px;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> cnv = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</div><div class="line">	<span class="keyword">var</span> jg = <span class="keyword">new</span> jsGraphics(cnv);</div><div class="line">	jg.setStroke(<span class="number">3</span>);</div><div class="line"></div><div class="line">	<span class="keyword">var</span> mousePress = <span class="literal">false</span> ;</div><div class="line">	<span class="keyword">var</span> nowMouseX , nowMouseY;</div><div class="line">	<span class="keyword">var</span> pastMouseX , pastMouseY ;</div><div class="line"></div><div class="line">	$(<span class="built_in">document</span>).mousemove(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">		pastMouseX = nowMouseX , paseMouseY = nowMouseY ;</div><div class="line">		nowMouseX = e.pageX + <span class="built_in">document</span>.documentElement.scrollTop;</div><div class="line">		nowMouseY = e.pageY + <span class="built_in">document</span>.documentElement.scrollLeft;</div><div class="line">		<span class="keyword">if</span> ( mousePress === <span class="literal">true</span> )&#123;</div><div class="line">			jg.drawLine(pastMouseX,paseMouseY,nowMouseX,nowMouseY);</div><div class="line">			jg.paint();</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	$(<span class="built_in">document</span>).mousedown(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">		mousePress = <span class="literal">true</span> ;</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	$(<span class="built_in">document</span>).mouseup(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">		mousePress = <span class="literal">false</span> ;</div><div class="line">	&#125;);</div><div class="line">	</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/14/Web/Front-End/利用jsGraphics將網頁當畫圖版/" data-id="cj1hupfk200506b3h8p911ddj" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/14/Web/Front-End/利用jsGraphics將網頁當畫圖版/" data-id="cj1hweghk004yb93hsat0h0lb" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/14/Web/Front-End/利用jsGraphics將網頁當畫圖版/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

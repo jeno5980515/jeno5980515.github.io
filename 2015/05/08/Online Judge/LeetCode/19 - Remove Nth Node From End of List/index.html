@@ -5,17 +5,17 @@
   
   <title>[LeetCode] 19 - Remove Nth Node From End of List | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意刪除一個Singly Linked List的倒數第n個節點。">
+  <meta name="description" content="題意刪除一個Singly Linked List的倒數第n個節點。">
 <meta name="keywords" content="LeetCode,19,Linked List">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[LeetCode] 19 - Remove Nth Node From End of List">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/19 - Remove Nth Node From End of List/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意刪除一個Singly Linked List的倒數第n個節點。">
-<meta property="og:updated_time" content="2017-04-08T02:36:37.000Z">
+<meta property="og:description" content="題意刪除一個Singly Linked List的倒數第n個節點。">
+<meta property="og:updated_time" content="2017-04-14T13:25:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LeetCode] 19 - Remove Nth Node From End of List">
-<meta name="twitter:description" content="#題意刪除一個Singly Linked List的倒數第n個節點。">
+<meta name="twitter:description" content="題意刪除一個Singly Linked List的倒數第n個節點。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,16 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>刪除一個<code>Singly Linked List</code>的倒數第n個節點。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>刪除一個<code>Singly Linked List</code>的倒數第n個節點。</p>
 <a id="more"></a>
-<p>#解法<br>使用兩個指針讓一個先走，接著同步走等到第一個指針到了最後就代表第二個指針是倒數第n個。</p>
-<p>#心得<br>要注意頭節點的處理。</p>
-<p>#程式</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *	 int val;</div><div class="line"> *	 ListNode *next;</div><div class="line"> *	 ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		ListNode *Node1 = head , *Node2 = head ;</div><div class="line">		<span class="keyword">int</span> i = <span class="number">0</span> ;</div><div class="line">		<span class="keyword">while</span> ( Node1-&gt;next != <span class="literal">NULL</span> &amp;&amp; i &lt; n )&#123;</div><div class="line">			Node1 = Node1-&gt;next ;</div><div class="line">			i ++ ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> ( Node1-&gt;next != <span class="literal">NULL</span> )&#123;</div><div class="line">			Node1 = Node1-&gt;next ;</div><div class="line">			Node2 = Node2-&gt;next ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> ( i &gt;= n )&#123;</div><div class="line">			ListNode *Node = Node2-&gt;next-&gt;next ;</div><div class="line">			Node2-&gt;next = Node ;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( i == n - <span class="number">1</span> )&#123;</div><div class="line">			ListNode *Node = Node2-&gt;next ;</div><div class="line">			head = Node ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> head ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>使用兩個指針讓一個先走，接著同步走等到第一個指針到了最後就代表第二個指針是倒數第n個。</p>
+<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>要注意頭節點的處理。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * struct ListNode &#123;</div><div class="line"> *	 int val;</div><div class="line"> *	 ListNode *next;</div><div class="line"> *	 ListNode(int x) : val(x), next(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		ListNode *Node1 = head , *Node2 = head ;</div><div class="line">		<span class="keyword">int</span> i = <span class="number">0</span> ;</div><div class="line">		<span class="keyword">while</span> ( Node1-&gt;next != <span class="literal">NULL</span> &amp;&amp; i &lt; n )&#123;</div><div class="line">			Node1 = Node1-&gt;next ;</div><div class="line">			i ++ ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">while</span> ( Node1-&gt;next != <span class="literal">NULL</span> )&#123;</div><div class="line">			Node1 = Node1-&gt;next ;</div><div class="line">			Node2 = Node2-&gt;next ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> ( i &gt;= n )&#123;</div><div class="line">			ListNode *Node = Node2-&gt;next-&gt;next ;</div><div class="line">			Node2-&gt;next = Node ;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> ( i == n - <span class="number">1</span> )&#123;</div><div class="line">			ListNode *Node = Node2-&gt;next ;</div><div class="line">			head = Node ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> head ;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/19 - Remove Nth Node From End of List/" data-id="cj1hupfgr001c6b3hlhyphbhd" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/19 - Remove Nth Node From End of List/" data-id="cj1hwegee001gb93h1mffrtw6" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/19 - Remove Nth Node From End of List/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -169,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -236,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

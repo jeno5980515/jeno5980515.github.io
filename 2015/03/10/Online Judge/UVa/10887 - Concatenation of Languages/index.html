@@ -5,17 +5,17 @@
   
   <title>[UVa] 10887 - Concatenation of Languages | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
+  <meta name="description" content="題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
 <meta name="keywords" content="UVa,Set">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[UVa] 10887 - Concatenation of Languages">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/03/10/Online Judge/UVa/10887 - Concatenation of Languages/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
-<meta property="og:updated_time" content="2017-04-08T02:37:25.000Z">
+<meta property="og:description" content="題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
+<meta property="og:updated_time" content="2017-04-14T13:27:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[UVa] 10887 - Concatenation of Languages">
-<meta name="twitter:description" content="#題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
+<meta name="twitter:description" content="題意現有A集合和B集合，請輸出兩集合所能形成的字串數量。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,15 +101,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#題意<br>現有A集合和B集合，請輸出兩集合所能形成的字串數量。</p>
+        <h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>現有A集合和B集合，請輸出兩集合所能形成的字串數量。</p>
 <a id="more"></a>
-<p>#注意<br>會有空字串、空白，以及這種情況：「<code>aaa,b</code> 和 <code>aa,ab</code>都會產生同樣的字串」。</p>
-<p>#心得<br>先偷懶用<code>STL</code>的<code>Set</code>，做法也是有點暴力，之後再研究其它解法。</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>會有空字串、空白，以及這種情況：「<code>aaa,b</code> 和 <code>aa,ab</code>都會產生同樣的字串」。</p>
+<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>先偷懶用<code>STL</code>的<code>Set</code>，做法也是有點暴力，之後再研究其它解法。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">set</span> &lt;<span class="built_in">string</span>&gt; A , B , C ;</div><div class="line">	<span class="keyword">int</span> T ;</div><div class="line">	<span class="built_in">cin</span> &gt;&gt; T ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">int</span> M , N , t = <span class="number">0</span> ; t &lt; T &amp;&amp; <span class="built_in">cin</span> &gt;&gt; M &gt;&gt; N ; t ++ ) &#123;</div><div class="line">		A.clear() , B.clear() , C.clear() ;</div><div class="line">		<span class="built_in">string</span> input ;</div><div class="line">		<span class="built_in">cin</span>.ignore() ;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> m = <span class="number">0</span>  ; m &lt; M &amp;&amp; getline(<span class="built_in">cin</span>,input) ; m ++ )&#123;</div><div class="line">			A.insert(input) ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> n = <span class="number">0</span>  ; n &lt; N &amp;&amp; getline(<span class="built_in">cin</span>,input) ; n ++ )&#123;</div><div class="line">			B.insert(input) ;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">set</span>&lt;<span class="built_in">string</span>&gt;::iterator it , it2;</div><div class="line">		<span class="keyword">for</span> ( it = A.begin() ; it != A.end() ; it ++ )&#123;</div><div class="line">			<span class="keyword">for</span> (  it2 = B.begin() ; it2 != B.end() ; it2 ++ )&#123;</div><div class="line">				C.insert(*it+*it2) ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; t+<span class="number">1</span> &lt;&lt; <span class="string">": "</span> &lt;&lt; C.size() &lt;&lt; <span class="built_in">endl</span> ;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/03/10/Online Judge/UVa/10887 - Concatenation of Languages/" data-id="cj1hupfhz002d6b3hrdy5le5e" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/03/10/Online Judge/UVa/10887 - Concatenation of Languages/" data-id="cj1hwegf50029b93hpv502g87" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/03/10/Online Judge/UVa/10887 - Concatenation of Languages/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

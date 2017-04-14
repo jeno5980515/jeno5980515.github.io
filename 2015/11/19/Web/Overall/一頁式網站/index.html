@@ -5,17 +5,17 @@
   
   <title>[Web] 一頁式網站 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
+  <meta name="description" content="前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Web] 一頁式網站">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
-<meta property="og:updated_time" content="2017-04-08T03:05:03.000Z">
+<meta property="og:description" content="前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
+<meta property="og:updated_time" content="2017-04-14T13:35:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] 一頁式網站">
-<meta name="twitter:description" content="#前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
+<meta name="twitter:description" content="前言網站可以利用多個HTML檔切換，也可以利用#來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,17 +101,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>網站可以利用多個HTML檔切換，也可以利用<code>#</code>來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>網站可以利用多個HTML檔切換，也可以利用<code>#</code>來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。</p>
 <a id="more"></a>
-<p>#切換<br>利用CSS的<code>display:none</code>，使用jQuery則可以使用<code>show()</code>和<code>hide()</code>。</p>
+<h1 id="切換"><a href="#切換" class="headerlink" title="切換"></a>切換</h1><p>利用CSS的<code>display:none</code>，使用jQuery則可以使用<code>show()</code>和<code>hide()</code>。</p>
 <h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><p>加上<code>location.href=&quot;#xxx&quot;</code>則可以在網址加上<code>#</code>和值，可以用來標示不同的頁面，而上一頁下一頁也會有作用。</p>
-<p>#onhashchange<br>單純這樣子會使瀏覽器的上一頁和下一頁無作用，僅造成網址的改變，因此要加入事件偵測，再取得當前的頁面做不同的事件即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>)); <span class="comment">//取得tag後的value</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// or jQuery</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'hashchange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>#返回首頁<br>若不希望可以直接進入子頁面，除了做事件偵測外還要改網址。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="built_in">window</span>.location.hash )&#123;</div><div class="line">	<span class="built_in">window</span>.location.href = <span class="string">""</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="onhashchange"><a href="#onhashchange" class="headerlink" title="onhashchange"></a>onhashchange</h1><p>單純這樣子會使瀏覽器的上一頁和下一頁無作用，僅造成網址的改變，因此要加入事件偵測，再取得當前的頁面做不同的事件即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>)); <span class="comment">//取得tag後的value</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// or jQuery</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'hashchange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h1 id="返回首頁"><a href="#返回首頁" class="headerlink" title="返回首頁"></a>返回首頁</h1><p>若不希望可以直接進入子頁面，除了做事件偵測外還要改網址。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="built_in">window</span>.location.hash )&#123;</div><div class="line">	<span class="built_in">window</span>.location.href = <span class="string">""</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/" data-id="cj1hupfl100686b3hij0cg9hc" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/" data-id="cj1hwegi20060b93hzszvcq1t" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -170,7 +170,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -237,7 +237,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

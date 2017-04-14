@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://jeno5980515.github.io/2015/03/20/Web/Overall/透過PHP取得MySQL資料/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="上次講過放入，這次講怎麼取出。">
-<meta property="og:updated_time" content="2017-04-08T03:12:24.000Z">
+<meta property="og:updated_time" content="2017-04-14T13:36:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] 透過PHP取得MySQL資料">
 <meta name="twitter:description" content="上次講過放入，這次講怎麼取出。">
@@ -103,13 +103,13 @@
       
         <p>上次講過放入，這次講怎麼取出。</p>
 <a id="more"></a>
-<p>#####PHP程式碼<br>記得要改掉那些名稱，由於是傳給<code>JavaScript</code>，所以利用<code>JSON</code>相當方便。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">	header(<span class="string">"Content-type: text/html; charset=utf-8"</span>); </div><div class="line">	header(<span class="string">'Access-Control-Allow-Origin: *'</span>);</div><div class="line">	header(<span class="string">'Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'</span>);</div><div class="line">	header(<span class="string">'Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept'</span>);</div><div class="line">	mysql_connect(hostname,username,password);</div><div class="line">	mysql_select_db(databasename);</div><div class="line">	mysql_query(<span class="string">"set names utf8"</span>);</div><div class="line">	$q=mysql_query(<span class="string">"SELECT * from `databasename`.`tablename` "</span>);</div><div class="line">	<span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</div><div class="line">		<span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . $conn-&gt;connect_error);</div><div class="line">	&#125; </div><div class="line">	<span class="keyword">while</span>($e=mysql_fetch_assoc($q))</div><div class="line">	$output[]=$e;</div><div class="line">	<span class="keyword">echo</span> json_encode($output,JSON_UNESCAPED_UNICODE);</div><div class="line">	mysql_close();</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
-<p>#####JavaScript程式碼<br>使用<code>jQuery</code>就是這麼簡單。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.get(URL , <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">	data = jQuery.parseJSON(response) ;		</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h5 id="PHP程式碼"><a href="#PHP程式碼" class="headerlink" title="PHP程式碼"></a>PHP程式碼</h5><p>記得要改掉那些名稱，由於是傳給<code>JavaScript</code>，所以利用<code>JSON</code>相當方便。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">	header(<span class="string">"Content-type: text/html; charset=utf-8"</span>); </div><div class="line">	header(<span class="string">'Access-Control-Allow-Origin: *'</span>);</div><div class="line">	header(<span class="string">'Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'</span>);</div><div class="line">	header(<span class="string">'Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept'</span>);</div><div class="line">	mysql_connect(hostname,username,password);</div><div class="line">	mysql_select_db(databasename);</div><div class="line">	mysql_query(<span class="string">"set names utf8"</span>);</div><div class="line">	$q=mysql_query(<span class="string">"SELECT * from `databasename`.`tablename` "</span>);</div><div class="line">	<span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</div><div class="line">		<span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . $conn-&gt;connect_error);</div><div class="line">	&#125; </div><div class="line">	<span class="keyword">while</span>($e=mysql_fetch_assoc($q))</div><div class="line">	$output[]=$e;</div><div class="line">	<span class="keyword">echo</span> json_encode($output,JSON_UNESCAPED_UNICODE);</div><div class="line">	mysql_close();</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure></p>
+<h5 id="JavaScript程式碼"><a href="#JavaScript程式碼" class="headerlink" title="JavaScript程式碼"></a>JavaScript程式碼</h5><p>使用<code>jQuery</code>就是這麼簡單。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.get(URL , <span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">	data = jQuery.parseJSON(response) ;		</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/03/20/Web/Overall/透過PHP取得MySQL資料/" data-id="cj1hupfl7006g6b3h0jcnahax" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/03/20/Web/Overall/透過PHP取得MySQL資料/" data-id="cj1hwegi5006bb93h74p08n0u" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/03/20/Web/Overall/透過PHP取得MySQL資料/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -168,7 +168,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -235,7 +235,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

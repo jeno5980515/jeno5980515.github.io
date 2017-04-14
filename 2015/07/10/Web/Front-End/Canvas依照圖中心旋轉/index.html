@@ -5,17 +5,17 @@
   
   <title>[Front-End] Canvas依照圖中心旋轉 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
+  <meta name="description" content="前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
 <meta name="keywords" content="JavaScript,Canvas,HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Front-End] Canvas依照圖中心旋轉">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
-<meta property="og:updated_time" content="2017-04-08T03:14:41.000Z">
+<meta property="og:description" content="前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
+<meta property="og:updated_time" content="2017-04-14T13:32:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Front-End] Canvas依照圖中心旋轉">
-<meta name="twitter:description" content="#前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
+<meta name="twitter:description" content="前言若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,22 +101,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。</p>
 <a id="more"></a>
-<p>#方法</p>
-<p>先使用<code>save()</code>保存畫布。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div></pre></td></tr></table></figure></p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>先使用<code>save()</code>保存畫布。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div></pre></td></tr></table></figure></p>
 <p>由於是針對左上角旋轉，所以我們先把畫布移到物體的座標。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(obj.x,obj.y);</div></pre></td></tr></table></figure></p>
 <p>再移到物體的中心。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(obj.width/<span class="number">2</span>,obj.height/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
 <p>旋轉。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.rotate( <span class="number">1</span> );</div></pre></td></tr></table></figure></p>
 <p>再移動畫布<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(-obj.width/<span class="number">2</span>,-obj.height/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
 <p>畫上圖案<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.drawImage(obj, <span class="number">0</span>,  <span class="number">0</span>, obj.width, obj.height);</div></pre></td></tr></table></figure></p>
 <p>還原<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.restore();</div></pre></td></tr></table></figure></p>
-<p>#完整代碼<br>記得自己替換內容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div><div class="line">ctx.translate(view.width ,view.height);</div><div class="line">ctx.translate(view.width/<span class="number">2</span>,view.height/<span class="number">2</span>); </div><div class="line">ctx.rotate( ang );</div><div class="line">ctx.translate(-view.width/<span class="number">2</span>,-view.height/<span class="number">2</span>);</div><div class="line">ctx.drawImage(view, <span class="number">0</span>,  <span class="number">0</span>, view.width, view.height);</div><div class="line">ctx.restore();</div></pre></td></tr></table></figure></p>
+<h1 id="完整代碼"><a href="#完整代碼" class="headerlink" title="完整代碼"></a>完整代碼</h1><p>記得自己替換內容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div><div class="line">ctx.translate(view.width ,view.height);</div><div class="line">ctx.translate(view.width/<span class="number">2</span>,view.height/<span class="number">2</span>); </div><div class="line">ctx.rotate( ang );</div><div class="line">ctx.translate(-view.width/<span class="number">2</span>,-view.height/<span class="number">2</span>);</div><div class="line">ctx.drawImage(view, <span class="number">0</span>,  <span class="number">0</span>, view.width, view.height);</div><div class="line">ctx.restore();</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/" data-id="cj1hupfja00426b3hjhmkzza5" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/" data-id="cj1hwegh50045b93hneb42q57" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -175,7 +174,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -242,7 +241,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 

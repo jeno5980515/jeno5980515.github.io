@@ -5,17 +5,17 @@
   
   <title>[C/C++] 函數指標 | Jeno&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
+  <meta name="description" content="前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
 <meta name="keywords" content="C,Function Pointer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[C/C++] 函數指標">
 <meta property="og:url" content="http://jeno5980515.github.io/2015/05/13/Programming Language/C&C++/函數指標/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
-<meta property="og:description" content="#前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
-<meta property="og:updated_time" content="2017-04-08T02:32:02.000Z">
+<meta property="og:description" content="前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
+<meta property="og:updated_time" content="2017-04-14T13:27:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[C/C++] 函數指標">
-<meta name="twitter:description" content="#前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
+<meta name="twitter:description" content="前言最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了函數指標，發覺是個很有趣的東西。">
   
     <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
   
@@ -101,9 +101,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#前言<br>最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了<code>函數指標</code>，發覺是個很有趣的東西。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在看《指標的藝術》，看能不能對於指標理解透徹一點。其中看到了<code>函數指標</code>，發覺是個很有趣的東西。</p>
 <a id="more"></a>
-<p>#函數指標<br>顧名思義，就是一個指向函數的指標，那有什麼用途？直接看一段程式碼。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> x + y ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> x - y ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">3</span> , c ;</div><div class="line">	<span class="keyword">int</span> (*operation)(<span class="keyword">int</span> , <span class="keyword">int</span>) ;</div><div class="line"></div><div class="line">	operation = add ;</div><div class="line">	c = (*operation)(a , b) ;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"a + b = %d\n"</span>, c ) ;</div><div class="line"></div><div class="line">	operation = sub ;</div><div class="line">	c = (*operation)(a , b) ;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"a + b = %d\n"</span>, c ) ;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="函數指標"><a href="#函數指標" class="headerlink" title="函數指標"></a>函數指標</h1><p>顧名思義，就是一個指向函數的指標，那有什麼用途？直接看一段程式碼。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> x + y ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> x - y ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a = <span class="number">5</span> , b = <span class="number">3</span> , c ;</div><div class="line">	<span class="keyword">int</span> (*operation)(<span class="keyword">int</span> , <span class="keyword">int</span>) ;</div><div class="line"></div><div class="line">	operation = add ;</div><div class="line">	c = (*operation)(a , b) ;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"a + b = %d\n"</span>, c ) ;</div><div class="line"></div><div class="line">	operation = sub ;</div><div class="line">	c = (*operation)(a , b) ;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"a + b = %d\n"</span>, c ) ;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>最後得到結果個別是<code>8</code>和<code>2</code>，可以發現函數指標可以像是變數一樣的使用，不過本質上還是指向函數的位置，型態和參數都要匹配才可以。</p>
 <p>但要注意優先權的關係，有沒有括弧會不一樣。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> *<span class="title">operation</span><span class="params">(<span class="keyword">int</span> , <span class="keyword">int</span>)</span> </span>;</div><div class="line"><span class="keyword">int</span> (*operation)(<span class="keyword">int</span> , <span class="keyword">int</span>) ;</div></pre></td></tr></table></figure>
@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/05/13/Programming Language/C&C++/函數指標/" data-id="cj1hupfia002v6b3h1kkqz8co" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/05/13/Programming Language/C&C++/函數指標/" data-id="cj1hwegfu002zb93h9nnbjaxm" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/05/13/Programming Language/C&C++/函數指標/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -171,7 +171,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
           </li>
         
           <li>
@@ -238,7 +238,7 @@
 		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
 		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
 		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
-		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
 	  </div>
 	  <div id="footer-info" class="inner">
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
