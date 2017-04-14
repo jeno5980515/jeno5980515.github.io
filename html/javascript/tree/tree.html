@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="function Node(id){ 		this.id = id ; 		this.me = false ; 		this.dead = false ; 		this.sex = 0 ; 		this.age = null ; 		this.couple = null ; 		this.father = null ; 		this.mother = null ; 		this.chil">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jeno's Blog">
+<meta property="og:url" content="http://jeno5980515.github.io/html/javascript/tree/tree.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="function Node(id){ 		this.id = id ; 		this.me = false ; 		this.dead = false ; 		this.sex = 0 ; 		this.age = null ; 		this.couple = null ; 		this.father = null ; 		this.mother = null ; 		this.chil">
+<meta property="og:updated_time" content="2015-03-29T19:43:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jeno's Blog">
+<meta name="twitter:description" content="function Node(id){ 		this.id = id ; 		this.me = false ; 		this.dead = false ; 		this.sex = 0 ; 		this.age = null ; 		this.couple = null ; 		this.father = null ; 		this.mother = null ; 		this.chil">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/html/javascript/tree/tree.html" class="article-date">
+  <time datetime="2015-07-26T05:38:03.000Z" itemprop="datePublished">7月 26 2015</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script>
+	function Node(id){
+		this.id = id ;
+		this.me = false ;
+		this.dead = false ;
+		this.sex = 0 ;
+		this.age = null ;
+		this.couple = null ;
+		this.father = null ;
+		this.mother = null ;
+		this.children = [] ;
+		this.x = null ;
+		this.y = null ;
+	}
+	
+
+</script>
+<table>
+	<tr>
+		<td>
+			<div width="1000" height="700">
+				<canvas id="myCanvas" width="1000" height="700" style="border:1px solid #000000;"></canvas>
+			</div>
+		</td>
+		<td>
+			<div width="1000" height="700">
+				<button id="changedead">�����ͩR</button><br><br>
+				<button id="changeme">�]���ۤv</button><br><br>
+				<button id="changesex">�����ʧO</button><br><br>
+				<button id="insertchild_front">���J�p��(�e)</button><br><br>
+				<button id="insertchild_back">���J�p��(��)</button><br><br>
+
+				<!--
+				<button id="insertparent">���J�a��</button>
+				<button id="insertcouple">���J���Q</button>
+				<button id="removenode">�����`�I</button>
+				-->
+			</div>
+		</td>
+	</tr>
+</table>
+
+<script>
+	var c = document.getElementById('myCanvas') ;
+	var ctx = c.getContext("2d");
+	var dragspeed = 0.01 ;
+	var mouse_press = false ;
+	var press_mouse_x ;
+	var press_mouse_y ;
+	var move_x = 0 ;
+	var move_y = 0 ;
+	var moved_x = 0 ;
+	var moved_y = 0 ;
+	var mouse_x = 0, mouse_y = 0;
+	var baselong = 0 , baselati = 0 ;
+	var offsetx = 18 , offsety = 18 , offsetsize = 15 ;
+	var size = 20 ;
+	var node_vertical_distance = 115 ;
+	var child_horizontal_distance = 100 ;
+	var NodeList = [] ;
+	var PaintedNode = [] ;
+	var LevelOrderNode = [[]] ;
+	var NowId = null ;
+	var cover_distance = 10 ;
+	var demoved = 0 ;
+	var Me = new Node(0);
+	Me.x = c.width/2 ;
+	Me.y = c.height/ 2 ;
+	var couple_distance = 100 ;
+	Me.me = false ;
+	NodeList.push(Me) ;
+	NowId = 0 ;
+	ctx.lineWidth = 2 ;
+	ctx.fillStyle = "white" ;
+	var HighestList = [];
+	
+	$("#myCanvas").mousedown(function (e) {
+		press_mouse_x = mouse_x;
+		press_mouse_y = mouse_y;
+		mouse_press = true ;
+	});
+	
+	$("#myCanvas").mouseup(function (e) {
+		moved_x += move_x ;
+		moved_y += move_y ;
+		move_x = 0 ;
+		move_y = 0 ;
+		mouse_press = false ;
+		Paint2();
+		press_mouse_x = 0 ;
+		press_mouse_y = 0 ;
+
+ 	});
+
+	$("#myCanvas").mousemove(function (e) {
+		mouse_x = e.pageX + document.documentElement.scrollTop;
+		mouse_y = e.pageY + document.documentElement.scrollLeft;
+		if ( mouse_press === true ){
+			move_x = mouse_x-press_mouse_x ;
+			move_y = mouse_y-press_mouse_y ;
+			ctx.clearRect ( (-1)*c.width , (-1)*c.height , c.width*2, c.height*2 );
+			Paint2();
+		} 
+	});
+	
+	
+	$('#myCanvas').click(function (e) {
+		mouse_x = e.pageX + document.documentElement.scrollTop;
+		mouse_y = e.pageY + document.documentElement.scrollLeft;
+		for ( var i = 0 ; i < NodeList.length ; i ++ ) {
+			if ( Math.abs(mouse_x - NodeList[i].x -(move_x+moved_x) )  <= size && Math.abs(mouse_y - NodeList[i].y -(move_y+moved_y) ) <= size ) {
+				NowId = NodeList[i].id ;
+				Paint2();
+				return ;
+			}
+		}
+		NowId = null ;
+		Paint2();
+	});
+
+	$('#changedead').click(function (e) {
+		if ( DetectNull() === true){
+			if ( NodeList[NowId].dead === true )
+				NodeList[NowId].dead = false ;
+			else 
+				NodeList[NowId].dead = true ;
+			Paint();
+		}
+	});
+	
+	$('#changeme').click(function (e) {
+		if ( DetectNull() === true){
+			for ( var i = 0 ; i < NodeList.length ; i ++ ){
+				NodeList[i].me = false ;
+			}
+			NodeList[NowId].me = true ;
+			Paint();
+		}
+	});
+	
+	$('#changesex').click(function (e) {
+		if ( DetectNull() === true){
+			if ( NodeList[NowId].couple !== null ){
+				alert("�w�����Q�L�k����") ;
+				return ;
+			}
+			NodeList[NowId].sex = 1 - NodeList[NowId].sex ;
+			Paint();
+		}
+	});
+
+	$('#insertchild_back').click(function (e) {
+		InsertChildBack();
+	});
+	
+	$('#insertchild_front').click(function (e) {
+		InserChildFront();
+	});
+	
+	var InsertParent = function(){
+		if ( DetectNull() === true ){
+			if ( NodeList[NowId].father !== null && NodeList[NowId].mother !== null){
+				alert("�w���a��") ;
+			} else {
+				var father = new Node(NodeList.length) ;
+				father.children.push(NodeList[NowId]) ;
+				father.sex = 1 ;
+				var mother = new Node(NodeList.length+1) ;
+				mother.children.push(NodeList[NowId]) ;
+				mother.sex = 0 ;
+				father.couple = mother ;
+				mother.couple = father ;
+				NodeList.push(father) ;
+				NodeList.push(mother) ;
+				NodeList[NowId].father = father ;
+				NodeList[NowId].mother = mother ;
+				Paint();
+			}
+		}
+	}
+	
+	var InsertCouple = function(){
+		if ( DetectNull() === true){
+			if ( NodeList[NowId].couple !== null ){
+				alert("���B") ;
+			} else {
+				var coupleNode = new Node(NodeList.length) ;
+				coupleNode.sex = ( 1 - NodeList[NowId].sex ) ;
+				coupleNode.couple = NodeList[NowId] ;
+				NodeList.push(coupleNode) ;
+				NodeList[NowId].couple = coupleNode ;
+				NodeList[coupleNode.id].couple = NodeList[NowId] ;
+				Paint();
+			}
+		}
+	}
+	
+	var InsertChildBack = function(){
+		if ( DetectNull() === true){
+			if ( NodeList[NowId].couple === null ){
+				alert("�S�����Q") ;
+			} else {
+				var child = new Node(NodeList.length) ;
+				NodeList.push(child) ;
+				if ( NodeList[NowId].sex === 0 ) {
+					NodeList[child.id].mother = NodeList[NowId];
+					NodeList[child.id].father = NodeList[NowId].couple ;
+				} else {
+					NodeList[child.id].father = NodeList[NowId];
+					NodeList[child.id].mother = NodeList[NowId].couple ;
+				}
+				NodeList[NowId].children.push(child) ;
+				NodeList[NodeList[NowId].couple.id].children.push(child) ;
+				Paint();
+			}
+		}
+	}
+	
+	var InserChildFront = function(){
+		if ( DetectNull() === true){
+			if ( NodeList[NowId].couple === null ){
+				alert("�S�����Q") ;
+			} else {
+				var child = new Node(NodeList.length) ;
+				NodeList.push(child) ;
+				if ( NodeList[NowId].sex === 0 ) {
+					NodeList[child.id].mother = NodeList[NowId];
+					NodeList[child.id].father = NodeList[NowId].couple ;
+				} else {
+					NodeList[child.id].father = NodeList[NowId];
+					NodeList[child.id].mother = NodeList[NowId].couple ;
+				}
+				NodeList[NowId].children.unshift(child) ;
+				NodeList[NodeList[NowId].couple.id].children.unshift(child) ;
+				Paint();
+			}
+		}
+	}
+	
+	var DetectNull = function(){
+		if (NowId === null){
+			alert("�п��ܤH��") ;
+			return false ;
+		} 
+		return true ;
+	}
+
+	var ResetParentSite = function(index){
+		if ( ( NodeList[index].father === null &&  NodeList[index].mother === null ) || PaintedNode[index] === true ){
+			return ;
+		}
+		NodeList[NodeList[index].father.id].x = NodeList[index].x - couple_distance / 2 ;
+		NodeList[NodeList[index].mother.id].x = NodeList[index].x + couple_distance / 2 ;
+		NodeList[NodeList[index].father.id].y = NodeList[index].y - node_vertical_distance ;
+		NodeList[NodeList[index].mother.id].y = NodeList[index].y - node_vertical_distance ;
+		ResetParentSite(NodeList[index].father.id);
+		ResetParentSite(NodeList[index].mother.id);
+		ResetChildrenSite(NodeList[index].mother.id);
+	}	
+	
+	var ResetChildrenSite = function(index){
+		if ( NodeList[index].children.length === 0 || PaintedNode[index] === true )
+			return ;
+		PaintedNode[index] = true ;
+		if ( NodeList[index].sex === 0 ){
+			for ( var i = 0 ; i < NodeList[index].children.length ; i ++ ){
+				ResetCoupleSite(NodeList[index].children[i].id) ;
+				NodeList[NodeList[index].children[i].id].x = (-1)*child_horizontal_distance / 2 + NodeList[index].x + ( child_horizontal_distance * i ) - ( NodeList[index].children.length - 1 ) * child_horizontal_distance / 2 ;
+				NodeList[NodeList[index].children[i].id].y = NodeList[index].y + node_vertical_distance ;
+				ResetChildrenSite(NodeList[index].children[i].id) ;
+			}
+		} else {
+			for ( var i = 0 ; i < NodeList[index].children.length ; i ++ ){
+				ResetCoupleSite(NodeList[index].children[i].id) ;
+				NodeList[NodeList[index].children[i].id].x = (child_horizontal_distance / 2) + NodeList[index].x + ( child_horizontal_distance * i ) - ( NodeList[index].children.length - 1 ) * child_horizontal_distance / 2 ;
+				NodeList[NodeList[index].children[i].id].y = NodeList[index].y + node_vertical_distance ;
+				ResetChildrenSite(NodeList[index].children[i].id) ;
+			}
+		}
+	}
+	
+	var ResetCoupleSite = function(index){
+		if ( NodeList[index].couple === null || PaintedNode[index] === true ){
+			return ;
+		}
+		NodeList[NodeList[index].couple.id].y = NodeList[index].y ;
+		if ( NodeList[index].sex === 0 ) {
+			NodeList[NodeList[index].couple.id].x = NodeList[index].x - couple_distance ;
+		} else {
+			NodeList[NodeList[index].couple.id].x = NodeList[index].x + couple_distance ;
+		}
+		ResetParentSite(NodeList[index].couple.id);
+		ResetChildrenSite(NodeList[index].couple.id);
+	}	
+	
+	var ResetAllSite = function(){
+		NodeList[0].x = c.width/2 ; 
+		ResetParentSite(0);
+		ResetCoupleSite(0);
+		ResetChildrenSite(0);
+	}
+	
+	var Paint = function(){
+		PaintedNode = new Array();
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			PaintedNode.push(false) ;
+		}
+		ResetAllSite();
+		DetectAllCover();
+		Paint2();
+	}
+	
+	var DetectLevel = function(offset){
+		var move = offset ;
+		var moved = false ;
+		for ( var i = 0 ; i < HighestList.length ; i ++ ){
+			NodeList[HighestList[i]].x += move ;
+			NodeList[NodeList[HighestList[i]].couple.id].x += move ;
+			if ( moved === true ){
+				for ( var j = 0 ; j < NodeList[HighestList[i]].children.length ; j ++ )
+					NodeList[NodeList[HighestList[i]].children[j].id].x += move ;
+				moved = false ;
+			}
+			for ( var j = i + 1 ; j < HighestList.length ; j ++ ){
+				if ( Math.abs(NodeList[HighestList[i]].x -  NodeList[HighestList[j]].x) <= child_horizontal_distance ) {
+					move += child_horizontal_distance ;
+					moved = true ;
+				}
+			}
+		}
+		move = offset ;
+		moved = false ;
+		for ( var i = 0 ; i < HighestList.length ; i ++ ){
+			NodeList[HighestList[i]].x += move ;
+			NodeList[NodeList[HighestList[i]].couple.id].x += move ;
+			if ( moved === true ){
+				for ( var j = 0 ; j < NodeList[HighestList[i]].children.length ; j ++ )
+					NodeList[NodeList[HighestList[i]].children[j].id].x += move ;
+				moved = false ;
+			}
+			for ( var j = 0 ; j < NodeList[HighestList[i]].children.length ; j ++ ){
+				for ( var k = i + 1 ; k < HighestList.length ; k ++ ) {
+					if ( NodeList[HighestList[i]].children[j].x >= NodeList[HighestList[k]].children[0].x  ){
+						move += child_horizontal_distance ;
+						moved = true ;
+					}
+				}
+			}
+		}
+		FixChildren(0) ;
+	}
+	
+	var DetectAllCover = function(){
+		DetectLevel(0);
+		/*
+		var ysite = 99999 , highestid ;
+		for ( var i = 0 ; i < NodeList.length ; i ++ ) {
+			if ( ysite > NodeList[i].y ){
+				ysite = NodeList[i].y ;
+				highestid = i ;
+			}
+		}
+		HighestList = [];
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			if ( NodeList[i].y === ysite && NodeList[i].sex === 1 ){
+				HighestList.push(i) ;
+			}
+		}
+		var LevelOrderNode = [[]] ;
+		var SortedList = NodeList ;
+		SortedList.sort(function(a, b){return a.y-b.y});
+		var ysite = SortedList[0] ;
+		for ( var i = 0 , j = 0 ; i < SortedList.length ; i ++ ){
+			if ( SortedList[i] === ysite ){
+				LevelOrderNode[j].push()
+			}
+		}
+		/*
+		var Fixed = false ;
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			while ( DetectCover(i) === true ){
+				DetectCover(i) ;
+				Fixed = true ;
+			}
+		}*/
+		//FixCouple();
+		//FixSoloChild();
+	}
+	
+	var Paint2 = function(){
+		ctx.clearRect ( (-1)*c.width , (-1)*c.height , c.width*2, c.height*2 );
+		ctx.font = "30px Arial";
+		ctx.fillStyle = "#000000";
+		ctx.fillText("By : jeno5980515", 600, 600);
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			if ( NodeList[i].x === null || NodeList[i].y === null ) {
+				alert("Bug") ;
+				break ;
+			}
+			ctx.strokeStyle = "black" ;
+			if ( NodeList[i].id === NowId ){
+				ctx.strokeStyle = "red" ;
+			}
+			if ( NodeList[i].dead == false ){
+				if ( NodeList[i].sex === 0 ){
+					ctx.beginPath();
+					ctx.arc(NodeList[i].x+move_x+moved_x,NodeList[i].y+move_y+moved_y,size,0,Math.PI*2);
+					ctx.stroke() ;
+					if ( NodeList[i].me === true ){
+						ctx.beginPath();
+						ctx.moveTo( NodeList[i].x+size-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size-5-1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size-5+1+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2-5+1+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1-5-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size+5-1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+5+1+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+5+1+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1+5-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size-10-1-3-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size-10+1+3+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2-10+1+1+3-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1-10-1-3 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size+10-1-3-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+10+1+3+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+10+1+1+3-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1+10-1-3 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.stroke() ;
+					}
+				} else {
+					ctx.beginPath();
+					ctx.strokeRect(NodeList[i].x-offsetx+move_x+moved_x,NodeList[i].y-offsety+move_y+moved_y,size+offsetsize,size+offsetsize);
+					if ( NodeList[i].me === true ){
+						ctx.beginPath();
+						ctx.moveTo( NodeList[i].x+size+2-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size-2+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+1-2-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1+2 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size-5-1-1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size-5+1+1+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2-5+1+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1-5-1-1+ +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size+5-1-1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+5+1+1+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+5+1+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1+5-1-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size-10-1-3-2-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size-10+1+3+2+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2-10+1+1+3+1+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1-10-1-3-1-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.moveTo( NodeList[i].x+size+10-1-3-2-1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+10+1+3+2+1+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+						ctx.lineTo( NodeList[i].x-size/2+10+1+1+3+1+2-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1+10-1-3-1-2 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+						ctx.stroke() ;
+					}
+				}
+			} else {
+				if ( NodeList[i].sex === 0 ){
+					ctx.beginPath();
+					ctx.arc(NodeList[i].x+move_x+moved_x,NodeList[i].y+move_y+moved_y,size,0,Math.PI*2);
+					ctx.stroke() ;
+					ctx.closePath();
+					ctx.moveTo(0,0);
+					ctx.beginPath();
+					ctx.moveTo( NodeList[i].x-size+(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+					ctx.lineTo( NodeList[i].x+size/2-1+(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+					ctx.stroke() ;
+					ctx.moveTo( NodeList[i].x+size-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-size+(size-Math.sqrt(size*size/2)) +move_y+moved_y) ;
+					ctx.lineTo( NodeList[i].x-size/2+1-(size-Math.sqrt(size*size/2))+move_x+moved_x,  NodeList[i].y-1 +size/2+(size-Math.sqrt(size*size/2))+move_y+moved_y) ;
+					ctx.stroke() ;
+				} else {
+					ctx.beginPath();
+					ctx.strokeRect(NodeList[i].x-offsetx+move_x+moved_x,NodeList[i].y-offsety+move_y+moved_y,size+offsetsize,size+offsetsize);
+					ctx.stroke() ;
+					ctx.closePath();
+					ctx.moveTo(0,0);
+					ctx.beginPath();
+					ctx.moveTo( NodeList[i].x-size+2+move_x+moved_x,  NodeList[i].y+2-size+move_y+moved_y) ;
+					ctx.lineTo( NodeList[i].x+size-3+move_x+moved_x,  NodeList[i].y-3+size+move_y+moved_y) ;
+					ctx.stroke() ;
+					ctx.moveTo( NodeList[i].x+size-3+move_x+moved_x,  NodeList[i].y+2-size+move_y+moved_y) ;
+					ctx.lineTo( NodeList[i].x-size+3+move_x+moved_x,  NodeList[i].y-3+size+move_y+moved_y) ;
+					ctx.stroke() ;
+				}
+			}
+		}
+		ctx.strokeStyle = "black" ;
+		ctx.closePath();
+		ctx.moveTo(0,0);
+		ctx.beginPath();
+		DrawLine();
+	}
+	
+	var DetectCover = function(index){
+		var result = false ;
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			if ( i === index )
+				continue ;
+			if ( Math.abs(NodeList[i].x - NodeList[index].x) <= child_horizontal_distance / 2 && index !== i && NodeList[i].y === NodeList[index].y ){
+				FixSite(index,i) ;
+				result = true ;
+				i = -1 ;
+			}
+		}
+		if ( result === true )
+			return true ;
+		else 
+			return false ;
+	}
+	
+	var FixParent = function(index){
+		if ( NodeList[index].father === null || NodeList[NodeList[index].father.id].children.length === 0 )
+			return ;
+		var FatherId = NodeList[index].father.id , MotherId = NodeList[index].mother.id ;
+		if ( Math.abs(NodeList[FatherId].x + NodeList[MotherId].x / 2 - NodeList[FatherId].children[Math.floor(NodeList[FatherId].children.length/2)].x) <= couple_distance ) {
+			NodeList[FatherId].x = NodeList[FatherId].children[Math.floor(NodeList[FatherId].children.length/2)].x - couple_distance / 2 ;
+			NodeList[MotherId].x = NodeList[MotherId].children[Math.floor(NodeList[MotherId].children.length/2)].x + couple_distance / 2 ;
+		} 
+	}
+	
+	var FixChildren = function(index){
+		var coveroffsetx = 0 ;
+		if ( NodeList[index].sex === 0 ){
+			for ( var i = 0 ; i < NodeList[index].children.length ; i ++ ){
+				NodeList[NodeList[index].children[i].id].x = coveroffsetx + 
+				(-1)*Math.abs(NodeList[index].x - NodeList[NodeList[index].couple.id].x) / 2 
+				+ NodeList[index].x + ( Math.abs(NodeList[index].x - NodeList[NodeList[index].couple.id].x) * i / 2 ) - 
+				( NodeList[index].children.length - 1 ) * Math.abs(NodeList[index].x - NodeList[NodeList[index].couple.id].x) / 4 ;
+				/*
+				for ( var j = i + 1  ; j < NodeList[index].children.length ; j ++ ){
+					if ( Math.abs(NodeList[NodeList[index].children[i].id].x-NodeList[NodeList[index].children[j].id].x) <= child_horizontal_distance / 2 ){
+						if ( NodeList[NodeList[index].children[i].id].sex === 1 ) {
+							if ( NodeList[NodeList[index].children[i].id].couple !== null ){
+								NodeList[NodeList[index].children[i].id].x = NodeList[NodeList[index].children[i].id].x - couple_distance ; 
+								coveroffsetx += child_horizontal_distance ;
+								NodeList[NodeList[NodeList[index].children[i].id].couple.id].x = NodeList[NodeList[index].children[i].id].x + couple_distance ;
+							} else {
+								coveroffsetx += child_horizontal_distance / 2  ;
+							}
+						} else {
+							if ( NodeList[NodeList[index].children[i].id].couple !== null ){
+								NodeList[NodeList[index].children[i].id].x = NodeList[NodeList[index].children[i].id].x + couple_distance ; ;
+								NodeList[NodeList[NodeList[index].children[i].id].couple.id].x = NodeList[NodeList[index].children[i].id].x - couple_distance ;
+								coveroffsetx += child_horizontal_distance ;
+							} else {
+								coveroffsetx += child_horizontal_distance /2 ;
+							}
+						}
+					}
+				}
+				*/
+			}
+		} 
+	}
+
+	
+	var DrawCoupleLine = function(index){
+		ctx.closePath();
+		ctx.moveTo(0,0);
+		ctx.beginPath();
+		if ( NodeList[index].couple !== null ){
+			if ( NodeList[index].sex === 1 ){
+				ctx.moveTo(NodeList[index].x+move_x+moved_x,NodeList[index].y+move_y+moved_y+size-2);
+				ctx.lineTo(NodeList[index].x+move_x+moved_x,NodeList[index].y+move_y+moved_y+node_vertical_distance*2/7);
+				ctx.lineTo(NodeList[NodeList[index].couple.id].x+move_x+moved_x,NodeList[NodeList[index].couple.id].y+move_y+moved_y+node_vertical_distance*2/7);
+				ctx.lineTo(NodeList[NodeList[index].couple.id].x+move_x+moved_x,NodeList[NodeList[index].couple.id].y+move_y+moved_y+size);
+				ctx.stroke();
+			}
+		}
+	}
+	
+	var DrawChildrenLine = function(index){
+		ctx.closePath();
+		ctx.moveTo(0,0);
+		ctx.beginPath();
+		if ( NodeList[index].couple !== null && NodeList[index].children.length !== 0 && NodeList[index].sex === 1 ){
+			ctx.moveTo(NodeList[index].children[0].x+move_x+moved_x,NodeList[index].y+move_y+moved_y+node_vertical_distance*5/8);
+			ctx.lineTo(NodeList[index].children[NodeList[index].children.length-1].x+move_x+moved_x,NodeList[NodeList[index].couple.id].y+move_y+moved_y+node_vertical_distance*5/8);
+			for ( var i = 0 ; i < NodeList[index].children.length ; i ++ ){
+				ctx.moveTo(NodeList[index].children[i].x+move_x+moved_x,NodeList[index].children[i].y+move_y+moved_y-node_vertical_distance*3/8);
+				if ( NodeList[index].children[i].sex === 0 ){
+					ctx.lineTo(NodeList[index].children[i].x+move_x+moved_x,NodeList[index].children[i].y+move_y+moved_y-size+1);
+				} else {
+					ctx.lineTo(NodeList[index].children[i].x+move_x+moved_x,NodeList[index].children[i].y+move_y+moved_y-size+1);	
+				}
+			}
+			ctx.moveTo((NodeList[NodeList[index].couple.id].x + NodeList[index].x)/2+move_x+moved_x,NodeList[index].y+move_y+moved_y+node_vertical_distance*2/7);
+			ctx.lineTo((NodeList[NodeList[index].couple.id].x + NodeList[index].x)/2+move_x+moved_x,NodeList[index].y+move_y+moved_y+node_vertical_distance*5/8);
+			ctx.stroke();
+		}
+	}
+	
+	var DrawLine = function(){
+		ctx.moveTo(0,0) ;
+		for ( var i = 0 ; i < NodeList.length ; i ++ ){
+			DrawCoupleLine(i) ;
+			DrawChildrenLine(i) ;
+		}
+	}
+	
+	InsertCouple();
+	InsertChildBack();
+	InsertParent();
+	NowId = 1 ;
+	InsertParent();
+	NowId = null ;
+	HighestList[0] = 5 ;
+	HighestList[1] = 3 ;
+	Paint();
+</script>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/html/javascript/tree/tree.html" data-id="cj1girkmu000mej3hqeb0hjsu" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/html/javascript/tree/tree.html#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/PhoneGap/">PhoneGap</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">40</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/">[Front-End] 自動調整Contenteditable邊界</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/Web/Front-End/removeClass和addClass/">[Front-End] removeClass和addClass</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/08/Web/Front-End/利用window.open傳值/">[Front-End] 利用window.open傳值</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/html/javascript/tree/tree.html';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

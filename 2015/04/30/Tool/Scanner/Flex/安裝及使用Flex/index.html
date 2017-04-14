@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[Flex] 安裝及使用Flex | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+<meta name="keywords" content="Scanner,Flex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Flex] 安裝及使用Flex">
+<meta property="og:url" content="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+<meta property="og:updated_time" content="2017-04-08T02:41:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Flex] 安裝及使用Flex">
+<meta name="twitter:description" content="#介紹在Compiler中，首先就是利用Scanner把程式碼轉成一個一個token，而其中有名的工具就是lex，但那是在Unix系統底下的，而Flex則可在Windows底下執行。">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Tool/Scanner/Flex/安裝及使用Flex" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/" class="article-date">
+  <time datetime="2015-04-29T19:21:48.000Z" itemprop="datePublished">4月 30 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tool/">Tool</a>►<a class="article-category-link" href="/categories/Tool/Scanner/">Scanner</a>►<a class="article-category-link" href="/categories/Tool/Scanner/Flex/">Flex</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Flex] 安裝及使用Flex
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#介紹<br>在<code>Compiler</code>中，首先就是利用<code>Scanner</code>把程式碼轉成一個一個token，而其中有名的工具就是<code>lex</code>，但那是在<code>Unix</code>系統底下的，而<code>Flex</code>則可在<code>Windows</code>底下執行。</p>
+<a id="more"></a>
+<p>#安裝<br>到<a href="http://gnuwin32.sourceforge.net/packages/flex.htm" target="_blank" rel="external">Flex</a>的網站，懶人可直接下載<code>Complete package, except sources</code>自動安裝。</p>
+<p>#環境設定<br>免不了還是得手動環境設定，到<code>PATH</code>增加<code>;C:\Program Files\GnuWin32\bin;</code>，看你的安裝在哪裡，在命令列輸入<code>flex -V</code>如果沒有出現錯誤就代表成功。</p>
+<p>#使用</p>
+<p>先借用Compiler助教的範例，產生一個名為<code>word_count.l</code>的檔案，並輸入以下內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">%&#123;</div><div class="line">unsigned int charCount=0, wordCount=0, lineCount=0;</div><div class="line">%&#125;</div><div class="line">word	[^ \t\n]+</div><div class="line">eol	\n</div><div class="line">%%</div><div class="line">&#123;word&#125;	&#123; wordCount++; charCount += yyleng; &#125;</div><div class="line">&#123;eol&#125;	&#123; charCount++; lineCount++; &#125;</div><div class="line">.	charCount++;</div><div class="line">%%</div><div class="line">int main(int argc, char *argv[])&#123;</div><div class="line">	yylex();</div><div class="line">	printf(&quot;%u %u %u\n&quot;, lineCount, wordCount, charCount);</div><div class="line">	return(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在命令列執行下列指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">flex word_count.l</div><div class="line">gcc lex.yy.c -o word_count.exe -lfl</div></pre></td></tr></table></figure></p>
+<p>接著產生一個<code>input.txt</code>檔，並輸入以下內容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">This is an apple.</div></pre></td></tr></table></figure></p>
+<p>最後在命令列打入指令，將文本餵給程式碼即會輸出結果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">word_count.exe &lt; input.txt</div></pre></td></tr></table></figure></p>
+<p>我還真不知道為什麼助教的結果會是<code>2 4 19</code> ..</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/" data-id="cj1girkxa00l0ej3hhvlotwm3" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flex/">Flex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scanner/">Scanner</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/29/Online Judge/LeetCode/53 - Maximum Subarray/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [LeetCode] 53 - Maximum Subarray
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/04/30/Online Judge/LeetCode/204 - Count Primes/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[LeetCode] 204 - Count Primes</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/PhoneGap/">PhoneGap</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">40</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/">[Front-End] 自動調整Contenteditable邊界</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/Web/Front-End/removeClass和addClass/">[Front-End] removeClass和addClass</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/08/Web/Front-End/利用window.open傳值/">[Front-End] 利用window.open傳值</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

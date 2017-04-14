@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[Web] Bingo遊戲 | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原本想要寫的是可以返回的，但對於判斷搞不定加上非必要就不寫了。 試著把所有東西都搬到JavaScript上，如此一來要做變動也方便許多，HTML也看起來乾淨許多。 但寫法仍有待改進，演算法也是。">
+<meta name="keywords" content="JavaScript,Bingo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Web] Bingo遊戲">
+<meta property="og:url" content="http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo遊戲/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="原本想要寫的是可以返回的，但對於判斷搞不定加上非必要就不寫了。 試著把所有東西都搬到JavaScript上，如此一來要做變動也方便許多，HTML也看起來乾淨許多。 但寫法仍有待改進，演算法也是。">
+<meta property="og:updated_time" content="2017-04-08T03:01:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Web] Bingo遊戲">
+<meta name="twitter:description" content="原本想要寫的是可以返回的，但對於判斷搞不定加上非必要就不寫了。 試著把所有東西都搬到JavaScript上，如此一來要做變動也方便許多，HTML也看起來乾淨許多。 但寫法仍有待改進，演算法也是。">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web/Other/Bingo/Bingo遊戲" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/15/Web/Other/Bingo/Bingo遊戲/" class="article-date">
+  <time datetime="2015-02-14T19:10:18.000Z" itemprop="datePublished">2月 15 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>►<a class="article-category-link" href="/categories/Web/Other/">Other</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Web] Bingo遊戲
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原本想要寫的是可以返回的，但對於判斷搞不定加上非必要就不寫了。</p>
+<p>試著把所有東西都搬到<code>JavaScript</code>上，如此一來要做變動也方便許多，<code>HTML</code>也看起來乾淨許多。</p>
+<p>但寫法仍有待改進，演算法也是。</p>
+<a id="more"></a>
+<p>盡量將畫面和運算分開，沒有做防呆設置，接下來研究如何加上<code>Push</code>及帳號綁定。</p>
+<p><a href="/rar/Bingo.rar">Bingo</a></p>
+<p>##Layout<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> array_item = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">"Microsoft"</span>,<span class="string">"PTT"</span>,<span class="string">"Google"</span>,<span class="string">"Mcdonald"</span>,<span class="string">"HaagenDazs"</span>,<span class="string">"Yahoo"</span>,<span class="string">"Nike"</span>,<span class="string">"LG"</span>,</div><div class="line">							<span class="string">"Family"</span>,<span class="string">"Dropbox"</span>,<span class="string">"CocaCola"</span>,<span class="string">"BMW"</span>,<span class="string">"Apple"</span>,<span class="string">"Android"</span>,<span class="string">"7-11"</span>,<span class="string">"Adidas"</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">var</span> size_bingotable = <span class="number">4</span> ;</div><div class="line"></div><div class="line"><span class="keyword">var</span> div_database = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>) ;</div><div class="line"><span class="keyword">var</span> div_bingotable = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>) ;</div><div class="line"><span class="keyword">var</span> div_call = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">var</span> table_database = <span class="built_in">document</span>.createElement(<span class="string">"table"</span>) ;</div><div class="line"><span class="keyword">var</span> table_bingotable = <span class="built_in">document</span>.createElement(<span class="string">"table"</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">var</span> select_call = <span class="built_in">document</span>.createElement(<span class="string">"select"</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">var</span> button_coffrim = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>) ;</div><div class="line"><span class="keyword">var</span> button_call = <span class="built_in">document</span>.createElement(<span class="string">"button"</span>) ;</div><div class="line"></div><div class="line">SetTable(table_database,<span class="number">1</span>,<span class="number">1</span>,<span class="number">100</span>,<span class="number">50</span>,<span class="number">1</span>) ;</div><div class="line">SetTable(table_bingotable,size_bingotable,size_bingotable,<span class="number">100</span>,<span class="number">100</span>,<span class="number">1</span>) ;</div><div class="line"></div><div class="line">SetTableMin(table_database,<span class="number">100</span>,<span class="number">100</span>) ;</div><div class="line">SetTableMin(table_bingotable,<span class="number">150</span>,<span class="number">150</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; array_item.length ; i ++ )</div><div class="line">&#123;</div><div class="line">	InsertDataBase(array_item[i]) ;</div><div class="line">	select_call.options.add(<span class="keyword">new</span> Option(array_item[i],array_item[i]));  </div><div class="line">&#125;</div><div class="line"></div><div class="line">button_coffrim.style.width = <span class="string">"100%"</span> ;</div><div class="line">button_coffrim.style.height = <span class="number">50</span> ;</div><div class="line">button_coffrim.innerHTML = <span class="string">"確認"</span> ;</div><div class="line"></div><div class="line">button_call.style.width = <span class="string">"50%"</span> ;</div><div class="line">button_call.style.height = <span class="number">50</span> ;</div><div class="line">button_call.innerHTML = <span class="string">"叫號"</span> ;</div><div class="line"></div><div class="line">select_call.style.width = <span class="string">"50%"</span> ;</div><div class="line">select_call.style.height = <span class="number">50</span> ;</div><div class="line"></div><div class="line">button_coffrim.setAttribute(<span class="string">"onclick"</span>,<span class="string">"Confirm_layout();Confirm_game()"</span>) ;</div><div class="line">button_call.setAttribute(<span class="string">"onclick"</span>,<span class="string">"Call(select_call.value)"</span>)</div><div class="line"></div><div class="line">div_database.appendChild(table_database) ;</div><div class="line">div_bingotable.appendChild(table_bingotable) ;</div><div class="line">div_call.appendChild(button_coffrim) ;</div><div class="line"></div><div class="line"><span class="built_in">document</span>.body.appendChild(div_database);</div><div class="line"><span class="built_in">document</span>.body.appendChild(div_bingotable);</div><div class="line"><span class="built_in">document</span>.body.appendChild(div_call);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetTable</span>(<span class="params">t ,  r ,  c ,  w ,  h ,  b </span>)</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; r ; i ++ ) &#123; </div><div class="line">		t.insertRow(); </div><div class="line">	    <span class="keyword">for</span>( <span class="keyword">var</span> j = <span class="number">0</span> ; j &lt; c ; j ++ ) &#123; </div><div class="line">			t.rows[i].insertCell(j);</div><div class="line">			t.rows[i].cells[j].setAttribute(<span class="string">"ondrop"</span>, <span class="string">"Drop(event)"</span>) ;</div><div class="line">			t.rows[i].cells[j].setAttribute(<span class="string">"ondragover"</span>,<span class="string">"AllowDrop(event)"</span>) ;</div><div class="line">			t.rows[i].cells[j].align = <span class="string">"middle"</span> ;</div><div class="line">		&#125;    </div><div class="line">	&#125; </div><div class="line">	t.width = w + <span class="string">"%"</span>  ;</div><div class="line">	t.height = h + <span class="string">"%"</span>  ;</div><div class="line">	t.border = b ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetTableMin</span> (<span class="params">t , w , h </span>)</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; t.rows.length ; i ++ )</div><div class="line">	&#123;</div><div class="line">		t.rows[i].cells[<span class="number">0</span>].height = h ;</div><div class="line">		<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; t.rows[i].cells.length ; j ++ )</div><div class="line">			t.rows[i].cells[j].width = w ;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">InsertDataBase</span>(<span class="params">s</span>)</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">var</span> img_newitem = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>) ;</div><div class="line">	img_newitem.src = <span class="string">"pic/"</span> + s + <span class="string">".png"</span> ;</div><div class="line">	img_newitem.setAttribute(<span class="string">"id"</span>, s); </div><div class="line">	img_newitem.width = <span class="number">100</span> ;</div><div class="line">	img_newitem.height = <span class="number">100</span> ;</div><div class="line">	img_newitem.setAttribute(<span class="string">"draggable"</span>, <span class="literal">true</span>);</div><div class="line">	img_newitem.setAttribute(<span class="string">"ondragstart"</span>,<span class="string">"Drag(event)"</span>) ;</div><div class="line">	table_database.rows[<span class="number">0</span>].cells[<span class="number">0</span>].appendChild(img_newitem) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">AllowDrop</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">	event.preventDefault();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Drag</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">	event.dataTransfer.setData(<span class="string">"text"</span>,event.currentTarget.id);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Drop</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span> ( event.currentTarget.childNodes[<span class="number">0</span>] != <span class="literal">null</span> &amp;&amp; event.currentTarget != table_database )</div><div class="line">	&#123;</div><div class="line">		table_database.rows[<span class="number">0</span>].cells[<span class="number">0</span>].appendChild(<span class="built_in">document</span>.getElementById(event.currentTarget.childNodes[<span class="number">0</span>].id));</div><div class="line">	&#125;</div><div class="line">	event.preventDefault();</div><div class="line">	<span class="keyword">var</span> data=event.dataTransfer.getData(<span class="string">"text"</span>);</div><div class="line">	event.currentTarget.appendChild(<span class="built_in">document</span>.getElementById(data));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Confirm_layout</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	div_call.removeChild(div_call.lastChild) ;</div><div class="line">	div_call.appendChild(select_call) ;</div><div class="line">	div_call.appendChild(button_call) ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; array_item.length ; i ++ )</div><div class="line">		<span class="built_in">document</span>.getElementById(array_item[i]).draggable = <span class="literal">false</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##Game<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x_map = &#123;&#125; ;</div><div class="line"><span class="keyword">var</span> y_map = &#123;&#125; ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">CheckBingo</span>(<span class="params">x,y</span>)</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; size_bingotable ; i ++ )</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> ( table_bingotable.rows[i].cells[y].bgColor != <span class="string">"green"</span> &amp;&amp; table_bingotable.rows[i].cells[y].bgColor != <span class="string">"red"</span> )</div><div class="line">			<span class="keyword">break</span> ;</div><div class="line">		<span class="keyword">if</span> ( i == size_bingotable - <span class="number">1</span> )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; size_bingotable ; j ++ )</div><div class="line">				table_bingotable.rows[j].cells[y].bgColor = <span class="string">"red"</span> ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; size_bingotable ; i ++ )</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span> ( table_bingotable.rows[x].cells[i].bgColor != <span class="string">"green"</span> &amp;&amp; table_bingotable.rows[x].cells[i].bgColor != <span class="string">"red"</span> )</div><div class="line">			<span class="keyword">break</span> ;</div><div class="line">		<span class="keyword">if</span> ( i == size_bingotable - <span class="number">1</span>  )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; size_bingotable ; j ++ )</div><div class="line">				table_bingotable.rows[x].cells[j].bgColor = <span class="string">"red"</span> ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> ( x == y )</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; size_bingotable ; i ++ )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> ( table_bingotable.rows[i].cells[i].bgColor != <span class="string">"green"</span> &amp;&amp; table_bingotable.rows[i].cells[i].bgColor != <span class="string">"red"</span> )</div><div class="line">				<span class="keyword">break</span> ;</div><div class="line">			<span class="keyword">if</span> ( i == size_bingotable - <span class="number">1</span>  )</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; size_bingotable ; j ++ )</div><div class="line">					table_bingotable.rows[j].cells[j].bgColor = <span class="string">"red"</span> ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> ( x + y == size_bingotable <span class="number">-1</span> )</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; size_bingotable ; i ++ )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span> ( table_bingotable.rows[i].cells[size_bingotable<span class="number">-1</span>-i].bgColor != <span class="string">"green"</span> &amp;&amp; table_bingotable.rows[i].cells[size_bingotable<span class="number">-1</span>-i].bgColor != <span class="string">"red"</span> )</div><div class="line">				<span class="keyword">break</span> ;</div><div class="line">			<span class="keyword">if</span> ( i == size_bingotable <span class="number">-1</span>  )</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; size_bingotable ; j ++ )</div><div class="line">					table_bingotable.rows[j].cells[size_bingotable<span class="number">-1</span>-j].bgColor = <span class="string">"red"</span> ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Call</span>(<span class="params">call</span>)</span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">try</span>&#123;</div><div class="line">		<span class="keyword">if</span> ( call <span class="keyword">in</span> x_map )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">var</span> x = x_map[call] ;</div><div class="line">			<span class="keyword">var</span> y = y_map[call] ;</div><div class="line">			<span class="keyword">if</span> ( table_bingotable.rows[x].cells[y].bgColor != <span class="string">"red"</span> )</div><div class="line">			&#123;</div><div class="line">				table_bingotable.rows[x].cells[y].bgColor = <span class="string">"green"</span> ;</div><div class="line">				CheckBingo(x,y) ;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;<span class="keyword">catch</span> (e)</div><div class="line">	&#123;</div><div class="line">		;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Confirm_game</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; i ++ )</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span> ( j = <span class="number">0</span> ; j &lt; <span class="number">4</span> ; j ++ )</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">try</span>&#123;</div><div class="line">				x_map[table_bingotable.rows[i].cells[j].childNodes[<span class="number">0</span>].id] = i ;</div><div class="line">				y_map[table_bingotable.rows[i].cells[j].childNodes[<span class="number">0</span>].id] = j ;</div><div class="line">			&#125;<span class="keyword">catch</span>(e)</div><div class="line">			&#123;</div><div class="line">				;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo遊戲/" data-id="cj1girkxb00l2ej3he37xm5v1" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo遊戲/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Bingo/">Bingo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/02/15/Web/Node.js/Socketio/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Node.js] Socket.io
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/02/16/Web/Node.js/Socketio的Broadcast/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Node.js] Socket.io的Broadcast</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/PhoneGap/">PhoneGap</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">40</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/">[Front-End] 自動調整Contenteditable邊界</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/Web/Front-End/removeClass和addClass/">[Front-End] removeClass和addClass</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/08/Web/Front-End/利用window.open傳值/">[Front-End] 利用window.open傳值</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo遊戲/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

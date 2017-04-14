@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jeno&#39;s Blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://jeno5980515.github.io/"/>
+  <updated>2017-04-14T05:46:14.000Z</updated>
+  <id>http://jeno5980515.github.io/</id>
+  
+  <author>
+    <name>Jeno</name>
+    <email>jeno5980515@yahoo.com.tw</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Web] AMD及效能調校</title>
+    <link href="http://jeno5980515.github.io/2017/04/13/Web/Overall/a/"/>
+    <id>http://jeno5980515.github.io/2017/04/13/Web/Overall/a/</id>
+    <published>2017-04-13T11:50:46.000Z</published>
+    <updated>2017-04-14T05:46:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近另一個專案的網站一上線馬上就崩潰了，紀錄一下關於效能上的解決方法。</p>
+<a id="more"></a>
+<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>該網站的效能瓶頸在於會載入大量js寫成的動畫效果，因此利用模組化將程式碼拆開且動態載入需要的效果即可。</p>
+<p>使用<code>createElement</code>產生<code>script</code>，再綁定<code>load</code>事件來偵測是否載入完畢達到非同步的效果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> jsFile = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">jsFile.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);</div><div class="line">jsFile.setAttribute(<span class="string">"src"</span>, <span class="string">"js/jquery.js"</span>);</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(jsFile);</div><div class="line"></div><div class="line">jsFile.addEventListener(<span class="string">"load"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log($);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>若是像以前在HTML逐步利用tag載入script，這樣子同步載入會照成阻塞以及非必要的載入，而<a href="https://en.wikipedia.org/wiki/Asynchronous_module_definition" target="_blank" rel="external">AMD</a> ( Asynchronous Module Definition ) 就是希望可以達到模組化以及異步載入的效果。</p>
+<h3 id="RequireJS"><a href="#RequireJS" class="headerlink" title="RequireJS"></a>RequireJS</h3><p>若不想像這樣一個一個綁事件，則可以利用<a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>這個函式庫達到AMD的效果。</p>
+<p>在HTML中設置<code>data-main</code>屬性註明主要的js檔(.js可省略)，<code>defer</code>和<code>async=&quot;true&quot;</code>則是註明需要異步載入(非必需)。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/require.js"</span> <span class="attr">defer</span> <span class="attr">async</span>=<span class="string">"true"</span> <span class="attr">data-main</span>=<span class="string">"/js/main"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>使用<code>require</code>函數載入模組，可利用陣列一次載入多個模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log($);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>若想要將模組導出，則要使用<code>define</code>函數。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">getName</span> : getName</div><div class="line">	&#125;　　　</div><div class="line">&#125;);</div><div class="line"><span class="comment">// main.js</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'module1'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">m1</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(m1.getName);  <span class="comment">// Jeno</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>若這個要導出的模組同時需要依賴其他模組，將<code>define</code>第一個參數如同<code>require</code>使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line">define([<span class="string">'jquery'</span>],<span class="function"><span class="keyword">function</span> (<span class="params">$</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">getName</span> : getName</div><div class="line">	&#125;　　　</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h3><p>ES6中則是直接新增了<code>import</code>及<code>export</code>來使用模組。</p>
+<p>利用<code>export</code>導出模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line"><span class="comment">// default代表預設導出</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> getName()&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getWord</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"Hello"</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>利用<code>import</code>導入模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">foo(); <span class="comment">//Jeno</span></div></pre></td></tr></table></figure></p>
+<p>載入模組特定的元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; getName , getWord &#125; <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">getName(); <span class="comment">//Jeno</span></div><div class="line">getWord(); <span class="comment">//Hello</span></div></pre></td></tr></table></figure></p>
+<p>載入模組所有元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Module1 <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">Module1.default(); <span class="comment">//Jeno</span></div><div class="line">Module1.getWord(); <span class="comment">//Hello</span></div></pre></td></tr></table></figure></p>
+<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>調校前<br><img src="/img/Web/AMD及效能調校2.png" alt=""><br>調校後<br><img src="/img/Web/AMD及效能調校.png" alt=""><br>原本大概50人左右反應時間就需要20秒左右，改善後則是50人也不超過2秒，沒想到人數一多在效能上會有如此大的差距！</p>
+<h2 id="壓力測試"><a href="#壓力測試" class="headerlink" title="壓力測試"></a>壓力測試</h2><p><a href="https://loadimpact.com/" target="_blank" rel="external">Load Impact</a>是個免費壓力測試的服務，超過一定次數或者需要更高的要求則需要付費。</p>
+<h2 id="Slow-Query-Log"><a href="#Slow-Query-Log" class="headerlink" title="Slow Query Log"></a>Slow Query Log</h2><p><code>MySQL</code>可以在<code>my.cnf</code>加入設定記錄較慢的query。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">slow_query_log = 1 //開啟設定</div><div class="line">slow_query_log_file = /var/log/mysql-slow.log //log檔位置</div><div class="line">long_query_time = 1 //超出幾秒儲存</div></pre></td></tr></table></figure></p>
+<h2 id="Time-Log-Pivot"><a href="#Time-Log-Pivot" class="headerlink" title="Time Log Pivot"></a>Time Log Pivot</h2><p>在程式執行間隔前後紀錄當下時間，利用差值則可找出程式的效能瓶頸。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近另一個專案的網站一上線馬上就崩潰了，紀錄一下關於效能上的解決方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
+    
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/tags/Web/"/>
+    
+      <category term="Performance" scheme="http://jeno5980515.github.io/tags/Performance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[JavaScript] 非同步事件處理</title>
+    <link href="http://jeno5980515.github.io/2017/04/07/Programming%20Language/JavaScript/%E9%9D%9E%E5%90%8C%E6%AD%A5%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86/"/>
+    <id>http://jeno5980515.github.io/2017/04/07/Programming Language/JavaScript/非同步事件處理/</id>
+    <published>2017-04-07T15:46:26.000Z</published>
+    <updated>2017-04-13T12:35:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>許久沒更新網誌了，開始上班剛好是個好時機重新經營。</p>
+<p>最近又遇到非同步事件的問題，雖然寫過但一遇到還是卡住，因此紀錄一下做法。</p>
+<a id="more"></a>
+<p>#問題<br>假設我們現在有三個事件要進行並取得結果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tasks = [task1, task2, task3];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task1</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 1 done'</span>);</div><div class="line">    callback(<span class="number">1</span>);</div><div class="line">  &#125;, <span class="number">500</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task2</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 2 done'</span>);</div><div class="line">    callback(<span class="number">2</span>);</div><div class="line">  &#125;, <span class="number">400</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task3</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 3 done'</span>);</div><div class="line">    callback(<span class="number">3</span>);</div><div class="line">  &#125;, <span class="number">300</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;&#125; ;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getResult</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">	obj.result = result ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##依序執行<br>利用遞迴以及紀錄次數<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sequential</span>(<span class="params">tasks,callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> index = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">var</span> resultList = [] ;</div><div class="line">	(<span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span> ( index &lt; tasks.length )&#123;</div><div class="line">			tasks[index++](<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</div><div class="line">				resultList.push(el);</div><div class="line">				next(tasks);</div><div class="line">			&#125;);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			callback(resultList);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">&#125;</div><div class="line"></div><div class="line">sequential(tasks,getResult);</div></pre></td></tr></table></figure></p>
+<p>##同時進行<br>紀錄事件狀態及紀錄完成次數<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parallel</span>(<span class="params">tasks , callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> resultList = [] , resultCount = <span class="number">0</span> ;</div><div class="line">	resultList.length = tasks.length ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span> ; i &lt; tasks.length ; i ++ )&#123;</div><div class="line">		tasks[i](<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</div><div class="line">			resultList[i] = el ;</div><div class="line">			resultCount ++ ;</div><div class="line">			<span class="keyword">if</span> ( resultCount &gt;= tasks.length )&#123;</div><div class="line">				callback(resultList) ;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">parallel(tasks,getResult);</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;許久沒更新網誌了，開始上班剛好是個好時機重新經營。&lt;/p&gt;
+&lt;p&gt;最近又遇到非同步事件的問題，雖然寫過但一遇到還是卡住，因此紀錄一下做法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Flow Control" scheme="http://jeno5980515.github.io/tags/Flow-Control/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Security] Buffer Overflow</title>
+    <link href="http://jeno5980515.github.io/2015/12/11/Security/Buffer%20Overflow/"/>
+    <id>http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/</id>
+    <published>2015-12-11T08:53:17.000Z</published>
+    <updated>2017-04-08T02:39:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br><code>Buffer Overflow</code>是最基礎也是最常見的漏洞攻擊，以下是在<code>x86</code>執行的實作範例。</p>
+<a id="more"></a>
+<p>#程式<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</div><div class="line">	system(<span class="string">"/bin/sh"</span>) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exec</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> buf[<span class="number">10</span>] ;</div><div class="line">	<span class="built_in">puts</span>(<span class="string">"What's your name?"</span>) ;</div><div class="line">	gets(buf);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hi !! %s\n"</span>,buf) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	exec();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>這是一支簡單的讀入輸出的程式碼，但注意到由於<code>buf</code>只有10個byte的空間，所以一旦輸入大於10個byte的字串就有可能造成意外。</p>
+<p>#Stack Smashing<br>普遍編譯器都會提供<code>Stack Smashing</code>的保護，但為了簡單示範在編譯時將保護關掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c -fno-stack-protector test.c</div><div class="line">gcc -o test test.o</div></pre></td></tr></table></figure></p>
+<p>#攻擊<br>假設程式碼中剛剛好有你想執行的函式，如此一來我們只要取得函式的位置後利用overflow蓋過去欲執行的位置即可。</p>
+<p>#GDB<br>我們可以利用gdb來debugger<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gdb ./test</div></pre></td></tr></table></figure></p>
+<p>查看main的stack分佈<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas main</div></pre></td></tr></table></figure></p>
+<p>得知在<code>*main+6</code>的位置執行<code>exec</code>函式，因此我們先在這邊設一個<code>Break Point</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) b *main+6</div></pre></td></tr></table></figure></p>
+<p>再來我們查看exec<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas exec</div></pre></td></tr></table></figure></p>
+<p>找到在<code>*exec+49</code>的位置return，因此在這邊設一個<code>Break Point</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) b *exec+49</div></pre></td></tr></table></figure></p>
+<p>接著運行程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) r</div></pre></td></tr></table></figure></p>
+<p>由於呼叫函式會將接下來欲執行的程式位置push進堆疊，所以我們可以看到目前stack最上層就是呼叫完函式後欲執行的位置，也是我們欲覆蓋過去的地方。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) x/wx $esp</div></pre></td></tr></table></figure></p>
+<p>繼續執行程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) c</div></pre></td></tr></table></figure></p>
+<p>接下來查看要塞幾個byte才能覆蓋到該位置，在這裡我們利用每個字母四個為一組來測試。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xxxxxxxxxxAAAABBBBCCCCDDDDEEEEFFFF</div></pre></td></tr></table></figure></p>
+<p>在第二個break point查看esp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) x/wx $esp</div></pre></td></tr></table></figure></p>
+<p>得到位置為<code>0x44444444</code>，也就是<code>DDDD</code>的部分，因此我們需要在DDDD的部分放進想執行的位置，現在來查看欲執行的函式位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas *exec</div></pre></td></tr></table></figure></p>
+<p>得到位置為<code>0x080484ad</code>，因此可以得到我們的攻擊字串，由於是<code>little endian</code>所以記得將位置相反。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -ne &quot;xxxxxxxxxxAAAABBBBCCCC\xad\x84\x04\x08\n&quot; &gt; s</div></pre></td></tr></table></figure></p>
+<p>再將字串丟進程式運行則可以發現執行到覆蓋的部分了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat s - | ./test</div></pre></td></tr></table></figure></p>
+<p>#結論<br>這只是展示最簡單的<code>Buffer Overflow</code>運行原理，不過一般情況會有許多的保護機制，也不太可能這麼剛好塞了特別的函式讓你運行，其餘的方法待之後學習紀錄。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;&lt;code&gt;Buffer Overflow&lt;/code&gt;是最基礎也是最常見的漏洞攻擊，以下是在&lt;code&gt;x86&lt;/code&gt;執行的實作範例。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Security" scheme="http://jeno5980515.github.io/categories/Security/"/>
+    
+    
+      <category term="Security" scheme="http://jeno5980515.github.io/tags/Security/"/>
+    
+      <category term="C" scheme="http://jeno5980515.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Web] 一頁式網站</title>
+    <link href="http://jeno5980515.github.io/2015/11/19/Web/Overall/%E4%B8%80%E9%A0%81%E5%BC%8F%E7%B6%B2%E7%AB%99/"/>
+    <id>http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/</id>
+    <published>2015-11-19T12:51:42.000Z</published>
+    <updated>2017-04-08T03:05:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>網站可以利用多個HTML檔切換，也可以利用<code>#</code>來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。</p>
+<a id="more"></a>
+<p>#切換<br>利用CSS的<code>display:none</code>，使用jQuery則可以使用<code>show()</code>和<code>hide()</code>。</p>
+<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><p>加上<code>location.href=&quot;#xxx&quot;</code>則可以在網址加上<code>#</code>和值，可以用來標示不同的頁面，而上一頁下一頁也會有作用。</p>
+<p>#onhashchange<br>單純這樣子會使瀏覽器的上一頁和下一頁無作用，僅造成網址的改變，因此要加入事件偵測，再取得當前的頁面做不同的事件即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>)); <span class="comment">//取得tag後的value</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// or jQuery</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'hashchange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>#返回首頁<br>若不希望可以直接進入子頁面，除了做事件偵測外還要改網址。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="built_in">window</span>.location.hash )&#123;</div><div class="line">	<span class="built_in">window</span>.location.href = <span class="string">""</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;網站可以利用多個HTML檔切換，也可以利用&lt;code&gt;#&lt;/code&gt;來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] mouseDown手機上運行</title>
+    <link href="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%81%8B%E8%A1%8C/"/>
+    <id>http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/</id>
+    <published>2015-11-06T09:53:39.000Z</published>
+    <updated>2017-04-08T03:19:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>手機上無法使用<code>mouseDown</code>等等的事件，必須使用<code>touchStart</code>，網路上找到別人寫的替換方法。</p>
+<a id="more"></a>
+<p>#程式碼<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mouseEventTypes = &#123;</div><div class="line">	<span class="attr">touchstart</span> : <span class="string">"mousedown"</span>,</div><div class="line">	<span class="attr">touchmove</span> : <span class="string">"mousemove"</span>,</div><div class="line">	<span class="attr">touchend</span> : <span class="string">"mouseup"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (originalType <span class="keyword">in</span> mouseEventTypes) &#123;</div><div class="line">	<span class="built_in">document</span>.addEventListener(originalType, <span class="function"><span class="keyword">function</span>(<span class="params">originalEvent</span>) </span>&#123;</div><div class="line">		event = <span class="built_in">document</span>.createEvent(<span class="string">"MouseEvents"</span>);</div><div class="line">		touch = originalEvent.changedTouches[<span class="number">0</span>];</div><div class="line">		event.initMouseEvent(mouseEventTypes[originalEvent.type], <span class="literal">true</span>, <span class="literal">true</span>,</div><div class="line">		<span class="built_in">window</span>, <span class="number">0</span>, touch.screenX, touch.screenY, touch.clientX,</div><div class="line">		touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,</div><div class="line">		touch.metaKey, <span class="number">0</span>, <span class="literal">null</span>);</div><div class="line">		originalEvent.target.dispatchEvent(event);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;手機上無法使用&lt;code&gt;mouseDown&lt;/code&gt;等等的事件，必須使用&lt;code&gt;touchStart&lt;/code&gt;，網路上找到別人寫的替換方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[CentOS] 使用sftp傳輸檔案</title>
+    <link href="http://jeno5980515.github.io/2015/11/06/Server/CentOS/%E4%BD%BF%E7%94%A8sftp%E5%82%B3%E8%BC%B8%E6%AA%94%E6%A1%88/"/>
+    <id>http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/</id>
+    <published>2015-11-06T09:15:27.000Z</published>
+    <updated>2017-04-08T02:53:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>想遠端傳輸檔案可以使用<code>sftp</code>，但要產生<code>ssh key</code>。</p>
+<a id="more"></a>
+<p>#過程<br>先在本機產生ssh key。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa</div></pre></td></tr></table></figure></p>
+<p>開啟檔案<code>xxx.pub</code>後將內容複製，再到伺服器端輸入以下指令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir ~/.ssh</div><div class="line">vim ~/ssh/authorized_keys</div></pre></td></tr></table></figure></p>
+<p>再將剛剛複製的內容貼在最後即可，若使用FileZilla則在設定中加入剛剛產生的檔案即可。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;想遠端傳輸檔案可以使用&lt;code&gt;sftp&lt;/code&gt;，但要產生&lt;code&gt;ssh key&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Server" scheme="http://jeno5980515.github.io/categories/Server/"/>
+    
+      <category term="CentOS" scheme="http://jeno5980515.github.io/categories/Server/CentOS/"/>
+    
+    
+      <category term="CentOS" scheme="http://jeno5980515.github.io/tags/CentOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Joomla] Joomla網站搬家</title>
+    <link href="http://jeno5980515.github.io/2015/10/27/Content%20Management%20System/Joomla/Joomla%E7%B6%B2%E7%AB%99%E6%90%AC%E5%AE%B6/"/>
+    <id>http://jeno5980515.github.io/2015/10/27/Content Management System/Joomla/Joomla網站搬家/</id>
+    <published>2015-10-27T08:22:13.000Z</published>
+    <updated>2017-04-08T02:32:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>最近要將一個用<code>Joomla</code>做的網站搬到新的server上，將一些遇到的問題紀錄一下。</p>
+<a id="more"></a>
+<p>#備份<br>將網站內容及資料庫搬到新server上，對<code>configuration.php</code>做修改。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> $user = 資料庫帳號 ;</div><div class="line"><span class="keyword">public</span> $password = 資料庫密碼 ;</div><div class="line"><span class="keyword">public</span> $db = 資料表 ;</div><div class="line"><span class="keyword">public</span> $log_path = 檔案位置 ;</div><div class="line"><span class="keyword">public</span> $tmp_path = 檔案位置 ;</div></pre></td></tr></table></figure>
+<p>#Search Engine Friendly URLs<br>在搬遷的過程中卡了許久在這邊。這功能可以將你的網址縮成較美觀的格式，但首先要確定<code>.htaccess</code>是可以覆寫的，編輯<code>httpd.conf</code>檔案加入下行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Directory &quot;檔案位置&quot;&gt;</div><div class="line">  AllowOverride All</div><div class="line">&lt;/Directory&gt;</div></pre></td></tr></table></figure></p>
+<p>#參考<br><a href="https://goo.gl/zDlV8S" target="_blank" rel="external">Enabling Search Engine Friendly (SEF) URLs on Apache</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;最近要將一個用&lt;code&gt;Joomla&lt;/code&gt;做的網站搬到新的server上，將一些遇到的問題紀錄一下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Content Management System" scheme="http://jeno5980515.github.io/categories/Content-Management-System/"/>
+    
+      <category term="Joomla" scheme="http://jeno5980515.github.io/categories/Content-Management-System/Joomla/"/>
+    
+    
+      <category term="Joomla" scheme="http://jeno5980515.github.io/tags/Joomla/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] 自動調整Contenteditable邊界</title>
+    <link href="http://jeno5980515.github.io/2015/09/22/Web/Front-End/%E8%87%AA%E5%8B%95%E8%AA%BF%E6%95%B4Contenteditable%E9%82%8A%E7%95%8C/"/>
+    <id>http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/</id>
+    <published>2015-09-22T01:30:00.000Z</published>
+    <updated>2017-04-08T03:24:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>HTML5有<code>contenteditable</code>屬性，可以達到類似<code>textarea</code>的效果。</p>
+<a id="more"></a>
+<p>#差異<br>原理大致上和<code>textarea</code>差不多，但如果換行會產生新的子區塊而不是產生換行字元，因此必須使用<code>keydown</code>將動作替換成插入<code>&lt;br&gt;</code>，但若只插入一個<code>&lt;br&gt;</code>在文字的最後無法換行，等待之後尋求更好的解法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">text.onkeydown = function(e)&#123;</div><div class="line">	if ( e.keyCode === 13) &#123;</div><div class="line">		document.execCommand(&apos;insertHTML&apos;, false, &apos;&lt;br&gt;&lt;br&gt;&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var getTextMaxLength = function(text,font,size)&#123;</div><div class="line">	var s = &quot;&quot; ;</div><div class="line">	var t = (text.innerHTML).replace(&quot;&amp;nbsp;&quot;,&apos; &apos;) ;</div><div class="line">	var max = 0 ;</div><div class="line">	var row = 0 ;</div><div class="line">	for ( var i = 0 ; t.indexOf(&quot;&lt;br&gt;&quot;) !== -1 ; i ++ , row = i )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t.substring(0,t.indexOf(&quot;&lt;br&gt;&quot;)-1),font,size)) ;</div><div class="line">		t = t.substring(t.indexOf(&quot;&lt;br&gt;&quot;)+4,t.length) ;</div><div class="line">	&#125;</div><div class="line">	if ( t !== &quot;&quot; )&#123;</div><div class="line">		max = Math.max(max,getTextWidth(t,font,size)) ;</div><div class="line">		row ++ ;</div><div class="line">	&#125;</div><div class="line">	return &#123;row:row,length:max&#125; ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#GitHub<br><a href="https://github.com/jeno5980515/contenteditable-autosize" target="_blank" rel="external">GitHub</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;HTML5有&lt;code&gt;contenteditable&lt;/code&gt;屬性，可以達到類似&lt;code&gt;textarea&lt;/code&gt;的效果。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] removeClass和addClass</title>
+    <link href="http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass%E5%92%8CaddClass/"/>
+    <id>http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass和addClass/</id>
+    <published>2015-09-12T13:55:01.000Z</published>
+    <updated>2017-04-08T03:20:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>在純JavaScript使用addClass和removeClass。</p>
+<a id="more"></a>
+<p>#hasClass<br>利用正規表示式判斷是否存在該class。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hasClass = <span class="function"><span class="keyword">function</span>(<span class="params">ele,cls</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> !!ele.className.match(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(\\s|^)'</span>+cls+<span class="string">'(\\s|$)'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#addClass<br>若沒有就加上去。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> addClass = <span class="function"><span class="keyword">function</span>(<span class="params">ele,cls</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!hasClass(ele,cls)) </div><div class="line">		ele.className += <span class="string">" "</span>+cls;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#removeClass<br>若有就刪除。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> removeClass = <span class="function"><span class="keyword">function</span>(<span class="params">ele,cls</span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (hasClass(ele,cls)) &#123;</div><div class="line">		<span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'(\\s|^)'</span>+cls+<span class="string">'(\\s|$)'</span>);</div><div class="line">		ele.className=ele.className.replace(reg,<span class="string">' '</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#參考<br><a href="http://jaketrent.com/post/addremove-classes-raw-javascript/" target="_blank" rel="external">Add/Remove Classes With Raw Javascript</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;在純JavaScript使用addClass和removeClass。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] 利用window.open傳值</title>
+    <link href="http://jeno5980515.github.io/2015/09/08/Web/Front-End/%E5%88%A9%E7%94%A8window.open%E5%82%B3%E5%80%BC/"/>
+    <id>http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/</id>
+    <published>2015-09-08T12:30:38.000Z</published>
+    <updated>2017-04-08T03:12:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>之前用過網址在網頁間傳值，這次利用<code>window.open()</code>在子母視窗間取值傳值。</p>
+<a id="more"></a>
+<p>#母視窗<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="string">"text"</span>;</div><div class="line"><span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">window</span>.open(<span class="string">"b.html"</span>,<span class="string">"_blank"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#子視窗<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="built_in">window</span>.opener.s);</div></pre></td></tr></table></figure></p>
+<p>#備註<br><code>window.open()</code>無法自動執行必須透過事件，而如果無法運行要上傳到Server。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;之前用過網址在網頁間傳值，這次利用&lt;code&gt;window.open()&lt;/code&gt;在子母視窗間取值傳值。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] toDataURL及crossOrigin</title>
+    <link href="http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL%E5%8F%8AcrossOrigin/"/>
+    <id>http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL及crossOrigin/</id>
+    <published>2015-09-07T11:04:26.000Z</published>
+    <updated>2017-04-08T03:20:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>使用<code>toDataURL()</code>卻發現失敗，原來是因為跨網域的關係。</p>
+<a id="more"></a>
+<p>#crossOrigin<br>在img加上屬性即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">img.setAttribute(<span class="string">'crossOrigin'</span>, <span class="string">'anonymous'</span>);</div></pre></td></tr></table></figure></p>
+<p>若本機無法運行需上傳至Server。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;使用&lt;code&gt;toDataURL()&lt;/code&gt;卻發現失敗，原來是因為跨網域的關係。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] 自動調整Textarea邊界</title>
+    <link href="http://jeno5980515.github.io/2015/09/01/Web/Front-End/%E8%87%AA%E5%8B%95%E8%AA%BF%E6%95%B4Textarea%E9%82%8A%E7%95%8C/"/>
+    <id>http://jeno5980515.github.io/2015/09/01/Web/Front-End/自動調整Textarea邊界/</id>
+    <published>2015-09-01T14:40:45.000Z</published>
+    <updated>2017-04-08T03:10:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>延續上次的文章，取得文字高度和寬度後就可以動態調整邊界。</p>
+<a id="more"></a>
+<p>#取得字體資訊<br>若沒有在CSS中設定，可以透過<code>getComputedStyle</code>取得。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> style = <span class="built_in">window</span>.getComputedStyle( text, <span class="literal">null</span> ).getPropertyValue( <span class="string">'font-family'</span> );</div><div class="line"><span class="keyword">var</span> size = <span class="built_in">window</span>.getComputedStyle(text, <span class="literal">null</span>).getPropertyValue(<span class="string">'font-size'</span>);</div></pre></td></tr></table></figure></p>
+<p>#取得字體高度及寬度<br>一樣透過在網頁新增物件量測。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> getTextWidth = <span class="function"><span class="keyword">function</span>(<span class="params">text,font,size</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	span.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	span.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	span.innerHTML = <span class="string">"W"</span> + text  + <span class="string">"W"</span>;</div><div class="line">	<span class="built_in">document</span>.body.appendChild(span);</div><div class="line">	<span class="keyword">var</span> width = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		width = span.offsetWidth ;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		span.remove();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> width;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#取得行數及最大寬度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextMaxLength = <span class="function"><span class="keyword">function</span>(<span class="params">text,font,size</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> s = <span class="string">""</span> ;</div><div class="line">	<span class="keyword">var</span> t = text.value ;</div><div class="line">	<span class="keyword">var</span> max = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">var</span> row = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; t.length ; i ++ )&#123;</div><div class="line">		<span class="keyword">if</span> ( t[i] === <span class="string">"\n"</span> || i === t.length - <span class="number">1</span> )&#123;</div><div class="line">			max = <span class="built_in">Math</span>.max(max,getTextWidth(s,font,size)) ;</div><div class="line">			s = <span class="string">""</span> ;</div><div class="line">			row ++ ;</div><div class="line">			<span class="keyword">if</span> ( (t[i] === <span class="string">"\n"</span> || t[i] === <span class="string">"\r"</span> || t[i] === <span class="string">"\r\n"</span>  ) &amp;&amp; i === t.length - <span class="number">1</span> )&#123;</div><div class="line">				row++ ;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			s += t[i] ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;<span class="attr">row</span>:row,<span class="attr">length</span>:max&#125; ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#Event<br>若使用onchange會點擊其他元素的時候才會觸發，單獨使用keydown會造成最後按下的字母不會在value裡，而單獨使用keyup會造成長按只紀錄一個，因此同時使用keydown和keyup。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">text.onkeydown = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> result = getTextMaxLength(text,getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) ;</div><div class="line">	<span class="keyword">this</span>.style.width = result.length  + <span class="number">3</span> ;</div><div class="line">	<span class="keyword">this</span>.style.height = getTextHeight(getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) * result.row + <span class="number">10</span>;</div><div class="line">&#125;</div><div class="line">text.onkeyup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> result = getTextMaxLength(text,getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) ;</div><div class="line">	<span class="keyword">this</span>.style.width = result.length  + <span class="number">3</span> ;</div><div class="line">	<span class="keyword">this</span>.style.height = getTextHeight(getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) * result.row + <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#GitHub<br><a href="https://github.com/jeno5980515/textarea-autosize" target="_blank" rel="external">GitHub</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;延續上次的文章，取得文字高度和寬度後就可以動態調整邊界。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] Cavnas取得文字高度</title>
+    <link href="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas%E5%8F%96%E5%BE%97%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6/"/>
+    <id>http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/</id>
+    <published>2015-08-27T13:01:48.000Z</published>
+    <updated>2017-04-08T03:14:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>最近在利用Canvas製作類似修圖的App，在<code>fillText</code>的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？</p>
+<a id="more"></a>
+<p>#measureText<br>可以利用<code>measureText</code>取得文字的寬度，但無法取得高度。</p>
+<p>#做法<br>在網頁上新增兩個元素，透過<code>verticalAlign</code>讓物件對齊文字的底部，兩物件offsetTop的差值即是文字的高度。</p>
+<p>#程式碼<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line"></div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line"></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#參考<br><a href="http://stackoverflow.com/questions/1134586/how-can-you-find-the-height-of-text-on-an-html-canvas" target="_blank" rel="external">How can you find the height of text on an HTML canvas?</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;最近在利用Canvas製作類似修圖的App，在&lt;code&gt;fillText&lt;/code&gt;的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] 使用x-gif操控gif</title>
+    <link href="http://jeno5980515.github.io/2015/08/10/Web/Front-End/%E4%BD%BF%E7%94%A8x-gif%E6%93%8D%E6%8E%A7gif/"/>
+    <id>http://jeno5980515.github.io/2015/08/10/Web/Front-End/使用x-gif操控gif/</id>
+    <published>2015-08-09T19:43:38.000Z</published>
+    <updated>2017-04-08T03:22:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br><a href="http://geelen.github.io/x-gif/#/http://i.imgur.com/iKXH4E2.gif" target="_blank" rel="external">x-gif</a>可以使用<code>&lt;x-gif&gt;</code>的標籤來顯示gif檔，透過這個標籤可以動態的調整gif。</p>
+<a id="more"></a>
+<p>#Usage<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">if</span> (<span class="string">'registerElement'</span> <span class="keyword">in</span> <span class="built_in">document</span></div><div class="line">    &amp;&amp; <span class="string">'createShadowRoot'</span> <span class="keyword">in</span> HTMLElement.prototype</div><div class="line">    &amp;&amp; <span class="string">'import'</span> <span class="keyword">in</span> <span class="built_in">document</span>.createElement(<span class="string">'link'</span>)</div><div class="line">    &amp;&amp; <span class="string">'content'</span> <span class="keyword">in</span> <span class="built_in">document</span>.createElement(<span class="string">'template'</span>)) &#123;</div><div class="line">    <span class="comment">// We're using a browser with native WC support!</span></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">document</span>.write(<span class="string">'&lt;script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"&gt;&lt;\/script&gt;'</span>)</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"import"</span> <span class="attr">href</span>=<span class="string">"x-gif.html"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>github上有了就不贅述，記得import必須透過網路。</p>
+<p>#Reverse<br>x-gif沒有<code>reverse</code>選項，因此對程式做一點修改，直接附上修改後的檔案。<br><a href="https://cdn.rawgit.com/jeno5980515/x-gif/gh-pages/dist/x-gif.html" target="_blank" rel="external">x-gif.html</a></p>
+<p>#Bug</p>
+<p>##Safari<br>Safari並不能顯示x-gif，研究了兩三天也找不到替代套件後終於找到解決辦法了。</p>
+<p>首先先到<a href="https://github.com/webcomponents/webcomponentsjs" target="_blank" rel="external">webcomponentsjs</a>，下載後再將這段<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"&gt;&lt;\/script&gt;)</span></div></pre></td></tr></table></figure></p>
+<p>替換成下載的檔案<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="js\/webcomponents.js"&gt;&lt;\/script&gt;'</span>);</div></pre></td></tr></table></figure></p>
+<p>##jQuery Mobile<br><code>webcomponents</code>和<code>jQuery Mobile</code>會有衝突，將<code>jquery.mobile-1.4.5.js</code>中的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.window = $( <span class="keyword">this</span>.document[<span class="number">0</span>].defaultView || <span class="keyword">this</span>.document[<span class="number">0</span>].parentWindow );</div></pre></td></tr></table></figure></p>
+<p>替換成<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.window = $(<span class="built_in">window</span>);</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;&lt;a href=&quot;http://geelen.github.io/x-gif/#/http://i.imgur.com/iKXH4E2.gif&quot;&gt;x-gif&lt;/a&gt;可以使用&lt;code&gt;&amp;lt;x-gif&amp;gt;&lt;/code&gt;的標籤來顯示gif檔，透過這個標籤可以動態的調整gif。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] Drag And Drop隨意拖曳</title>
+    <link href="http://jeno5980515.github.io/2015/07/27/Web/Front-End/Drag%20And%20Drop%E9%9A%A8%E6%84%8F%E6%8B%96%E6%9B%B3/"/>
+    <id>http://jeno5980515.github.io/2015/07/27/Web/Front-End/Drag And Drop隨意拖曳/</id>
+    <published>2015-07-27T12:27:05.000Z</published>
+    <updated>2017-04-08T03:15:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>HTML5提供了<code>Drag And Drop</code>可以拖曳物件，研究了一下如何在區塊內隨意拖曳。</p>
+<a id="more"></a>
+<p>#作法<br>開始拖曳前先取得滑鼠座標和圖片最左上角位置的差值，放開後再將圖片的<code>top</code>和<code>left</code>設置成滑鼠座標補上差值即可。</p>
+<p>#程式<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div"</span> <span class="attr">ondrop</span>=<span class="string">"toDrop(event)"</span> <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"img"</span> <span class="attr">src</span>=<span class="string">"gif.gif"</span> <span class="attr">draggable</span>=<span class="string">"true"</span> <span class="attr">ondragstart</span>=<span class="string">"beginDrag(event)"</span> &gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">	#div &#123;width:700px;height:700px;border:1px solid #aaaaaa;&#125;</div><div class="line">	#img &#123;position: relative;top:10px;left:10px;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">var</span> IE = <span class="string">"ActiveXObject"</span> <span class="keyword">in</span> <span class="built_in">window</span> ;</div><div class="line"><span class="keyword">var</span> nowObject = <span class="literal">null</span> ;</div><div class="line"><span class="keyword">var</span> offsetX = <span class="number">0</span> , offsetY = <span class="number">0</span> ;</div><div class="line"></div><div class="line"><span class="comment">//取得滑鼠座標</span></div><div class="line"><span class="keyword">var</span> getMouseSite = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> tempX , tempY ;</div><div class="line">	<span class="keyword">if</span> (IE) &#123; </div><div class="line">		tempX = event.clientX + <span class="built_in">document</span>.body.scrollLeft ;</div><div class="line">		tempY = event.clientY + <span class="built_in">document</span>.body.scrollTop;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;  </div><div class="line">		tempX = e.pageX ;</div><div class="line">		tempY = e.pageY ;</div><div class="line">	&#125;	</div><div class="line">	<span class="keyword">return</span> &#123;<span class="attr">x</span>:tempX,<span class="attr">y</span>:tempY&#125; ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> beginDrag = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	e.dataTransfer.setData(<span class="string">"text"</span>, e.target.id);</div><div class="line">	<span class="keyword">var</span> temp = getMouseSite(e) ;</div><div class="line">	<span class="comment">//若left值未設則設0</span></div><div class="line">	<span class="keyword">var</span> left = <span class="built_in">document</span>.getElementById(e.target.id).style.left || <span class="number">0</span> ;</div><div class="line">	<span class="comment">//若left值已經設定，將px轉換成float</span></div><div class="line">	<span class="keyword">if</span> ( left !== <span class="number">0</span> )&#123;</div><div class="line">		left = <span class="built_in">parseFloat</span>(<span class="built_in">document</span>.getElementById(e.target.id).style.left);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> top = <span class="built_in">document</span>.getElementById(e.target.id).style.top || <span class="number">0</span> ;</div><div class="line">	<span class="keyword">if</span> ( top !== <span class="number">0</span> )&#123;</div><div class="line">		top = <span class="built_in">parseFloat</span>(<span class="built_in">document</span>.getElementById(e.target.id).style.top);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//滑鼠座標和圖片左上角的距離</span></div><div class="line">	offsetX = temp.x - left ; </div><div class="line">	offsetY = temp.y - top ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> toDrop = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">	e.preventDefault();</div><div class="line">	<span class="keyword">var</span> temp = getMouseSite(e) ;</div><div class="line">	<span class="keyword">var</span> data = e.dataTransfer.getData(<span class="string">"text"</span>);</div><div class="line">	<span class="built_in">document</span>.getElementById(data).style.top = temp.y -  <span class="built_in">document</span>.getElementById(data).height + ( <span class="built_in">document</span>.getElementById(data).height - offsetY ) ;</div><div class="line">	<span class="built_in">document</span>.getElementById(data).style.left = temp.x - <span class="built_in">document</span>.getElementById(data).width + ( <span class="built_in">document</span>.getElementById(data).width - offsetX );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> allowDrop = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">    e.preventDefault();</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>#Demo<br><a href="https://rawgit.com/jeno5980515/DragAndDrop/master/demo.html" target="_blank" rel="external">Demo</a></p>
+<p>#後記<br><code>jQuery UI</code>的<code>Draggable</code>可以達到同樣的效果，但還是有些差異。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;HTML5提供了&lt;code&gt;Drag And Drop&lt;/code&gt;可以拖曳物件，研究了一下如何在區塊內隨意拖曳。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Web] 圖片處理</title>
+    <link href="http://jeno5980515.github.io/2015/07/26/Web/Overall/%E5%9C%96%E7%89%87%E8%99%95%E7%90%86/"/>
+    <id>http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/</id>
+    <published>2015-07-26T05:39:35.000Z</published>
+    <updated>2017-04-08T03:26:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>圖片可以經由<code>Base64</code>編碼在網路間傳遞，再存成檔案。</p>
+<a id="more"></a>
+<p>#File API<br>首先使用<code>File API</code>將圖片轉成<code>Base64</code>編碼，這邊使用的是選擇多個檔案。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"files"</span> <span class="attr">name</span>=<span class="string">"files[]"</span> <span class="attr">multiple</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">output</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">output</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleFileSelect</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> files = evt.target.files; </div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, f; f = files[i]; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (!f.type.match(<span class="string">'image.*'</span>)) &#123;</div><div class="line">      	  <span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</div><div class="line">		reader.onload = (<span class="function"><span class="keyword">function</span>(<span class="params">theFile</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">				<span class="keyword">var</span> span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">				span.innerHTML = [<span class="string">'&lt;img class="thumb"  height="50" width="50" src="'</span>, e.target.result, <span class="string">'" title="'</span>, <span class="built_in">escape</span>(theFile.name), <span class="string">'"/&gt;'</span>].join(<span class="string">''</span>);</div><div class="line">				<span class="built_in">document</span>.getElementById(<span class="string">'list'</span>).insertBefore(span, <span class="literal">null</span>);</div><div class="line">			&#125;;</div><div class="line">		&#125;)(f);</div><div class="line">		reader.readAsDataURL(f);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'files'</span>).addEventListener(<span class="string">'change'</span>, handleFileSelect, <span class="literal">false</span>);</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>#PHP<br>取得<code>span</code>中圖片的<code>src</code>傳給PHP。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$img = $_POST[<span class="string">'IMG'</span>] ;</div><div class="line">$img = str_replace(<span class="string">'data:image/png;base64,'</span>, <span class="string">''</span>, $img);</div><div class="line">$img = str_replace(<span class="string">' '</span>, <span class="string">'+'</span>, $img);</div><div class="line">file_put_contents(<span class="string">"pic.png"</span>, $data);</div></pre></td></tr></table></figure></p>
+<p>#Lossy Gif Compressor<br>PNG壓縮的套件許多，這邊找一個GIF壓縮的。</p>
+<p>首先先安裝<a href="http://www.lcdf.org/gifsicle/" target="_blank" rel="external">Gifsicle</a>，再將<a href="https://pornel.net/lossygif" target="_blank" rel="external">lossygif</a>放到目錄下。</p>
+<p>可以透過PHP下指令執行將圖片壓縮，但要記得修改<code>php.ini</code>中的設定。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;圖片可以經由&lt;code&gt;Base64&lt;/code&gt;編碼在網路間傳遞，再存成檔案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
+    
+    
+      <category term="PHP" scheme="http://jeno5980515.github.io/tags/PHP/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] 利用getUserMedia拍照</title>
+    <link href="http://jeno5980515.github.io/2015/07/13/Web/Front-End/%E5%88%A9%E7%94%A8getUserMedia%E6%8B%8D%E7%85%A7/"/>
+    <id>http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/</id>
+    <published>2015-07-13T14:49:25.000Z</published>
+    <updated>2017-04-08T03:10:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>現在HTML5可以直接使用getUserMedia開啟裝置的相機。</p>
+<a id="more"></a>
+<p>#使用<br>先加上video和canvas的tag。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span> = <span class="string">'video'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span> = <span class="string">'img'</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span> &gt;</span><span class="tag">&lt;/<span class="name">img</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span> = <span class="string">'canvas'</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span> =<span class="string">"400"</span> <span class="attr">style</span>=<span class="string">"position:absolute"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>偵測瀏覽器是否支援getUserMedia。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.URL = <span class="built_in">window</span>.URL || <span class="built_in">window</span>.webkitURL;</div><div class="line">navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia ||</div><div class="line">                          navigator.mozGetUserMedia || navigator.msGetUserMedia;</div><div class="line"></div><div class="line"><span class="keyword">var</span>	video = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>) ;</div><div class="line"><span class="keyword">var</span> localMediaStream = <span class="literal">null</span> ;</div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>) ;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (navigator.getUserMedia) &#123;</div><div class="line">	navigator.getUserMedia(&#123;<span class="attr">video</span>: <span class="literal">true</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">stream</span>) </span>&#123;</div><div class="line">		video.src = <span class="built_in">window</span>.URL.createObjectURL(stream);</div><div class="line">		video.play();</div><div class="line">		localMediaStream = stream ;</div><div class="line">	&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</div><div class="line">		alert(error) ;</div><div class="line">	&#125;);</div><div class="line">&#125; </div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">	alert(<span class="string">'Unable'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>將video的畫面畫在canvas上且做成Image，如此一來img就是拍照後的結果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (localMediaStream) &#123;</div><div class="line">	<span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>) ;</div><div class="line">	ctx.drawImage(video,<span class="number">0</span>,<span class="number">0</span>) ;</div><div class="line">	img.src = tempCanvas.toDataURL(<span class="string">'image/webp'</span>);</div><div class="line">	video.pause();</div><div class="line">	localMediaStream.stop();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#範例<br><a href="https://rawgit.com/jeno5980515/Snapshot/master/index.html" target="_blank" rel="external">極陽春的仿修圖軟體</a><br>第一頁拍照、第二頁灰階效果、第三階加上物件。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;現在HTML5可以直接使用getUserMedia開啟裝置的相機。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[JavaScript] JavaScript小技巧</title>
+    <link href="http://jeno5980515.github.io/2015/07/12/Programming%20Language/JavaScript/JavaScript%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/</id>
+    <published>2015-07-11T17:04:43.000Z</published>
+    <updated>2017-04-08T03:18:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>記錄一下看到的有趣的寫法。</p>
+<a id="more"></a>
+<p>#利用||給予定義或初始值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = b || <span class="number">9</span> ;</div></pre></td></tr></table></figure></p>
+<p>#函式參數少於需求<br>有時候會好奇為什麼API有些參數可選擇，原來是沒輸入的都會當作undefined，如此一來就可以設置default值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	a = a || <span class="number">0</span> ; b = b || <span class="number">0</span> ; c = c || <span class="number">0</span> ;</div><div class="line">	<span class="keyword">return</span> a + b + c ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#函式參數多於需求<br>多的可以利用arguments獲得。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params">a,b,c</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> sum = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++ ) &#123;</div><div class="line">		sum += <span class="built_in">arguments</span>[i] ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> sum ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有看到新的再補充。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;記錄一下看到的有趣的寫法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] Canvas的Image未載入</title>
+    <link href="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas%E7%9A%84Image%E6%9C%AA%E8%BC%89%E5%85%A5/"/>
+    <id>http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/</id>
+    <published>2015-07-11T16:34:46.000Z</published>
+    <updated>2017-04-08T03:15:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。</p>
+<a id="more"></a>
+<p>#原因<br>動態載入圖案的話往往是非同步的，所以可能造成尚未載好圖片就繪製上去的錯誤，如此一來當然沒有東西。</p>
+<p>#改善<br>加入onload確保圖案載入完畢。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">"1.png"</span> ;</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	ctx.drawImage(img,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Front-End] Canvas依照圖中心旋轉</title>
+    <link href="http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas%E4%BE%9D%E7%85%A7%E5%9C%96%E4%B8%AD%E5%BF%83%E6%97%8B%E8%BD%89/"/>
+    <id>http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/</id>
+    <published>2015-07-10T10:19:18.000Z</published>
+    <updated>2017-04-08T03:14:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#前言<br>若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。</p>
+<a id="more"></a>
+<p>#方法</p>
+<p>先使用<code>save()</code>保存畫布。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div></pre></td></tr></table></figure></p>
+<p>由於是針對左上角旋轉，所以我們先把畫布移到物體的座標。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(obj.x,obj.y);</div></pre></td></tr></table></figure></p>
+<p>再移到物體的中心。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(obj.width/<span class="number">2</span>,obj.height/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
+<p>旋轉。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.rotate( <span class="number">1</span> );</div></pre></td></tr></table></figure></p>
+<p>再移動畫布<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.translate(-obj.width/<span class="number">2</span>,-obj.height/<span class="number">2</span>);</div></pre></td></tr></table></figure></p>
+<p>畫上圖案<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.drawImage(obj, <span class="number">0</span>,  <span class="number">0</span>, obj.width, obj.height);</div></pre></td></tr></table></figure></p>
+<p>還原<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ctx.restore();</div></pre></td></tr></table></figure></p>
+<p>#完整代碼<br>記得自己替換內容。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ctx.save();</div><div class="line">ctx.translate(view.width ,view.height);</div><div class="line">ctx.translate(view.width/<span class="number">2</span>,view.height/<span class="number">2</span>); </div><div class="line">ctx.rotate( ang );</div><div class="line">ctx.translate(-view.width/<span class="number">2</span>,-view.height/<span class="number">2</span>);</div><div class="line">ctx.drawImage(view, <span class="number">0</span>,  <span class="number">0</span>, view.width, view.height);</div><div class="line">ctx.restore();</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#前言&lt;br&gt;若對Canvas做旋轉會是依照最左上角為中心，所以若要針對特殊的圖中心就要做些處理。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
+    
+      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+  </entry>
+  
+</feed>

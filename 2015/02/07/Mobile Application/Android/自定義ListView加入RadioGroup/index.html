@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[Android] 自定義ListView加入RadioGroup | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由於需要做一個測驗類的東西，使用ListView發現Subitem除了文字都不能加，最後快崩潰就只好自己刻一個。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] 自定義ListView加入RadioGroup">
+<meta property="og:url" content="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="由於需要做一個測驗類的東西，使用ListView發現Subitem除了文字都不能加，最後快崩潰就只好自己刻一個。">
+<meta property="og:image" content="http://jeno5980515.github.io/img/App設計/Android/ListView/1.bmp">
+<meta property="og:updated_time" content="2017-04-08T02:35:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Android] 自定義ListView加入RadioGroup">
+<meta name="twitter:description" content="由於需要做一個測驗類的東西，使用ListView發現Subitem除了文字都不能加，最後快崩潰就只好自己刻一個。">
+<meta name="twitter:image" content="http://jeno5980515.github.io/img/App設計/Android/ListView/1.bmp">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Mobile Application/Android/自定義ListView加入RadioGroup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/" class="article-date">
+  <time datetime="2015-02-07T11:28:45.000Z" itemprop="datePublished">2月 7 2015</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile-Application/">Mobile Application</a>►<a class="article-category-link" href="/categories/Mobile-Application/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Android] 自定義ListView加入RadioGroup
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由於需要做一個測驗類的東西，使用<code>ListView</code>發現<code>Subitem</code>除了文字都不能加，最後快崩潰就只好自己刻一個。</p>
+<a id="more"></a>
+<p><img src="/img/App設計/Android/ListView/1.bmp" alt=""></p>
+<p>##XML<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">	android:orientation=&quot;horizontal&quot;</div><div class="line">    android:layout_width=&quot;fill_parent&quot;</div><div class="line">    android:layout_height=&quot;fill_parent&quot;&gt;</div><div class="line">    </div><div class="line">	&lt;LinearLayout android:orientation=&quot;vertical&quot;</div><div class="line">	        android:layout_width=&quot;wrap_content&quot;</div><div class="line">	        android:layout_height=&quot;wrap_content&quot;&gt;</div><div class="line">	 </div><div class="line">		&lt;TextView</div><div class="line">	         android:id=&quot;@+id/booktitle&quot;</div><div class="line">	         android:layout_width=&quot;wrap_content&quot;</div><div class="line">	         android:layout_height=&quot;wrap_content&quot;</div><div class="line">	         android:layout_marginLeft=&quot;20dp&quot;</div><div class="line">       		 android:textColor=&quot;#000000&quot; /&gt;</div><div class="line"></div><div class="line">	    </div><div class="line">		&lt;RadioGroup</div><div class="line">		     android:id=&quot;@+id/bookgroup&quot;</div><div class="line">		     android:layout_width=&quot;wrap_content&quot;</div><div class="line">		     android:layout_height=&quot;fill_parent&quot;</div><div class="line">		     android:layout_alignParentRight=&quot;true&quot;</div><div class="line">		     android:layout_alignParentTop=&quot;true&quot;</div><div class="line">		     android:orientation=&quot;horizontal&quot; &gt;</div><div class="line">		</div><div class="line">		     &lt;RadioButton</div><div class="line">		         android:id=&quot;@+id/book1&quot;</div><div class="line">		         android:layout_width=&quot;wrap_content&quot;</div><div class="line">		         android:layout_height=&quot;wrap_content&quot;</div><div class="line">		         android:layout_marginLeft=&quot;10dip&quot;</div><div class="line">		         android:checked=&quot;false&quot;</div><div class="line">		         android:text=&quot;1&quot; /&gt;</div><div class="line">		</div><div class="line">		     &lt;RadioButton</div><div class="line">		         android:id=&quot;@+id/book2&quot;</div><div class="line">		         android:layout_width=&quot;wrap_content&quot;</div><div class="line">		         android:layout_height=&quot;wrap_content&quot;</div><div class="line">		         android:layout_marginLeft=&quot;10dip&quot;</div><div class="line">		         android:checked=&quot;false&quot;</div><div class="line">		         android:text=&quot;2&quot; /&gt;</div><div class="line">		     </div><div class="line">		     &lt;RadioButton</div><div class="line">		         android:id=&quot;@+id/book3&quot;</div><div class="line">		         android:layout_width=&quot;wrap_content&quot;</div><div class="line">		         android:layout_height=&quot;wrap_content&quot;</div><div class="line">		         android:layout_marginLeft=&quot;10dip&quot;</div><div class="line">		         android:checked=&quot;false&quot;</div><div class="line">		         android:text=&quot;3&quot; /&gt;</div><div class="line">		     </div><div class="line">		     &lt;RadioButton</div><div class="line">		         android:id=&quot;@+id/book4&quot;</div><div class="line">		         android:layout_width=&quot;wrap_content&quot;</div><div class="line">		         android:layout_height=&quot;wrap_content&quot;</div><div class="line">		         android:layout_marginLeft=&quot;10dip&quot;</div><div class="line">		         android:checked=&quot;false&quot;</div><div class="line">		         android:text=&quot;4&quot; /&gt;</div><div class="line">		     </div><div class="line">		     &lt;RadioButton</div><div class="line">		         android:id=&quot;@+id/book5&quot;</div><div class="line">		         android:layout_width=&quot;wrap_content&quot;</div><div class="line">		         android:layout_height=&quot;wrap_content&quot;</div><div class="line">		         android:layout_marginLeft=&quot;10dip&quot;</div><div class="line">		         android:checked=&quot;false&quot;</div><div class="line">		         android:text=&quot;5&quot; /&gt;</div><div class="line">		 &lt;/RadioGroup&gt;</div><div class="line">	 </div><div class="line">	  &lt;/LinearLayout&gt;  </div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>##Adapter<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.microsoftapp;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;</div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;</div><div class="line"><span class="keyword">import</span> android.widget.ImageView;</div><div class="line"><span class="keyword">import</span> android.widget.RadioGroup;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> LayoutInflater Bookflater;</div><div class="line">    </div><div class="line">    CharSequence[] title = <span class="keyword">null</span>;</div><div class="line">    CharSequence[] radiogroup = <span class="keyword">null</span>;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookAdapter</span><span class="params">(Context ctxt, CharSequence[] title)</span></span>&#123;</div><div class="line">    	Bookflater = LayoutInflater.from(ctxt);</div><div class="line">        <span class="keyword">this</span>.title = title;</div><div class="line">        <span class="keyword">this</span>.radiogroup = radiogroup;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">         <span class="keyword">return</span> title.length;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">         <span class="keyword">return</span> title[position];</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">         <span class="keyword">return</span> position;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</div><div class="line"> </div><div class="line">    	BookView bookview;</div><div class="line"> </div><div class="line">        <span class="keyword">if</span>(convertView == <span class="keyword">null</span>)&#123;</div><div class="line">            convertView = Bookflater.inflate(R.layout.booklistview, <span class="keyword">null</span>);</div><div class="line">             </div><div class="line">            bookview = <span class="keyword">new</span> BookView(</div><div class="line">            (TextView) convertView.findViewById(R.id.booktitle));</div><div class="line">             </div><div class="line">            convertView.setTag(bookview);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">        	bookview = (BookView) convertView.getTag();</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        bookview.title.setText(title[position]);</div><div class="line">         </div><div class="line">        <span class="keyword">return</span> convertView;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">BookView</span></span>&#123;</div><div class="line">        TextView title;</div><div class="line">        RadioGroup radiogroup;</div><div class="line">     </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">BookView</span><span class="params">(TextView title)</span></span>&#123;</div><div class="line">            <span class="keyword">this</span>.title = title;</div><div class="line">            <span class="keyword">this</span>.radiogroup = radiogroup;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>##使用方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String[] listtitle ;</div><div class="line">CharSequence[] ListTitle = listtitle;  </div><div class="line">ListView listview ;</div><div class="line">listview.setAdapter(<span class="keyword">new</span> BookAdapter(<span class="keyword">this</span>, ListTitle));</div></pre></td></tr></table></figure>
+<p>但目前<code>RadioGroup</code>還沒實作功能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/" data-id="cj1girkmv000nej3hlu6xn796" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/02/07/Mobile Application/Android/Animation效果/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Android] Animation動畫效果
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/02/08/Mobile Application/Android/Spinner字體大小/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[Android] Spinner字體大小</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/PhoneGap/">PhoneGap</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">40</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/a/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/">[Front-End] 自動調整Contenteditable邊界</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/Web/Front-End/removeClass和addClass/">[Front-End] removeClass和addClass</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/08/Web/Front-End/利用window.open傳值/">[Front-End] 利用window.open傳值</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
