@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-04-18T03:59:52.000Z</updated>
+  <updated>2017-04-20T03:53:29.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -16,11 +16,52 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Cordova] Cordova插件開發</title>
+    <link href="http://jeno5980515.github.io/2017/04/20/Mobile%20Application/Cordova/Cordova%E6%8F%92%E4%BB%B6%E9%96%8B%E7%99%BC/"/>
+    <id>http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/</id>
+    <published>2017-04-20T02:54:24.000Z</published>
+    <updated>2017-04-20T03:53:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。</p>
+<p>在這邊只放了部分內容而完整檔案放在GitHub上。</p>
+<p><span style="color:red;">此插件為兩年前寫的，所以一些細節可能與現在版本不同！</span></p>
+<a id="more"></a>
+<h1 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h1><p>由於Cordova像是一層接口，所以必須寫js端的接口以及Java原生內容，而這邊則是直接在Java端製作好GIF再將路徑經由接口回傳。</p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>首先可以先去官方網站上下載範例做修改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</div></pre></td></tr></table></figure></p>
+<h1 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a>plugin.xml</h1><p>在<code>plugin.xml</code>修改插件相關的配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span></span></div><div class="line">        <span class="attr">id</span>=<span class="string">"cordova-plugin-gif"</span>       //這邊<span class="attr">id</span>是給外部安裝的名稱</div><div class="line">        <span class="attr">version</span>=<span class="string">"1.0.0"</span>&gt;</div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>GIF<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">src</span>=<span class="string">"www/GIF.js"</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span> //js接口檔案的位置及名稱</div><div class="line">    <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"window.plugins.gif"</span> /&gt;</span>  //外部使用的接口名稱</div><div class="line">  <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"jeno5980515.cordova.GIF"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span> </div><div class="line">    //平台上需要用到的設置</div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">    //需要用到的其他檔案</div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/commons-codec-1.10.jar"</span> <span class="attr">target-dir</span>=<span class="string">"libs"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/AnimatedGifEncoder.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/GIF.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> PLUGIN_NAME = <span class="string">"GIF"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GIF</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//呼叫原生的結構 </span></div><div class="line"><span class="comment">//cordova.exec(successCallback, errorCallback, 插件名稱, 插件動作, [參數陣列]);</span></div><div class="line">GIF.prototype.finish = <span class="function"><span class="keyword">function</span>(<span class="params">successCallback,errorCallback,data</span>)</span>&#123;</div><div class="line">	cordova.exec(successCallback, errorCallback, PLUGIN_NAME, <span class="string">"finish"</span>, [] );</div><div class="line">&#125;</div><div class="line"></div><div class="line">GIF.install = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!<span class="built_in">window</span>.plugins) &#123;</div><div class="line">		<span class="built_in">window</span>.plugins = &#123;&#125;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">window</span>.plugins.gif = <span class="keyword">new</span> GIF();</div><div class="line"> 	<span class="keyword">return</span> <span class="built_in">window</span>.plugins.gif;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">cordova.addConstructor(GIF.install);</div></pre></td></tr></table></figure>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GIF</span> <span class="keyword">extends</span> <span class="title">CordovaPlugin</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">execute</span><span class="params">(String action, JSONArray args, CallbackContext callbackContext)</span> <span class="keyword">throws</span> JSONException </span>&#123;</div><div class="line">    	<span class="comment">//判斷進來的動作為何</span></div><div class="line">		<span class="keyword">if</span> ( action.equals(<span class="string">"finish"</span>) )&#123;</div><div class="line">			...</div><div class="line">			String arg1 = args.getString(<span class="number">0</span>);  <span class="comment">//取得剛剛傳進來的參數</span></div><div class="line">			...</div><div class="line"></div><div class="line">			<span class="comment">//將內容傳回callback</span></div><div class="line">			callbackContext.success(<span class="string">"XXX"</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>如此一來經由指令即可安裝至專案中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add 來源</div></pre></td></tr></table></figure></p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/cordova-plugin-gif" target="_blank" rel="external">cordova-plugin-gif</a></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://github.com/nbadal/android-gif-encoder" target="_blank" rel="external">android-gif-encoder</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。&lt;/p&gt;
+&lt;p&gt;在這邊只放了部分內容而完整檔案放在GitHub上。&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#39;color:red;&#39;&gt;此插件為兩年前寫的，所以一些細節可能與現在版本不同！&lt;/span&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Mobile Application" scheme="http://jeno5980515.github.io/categories/Mobile-Application/"/>
+    
+      <category term="Cordova" scheme="http://jeno5980515.github.io/categories/Mobile-Application/Cordova/"/>
+    
+    
+      <category term="Android" scheme="http://jeno5980515.github.io/tags/Android/"/>
+    
+      <category term="Cordova" scheme="http://jeno5980515.github.io/tags/Cordova/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Hexo] 主題設置</title>
     <link href="http://jeno5980515.github.io/2017/04/18/Web/Hexo/%E4%B8%BB%E9%A1%8C%E8%A8%AD%E7%BD%AE/"/>
     <id>http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/</id>
     <published>2017-04-18T02:04:12.000Z</published>
-    <updated>2017-04-18T03:59:52.000Z</updated>
+    <updated>2017-04-20T03:55:17.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了一下Hexo主題的寫法，在這邊紀錄一下。</p>
 <a id="more"></a>
@@ -32,7 +73,7 @@
 <h1 id="Hexo變數及函式"><a href="#Hexo變數及函式" class="headerlink" title="Hexo變數及函式"></a>Hexo變數及函式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//當前是否首頁</span></div><div class="line">is_home()</div><div class="line"><span class="comment">//當前是否在某個頁面</span></div><div class="line">is_current(<span class="string">"xxx"</span>)</div><div class="line"><span class="comment">//路徑前加根路徑</span></div><div class="line">url_for()</div><div class="line"><span class="comment">//當前頁面變數</span></div><div class="line">page</div><div class="line"><span class="comment">//當前頁面路徑</span></div><div class="line">page.path</div><div class="line"><span class="comment">//網站變數</span></div><div class="line">site</div><div class="line"><span class="comment">//網站所有文章</span></div><div class="line">site.posts</div></pre></td></tr></table></figure>
 <h1 id="Nav"><a href="#Nav" class="headerlink" title="Nav"></a>Nav</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//當初設在主題_config.yml的menu內容</div><div class="line">&lt;% for (var i in theme.menu)&#123; %&gt;</div><div class="line">	&lt;a href=&quot;&lt;%- url_for(theme.menu[i]) %&gt;&quot; &gt;&lt;%- i  %&gt;&lt;/a&gt;</div><div class="line">&lt;% &#125; %&gt;</div></pre></td></tr></table></figure>
 <h1 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h1><p>Hexo的文章似乎沒有不同分頁屬性的結構，只能使用md的屬性或者來源來分辨。</p>
-<p>文章有預設的屬性不能自己新增，在這邊使用屬性中的資料夾來源辨別。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;% </div><div class="line">site.posts.forEach(function(post)&#123;</div><div class="line">	var slug = post.slug.split(&quot;/&quot;)[0] ;</div><div class="line">    	if ( slug === &quot;xxx&quot; )&#123; %&gt;</div><div class="line">        	&lt;img src=&lt;%- post.photos[0] %&gt; /&gt;</div><div class="line">	        &lt;div &gt;</div><div class="line">	        	&lt;%- post.title %&gt;</div><div class="line">	        &lt;/div&gt;</div><div class="line">            &lt;div &gt;</div><div class="line">            	&lt;%- post.description %&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div &gt;</div><div class="line">            	&lt;%- post.content %&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">	&lt;% &#125;</div><div class="line">&#125;) %&gt;</div></pre></td></tr></table></figure></p>
+<p>文章有預設的屬性不能自己新增，在這邊使用屬性中的資料夾來源辨別。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;% </div><div class="line">site.posts.forEach(function(post)&#123;</div><div class="line">	var slug = post.slug.split(&quot;/&quot;)[0] ;</div><div class="line">	if ( slug === &quot;xxx&quot; )&#123; %&gt;</div><div class="line">		&lt;img src=&lt;%- post.photos[0] %&gt; /&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.title %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.description %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.content %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">	&lt;% &#125;</div><div class="line">&#125;) %&gt;</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
@@ -463,9 +504,9 @@
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
-      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
-    
       <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
     
   </entry>
   
@@ -627,38 +668,6 @@
     
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] Canvas的Image未載入</title>
-    <link href="http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas%E7%9A%84Image%E6%9C%AA%E8%BC%89%E5%85%A5/"/>
-    <id>http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/</id>
-    <published>2015-07-11T16:34:46.000Z</published>
-    <updated>2017-04-14T13:32:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。</p>
-<a id="more"></a>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>動態載入圖案的話往往是非同步的，所以可能造成尚未載好圖片就繪製上去的錯誤，如此一來當然沒有東西。</p>
-<h1 id="改善"><a href="#改善" class="headerlink" title="改善"></a>改善</h1><p>加入onload確保圖案載入完畢。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">"1.png"</span> ;</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	ctx.drawImage(img,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>,<span class="number">100</span>) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;同樣在畫布上繪圖的程式碼，在不同瀏覽器卻有的可以執行有的卻不行。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
-    
-      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
     
   </entry>
   

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[Cordova] Cordova插件開發 | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。 在這邊只放了部分內容而完整檔案放在GitHub上。 此插件為兩年前寫的，所以一些細節可能與現在版本不同！">
+<meta name="keywords" content="Android,Cordova">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Cordova] Cordova插件開發">
+<meta property="og:url" content="http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="前言之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。 在這邊只放了部分內容而完整檔案放在GitHub上。 此插件為兩年前寫的，所以一些細節可能與現在版本不同！">
+<meta property="og:updated_time" content="2017-04-20T03:53:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Cordova] Cordova插件開發">
+<meta name="twitter:description" content="前言之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。 在這邊只放了部分內容而完整檔案放在GitHub上。 此插件為兩年前寫的，所以一些細節可能與現在版本不同！">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Mobile Application/Cordova/Cordova插件開發" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/Mobile Application/Cordova/Cordova插件開發/" class="article-date">
+  <time datetime="2017-04-20T02:54:24.000Z" itemprop="datePublished">4月 20 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mobile-Application/">Mobile Application</a>►<a class="article-category-link" href="/categories/Mobile-Application/Cordova/">Cordova</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Cordova] Cordova插件開發
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。</p>
+<p>在這邊只放了部分內容而完整檔案放在GitHub上。</p>
+<p><span style="color:red;">此插件為兩年前寫的，所以一些細節可能與現在版本不同！</span></p>
+<a id="more"></a>
+<h1 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h1><p>由於Cordova像是一層接口，所以必須寫js端的接口以及Java原生內容，而這邊則是直接在Java端製作好GIF再將路徑經由接口回傳。</p>
+<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>首先可以先去官方網站上下載範例做修改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</div></pre></td></tr></table></figure></p>
+<h1 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a>plugin.xml</h1><p>在<code>plugin.xml</code>修改插件相關的配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span></span></div><div class="line">        <span class="attr">id</span>=<span class="string">"cordova-plugin-gif"</span>       //這邊<span class="attr">id</span>是給外部安裝的名稱</div><div class="line">        <span class="attr">version</span>=<span class="string">"1.0.0"</span>&gt;</div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>GIF<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">src</span>=<span class="string">"www/GIF.js"</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span> //js接口檔案的位置及名稱</div><div class="line">    <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"window.plugins.gif"</span> /&gt;</span>  //外部使用的接口名稱</div><div class="line">  <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"jeno5980515.cordova.GIF"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span> </div><div class="line">    //平台上需要用到的設置</div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">    //需要用到的其他檔案</div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/commons-codec-1.10.jar"</span> <span class="attr">target-dir</span>=<span class="string">"libs"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/AnimatedGifEncoder.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/GIF.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> PLUGIN_NAME = <span class="string">"GIF"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GIF</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//呼叫原生的結構 </span></div><div class="line"><span class="comment">//cordova.exec(successCallback, errorCallback, 插件名稱, 插件動作, [參數陣列]);</span></div><div class="line">GIF.prototype.finish = <span class="function"><span class="keyword">function</span>(<span class="params">successCallback,errorCallback,data</span>)</span>&#123;</div><div class="line">	cordova.exec(successCallback, errorCallback, PLUGIN_NAME, <span class="string">"finish"</span>, [] );</div><div class="line">&#125;</div><div class="line"></div><div class="line">GIF.install = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!<span class="built_in">window</span>.plugins) &#123;</div><div class="line">		<span class="built_in">window</span>.plugins = &#123;&#125;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">window</span>.plugins.gif = <span class="keyword">new</span> GIF();</div><div class="line"> 	<span class="keyword">return</span> <span class="built_in">window</span>.plugins.gif;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">cordova.addConstructor(GIF.install);</div></pre></td></tr></table></figure>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GIF</span> <span class="keyword">extends</span> <span class="title">CordovaPlugin</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">execute</span><span class="params">(String action, JSONArray args, CallbackContext callbackContext)</span> <span class="keyword">throws</span> JSONException </span>&#123;</div><div class="line">    	<span class="comment">//判斷進來的動作為何</span></div><div class="line">		<span class="keyword">if</span> ( action.equals(<span class="string">"finish"</span>) )&#123;</div><div class="line">			...</div><div class="line">			String arg1 = args.getString(<span class="number">0</span>);  <span class="comment">//取得剛剛傳進來的參數</span></div><div class="line">			...</div><div class="line"></div><div class="line">			<span class="comment">//將內容傳回callback</span></div><div class="line">			callbackContext.success(<span class="string">"XXX"</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>如此一來經由指令即可安裝至專案中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add 來源</div></pre></td></tr></table></figure></p>
+<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/cordova-plugin-gif" target="_blank" rel="external">cordova-plugin-gif</a></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://github.com/nbadal/android-gif-encoder" target="_blank" rel="external">android-gif-encoder</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/" data-id="cj1pu7cai000jvc3hle51bzii" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cordova/">Cordova</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/18/Web/Hexo/主題設置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Hexo] 主題設置
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Cordova/">Cordova</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/20/Mobile Application/Cordova/Cordova插件開發/">[Cordova] Cordova插件開發</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/Web/Hexo/主題設置/">[Hexo] 主題設置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/">[Front-End] 自動調整Contenteditable邊界</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
