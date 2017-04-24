@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[JavaScript] Promise實作原理 | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言最近從 JavaScript Promises … In Wicked Detail 研究Promise的實作原理，在此紀錄一下。 這邊的Promise會盡量符合Promises/A+的規範但離完整的實作仍會有些細節上處理的差距。">
+<meta name="keywords" content="JavaScript,Promise">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[JavaScript] Promise實作原理">
+<meta property="og:url" content="http://jeno5980515.github.io/2017/04/24/Programming Language/JavaScript/Promise實作原理/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="前言最近從 JavaScript Promises … In Wicked Detail 研究Promise的實作原理，在此紀錄一下。 這邊的Promise會盡量符合Promises/A+的規範但離完整的實作仍會有些細節上處理的差距。">
+<meta property="og:updated_time" content="2017-04-24T05:22:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[JavaScript] Promise實作原理">
+<meta name="twitter:description" content="前言最近從 JavaScript Promises … In Wicked Detail 研究Promise的實作原理，在此紀錄一下。 這邊的Promise會盡量符合Promises/A+的規範但離完整的實作仍會有些細節上處理的差距。">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Programming Language/JavaScript/Promise實作原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/24/Programming Language/JavaScript/Promise實作原理/" class="article-date">
+  <time datetime="2017-04-24T05:16:00.000Z" itemprop="datePublished">4月 24 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming-Language/">Programming Language</a>►<a class="article-category-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [JavaScript] Promise實作原理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近從 <a href="http://www.mattgreer.org/articles/promises-in-wicked-detail/" target="_blank" rel="external">JavaScript Promises … In Wicked Detail</a> 研究Promise的實作原理，在此紀錄一下。</p>
+<p>這邊的Promise會盡量符合<code>Promises/A+</code>的規範但離完整的實作仍會有些細節上處理的差距。</p>
+<a id="more"></a>
+<h1 id="基礎"><a href="#基礎" class="headerlink" title="基礎"></a>基礎</h1><p>假設我們希望將callback改成then的串鏈形式，我們只需要簡單改變結構。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">doSomething(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Got a value:'</span> + value);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	callback(value);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>改變成<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">doSomething().then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Got a value:'</span> + value);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">then</span>: <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">			<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">			callback(value);</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h1><p>接下來開始實作Promise物件，使他適用到任何函式中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> callback = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</div><div class="line">		callback = cb;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">		callback(value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	resolve(value);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Got a value:'</span> + value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>這樣子的結構會有個問題，因為resolve會在then之前執行，所以callback目前的狀態還是null。</p>
+<p>在這邊利用setTimeout讓resolve跳出目前的事件流，讓then在resolve前執行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> callback = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</div><div class="line">		callback = cb;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			callback(value);</div><div class="line">		&#125;,<span class="number">0</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	resolve(value);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'Got a value:'</span> + value);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>乍看之下好像完成了，但是一旦then是非同步執行，這樣的結構就會出問題。</p>
+<p>因為如此一來resolve一樣在then之前執行了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> callback = <span class="literal">null</span>;</div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</div><div class="line">		callback = cb;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">		setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			callback(value);</div><div class="line">		&#125;,<span class="number">0</span>)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	resolve(value);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'Got a value:'</span> + value);</div><div class="line">	&#125;);</div><div class="line">&#125;,<span class="number">100</span>)</div></pre></td></tr></table></figure>
+<h1 id="狀態機"><a href="#狀態機" class="headerlink" title="狀態機"></a>狀態機</h1><p>可以將<code>狀態</code>及<code>結果</code>記錄在Promise中，利用當前狀態判斷執行順序再將結果傳回欲執行的函式。</p>
+<p>若then在resolve前執行則先暫時將then的函式存在deferred中，等候resolve完才執行。</p>
+<p>反之若resolve在then前執行，則因為狀態已改變為resolved，可直接接著執行then函式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> state = <span class="string">'pending'</span>;</div><div class="line">	<span class="keyword">var</span> value;</div><div class="line">	<span class="keyword">var</span> deferred;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">		value = newValue;</div><div class="line">		state = <span class="string">'resolved'</span>;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(deferred) &#123;</div><div class="line">			handle(deferred);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">onResolved</span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>(state === <span class="string">'pending'</span>) &#123;</div><div class="line">			deferred = onResolved;</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		onResolved(value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onResolved</span>) </span>&#123;</div><div class="line">		handle(onResolved);</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">		resolve(value);</div><div class="line">	&#125;,<span class="number">500</span>);</div><div class="line">&#125;) ;</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'1. execute then before resolve , value :'</span> + value);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'2. execute then before resolve , value :'</span> + value);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'3. execute then before resolve , value :'</span> + value);</div><div class="line">	&#125;);	</div><div class="line">&#125;,<span class="number">300</span>);</div><div class="line"></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;  </div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'execute then after resolve , value :'</span> + value);</div><div class="line">	&#125;);	</div><div class="line">&#125;,<span class="number">1000</span>);</div></pre></td></tr></table></figure>
+<p>可以發現如果有多個then在resolve前執行會只有最後一個then會執行，這是因為不斷將deferred覆蓋過去了，所以實作上會利用陣列來儲存函式。</p>
+<h1 id="串鏈Promises"><a href="#串鏈Promises" class="headerlink" title="串鏈Promises"></a>串鏈Promises</h1><p>若我們希望then之後可以接著then，如此一來我們必須再then中傳回Promise物件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;  </div><div class="line">	<span class="keyword">var</span> state = <span class="string">'pending'</span>;</div><div class="line">	<span class="keyword">var</span> value;</div><div class="line">	<span class="keyword">var</span> deferred = <span class="literal">null</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;</div><div class="line">		value = newValue;</div><div class="line">		state = <span class="string">'resolved'</span>;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(deferred) &#123;</div><div class="line">			handle(deferred);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">handler</span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>(state === <span class="string">'pending'</span>) &#123;</div><div class="line">			deferred = handler;</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(!handler.onResolved) &#123;</div><div class="line">			handler.resolve(value);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">var</span> ret = handler.onResolved(value);</div><div class="line">		handler.resolve(ret);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onResolved</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">			handle(&#123;</div><div class="line">				<span class="attr">onResolved</span>: onResolved,</div><div class="line">				<span class="attr">resolve</span>: resolve</div><div class="line">			&#125;);</div><div class="line">		&#125;);</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	resolve(value);</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123; </div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"First result:"</span> + result); </div><div class="line">	<span class="keyword">return</span> result+<span class="number">1</span>;</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Second result:"</span> + result); </div><div class="line">	<span class="keyword">return</span> result+<span class="number">1</span>;</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Third result:"</span> + result); </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>一般建立的Promise和then建立的Promise有些許的不同</p>
+<p>在then建立的Promise中我們把原先的value傳進去執行then中的函式，再將執行結果傳給原先Promise的resolve。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ret = handler.onResolved(value);</div><div class="line">handler.resolve(ret);</div></pre></td></tr></table></figure></p>
+<p>文中給的then不一定要有callback函式，因此在handle函式做了判斷<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!handler.onResolved) &#123;  </div><div class="line">	handler.resolve(value);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不過我暫時想不到什麼情況下需要一個沒有callback的then。</p>
+<h1 id="串鏈中回傳Promise"><a href="#串鏈中回傳Promise" class="headerlink" title="串鏈中回傳Promise"></a>串鏈中回傳Promise</h1><p>then中的程式如果是非同步執行，如此一來必須在串鏈中回傳Promise。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>)</span>&#123;</div><div class="line">	    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"First result:"</span> + result); </div><div class="line">			resolve(result+<span class="number">1</span>);  </div><div class="line">	    &#125;,<span class="number">500</span>)</div><div class="line">	&#125;);</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">anotherPromise</span>) </span>&#123;</div><div class="line">	anotherPromise.then(<span class="function"><span class="keyword">function</span>(<span class="params">finalResult</span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"the final result is"</span>, finalResult);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我們可以將判別是否為Promise的程式寫到resolve中，我們會不斷的遞迴呼叫resolve函式直到不再是Promise為止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;  </div><div class="line">	<span class="keyword">var</span> state = <span class="string">'pending'</span>;</div><div class="line">	<span class="keyword">var</span> value;</div><div class="line">	<span class="keyword">var</span> deferred = <span class="literal">null</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">newValue</span>) </span>&#123;  </div><div class="line">		<span class="keyword">if</span>(newValue &amp;&amp; <span class="keyword">typeof</span> newValue.then === <span class="string">'function'</span>) &#123;</div><div class="line">			newValue.then(resolve);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		state = <span class="string">'resolved'</span>;</div><div class="line">		value = newValue;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(deferred) &#123;</div><div class="line">			handle(deferred);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">handler</span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>(state === <span class="string">'pending'</span>) &#123;</div><div class="line">			deferred = handler;</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!handler.onResolved) &#123;</div><div class="line">		handler.resolve(value);</div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> ret = handler.onResolved(value);</div><div class="line">		handler.resolve(ret);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">this</span>.then = <span class="function"><span class="keyword">function</span>(<span class="params">onResolved</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">			handle(&#123;</div><div class="line">				<span class="attr">onResolved</span>: onResolved,</div><div class="line">				<span class="attr">resolve</span>: resolve</div><div class="line">			&#125;);</div><div class="line">		&#125;);</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	fn(resolve);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> value = <span class="number">42</span>;</div><div class="line">	resolve(value);</div><div class="line">&#125;)</div><div class="line"></div><div class="line">promise.then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;     </div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>)</span>&#123;</div><div class="line">	    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"First result:"</span> + result); </div><div class="line">			resolve(result+<span class="number">1</span>);  </div><div class="line">	    &#125;,<span class="number">500</span>)</div><div class="line">	&#125;);</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Second result:"</span> + result); </div><div class="line">	<span class="keyword">return</span> result+<span class="number">1</span>;</div><div class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"Third result:"</span> + result); </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>錯誤處理及一些實作上的細節等到之後補充。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="http://www.mattgreer.org/articles/promises-in-wicked-detail/" target="_blank" rel="external">JavaScript Promises … In Wicked Detail</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2017/04/24/Programming Language/JavaScript/Promise實作原理/" data-id="cj1vo8svr002qyf3hzaxfccwe" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2017/04/24/Programming Language/JavaScript/Promise實作原理/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/">Promise</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/20/Mobile Application/Cordova/Cordova插件開發/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Cordova] Cordova插件開發
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Cordova/">Cordova</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">41</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/24/Programming Language/JavaScript/Promise實作原理/">[JavaScript] Promise實作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/Mobile Application/Cordova/Cordova插件開發/">[Cordova] Cordova插件開發</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/Web/Hexo/主題設置/">[Hexo] 主題設置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/27/Content Management System/Joomla/Joomla網站搬家/">[Joomla] Joomla網站搬家</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2017/04/24/Programming Language/JavaScript/Promise實作原理/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
