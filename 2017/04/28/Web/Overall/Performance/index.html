@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/performance.png">
 <meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool10.PNG">
 <meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool11.PNG">
-<meta property="og:updated_time" content="2017-04-28T05:15:02.000Z">
+<meta property="og:updated_time" content="2017-04-28T05:16:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Web] Performnace">
 <meta name="twitter:description" content="前言最近看了Google的Learn How to Develop the Next Generation of Applications for the Web和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。">
@@ -142,8 +142,8 @@
 <p><a href="http://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left" target="_blank" rel="external">Why do browsers match CSS selectors from right to left?</a></p>
 <h1 id="渲染樹"><a href="#渲染樹" class="headerlink" title="渲染樹"></a>渲染樹</h1><p>建立渲染樹的過程中，會從DOM中找node且在CSSOM找是否有相對應的node然後加到渲染樹上。<br><img src="/img/Web/Performance/render_tree.PNG" alt=""><br>由於渲染樹只會加上可見的元素，因此<code>display:none</code>的span不會加到樹上，但Pseudo Elements則會。</p>
 <h1 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h1><p><code>viewport</code>可以告知瀏覽器Layout的寬度應該多長，若沒告知則為預設的980px。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width;"</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>media屬性<br>若是不希望阻塞渲染，可在css來源的tag加上media屬性，如此一來檔案仍會下載但不會阻塞。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"print.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"print"</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>async<br>可在不需要依賴DOM的script上加上async屬性，如此一來就不會阻塞渲染。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="media"><a href="#media" class="headerlink" title="media"></a>media</h2><p>若是不希望阻塞渲染，可在css來源的tag加上media屬性，如此一來檔案仍會下載但不會阻塞。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"print.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"print"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><p>可在不需要依賴DOM的script上加上async屬性，如此一來就不會阻塞渲染。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h1 id="Critical-Rendering-Path-Diagrams"><a href="#Critical-Rendering-Path-Diagrams" class="headerlink" title="Critical Rendering Path Diagrams"></a>Critical Rendering Path Diagrams</h1><p><img src="/img/Web/Performance/diagram.png" alt=""><br>發出HTML請求-&gt;發出CSS請求並同時建立DOM-&gt;建立CSSOM-&gt;渲染</p>
 <p><img src="/img/Web/Performance/diagram2.png" alt=""><br>發出HTML請求-&gt;發出CSS、JavaScript請求並同時建立DOM(遇到JavaScript處則暫停建立DOM)-&gt;建立CSSOM-&gt;執行JavaScript-&gt;繼續建立DOM-&gt;渲染</p>
 <p>瀏覽器會使用<code>preload scanner</code>將所有css和js一起載入。</p>
@@ -228,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/" data-id="cj21dufrh005c573hf84dfgsq" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/" data-id="cj21dygkv006e5l3hzpjoo885" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/#disqus_thread" class="article-comment-link">Comments</a>
       
