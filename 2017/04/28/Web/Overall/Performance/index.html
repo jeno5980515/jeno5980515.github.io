@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[Web] Performnace | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言最近看了Google的Learn How to Develop the Next Generation of Applications for the Web和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。">
+<meta name="keywords" content="Web,Performance">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Web] Performnace">
+<meta property="og:url" content="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="前言最近看了Google的Learn How to Develop the Next Generation of Applications for the Web和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom1.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom2.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom3.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom4.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/css2cssom.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/css2cssom1.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/render_tree.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/diagram.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/diagram2.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/pipeline1.jpg">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/pipeline2.jpg">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/pipeline3.jpg">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool1.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool12.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool2.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool3.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool4.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool5.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool6.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool9.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool7.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool8.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/performance2.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/performance.png">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool10.PNG">
+<meta property="og:image" content="http://jeno5980515.github.io/img/Web/Performance/devtool11.PNG">
+<meta property="og:updated_time" content="2017-04-28T05:08:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Web] Performnace">
+<meta name="twitter:description" content="前言最近看了Google的Learn How to Develop the Next Generation of Applications for the Web和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。">
+<meta name="twitter:image" content="http://jeno5980515.github.io/img/Web/Performance/html2dom.PNG">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web/Overall/Performance" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/28/Web/Overall/Performance/" class="article-date">
+  <time datetime="2017-04-28T03:43:34.000Z" itemprop="datePublished">4月 28 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>►<a class="article-category-link" href="/categories/Web/Overall/">Overall</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [Web] Performnace
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近看了Google的<a href="https://developers.google.com/web/" target="_blank" rel="external">Learn How to Develop the Next Generation of Applications for the Web</a>和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。</p>
+<a id="more"></a>
+<h1 id="DOM-amp-CSSOM"><a href="#DOM-amp-CSSOM" class="headerlink" title="DOM &amp; CSSOM"></a>DOM &amp; CSSOM</h1><p>HTML轉換成DOM (Document Object Model) 的流程如下圖<br><img src="/img/Web/Performance/html2dom.PNG" alt=""><br>首先會先將HTML字串<br><img src="/img/Web/Performance/html2dom1.PNG" alt=""><br>轉換成一個一個的token<br><img src="/img/Web/Performance/html2dom2.PNG" alt=""><br>再將這些token轉換成一個一個的node<br><img src="/img/Web/Performance/html2dom3.PNG" alt=""><br>最後就形成了DOM<br><img src="/img/Web/Performance/html2dom4.PNG" alt=""></p>
+<p>CSS轉換成CSSOM (CSS Object Model) 的流程如下圖<br><img src="/img/Web/Performance/css2cssom.PNG" alt=""><br>直接看到轉換成node的部分<br><img src="/img/Web/Performance/css2cssom1.PNG" alt=""><br>p是body的子節點，因為所有可見的內容都是body的一部份。</p>
+<p>其中子節點會繼承父節點的屬性。</p>
+<h1 id="CSS-Selector"><a href="#CSS-Selector" class="headerlink" title="CSS Selector"></a>CSS Selector</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以下兩種選擇會是哪一種比較快？<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">h1 &#123; ... &#125;</div><div class="line">div p &#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<p>第一種會找所有的h1並且設置屬性，第二種則是找到所有的p且往上找是否父節點為div。</p>
+<p>因此直接選擇h1會比較快。</p>
+<p>CSS是從右到左，因為從右邊讀取效率會比較高，從左到右會浪費許多時間在錯誤的查找上。</p>
+<p><a href="http://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left" target="_blank" rel="external">Why do browsers match CSS selectors from right to left?</a></p>
+<h1 id="渲染樹"><a href="#渲染樹" class="headerlink" title="渲染樹"></a>渲染樹</h1><p>建立渲染樹的過程中，會從DOM中找node且在CSSOM找是否有相對應的node然後加到渲染樹上。<br><img src="/img/Web/Performance/render_tree.png" alt=""><br>由於渲染樹只會加上可見的元素，因此<code>display:none</code>的span不會加到樹上，但Pseudo Elements則會。</p>
+<h1 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h1><p><code>viewport</code>可以告知瀏覽器Layout的寬度應該多長，若沒告知則為預設的980px。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width;"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>media屬性<br>若是不希望阻塞渲染，可在css來源的tag加上media屬性，如此一來檔案仍會下載但不會阻塞。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"print.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"print"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>async<br>可在不需要依賴DOM的script上加上async屬性，如此一來就不會阻塞渲染。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="Critical-Rendering-Path-Diagrams"><a href="#Critical-Rendering-Path-Diagrams" class="headerlink" title="Critical Rendering Path Diagrams"></a>Critical Rendering Path Diagrams</h1><p><img src="/img/Web/Performance/diagram.png" alt=""><br>發出HTML請求-&gt;發出CSS請求並同時建立DOM-&gt;建立CSSOM-&gt;渲染</p>
+<p><img src="/img/Web/Performance/diagram2.png" alt=""><br>發出HTML請求-&gt;發出CSS、JavaScript請求並同時建立DOM(遇到JavaScript處則暫停建立DOM)-&gt;建立CSSOM-&gt;執行JavaScript-&gt;繼續建立DOM-&gt;渲染</p>
+<p>瀏覽器會使用<code>preload scanner</code>將所有css和js一起載入。</p>
+<h1 id="Pixel-Pipeline"><a href="#Pixel-Pipeline" class="headerlink" title="Pixel Pipeline"></a>Pixel Pipeline</h1><p>利用js修改DOM渲染的流程可以分為以下三種</p>
+<ol>
+<li><p>JS / CSS &gt; Style &gt; Layout &gt; Paint &gt; Composite<br><img src="/img/Web/Performance/pipeline1.jpg" alt=""><br>像是修改<code>margin-left</code>、<code>width</code>等等。</p>
+</li>
+<li><p>JS / CSS &gt; Style &gt; Paint &gt; Composite<br><img src="/img/Web/Performance/pipeline2.jpg" alt=""><br>像是修改<code>background-image</code>、<code>color</code>等等。</p>
+</li>
+<li><p>JS / CSS &gt; Style &gt; Composite<br><img src="/img/Web/Performance/pipeline3.jpg" alt=""><br>像是修改<code>transform</code>等等。</p>
+</li>
+</ol>
+<p>需要的流程越少成本就越小，因此要盡量選擇第三種方法。</p>
+<p><a href="https://csstriggers.com/" target="_blank" rel="external">CSS Triggers</a>可以查看每個style所會觸發的流程。</p>
+<h1 id="Load-Idle-Animate-Response"><a href="#Load-Idle-Animate-Response" class="headerlink" title="Load, Idle, Animate, Response"></a>Load, Idle, Animate, Response</h1><p>我們必須把真正需要的在Load載入來減少時間，像是基本架構、重要的文字等等。</p>
+<p>在Idle的時候則可以載入等一下可能會使用到的東西。</p>
+<h1 id="Chrome-DevTools"><a href="#Chrome-DevTools" class="headerlink" title="Chrome DevTools"></a>Chrome DevTools</h1><p>最近Chrome的Timeline和Profiles等等似乎都合併到Performance裡了。</p>
+<p>FPS Metor用來查看即時的狀況<br><img src="/img/Web/Performance/devtool1.PNG" alt=""></p>
+<p>Paint Flashing用來查看即時Paint的情形<br><img src="/img/Web/Performance/devtool12.PNG" alt=""></p>
+<p>經由左上角的錄製鈕來逐Frame檢視<br><img src="/img/Web/Performance/devtool2.PNG" alt=""></p>
+<p>Screenshots用來查看每個Frame的當前畫面直接鎖定需要的地方<br><img src="/img/Web/Performance/devtool3.PNG" alt=""></p>
+<p>若是大量動畫的狀態要盡量保持在60fps也就是16ms以下(1000/60)才會順暢。<br><img src="/img/Web/Performance/devtool4.PNG" alt=""></p>
+<p>Summary圖表顯示了所花的時間<br><img src="/img/Web/Performance/devtool5.PNG" alt=""></p>
+<p>Event Log則可以看細部所花的時間，Self Time代表在程式內部的，Total Time則是包含了內部呼叫的其他函式。<br><img src="/img/Web/Performance/devtool6.PNG" alt=""></p>
+<p>開啟Memory選項則可以看到內存的使用情形。<br><img src="/img/Web/Performance/devtool9.PNG" alt=""></p>
+<h1 id="實機測試-Chrome-DevTools"><a href="#實機測試-Chrome-DevTools" class="headerlink" title="實機測試 + Chrome DevTools"></a>實機測試 + Chrome DevTools</h1><p>若希望使用開發者工具來檢視手機上的結果<br>可開啟<code>設定-&gt;開發者選項-&gt;USB偵錯</code><br><img src="/img/Web/Performance/devtool7.png" alt=""><br>在Chrome上連結設<code>chrome://inspect</code>即可看見手機上的網頁，在需要測試的按<code>inspect</code>即可進入開發者模式。</p>
+<p>若想要直接在手機上開啟本機伺服器檔案，則可以Port forwarding設置且按下<code>Enable port forwarding</code>即可。<br><img src="/img/Web/Performance/devtool8.png" alt=""></p>
+<h1 id="Micro-Optimizations"><a href="#Micro-Optimizations" class="headerlink" title="Micro Optimizations"></a>Micro Optimizations</h1><p>由於JavaScript不見得是照我們寫的運行，我們無法知道如何引擎是做最佳化，所以不需要花時間在微最佳化上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Don't waste time between them</span></div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; len ; i ++ ) ...</div><div class="line"></div><div class="line">while ( ++ i &lt; len ) ...</div></pre></td></tr></table></figure>
+<h1 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h1><p>雖然60fps換算下來是16ms，但我們實際上必須要在更短的時間內執行完程式，因為會有額外的時間拿來做style計算、layer管理等等。</p>
+<p>setTimeout和setInterval不適合拿來處理動畫，因為若我們在像是style計算中突然要執行JavaScript，如此一來整個渲染流程又會重新執行而造成頻率不一致，而requestAnimationFrame可以妥善的安排JavaScript執行的時間。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">time</span>) </span>&#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> requestId = requestAnimationFrame(render);</div><div class="line"><span class="comment">//取消動畫</span></div><div class="line">cancelAnimationFrame(requestId);</div></pre></td></tr></table></figure>
+<h1 id="Web-Workers"><a href="#Web-Workers" class="headerlink" title="Web Workers"></a>Web Workers</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="external">Web Workers</a>可以讓js運行在不同的thread而不會造成阻塞。</p>
+<h1 id="Memory-Management"><a href="#Memory-Management" class="headerlink" title="Memory Management"></a>Memory Management</h1><ol>
+<li>盡量別用delete，因為JavaScript引擎會自動最佳化，若是delete其中的元素則得重新計算。</li>
+<li>null不會真的清空物件，只會讓物件指向null</li>
+<li>全域變數不會被GC回收</li>
+<li>取消綁定事件若不再需要</li>
+<li>若使用資料快取要妥善管理</li>
+</ol>
+<p>考慮以下的情況<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myObj = &#123;</div><div class="line">    <span class="attr">callMeMaybe</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> myRef = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">var</span> val = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'Time is running out!'</span>); </div><div class="line">            myRef.callMeMaybe();</div><div class="line">        &#125;, <span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">myObj.callMeMaybe();</div><div class="line">myObj = <span class="literal">null</span>;</div></pre></td></tr></table></figure></p>
+<p>即使設為null，setTimeout仍會持續進行，這是因為myRef在closure中指向myObj，因此myObj不會被GC回收。</p>
+<p><a href="https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/" target="_blank" rel="external">How To Write Fast, Memory-Efficient JavaScript</a></p>
+<h1 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h1><p>當Selector條件越多效能就越受影響，使用<code>.box-three</code>會比<code>:nth-child(3)</code>的選擇好。</p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://dl.dropboxusercontent.com/u/2272348/codez/udacity/box-recalc-style-slow.html" target="_blank" rel="external">box-recalc-style-slow</a></p>
+<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span><span class="selector-class">.toggled</span> <span class="selector-tag">main</span> <span class="selector-class">.box-container</span> <span class="selector-class">.box</span><span class="selector-pseudo">:nth-child(2n)</span> &#123;</div><div class="line">	<span class="attribute">background</span>: <span class="number">#777</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">button.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">document</span>.body.classList.toggle(<span class="string">'toggled'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>如此一來每個<code>.box</code>都會看且判斷是否是偶數個，再逐一往上(左)找是否符合</p>
+<p>效能<br><img src="/img/Web/Performance/performance2.png" alt=""></p>
+<p>改進方法如下</p>
+<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span><span class="selector-class">.gray</span> &#123;</div><div class="line">	<span class="attribute">background-color</span>: <span class="number">#777</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> JavaScript<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">button.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">document</span>.body.classList.toggle(<span class="string">'toggled'</span>);</div><div class="line">	<span class="keyword">var</span> boxes = container.querySelectorAll(<span class="string">".box"</span>) ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; boxes.length ; i += <span class="number">2</span> )&#123;</div><div class="line">		boxes[i].classList.toggle(<span class="string">'gray'</span>,<span class="built_in">document</span>.body.classList.contains(<span class="string">'toggled'</span>));</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p> 如此一來會直接先找到<code>.gray</code>才找<code>.box</code>，省去了一半的數量<br> 效能<br> <img src="/img/Web/Performance/performance.png" alt=""></p>
+<h1 id="Forced-Synchronous-Layouts"><a href="#Forced-Synchronous-Layouts" class="headerlink" title="Forced Synchronous Layouts"></a>Forced Synchronous Layouts</h1><p>若我們每次都要取得Layout再重新計算，這樣會造成<code>Forced Synchronous Layouts</code>。</p>
+<h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo"></a>Demo</h2><p><a href="http://output.jsbin.com/aqavin/2/quiet" target="_blank" rel="external">Slow stuff</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (goSlow) &#123;</div><div class="line">	<span class="keyword">while</span> (i--) &#123;</div><div class="line">		ps[i].style.width = sizer.offsetWidth + <span class="string">'px'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">	size = sizer.offsetWidth;</div><div class="line">	<span class="keyword">while</span> (i--) &#123;</div><div class="line">		ps[i].style.width = size + <span class="string">'px'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到先把Node的寬度快取住會比每次都要重新取得快的許多。</p>
+<h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://github.com/udacity/pizza-perf/blob/master/pizza.html" target="_blank" rel="external">pizza-perf</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>).length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> dx = determineDx(<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i], size);</div><div class="line">		<span class="keyword">var</span> newwidth = (<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i].offsetWidth + dx) + <span class="string">'px'</span>;</div><div class="line">		<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i].style.width = newwidth;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>改為<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> randomPizzas = <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>) ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; randomPizzas.length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> dx = determineDx(randomPizzas[i], size);</div><div class="line">		<span class="keyword">var</span> newwidth = (randomPizzas[i].offsetWidth + dx) + <span class="string">'px'</span>;</div><div class="line">		<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i].style.width = newwidth;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查看determineDx函式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">determineDx</span> (<span class="params">elem, size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> oldwidth = elem.offsetWidth;</div><div class="line">	<span class="keyword">var</span> windowwidth = <span class="built_in">document</span>.querySelector(<span class="string">"#randomPizzas"</span>).offsetWidth;</div><div class="line">	<span class="keyword">var</span> oldsize = oldwidth / windowwidth;</div><div class="line"></div><div class="line">	<span class="comment">// Changes the slider value to a percent width</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">sizeSwitcher</span> (<span class="params">size</span>) </span>&#123;</div><div class="line">		<span class="keyword">switch</span>(size) &#123;</div><div class="line">			<span class="keyword">case</span> <span class="string">"1"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.25</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"2"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.3333</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"3"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.5</span>;</div><div class="line">			<span class="keyword">default</span>:</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"bug in sizeSwitcher"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> newsize = sizeSwitcher(size);</div><div class="line">	<span class="keyword">var</span> dx = (newsize - oldsize) * windowwidth;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> dx;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>發現原本是計算差值然後加上去，這樣子可以改寫成直接給予新的值即可，因此改寫為<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">switch</span>(size) &#123;</div><div class="line">		<span class="keyword">case</span> <span class="string">"1"</span>:</div><div class="line">		newWidth = <span class="number">0.25</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">"2"</span>:</div><div class="line">		newWidth = <span class="number">0.3333</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">"3"</span>:</div><div class="line">		newWidth = <span class="number">0.5</span>;</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"bug in sizeSwitcher"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> randomPizzas = <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>) ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; randomPizzas.length; i++) &#123;</div><div class="line">		randomPizzas[i].style.width = newWidth + <span class="string">"%"</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="CSS-or-JavaScript"><a href="#CSS-or-JavaScript" class="headerlink" title="CSS or JavaScript?"></a>CSS or JavaScript?</h1><p>動畫究竟該用CSS還是JavaScript?</p>
+<ol>
+<li>當元素是單一的用CSS</li>
+<li>當需要信號控制像是stop、slow down、reverse等等則用JavaScript</li>
+<li>更改Layout(位置)或需要Paint是相當耗效能的</li>
+<li>盡量用transforms或opacity</li>
+<li>原則上CSS動畫會在<code>compositor thread</code>上執行，所以當主執行緒有繁重的任務時動畫不會被干擾，JavaScript則會佔用主執行緒</li>
+<li>不論CSS或JavaScript動畫只要觸發Layout或Paint都會在主執行緒上執行</li>
+</ol>
+<p><a href="https://developers.google.com/web/fundamentals/design-and-ui/animations/css-vs-javascript" target="_blank" rel="external">CSS Versus JavaScript Animations</a><br><a href="https://developers.google.com/web/fundamentals/design-and-ui/animations/animations-and-performance" target="_blank" rel="external">Animations and Performance</a></p>
+<h1 id="will-change"><a href="#will-change" class="headerlink" title="will-change"></a>will-change</h1><p>利用多個Layer可以讓元素跳過Layout和Paint而直接到Composite，但過多的Layer會造成管理Layer上效能的問題。</p>
+<p><code>will-change</code>屬性會告知瀏覽器即將運行的事件，讓瀏覽器建立一個Layer<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.circle</span> &#123;</div><div class="line">	<span class="attribute">will-change </span>: transform;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以在will-change上設置top、left等等，雖然會增加一層Layer但仍得進行Layout和Paint，因此不會有太大的改善。</p>
+<p>在舊的瀏覽器上可以使用<code>translateZ</code>達到同樣的效果，一樣會告知瀏覽器建立Layer。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.circle</span>&#123;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(0) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以用Chrome的DevTools的Layer標籤查看網頁Layer情形。<br><img src="/img/Web/Performance/devtool10.PNG" alt=""></p>
+<p>可在Detail看到形成Layer的原因。<br><img src="/img/Web/Performance/devtool11.PNG" alt=""></p>
+<h2 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://dl.dropboxusercontent.com/u/2272348/codez/parallax/demo-promo/index.html" target="_blank" rel="external">demo-promo</a><br>在<code>section#background</code>加上<code>will-change:transform;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">section#background &#123;</div><div class="line">	will-change: transform;</div><div class="line">	background: #1e2124 url(&quot;../../images/parallax-bg.jpg&quot;) center 0 no-repeat;</div><div class="line">	width: 960px;</div><div class="line">	height: 3000px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以在發現原本Paint整個頁面的變成只剩下Paint滾動條。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://developers.google.com/web/" target="_blank" rel="external">Learn How to Develop the Next Generation of Applications for the Web</a><br><a href="https://classroom.udacity.com/courses/ud884" target="_blank" rel="external">Website Performance Optimization</a><br><a href="https://classroom.udacity.com/courses/ud860" target="_blank" rel="external">Browser Rendering Optimization</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/" data-id="cj21cbftv00mh143h87hy1dwb" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Performance/">Performance</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/24/Programming Language/JavaScript/Promise實作原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [JavaScript] Promise實作原理
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Cordova/">Cordova</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">42</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/04/28/Web/Overall/Performance/">[Web] Performnace</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/24/Programming Language/JavaScript/Promise實作原理/">[JavaScript] Promise實作原理</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/Mobile Application/Cordova/Cordova插件開發/">[Cordova] Cordova插件開發</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/18/Web/Hexo/主題設置/">[Hexo] 主題設置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/13/Web/Overall/AMD及效能調校/">[Web] AMD及效能調校</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/07/Programming Language/JavaScript/非同步事件處理/">[JavaScript] 非同步事件處理</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/11/Security/Buffer Overflow/">[Security] Buffer Overflow</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/19/Web/Overall/一頁式網站/">[Web] 一頁式網站</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Web/Front-End/mouseDown手機上運行/">[Front-End] mouseDown手機上運行</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/Server/CentOS/使用sftp傳輸檔案/">[CentOS] 使用sftp傳輸檔案</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
