@@ -15,7 +15,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/04/24/Programming%20Language/JavaScript/Promise%E5%AF%A6%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
+        <loc>http://jeno5980515.github.io/2017/04/24/Programming Language/JavaScript/Promise實作原理/</loc>
         <lastmod>2017-04-24T05:22:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -23,7 +23,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/04/18/Web/Hexo/%E4%B8%BB%E9%A1%8C%E8%A8%AD%E7%BD%AE/</loc>
+        <loc>http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/</loc>
         <lastmod>2017-04-20T03:55:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +31,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/04/20/Mobile%20Application/Cordova/Cordova%E6%8F%92%E4%BB%B6%E9%96%8B%E7%99%BC/</loc>
+        <loc>http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/</loc>
         <lastmod>2017-04-20T03:53:29.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -39,7 +39,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/06/Mobile%20Application/Cordova/%E7%B4%B0%E7%AF%80%E8%A3%9C%E5%85%85/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/06/Mobile Application/Cordova/細節補充/</loc>
         <lastmod>2017-04-20T02:56:25.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -47,7 +47,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/02/Mobile%20Application/Cordova/%E5%AE%89%E8%A3%9D%E5%BB%BA%E7%BD%AE/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/02/Mobile Application/Cordova/安裝建置/</loc>
         <lastmod>2017-04-20T02:56:16.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -55,7 +55,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/01/26/Web/Hexo/%E5%BB%BA%E7%AB%8B%E6%AD%A4%E7%AB%99/</loc>
+        <loc>http://jeno5980515.github.io/2015/01/26/Web/Hexo/建立此站/</loc>
         <lastmod>2017-04-14T13:56:18.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -63,7 +63,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/13/Web/PHP/%E7%80%8F%E8%A6%BD%E4%BA%BA%E6%95%B8%E8%A8%88%E7%AE%97/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/13/Web/PHP/瀏覽人數計算/</loc>
         <lastmod>2017-04-14T13:49:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -71,7 +71,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/08/Programming%20Language/C&C++/%E5%B8%B8%E8%A6%8B%E6%8E%92%E5%BA%8F%E5%AF%A6%E4%BD%9C/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/08/Programming Language/C&amp;C++/常見排序實作/</loc>
         <lastmod>2017-04-14T13:48:10.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -79,7 +79,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/08/Online%20Judge/LeetCode/62%20-%20Unique%20Paths/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/62 - Unique Paths/</loc>
         <lastmod>2017-04-14T13:47:26.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -87,7 +87,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/14/Web/Other/%E6%95%B4%E5%80%8B%E7%B6%B2%E9%A0%81%E9%83%BD%E6%98%AF%E6%88%91%E7%9A%84%E7%B9%AA%E5%9C%96%E6%9D%BF/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/14/Web/Other/整個網頁都是我的繪圖板/</loc>
         <lastmod>2017-04-14T13:44:23.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -95,7 +95,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/06/07/Mobile%20Application/Android/SwipeListView/</loc>
+        <loc>http://jeno5980515.github.io/2015/06/07/Mobile Application/Android/SwipeListView/</loc>
         <lastmod>2017-04-14T13:42:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -103,7 +103,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/26/Web/Overall/%E5%9C%96%E7%89%87%E8%99%95%E7%90%86/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/26/Web/Overall/圖片處理/</loc>
         <lastmod>2017-04-14T13:41:12.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -111,7 +111,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass%E5%92%8CaddClass/</loc>
+        <loc>http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass和addClass/</loc>
         <lastmod>2017-04-14T13:40:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -119,7 +119,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/13/Web/Overall/WebScket%20API/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/13/Web/Overall/WebScket API/</loc>
         <lastmod>2017-04-14T13:36:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -135,7 +135,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/11/Web/Overall/Google%20Map%20API%E7%B0%A1%E6%98%93%E4%BD%BF%E7%94%A8/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/11/Web/Overall/Google Map API簡易使用/</loc>
         <lastmod>2017-04-14T13:36:31.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -143,7 +143,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/20/Web/Overall/%E9%80%8F%E9%81%8EPHP%E5%8F%96%E5%BE%97MySQL%E8%B3%87%E6%96%99/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/20/Web/Overall/透過PHP取得MySQL資料/</loc>
         <lastmod>2017-04-14T13:36:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -151,7 +151,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/11/Web/Overall/%E7%94%A8Closure%E5%9C%A8Google%20Map%E9%A1%AF%E7%A4%BA%E5%A4%9A%E5%80%8BInfoWindow/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/11/Web/Overall/用Closure在Google Map顯示多個InfoWindow/</loc>
         <lastmod>2017-04-14T13:35:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -159,7 +159,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/11/19/Web/Overall/%E4%B8%80%E9%A0%81%E5%BC%8F%E7%B6%B2%E7%AB%99/</loc>
+        <loc>http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/</loc>
         <lastmod>2017-04-14T13:35:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -167,7 +167,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/07/Web/PHP/%E5%AF%AB%E6%AA%94%E8%AE%80%E6%AA%94%E5%8F%8A%E6%AA%94%E6%A1%88%E8%99%95%E7%90%86/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/07/Web/PHP/寫檔讀檔及檔案處理/</loc>
         <lastmod>2017-04-14T13:35:29.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -175,7 +175,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/13/Web/PHP/%E4%BD%BF%E7%94%A8Google%20Analytics%E5%8F%96%E5%BE%97%E7%B6%B2%E7%AB%99%E8%B3%87%E8%A8%8A/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/13/Web/PHP/使用Google Analytics取得網站資訊/</loc>
         <lastmod>2017-04-14T13:35:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -191,7 +191,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo%E9%81%8A%E6%88%B2/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/15/Web/Other/Bingo/Bingo遊戲/</loc>
         <lastmod>2017-04-14T13:34:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -207,7 +207,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/16/Web/Node.js/Socketio%E7%9A%84Broadcast/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/16/Web/Node.js/Socketio的Broadcast/</loc>
         <lastmod>2017-04-14T13:34:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -215,7 +215,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/12/Web/Hexo/%E5%B0%87%E5%A4%9A%E9%A4%98%E7%9A%84%E5%AD%97%E7%9C%81%E7%95%A5/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/12/Web/Hexo/將多餘的字省略/</loc>
         <lastmod>2017-04-14T13:33:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -223,7 +223,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL%E5%8F%8AcrossOrigin/</loc>
+        <loc>http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL及crossOrigin/</loc>
         <lastmod>2017-04-14T13:33:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -231,7 +231,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/01/Web/Front-End/PhysicsJS%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/01/Web/Front-End/PhysicsJS物理引擎/</loc>
         <lastmod>2017-04-14T13:33:20.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -239,7 +239,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%81%8B%E8%A1%8C/</loc>
+        <loc>http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/</loc>
         <lastmod>2017-04-14T13:33:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -247,7 +247,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/17/Web/Front-End/HTML%E9%96%93%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/17/Web/Front-End/HTML間傳遞參數/</loc>
         <lastmod>2017-04-14T13:32:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -255,7 +255,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/27/Web/Front-End/Drag%20And%20Drop%E9%9A%A8%E6%84%8F%E6%8B%96%E6%9B%B3/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/27/Web/Front-End/Drag And Drop隨意拖曳/</loc>
         <lastmod>2017-04-14T13:32:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -263,7 +263,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas%E7%9A%84Image%E6%9C%AA%E8%BC%89%E5%85%A5/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/12/Web/Front-End/Canvas的Image未載入/</loc>
         <lastmod>2017-04-14T13:32:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -271,7 +271,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/20/Web/Front-End/Canvas%E6%8B%96%E6%9B%B3%E7%A7%BB%E5%8B%95%E5%9C%B0%E5%9C%96/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/20/Web/Front-End/Canvas拖曳移動地圖/</loc>
         <lastmod>2017-04-14T13:32:23.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -279,7 +279,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas%E5%8F%96%E5%BE%97%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6/</loc>
+        <loc>http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/</loc>
         <lastmod>2017-04-14T13:32:13.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -287,7 +287,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas%E4%BE%9D%E7%85%A7%E5%9C%96%E4%B8%AD%E5%BF%83%E6%97%8B%E8%BD%89/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/10/Web/Front-End/Canvas依照圖中心旋轉/</loc>
         <lastmod>2017-04-14T13:32:05.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -295,7 +295,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/25/Web/Front-End/%E9%9F%BF%E6%87%89%E5%BC%8FCanvas/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/25/Web/Front-End/響應式Canvas/</loc>
         <lastmod>2017-04-14T13:31:57.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -303,7 +303,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/09/01/Web/Front-End/%E8%87%AA%E5%8B%95%E8%AA%BF%E6%95%B4Textarea%E9%82%8A%E7%95%8C/</loc>
+        <loc>http://jeno5980515.github.io/2015/09/01/Web/Front-End/自動調整Textarea邊界/</loc>
         <lastmod>2017-04-14T13:31:53.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -311,7 +311,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/09/22/Web/Front-End/%E8%87%AA%E5%8B%95%E8%AA%BF%E6%95%B4Contenteditable%E9%82%8A%E7%95%8C/</loc>
+        <loc>http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/</loc>
         <lastmod>2017-04-14T13:31:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -319,7 +319,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/09/08/Web/Front-End/%E5%88%A9%E7%94%A8window.open%E5%82%B3%E5%80%BC/</loc>
+        <loc>http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/</loc>
         <lastmod>2017-04-14T13:31:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -327,7 +327,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/14/Web/Front-End/%E5%88%A9%E7%94%A8jsGraphics%E5%B0%87%E7%B6%B2%E9%A0%81%E7%95%B6%E7%95%AB%E5%9C%96%E7%89%88/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/14/Web/Front-End/利用jsGraphics將網頁當畫圖版/</loc>
         <lastmod>2017-04-14T13:31:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -335,7 +335,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/13/Web/Front-End/%E5%88%A9%E7%94%A8getUserMedia%E6%8B%8D%E7%85%A7/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/13/Web/Front-End/利用getUserMedia拍照/</loc>
         <lastmod>2017-04-14T13:31:24.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -343,7 +343,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/08/10/Web/Front-End/%E4%BD%BF%E7%94%A8x-gif%E6%93%8D%E6%8E%A7gif/</loc>
+        <loc>http://jeno5980515.github.io/2015/08/10/Web/Front-End/使用x-gif操控gif/</loc>
         <lastmod>2017-04-14T13:31:16.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -351,7 +351,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/01/Web/Front-End/%E4%BD%BF%E7%94%A8FastClick%E6%94%B9%E5%96%84onclick/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/01/Web/Front-End/使用FastClick改善onclick/</loc>
         <lastmod>2017-04-14T13:31:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -359,7 +359,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8Flex/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/30/Tool/Scanner/Flex/安裝及使用Flex/</loc>
         <lastmod>2017-04-14T13:30:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -367,7 +367,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8Bison/</loc>
+        <loc>http://jeno5980515.github.io/2015/06/04/Tool/Parser/Bison/安裝及使用Bison/</loc>
         <lastmod>2017-04-14T13:30:44.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -375,7 +375,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/11/06/Server/CentOS/%E4%BD%BF%E7%94%A8sftp%E5%82%B3%E8%BC%B8%E6%AA%94%E6%A1%88/</loc>
+        <loc>http://jeno5980515.github.io/2015/11/06/Server/CentOS/使用sftp傳輸檔案/</loc>
         <lastmod>2017-04-14T13:30:28.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -383,7 +383,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/12/11/Security/Buffer%20Overflow/</loc>
+        <loc>http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/</loc>
         <lastmod>2017-04-14T13:30:22.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -391,7 +391,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/07/12/Programming%20Language/JavaScript/JavaScript%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+        <loc>http://jeno5980515.github.io/2015/07/12/Programming Language/JavaScript/JavaScript小技巧/</loc>
         <lastmod>2017-04-14T13:29:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -399,7 +399,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/01/28/Programming%20Language/Java/UnionFind/</loc>
+        <loc>http://jeno5980515.github.io/2015/01/28/Programming Language/Java/UnionFind/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -407,7 +407,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/13/Programming%20Language/Java/Shallow%20Copy%E5%92%8CDeep%20Copy/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/13/Programming Language/Java/Shallow Copy和Deep Copy/</loc>
         <lastmod>2017-04-14T13:29:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -415,7 +415,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/01/28/Programming%20Language/Java/PriorityQueue/</loc>
+        <loc>http://jeno5980515.github.io/2015/01/28/Programming Language/Java/PriorityQueue/</loc>
         <lastmod>2017-04-14T13:29:10.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -423,7 +423,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/17/Programming%20Language/Java/Huffman%20Coding%E5%A3%93%E7%B8%AE%E8%BB%9F%E9%AB%94/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/17/Programming Language/Java/Huffman Coding壓縮軟體/</loc>
         <lastmod>2017-04-14T13:28:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -431,7 +431,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/01/27/Programming%20Language/Java/DataTransfer/</loc>
+        <loc>http://jeno5980515.github.io/2015/01/27/Programming Language/Java/DataTransfer/</loc>
         <lastmod>2017-04-14T13:28:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -439,7 +439,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/11/Programming%20Language/C&C++/Trie%E5%AD%97%E5%85%B8%E6%A8%B9%E5%AF%A6%E4%BD%9C/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/11/Programming Language/C&amp;C++/Trie字典樹實作/</loc>
         <lastmod>2017-04-14T13:28:18.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -447,7 +447,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/06/26/Programming%20Language/C&C++/Process%E5%92%8CThread/</loc>
+        <loc>http://jeno5980515.github.io/2015/06/26/Programming Language/C&amp;C++/Process和Thread/</loc>
         <lastmod>2017-04-14T13:28:10.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -455,7 +455,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/13/Programming%20Language/C&C++/%E5%87%BD%E6%95%B8%E6%8C%87%E6%A8%99/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/13/Programming Language/C&amp;C++/函數指標/</loc>
         <lastmod>2017-04-14T13:27:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -463,7 +463,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/27/Online%20Judge/UVa/536%20-%20Tree%20Recovery/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/27/Online Judge/UVa/536 - Tree Recovery/</loc>
         <lastmod>2017-04-14T13:27:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -471,7 +471,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/16/Online%20Judge/UVa/233%20-%20Package%20Pricing/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/16/Online Judge/UVa/233 - Package Pricing/</loc>
         <lastmod>2017-04-14T13:27:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -479,7 +479,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/06/03/Online%20Judge/UVa/12176%20-%20Bring%20Your%20Own%20Horse/</loc>
+        <loc>http://jeno5980515.github.io/2015/06/03/Online Judge/UVa/12176 - Bring Your Own Horse/</loc>
         <lastmod>2017-04-14T13:27:22.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -487,7 +487,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/10/Online%20Judge/UVa/10887%20-%20Concatenation%20of%20Languages/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/10/Online Judge/UVa/10887 - Concatenation of Languages/</loc>
         <lastmod>2017-04-14T13:27:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -495,7 +495,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/28/Online%20Judge/UVa/10271%20-%20Chopsticks/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/28/Online Judge/UVa/10271 - Chopsticks/</loc>
         <lastmod>2017-04-14T13:27:03.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -503,7 +503,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/16/Online%20Judge/UVa/10261%20-%20Ferry%20Loading/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/16/Online Judge/UVa/10261 - Ferry Loading/</loc>
         <lastmod>2017-04-14T13:26:53.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -511,7 +511,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/07/Online%20Judge/UVa/10220%20-%20I%20LOVE%20BIG%20NUMBERS!/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/07/Online Judge/UVa/10220 - I LOVE BIG NUMBERS!/</loc>
         <lastmod>2017-04-14T13:26:45.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -519,7 +519,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/25/Online%20Judge/UVa/10069%20-%20Distinct%20Subsequences/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/25/Online Judge/UVa/10069 - Distinct Subsequences/</loc>
         <lastmod>2017-04-14T13:26:34.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -527,7 +527,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/06/Online%20Judge/LeetCode/55%20-%20Jump%20Game/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/06/Online Judge/LeetCode/55 - Jump Game/</loc>
         <lastmod>2017-04-14T13:26:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -535,7 +535,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/29/Online%20Judge/LeetCode/53%20-%20Maximum%20Subarray/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/29/Online Judge/LeetCode/53 - Maximum Subarray/</loc>
         <lastmod>2017-04-14T13:26:13.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -543,7 +543,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/30/Online%20Judge/LeetCode/204%20-%20Count%20Primes/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/204 - Count Primes/</loc>
         <lastmod>2017-04-14T13:26:03.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -551,7 +551,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/08/Online%20Judge/LeetCode/19%20-%20Remove%20Nth%20Node%20From%20End%20of%20List/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/19 - Remove Nth Node From End of List/</loc>
         <lastmod>2017-04-14T13:25:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -559,7 +559,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/30/Online%20Judge/LeetCode/152%20-%20Maximum%20Product%20Subarray/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/30/Online Judge/LeetCode/152 - Maximum Product Subarray/</loc>
         <lastmod>2017-04-14T13:25:48.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -567,7 +567,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/08/Online%20Judge/LeetCode/125%20-%20Valid%20Palindrome/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/08/Online Judge/LeetCode/125 - Valid Palindrome/</loc>
         <lastmod>2017-04-14T13:25:44.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -575,7 +575,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/07/Online%20Judge/LeetCode/124%20-%20Binary%20Tree%20Maximum%20Path%20Sum/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/07/Online Judge/LeetCode/124 - Binary Tree Maximum Path Sum/</loc>
         <lastmod>2017-04-14T13:25:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -583,7 +583,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/13/Online%20Judge/Google%20Code%20Jam/2015%20-%20Qualification%20Round/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/13/Online Judge/Google Code Jam/2015 - Qualification Round/</loc>
         <lastmod>2017-04-14T13:25:22.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -591,7 +591,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/08/Mobile%20Application/Android/Spinner%E5%AD%97%E9%AB%94%E5%A4%A7%E5%B0%8F/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/08/Mobile Application/Android/Spinner字體大小/</loc>
         <lastmod>2017-04-14T13:24:18.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -599,7 +599,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/07/Mobile%20Application/Android/Animation%E6%95%88%E6%9E%9C/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/Animation效果/</loc>
         <lastmod>2017-04-14T13:24:12.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -607,7 +607,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/07/Mobile%20Application/Android/%E9%A0%81%E9%9D%A2%E5%88%87%E6%8F%9B%E5%8F%8A%E5%AD%90%E9%A0%81%E9%9D%A2/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/頁面切換及子頁面/</loc>
         <lastmod>2017-04-14T13:24:03.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -615,7 +615,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/07/Mobile%20Application/Android/%E8%87%AA%E5%AE%9A%E7%BE%A9ListView%E5%8A%A0%E5%85%A5RadioGroup/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/07/Mobile Application/Android/自定義ListView加入RadioGroup/</loc>
         <lastmod>2017-04-14T13:23:45.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -623,7 +623,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/09/Mobile%20Application/Android/%E5%88%A9%E7%94%A8PHP%E5%82%B3%E8%B3%87%E6%96%99%E7%B5%A6MySQL/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/09/Mobile Application/Android/利用PHP傳資料給MySQL/</loc>
         <lastmod>2017-04-14T13:23:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -631,7 +631,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/05/15/Learning%20Note/Machine%20Learning/Supervised%E5%92%8CUnsupervised%20Learning/</loc>
+        <loc>http://jeno5980515.github.io/2015/05/15/Learning Note/Machine Learning/Supervised和Unsupervised Learning/</loc>
         <lastmod>2017-04-14T13:23:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -639,7 +639,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/10/27/Content%20Management%20System/Joomla/Joomla%E7%B6%B2%E7%AB%99%E6%90%AC%E5%AE%B6/</loc>
+        <loc>http://jeno5980515.github.io/2015/10/27/Content Management System/Joomla/Joomla網站搬家/</loc>
         <lastmod>2017-04-14T13:23:04.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -647,7 +647,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/04/07/Programming%20Language/JavaScript/%E9%9D%9E%E5%90%8C%E6%AD%A5%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86/</loc>
+        <loc>http://jeno5980515.github.io/2017/04/07/Programming Language/JavaScript/非同步事件處理/</loc>
         <lastmod>2017-04-14T13:22:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -655,7 +655,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD%E5%8F%8A%E6%95%88%E8%83%BD%E8%AA%BF%E6%A0%A1/</loc>
+        <loc>http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD及效能調校/</loc>
         <lastmod>2017-04-14T05:46:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -663,7 +663,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/10/Web/jQuery/%E4%BD%BF%E7%94%A8Queue%E9%80%90%E6%AD%A5%E9%81%8B%E8%A1%8C%E4%BA%8B%E4%BB%B6/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/10/Web/jQuery/使用Queue逐步運行事件/</loc>
         <lastmod>2017-04-13T11:52:44.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -671,7 +671,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/20/Web/Front-End/Canvas%E4%BD%BF%E7%94%A8%E6%BB%91%E9%BC%A0%E6%BB%BE%E8%BC%AA%E7%B8%AE%E6%94%BE/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/20/Web/Front-End/Canvas使用滑鼠滾輪縮放/</loc>
         <lastmod>2017-04-08T03:14:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -679,7 +679,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/30/Web/Other/tree/%E5%AE%B6%E5%BA%AD%E6%A8%B9%E7%94%A2%E7%94%9F%E5%99%A8/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/30/Web/Other/tree/家庭樹產生器/</loc>
         <lastmod>2017-04-08T03:01:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -687,7 +687,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/04/23/Other/Byethost%20%E5%AF%84%E6%94%BE%E7%B6%B2%E5%9F%9F/</loc>
+        <loc>http://jeno5980515.github.io/2015/04/23/Other/Byethost 寄放網域/</loc>
         <lastmod>2017-04-08T02:53:47.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -695,7 +695,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/01/25/Web/Markdown/%E4%BB%8B%E7%B4%B9/</loc>
+        <loc>http://jeno5980515.github.io/2015/01/25/Web/Markdown/介紹/</loc>
         <lastmod>2017-04-08T02:52:08.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -703,7 +703,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/19/Tool/Compiler/GCC%E4%B8%8D%E6%98%AF%E5%85%A7%E9%83%A8%E6%8C%87%E4%BB%A4/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/19/Tool/Compiler/GCC不是內部指令/</loc>
         <lastmod>2017-04-08T02:41:28.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -711,7 +711,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/12/Programming%20Language/Python/%E8%87%AA%E5%8B%95%E6%8A%93%E5%8F%96%E6%9C%80%E6%96%B0%E6%90%9C%E7%B4%A2%E7%B5%90%E6%9E%9C/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/12/Programming Language/Python/自動抓取最新搜索結果/</loc>
         <lastmod>2017-04-08T02:39:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -719,7 +719,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/17/Online%20Judge/UVa/10583%20-%20Ubiquitous%20Religions/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/17/Online Judge/UVa/10583 - Ubiquitous Religions/</loc>
         <lastmod>2017-04-08T02:37:21.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -727,7 +727,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/03/02/Online%20Judge/UVa/10165%20-%20Stone%20Game/</loc>
+        <loc>http://jeno5980515.github.io/2015/03/02/Online Judge/UVa/10165 - Stone Game/</loc>
         <lastmod>2017-04-08T02:37:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -735,7 +735,7 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2015/02/26/Online%20Judge/UVa/100%20-%20The%203n%20+%201%20problem/</loc>
+        <loc>http://jeno5980515.github.io/2015/02/26/Online Judge/UVa/100 - The 3n + 1 problem/</loc>
         <lastmod>2017-04-08T02:36:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
