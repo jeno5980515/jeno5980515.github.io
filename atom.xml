@@ -48,11 +48,11 @@
   </entry>
   
   <entry>
-    <title>[Web] Performnace</title>
+    <title>[Web] Performance</title>
     <link href="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/"/>
     <id>http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/</id>
     <published>2017-04-28T03:43:34.000Z</published>
-    <updated>2017-04-28T12:05:26.000Z</updated>
+    <updated>2017-05-01T22:29:21.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近看了Google的<a href="https://developers.google.com/web/" target="_blank" rel="external">Learn How to Develop the Next Generation of Applications for the Web</a>和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。</p>
 <a id="more"></a>
