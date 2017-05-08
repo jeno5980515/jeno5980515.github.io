@@ -647,13 +647,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
-        <lastmod>2017-04-24T05:22:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/Promise/</loc>
         <lastmod>2017-04-24T05:22:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -677,6 +670,27 @@
     <url>
         <loc>http://jeno5980515.github.io/tags/Performance/</loc>
         <lastmod>2017-05-01T22:29:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <lastmod>2017-05-08T09:09:26.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/V8/</loc>
+        <lastmod>2017-05-08T09:09:26.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Event-Loop/</loc>
+        <lastmod>2017-05-08T09:09:26.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
