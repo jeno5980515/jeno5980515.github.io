@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-05-08T15:01:46.000Z</updated>
+  <updated>2017-05-09T06:04:50.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[LeetCode] 5 - Longest Palindromic Substring</title>
+    <link href="http://jeno5980515.github.io/2017/05/09/Online%20Judge/LeetCode/5%20-%20Longest%20Palindromic%20Substring/"/>
+    <id>http://jeno5980515.github.io/2017/05/09/Online Judge/LeetCode/5 - Longest Palindromic Substring/</id>
+    <published>2017-05-09T05:51:34.000Z</published>
+    <updated>2017-05-09T06:04:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求最長回文子字串。</p>
+<a id="more"></a>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>假設<code>dp(i,j)</code>代表從i到j的子字串是否為回文，得到下列遞迴式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dp(i,j) = <span class="number">1</span> , <span class="keyword">if</span> ( s[i] == s[j] &amp;&amp; dp(i+<span class="number">1</span>,j<span class="number">-1</span>) == <span class="number">1</span> ) </div><div class="line">	= <span class="number">0</span> , <span class="keyword">else</span></div></pre></td></tr></table></figure></p>
+<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>不得不說JavaScript真的是慢了許多 … </p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;string&#125; s</div><div class="line"> * @return &#123;string&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> longestPalindrome = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( s.length &lt;= <span class="number">1</span> ) <span class="keyword">return</span> s ;</div><div class="line">    <span class="keyword">var</span> nowMax = <span class="number">1</span> , nowString = s[s.length<span class="number">-1</span>] ;</div><div class="line">    <span class="keyword">var</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length+<span class="number">1</span>);</div><div class="line">    <span class="keyword">var</span> copy = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length+<span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s.length+<span class="number">1</span> ; i++) &#123;</div><div class="line">        copy[i] = <span class="literal">true</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; s.length+<span class="number">1</span>; i++)&#123;</div><div class="line">        dp[i] = copy.slice(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = s.length - <span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i -- )&#123;</div><div class="line">        <span class="keyword">for</span> ( <span class="keyword">var</span> j = i + <span class="number">1</span> ; j &lt; s.length ; j ++ )&#123;</div><div class="line">            <span class="keyword">if</span> ( s[i] === s[j] &amp;&amp; dp[i+<span class="number">1</span>][j<span class="number">-1</span>] !== <span class="literal">false</span> )&#123;</div><div class="line">                dp[i][j] = <span class="literal">true</span> ;</div><div class="line">                <span class="keyword">if</span> ( j - i + <span class="number">1</span> &gt; nowMax )&#123;</div><div class="line">                    nowMax = j - i + <span class="number">1</span> ;</div><div class="line">                    nowString = s.substring(i,j+<span class="number">1</span>) ;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                dp[i][j] = <span class="literal">false</span> ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> nowString ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;求最長回文子字串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="Palindrome" scheme="http://jeno5980515.github.io/tags/Palindrome/"/>
+    
+      <category term="5" scheme="http://jeno5980515.github.io/tags/5/"/>
+    
+  </entry>
   
   <entry>
     <title>[JavaScript] JavaScript運作原理</title>
@@ -829,40 +861,6 @@
       <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
     
       <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] 使用x-gif操控gif</title>
-    <link href="http://jeno5980515.github.io/2015/08/10/Web/Front-End/%E4%BD%BF%E7%94%A8x-gif%E6%93%8D%E6%8E%A7gif/"/>
-    <id>http://jeno5980515.github.io/2015/08/10/Web/Front-End/使用x-gif操控gif/</id>
-    <published>2015-08-09T19:43:38.000Z</published>
-    <updated>2017-04-14T13:31:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a href="http://geelen.github.io/x-gif/#/http://i.imgur.com/iKXH4E2.gif" target="_blank" rel="external">x-gif</a>可以使用<code>&lt;x-gif&gt;</code>的標籤來顯示gif檔，透過這個標籤可以動態的調整gif。</p>
-<a id="more"></a>
-<h1 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">if</span> (<span class="string">'registerElement'</span> <span class="keyword">in</span> <span class="built_in">document</span></div><div class="line">    &amp;&amp; <span class="string">'createShadowRoot'</span> <span class="keyword">in</span> HTMLElement.prototype</div><div class="line">    &amp;&amp; <span class="string">'import'</span> <span class="keyword">in</span> <span class="built_in">document</span>.createElement(<span class="string">'link'</span>)</div><div class="line">    &amp;&amp; <span class="string">'content'</span> <span class="keyword">in</span> <span class="built_in">document</span>.createElement(<span class="string">'template'</span>)) &#123;</div><div class="line">    <span class="comment">// We're using a browser with native WC support!</span></div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">document</span>.write(<span class="string">'&lt;script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"&gt;&lt;\/script&gt;'</span>)</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"import"</span> <span class="attr">href</span>=<span class="string">"x-gif.html"</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>github上有了就不贅述，記得import必須透過網路。</p>
-<h1 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h1><p>x-gif沒有<code>reverse</code>選項，因此對程式做一點修改，直接附上修改後的檔案。<br><a href="https://cdn.rawgit.com/jeno5980515/x-gif/gh-pages/dist/x-gif.html" target="_blank" rel="external">x-gif.html</a></p>
-<h1 id="Bug"><a href="#Bug" class="headerlink" title="Bug"></a>Bug</h1><h2 id="Safari"><a href="#Safari" class="headerlink" title="Safari"></a>Safari</h2><p>Safari並不能顯示x-gif，研究了兩三天也找不到替代套件後終於找到解決辦法了。</p>
-<p>首先先到<a href="https://github.com/webcomponents/webcomponentsjs" target="_blank" rel="external">webcomponentsjs</a>，下載後再將這段<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"&gt;&lt;\/script&gt;)</span></div></pre></td></tr></table></figure></p>
-<p>替換成下載的檔案<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="js\/webcomponents.js"&gt;&lt;\/script&gt;'</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="jQuery-Mobile"><a href="#jQuery-Mobile" class="headerlink" title="jQuery Mobile"></a>jQuery Mobile</h2><p><code>webcomponents</code>和<code>jQuery Mobile</code>會有衝突，將<code>jquery.mobile-1.4.5.js</code>中的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.window = $( <span class="keyword">this</span>.document[<span class="number">0</span>].defaultView || <span class="keyword">this</span>.document[<span class="number">0</span>].parentWindow );</div></pre></td></tr></table></figure></p>
-<p>替換成<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.window = $(<span class="built_in">window</span>);</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://geelen.github.io/x-gif/#/http://i.imgur.com/iKXH4E2.gif&quot;&gt;x-gif&lt;/a&gt;可以使用&lt;code&gt;&amp;lt;x-gif&amp;gt;&lt;/code&gt;的標籤來顯示gif檔，透過這個標籤可以動態的調整gif。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
   </entry>
   
