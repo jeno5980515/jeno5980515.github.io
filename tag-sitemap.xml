@@ -633,13 +633,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Promise/</loc>
-        <lastmod>2017-04-24T05:22:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/Sitemap/</loc>
         <lastmod>2017-04-28T09:01:19.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -656,13 +649,6 @@
     <url>
         <loc>http://jeno5980515.github.io/tags/Performance/</loc>
         <lastmod>2017-05-01T22:29:21.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
-        <lastmod>2017-05-08T15:01:46.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -698,6 +684,20 @@
     <url>
         <loc>http://jeno5980515.github.io/tags/5/</loc>
         <lastmod>2017-05-09T06:04:50.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <lastmod>2017-05-10T13:25:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Promise/</loc>
+        <lastmod>2017-05-10T13:25:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
