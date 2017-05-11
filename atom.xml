@@ -52,7 +52,7 @@
     <link href="http://jeno5980515.github.io/2017/05/08/Programming%20Language/JavaScript/V8%20%E5%92%8C%20Event%20Loop/"/>
     <id>http://jeno5980515.github.io/2017/05/08/Programming Language/JavaScript/V8 和 Event Loop/</id>
     <published>2017-05-08T08:55:36.000Z</published>
-    <updated>2017-05-11T03:22:32.000Z</updated>
+    <updated>2017-05-11T03:26:33.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了下 V8 和 Event Loop，以下圖片和程式碼皆引用自影片中。</p>
 <a id="more"></a>
@@ -135,7 +135,7 @@
 <p>DOM事件的監聽情形。<br><img src="/img/JavaScript/about/event_8.PNG" alt=""></p>
 <p>按下按鈕後<br><img src="/img/JavaScript/about/event_9.PNG" alt=""><br>逐步執行<br><img src="/img/JavaScript/about/event_10.PNG" alt=""></p>
 <hr>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://www.youtube.com/watch?v=UJPdhx5zTaw" target="_blank" rel="external">Google I/O 2012 - Breaking the JavaScript Speed Limit with V8</a><br><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ" target="_blank" rel="external">Philip Roberts: What the heck is the event loop anyway? | JSConf EU 2014</a><br><a href="https://vimeo.com/96425312" target="_blank" rel="external">Philip Roberts: Help, I’m stuck in an event-loop</a></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://www.youtube.com/watch?v=UJPdhx5zTaw" target="_blank" rel="external">Google I/O 2012 - Breaking the JavaScript Speed Limit with V8</a><br><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ" target="_blank" rel="external">Philip Roberts: What the heck is the event loop anyway? | JSConf EU 2014</a><br><a href="https://vimeo.com/96425312" target="_blank" rel="external">Philip Roberts: Help, I’m stuck in an event-loop</a><br><a href="https://github.com/v8/v8/wiki" target="_blank" rel="external"></a></p>
 ]]></content>
     
     <summary type="html">
@@ -858,9 +858,9 @@
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
-      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
-    
       <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
+    
+      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
     
   </entry>
   

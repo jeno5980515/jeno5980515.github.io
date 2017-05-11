@@ -318,6 +318,13 @@
     </url>
 
     <url>
+        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
+        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jeno5980515.github.io/tags/Java/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -326,13 +333,6 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/Algorithm/</loc>
-        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -683,21 +683,21 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
-        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
+        <lastmod>2017-05-11T03:26:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jeno5980515.github.io/tags/V8/</loc>
-        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
+        <lastmod>2017-05-11T03:26:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jeno5980515.github.io/tags/Event-Loop/</loc>
-        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
+        <lastmod>2017-05-11T03:26:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
