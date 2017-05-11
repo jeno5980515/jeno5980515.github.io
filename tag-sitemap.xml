@@ -318,13 +318,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
-        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/Java/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -333,6 +326,13 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/Algorithm/</loc>
+        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -654,20 +654,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/V8/</loc>
-        <lastmod>2017-05-08T15:01:46.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/Event-Loop/</loc>
-        <lastmod>2017-05-08T15:01:46.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/LeetCode/</loc>
         <lastmod>2017-05-09T06:04:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -689,15 +675,29 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <loc>http://jeno5980515.github.io/tags/Promise/</loc>
         <lastmod>2017-05-10T13:25:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Promise/</loc>
-        <lastmod>2017-05-10T13:25:30.000Z</lastmod>
+        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/V8/</loc>
+        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Event-Loop/</loc>
+        <lastmod>2017-05-11T03:22:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

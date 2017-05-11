@@ -48,18 +48,18 @@
   </entry>
   
   <entry>
-    <title>[JavaScript] JavaScript運作原理</title>
-    <link href="http://jeno5980515.github.io/2017/05/08/Programming%20Language/JavaScript/JavaScript%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
-    <id>http://jeno5980515.github.io/2017/05/08/Programming Language/JavaScript/JavaScript運作原理/</id>
+    <title>[JavaScript] V8 和 Event Loop</title>
+    <link href="http://jeno5980515.github.io/2017/05/08/Programming%20Language/JavaScript/V8%20%E5%92%8C%20Event%20Loop/"/>
+    <id>http://jeno5980515.github.io/2017/05/08/Programming Language/JavaScript/V8 和 Event Loop/</id>
     <published>2017-05-08T08:55:36.000Z</published>
-    <updated>2017-05-08T15:01:46.000Z</updated>
+    <updated>2017-05-11T03:22:32.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了下 JavaScript 的運作原理，以下圖片和程式碼皆引用自影片中。</p>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了下 V8 和 Event Loop，以下圖片和程式碼皆引用自影片中。</p>
 <a id="more"></a>
-<h2 id="V8"><a href="#V8" class="headerlink" title="V8"></a>V8</h2><p>電腦看不懂 JavaScript ，因此必須將 JavaScript 轉換成電腦看的懂的<code>Machine Code</code>，而 V8 是 Google 開發出的一套引擎，目前在 Chrome 和 Node.js 都是使用這套引擎。</p>
+<h2 id="V8"><a href="#V8" class="headerlink" title="V8"></a>V8</h2><p>以往JavaScript是透過直譯式的方式執行，而 V8 會直接將 JavaScript 轉換成電腦看的懂的<code>Machine Code</code> 再執行，目前在 Chrome 和 Node.js 都是使用這套引擎。</p>
 <hr>
-<h3 id="Hidden-Class"><a href="#Hidden-Class" class="headerlink" title="Hidden Class"></a>Hidden Class</h3><p>JavaScript是動態語言，這帶來了便利但也造成效能問題，以往引擎會採用類似<code>Hash Table</code>的方式來編譯，而V8則會在<code>Runtime</code>的時候建立<code>Hidden Class</code>。</p>
-<p>若物件有相同的<code>Hidden Class</code>，則可以使用相同的最佳化程式碼。</p>
+<h3 id="Hidden-Class"><a href="#Hidden-Class" class="headerlink" title="Hidden Class"></a>Hidden Class</h3><p>JavaScript是動態語言，這帶來了便利但也造成效能問題，以往類似引擎會採用類似<code>Hash Table</code>的方式來編譯，而V8則會在<code>Runtime</code>的時候建立<code>Hidden Class</code>。</p>
+<p>若物件有相同的<code>Hidden Class</code>，則可以使用相同的<code>Machine Code</code>，稱之為<code>Inline Caches</code>。</p>
 <p><img src="/img/JavaScript/about/v8_1.PNG" alt=""><br>依照程式的執行順序，我們會依序創建<code>Hidden Class</code>。</p>
 <p>p1：<br><code>Point</code>-&gt;<code>Point,x</code>-&gt;<code>Point,x,y</code><br>p2：<br>由於創建過所以可以直接指到<code>Point,x,y</code>，這時候如果我們給p2一個新的值z，則會創建一個<code>Point,x,y,z</code></p>
 <h4 id="優化"><a href="#優化" class="headerlink" title="優化"></a>優化</h4><ol>
@@ -67,7 +67,7 @@
 <li>使用同順序創建物件的元素</li>
 </ol>
 <hr>
-<h3 id="數字"><a href="#數字" class="headerlink" title="數字"></a>數字</h3><p><img src="/img/JavaScript/about/v8_2.PNG" alt=""><br>V8會用32 bits的空間儲存變數，再利用最後一個bit來判別是不是數字，1為物件指標而0則為數字。</p>
+<h3 id="數字"><a href="#數字" class="headerlink" title="數字"></a>數字</h3><p><img src="/img/JavaScript/about/v8_2.PNG" alt=""><br>V8會用32 bits的空間<br>用最後一個bit來判別是不是數字，1為物件指標而0則為數字。</p>
 <p>萬一這個數字超過31個bits，這時候會將數字放在Box裡並轉換為double，再存到物件中。</p>
 <h4 id="優化-1"><a href="#優化-1" class="headerlink" title="優化"></a>優化</h4><ul>
 <li>使用31 bits的有符號整數</li>
@@ -106,7 +106,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="反最佳化"><a href="#反最佳化" class="headerlink" title="反最佳化"></a>反最佳化</h3><p>若V8發現最佳化的效果不佳會自動反最佳化，如此一來會造成效能上的損失。</p>
+<h3 id="反最佳化"><a href="#反最佳化" class="headerlink" title="反最佳化"></a>反最佳化</h3><p>若 V8 發現最佳化的效果不佳會自動反最佳化，如此一來會造成效能上的損失。</p>
 <h4 id="優化-3"><a href="#優化-3" class="headerlink" title="優化"></a>優化</h4><ul>
 <li>不要改變最佳化的function造成<code>Hidden Class</code>的改變。</li>
 </ul>
@@ -140,7 +140,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近研究了下 JavaScript 的運作原理，以下圖片和程式碼皆引用自影片中。&lt;/p&gt;
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近研究了下 V8 和 Event Loop，以下圖片和程式碼皆引用自影片中。&lt;/p&gt;
     
     </summary>
     
@@ -858,9 +858,9 @@
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
-      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
-    
       <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
+    
+      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
     
   </entry>
   
