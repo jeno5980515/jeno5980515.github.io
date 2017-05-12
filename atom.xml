@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-05-12T02:54:13.000Z</updated>
+  <updated>2017-05-12T11:27:29.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,54 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Other] Untrusted</title>
+    <link href="http://jeno5980515.github.io/2017/05/12/Other/Untrusted/"/>
+    <id>http://jeno5980515.github.io/2017/05/12/Other/Untrusted/</id>
+    <published>2017-05-12T10:44:20.000Z</published>
+    <updated>2017-05-12T11:27:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://alexnisnevich.github.io/untrusted/" target="_blank" rel="external">Untrusted</a> 這個小遊戲必須由玩家編寫 JavaScript 來完成任務，遊戲目的只要操作角色到出口即可。</p>
+<p>其中必須觀察現有的程式，大部分的程式是不能做修改的，必須在黑色的地方新增或修改程式讓遊戲可以順利進行。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h3 id="1-cellBlockA"><a href="#1-cellBlockA" class="headerlink" title="1. cellBlockA"></a>1. cellBlockA</h3><p>直接將黑色部分的程式刪除即可</p>
+<h3 id="2-theLongWayOut"><a href="#2-theLongWayOut" class="headerlink" title="2. theLongWayOut"></a>2. theLongWayOut</h3><p>將 maze 重設大小 (非必要)，另外新增一個出口</p>
+<h3 id="3-validationEngaged"><a href="#3-validationEngaged" class="headerlink" title="3. validationEngaged"></a>3. validationEngaged</h3><p>在維持一定數量的 block 情況下修改位置</p>
+<h3 id="4-multiplicity"><a href="#4-multiplicity" class="headerlink" title="4. multiplicity"></a>4. multiplicity</h3><p>新增一個出口</p>
+<h3 id="5-minesweeper"><a href="#5-minesweeper" class="headerlink" title="5. minesweeper"></a>5. minesweeper</h3><p>修改地雷的顏色</p>
+<h3 id="6-drones101"><a href="#6-drones101" class="headerlink" title="6. drones101"></a>6. drones101</h3><p>新增一長條的 block 來阻擋 d 的去路</p>
+<h3 id="7-colors"><a href="#7-colors" class="headerlink" title="7. colors"></a>7. colors</h3><p>這邊的電話可以讓你按Q或Ctrl+6執行callback，因此在callback裡每次呼叫都改變顏色即可</p>
+<h3 id="8-intoTheWoods"><a href="#8-intoTheWoods" class="headerlink" title="8. intoTheWoods"></a>8. intoTheWoods</h3><p>將callback函式改成<code>generateForest</code>，如此一來一邊行動一邊重新產生樹林即可到達終點</p>
+<h3 id="9-fordingTheRiver"><a href="#9-fordingTheRiver" class="headerlink" title="9. fordingTheRiver"></a>9. fordingTheRiver</h3><p>重新定義一個raft，然後放一堆到水面上穿過</p>
+<h3 id="10-ambush"><a href="#10-ambush" class="headerlink" title="10. ambush"></a>10. ambush</h3><p>全部改成向右移動，並在出口的平行左邊放一個 block 阻擋 d 繼續向右擋到出口</p>
+<h3 id="11-robot"><a href="#11-robot" class="headerlink" title="11. robot"></a>11. robot</h3><p>若機器人可以向右則向右，否則向下，接著跟機器人會合拿到鑰匙即可</p>
+<h3 id="12-robotNav"><a href="#12-robotNav" class="headerlink" title="12. robotNav"></a>12. robotNav</h3><p>在第一個 # 柱子放四個直的，然後再第二個左邊放置一個4個 block 類似閃電的圖形，接著機器人行動判斷向右-&gt;向下-&gt;向上即可。</p>
+<h3 id="13-robotMaze"><a href="#13-robotMaze" class="headerlink" title="13. robotMaze"></a>13. robotMaze</h3><p>這關運氣好，只有讓機器人先向下然後向右，某次產生的地圖可以過關</p>
+<h3 id="14-crispsContest"><a href="#14-crispsContest" class="headerlink" title="14. crispsContest"></a>14. crispsContest</h3><p>修改的地方改成藍色鑰匙，行動順序如下</p>
+<p>左邊<span style="color:blue;">⊗</span>-&gt;<span style="color:green;">⊗</span>-&gt;<span style="color:blue;">⊗</span>-&gt;右上<span style="color:red;">⊗</span>-&gt;<span style="color:green;">⊗</span>-&gt;<span style="color:red;">⊗</span>-&gt;右下<span style="color:yellow;">⊗</span>-&gt;<span style="color:blue;">⊗</span>-&gt;<span style="color:yellow;">⊗</span></p>
+<h3 id="15-exceptionalCrossing"><a href="#15-exceptionalCrossing" class="headerlink" title="15. exceptionalCrossing"></a>15. exceptionalCrossing</h3><p>修改的地方改成一個未宣告的變數，如此一來就可以穿越水面到終點</p>
+<h3 id="16-lasers"><a href="#16-lasers" class="headerlink" title="16. lasers"></a>16. lasers</h3><p>在最下面重寫<code>getRandomInt</code>函式，每次回傳到同一個數字例如0，如此一來雷射都會產生在那個點而已。</p>
+<h3 id="17-pointers"><a href="#17-pointers" class="headerlink" title="17. pointers"></a>17. pointers</h3><p>這關莫名其妙過了，目前想法是一定要讓傳送點傳到傳送點不可以直接傳到 trap ，然後就會到出口附近的傳送點了。</p>
+<h3 id="18-superDrEvalBros"><a href="#18-superDrEvalBros" class="headerlink" title="18. superDrEvalBros"></a>18. superDrEvalBros</h3><p>在callback裡面另外寫一個反重力函式讓角色不斷向上且註冊 timer 即可。</p>
+<h3 id="19-documentObjectMadness"><a href="#19-documentObjectMadness" class="headerlink" title="19. documentObjectMadness"></a>19. documentObjectMadness</h3><p>這關不知道在幹麻亂動就過了 ….</p>
+<h3 id="20-bossFight"><a href="#20-bossFight" class="headerlink" title="20. bossFight"></a>20. bossFight</h3><p>可以發現只有在最一開始限制了 dynamic 數量，並且非 dynamic 數量還允許你建一個，因此 define 一個 boss2 和 bullet2 ， 讓使用者碰觸到 boss2 的時候會發射向上的 bullet2 來炸光所有 boss 即可得到 Algorithm</p>
+<h3 id="21-endOfTheLine"><a href="#21-endOfTheLine" class="headerlink" title="21. endOfTheLine"></a>21. endOfTheLine</h3><p>進入 menu 的 scripts 的 object.js，把 exit 裡的判斷 finalLevel 拿掉即可。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://alexnisnevich.github.io/untrusted/&quot;&gt;Untrusted&lt;/a&gt; 這個小遊戲必須由玩家編寫 JavaScript 來完成任務，遊戲目的只要操作角色到出口即可。&lt;/p&gt;
+&lt;p&gt;其中必須觀察現有的程式，大部分的程式是不能做修改的，必須在黑色的地方新增或修改程式讓遊戲可以順利進行。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Other" scheme="http://jeno5980515.github.io/categories/Other/"/>
+    
+    
+      <category term="Game" scheme="http://jeno5980515.github.io/tags/Game/"/>
+    
+  </entry>
   
   <entry>
     <title>[LeetCode] 136 - Single Number</title>
@@ -72,9 +120,9 @@
     
       <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
     
-      <category term="5" scheme="http://jeno5980515.github.io/tags/5/"/>
-    
       <category term="Palindrome" scheme="http://jeno5980515.github.io/tags/Palindrome/"/>
+    
+      <category term="5" scheme="http://jeno5980515.github.io/tags/5/"/>
     
   </entry>
   
@@ -827,37 +875,6 @@
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
       <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] 自動調整Textarea邊界</title>
-    <link href="http://jeno5980515.github.io/2015/09/01/Web/Front-End/%E8%87%AA%E5%8B%95%E8%AA%BF%E6%95%B4Textarea%E9%82%8A%E7%95%8C/"/>
-    <id>http://jeno5980515.github.io/2015/09/01/Web/Front-End/自動調整Textarea邊界/</id>
-    <published>2015-09-01T14:40:45.000Z</published>
-    <updated>2017-04-14T13:31:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>延續上次的文章，取得文字高度和寬度後就可以動態調整邊界。</p>
-<a id="more"></a>
-<h1 id="取得字體資訊"><a href="#取得字體資訊" class="headerlink" title="取得字體資訊"></a>取得字體資訊</h1><p>若沒有在CSS中設定，可以透過<code>getComputedStyle</code>取得。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> style = <span class="built_in">window</span>.getComputedStyle( text, <span class="literal">null</span> ).getPropertyValue( <span class="string">'font-family'</span> );</div><div class="line"><span class="keyword">var</span> size = <span class="built_in">window</span>.getComputedStyle(text, <span class="literal">null</span>).getPropertyValue(<span class="string">'font-size'</span>);</div></pre></td></tr></table></figure></p>
-<h1 id="取得字體高度及寬度"><a href="#取得字體高度及寬度" class="headerlink" title="取得字體高度及寬度"></a>取得字體高度及寬度</h1><p>一樣透過在網頁新增物件量測。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> getTextWidth = <span class="function"><span class="keyword">function</span>(<span class="params">text,font,size</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> span = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	span.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	span.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	span.innerHTML = <span class="string">"W"</span> + text  + <span class="string">"W"</span>;</div><div class="line">	<span class="built_in">document</span>.body.appendChild(span);</div><div class="line">	<span class="keyword">var</span> width = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		width = span.offsetWidth ;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		span.remove();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> width;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="取得行數及最大寬度"><a href="#取得行數及最大寬度" class="headerlink" title="取得行數及最大寬度"></a>取得行數及最大寬度</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextMaxLength = <span class="function"><span class="keyword">function</span>(<span class="params">text,font,size</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> s = <span class="string">""</span> ;</div><div class="line">	<span class="keyword">var</span> t = text.value ;</div><div class="line">	<span class="keyword">var</span> max = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">var</span> row = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; t.length ; i ++ )&#123;</div><div class="line">		<span class="keyword">if</span> ( t[i] === <span class="string">"\n"</span> || i === t.length - <span class="number">1</span> )&#123;</div><div class="line">			max = <span class="built_in">Math</span>.max(max,getTextWidth(s,font,size)) ;</div><div class="line">			s = <span class="string">""</span> ;</div><div class="line">			row ++ ;</div><div class="line">			<span class="keyword">if</span> ( (t[i] === <span class="string">"\n"</span> || t[i] === <span class="string">"\r"</span> || t[i] === <span class="string">"\r\n"</span>  ) &amp;&amp; i === t.length - <span class="number">1</span> )&#123;</div><div class="line">				row++ ;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			s += t[i] ;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;<span class="attr">row</span>:row,<span class="attr">length</span>:max&#125; ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="Event"><a href="#Event" class="headerlink" title="Event"></a>Event</h1><p>若使用onchange會點擊其他元素的時候才會觸發，單獨使用keydown會造成最後按下的字母不會在value裡，而單獨使用keyup會造成長按只紀錄一個，因此同時使用keydown和keyup。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">text.onkeydown = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> result = getTextMaxLength(text,getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) ;</div><div class="line">	<span class="keyword">this</span>.style.width = result.length  + <span class="number">3</span> ;</div><div class="line">	<span class="keyword">this</span>.style.height = getTextHeight(getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) * result.row + <span class="number">10</span>;</div><div class="line">&#125;</div><div class="line">text.onkeyup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> result = getTextMaxLength(text,getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) ;</div><div class="line">	<span class="keyword">this</span>.style.width = result.length  + <span class="number">3</span> ;</div><div class="line">	<span class="keyword">this</span>.style.height = getTextHeight(getFontFamily(<span class="keyword">this</span>),getFontSize(<span class="keyword">this</span>)) * result.row + <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/textarea-autosize" target="_blank" rel="external">GitHub</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;延續上次的文章，取得文字高度和寬度後就可以動態調整邊界。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
   </entry>
   
