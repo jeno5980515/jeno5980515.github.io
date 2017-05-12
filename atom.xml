@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-05-09T06:04:50.000Z</updated>
+  <updated>2017-05-12T02:54:13.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[LeetCode] 136 - Single Number</title>
+    <link href="http://jeno5980515.github.io/2017/05/12/Online%20Judge/LeetCode/136%20-%20Single%20Number/"/>
+    <id>http://jeno5980515.github.io/2017/05/12/Online Judge/LeetCode/136 - Single Number/</id>
+    <published>2017-05-12T02:47:30.000Z</published>
+    <updated>2017-05-12T02:54:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>有一個陣列裡面的元素皆出現兩次，只有一個元素為一次，找出獨立的那個元素。</p>
+<a id="more"></a>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>利用XOR運算，兩個相同的元素XOR運算結果為0，所以剩下的那一個就是答案。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>^<span class="number">2</span>^<span class="number">3</span>^<span class="number">4</span>^<span class="number">3</span>^<span class="number">2</span>^<span class="number">1</span> = <span class="number">1</span>^<span class="number">1</span>^<span class="number">2</span>^<span class="number">2</span>^<span class="number">3</span>^<span class="number">3</span>^<span class="number">4</span> = <span class="number">4</span></div></pre></td></tr></table></figure></p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[]&#125; nums</div><div class="line"> * @return &#123;number&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> singleNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> number = nums[<span class="number">0</span>] ;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">1</span> ; i &lt; nums.length ; i ++ )&#123;</div><div class="line">        number ^= nums[i] ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> number ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;有一個陣列裡面的元素皆出現兩次，只有一個元素為一次，找出獨立的那個元素。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="136" scheme="http://jeno5980515.github.io/tags/136/"/>
+    
+      <category term="XOR" scheme="http://jeno5980515.github.io/tags/XOR/"/>
+    
+  </entry>
   
   <entry>
     <title>[LeetCode] 5 - Longest Palindromic Substring</title>
@@ -41,9 +72,9 @@
     
       <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
     
-      <category term="Palindrome" scheme="http://jeno5980515.github.io/tags/Palindrome/"/>
-    
       <category term="5" scheme="http://jeno5980515.github.io/tags/5/"/>
+    
+      <category term="Palindrome" scheme="http://jeno5980515.github.io/tags/Palindrome/"/>
     
   </entry>
   
@@ -827,40 +858,6 @@
     
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] Cavnas取得文字高度</title>
-    <link href="http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas%E5%8F%96%E5%BE%97%E6%96%87%E5%AD%97%E9%AB%98%E5%BA%A6/"/>
-    <id>http://jeno5980515.github.io/2015/08/27/Web/Front-End/Canvas取得文字高度/</id>
-    <published>2015-08-27T13:01:48.000Z</published>
-    <updated>2017-04-14T13:32:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在利用Canvas製作類似修圖的App，在<code>fillText</code>的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？</p>
-<a id="more"></a>
-<h1 id="measureText"><a href="#measureText" class="headerlink" title="measureText"></a>measureText</h1><p>可以利用<code>measureText</code>取得文字的寬度，但無法取得高度。</p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>在網頁上新增兩個元素，透過<code>verticalAlign</code>讓物件對齊文字的底部，兩物件offsetTop的差值即是文字的高度。</p>
-<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getTextHeight = <span class="function"><span class="keyword">function</span>(<span class="params">font,size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> text = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</div><div class="line">	text.style[<span class="string">'fontFamily'</span>] = font ;</div><div class="line">	text.style[<span class="string">'fontSize'</span>] = size ;</div><div class="line">	text.innerHTML = <span class="string">"Hg"</span>;</div><div class="line">	<span class="keyword">var</span> block = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) ;</div><div class="line">	block.style.display =<span class="string">"inline-block"</span>;</div><div class="line">	block.style.width = <span class="string">"1px"</span> ;</div><div class="line">	block.style.height = <span class="string">"0px"</span> ; </div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">	div.appendChild(text);</div><div class="line">	div.appendChild(block)</div><div class="line"></div><div class="line">	<span class="built_in">document</span>.body.appendChild(div);</div><div class="line">	<span class="keyword">var</span> height = <span class="number">0</span> ;</div><div class="line"></div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		block.style.verticalAlign = <span class="string">"bottom"</span> ;</div><div class="line">		height = block.offsetTop - text.offsetTop;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		div.remove();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> height;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="http://stackoverflow.com/questions/1134586/how-can-you-find-the-height-of-text-on-an-html-canvas" target="_blank" rel="external">How can you find the height of text on an HTML canvas?</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近在利用Canvas製作類似修圖的App，在&lt;code&gt;fillText&lt;/code&gt;的部分一直抓不到座標，最後才發現原來座標的基準點是文字的左下角而不是左上角，因此將文字的高度補回來就可以得到左上角的座標，但問題是要如何取得高度呢？&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-      <category term="Canvas" scheme="http://jeno5980515.github.io/tags/Canvas/"/>
-    
-      <category term="HTML5" scheme="http://jeno5980515.github.io/tags/HTML5/"/>
     
   </entry>
   
