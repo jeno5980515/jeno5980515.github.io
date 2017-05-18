@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-05-17T13:41:53.000Z</updated>
+  <updated>2017-05-18T04:07:53.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[JavaScript] Compose 和 Pipe</title>
+    <link href="http://jeno5980515.github.io/2017/05/18/Programming%20Language/JavaScript/Compose%20%E5%92%8C%20Pipe/"/>
+    <id>http://jeno5980515.github.io/2017/05/18/Programming Language/JavaScript/Compose 和 Pipe/</id>
+    <published>2017-05-18T03:59:50.000Z</published>
+    <updated>2017-05-18T04:07:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h2><p><code>Compose</code>把多個函式組合成一個函式，關係式如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">F(x) = f(g(x))</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>程式範例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x + <span class="number">1</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x * <span class="number">2</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(g(<span class="number">1</span>)); <span class="comment">// 3</span></div><div class="line"><span class="keyword">var</span> F = compose(a,b);</div><div class="line">F(<span class="number">1</span>); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<h3 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h3><p>首先回傳一個函式，並利用閉包將傳入的函式紀錄起來。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> compose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> fns = <span class="built_in">arguments</span> ;</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>這個回傳的函式要依次執行函式參數，注意要從最後一個開始執行。</p>
+<p>這裡使用 call 而不直接呼叫是為了以防函式使用到 this 的情形。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> compose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> fns = <span class="built_in">arguments</span> ;</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">		<span class="keyword">for</span> ( <span class="keyword">var</span> i = fns.length ; i &gt;= <span class="number">0</span> ; i -- )&#123;</div><div class="line">			result = fns[i].call(<span class="keyword">this</span>,result) ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result ;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x + <span class="number">1</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x * <span class="number">2</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(g(<span class="number">1</span>)); <span class="comment">// 3</span></div><div class="line"><span class="keyword">var</span> F = compose(a,b);</div><div class="line">F(<span class="number">1</span>); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>可以使用 ES6 的 <code>reduce</code> ，記得是從最後一個開始執行所以要使用 <code>reduceRight</code>。</p>
+<p>由於 reduce 用於陣列而 arguments 只是類陣列，所以先將 arguments 先轉為陣列。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> fns = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>,<span class="number">0</span>);</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">arg</span>) </span>&#123;</div><div class="line">		<span class="keyword">var</span> result = fns.reduceRight(<span class="function"><span class="keyword">function</span>(<span class="params">result , fn</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> fn.call(<span class="keyword">this</span>,result);</div><div class="line">		&#125;,arg);</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h2><p>Pipe 其實和 Compose 很像，只是函式執行順序不一樣而已，因此改變程式順序即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pipe</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> fns = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>,<span class="number">0</span>);</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">arg</span>) </span>&#123;</div><div class="line">		<span class="keyword">var</span> result = fns.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">result , fn</span>) </span>&#123;</div><div class="line">			<span class="keyword">return</span> fn.call(<span class="keyword">this</span>,result);</div><div class="line">		&#125;,arg);</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="http://blakeembrey.com/articles/2014/01/compose-functions-javascript/" target="_blank" rel="external">Composing Functions in JavaScript</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Compose&quot;&gt;&lt;a href=&quot;#Compose&quot; class=&quot;headerlink&quot; title=&quot;Compose&quot;&gt;&lt;/a&gt;Compose&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Compose&lt;/code&gt;把多個函式組合成一個函式，關係式如下。&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;F(x) = f(g(x))&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+      <category term="Compose" scheme="http://jeno5980515.github.io/tags/Compose/"/>
+    
+      <category term="Pipe" scheme="http://jeno5980515.github.io/tags/Pipe/"/>
+    
+  </entry>
   
   <entry>
     <title>[JavaScript] Curry</title>
@@ -856,35 +898,6 @@
     <summary type="html">
     
       &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在純JavaScript使用addClass和removeClass。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] 利用window.open傳值</title>
-    <link href="http://jeno5980515.github.io/2015/09/08/Web/Front-End/%E5%88%A9%E7%94%A8window.open%E5%82%B3%E5%80%BC/"/>
-    <id>http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/</id>
-    <published>2015-09-08T12:30:38.000Z</published>
-    <updated>2017-04-14T13:31:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前用過網址在網頁間傳值，這次利用<code>window.open()</code>在子母視窗間取值傳值。</p>
-<a id="more"></a>
-<h1 id="母視窗"><a href="#母視窗" class="headerlink" title="母視窗"></a>母視窗</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="string">"text"</span>;</div><div class="line"><span class="keyword">var</span> init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">window</span>.open(<span class="string">"b.html"</span>,<span class="string">"_blank"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="子視窗"><a href="#子視窗" class="headerlink" title="子視窗"></a>子視窗</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="built_in">window</span>.opener.s);</div></pre></td></tr></table></figure>
-<h1 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h1><p><code>window.open()</code>無法自動執行必須透過事件，而如果無法運行要上傳到Server。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前用過網址在網頁間傳值，這次利用&lt;code&gt;window.open()&lt;/code&gt;在子母視窗間取值傳值。&lt;/p&gt;
     
     </summary>
     
