@@ -318,6 +318,13 @@
     </url>
 
     <url>
+        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
+        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jeno5980515.github.io/tags/Java/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -326,13 +333,6 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/Algorithm/</loc>
-        <lastmod>2017-04-14T13:29:42.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/Union-Find/</loc>
         <lastmod>2017-04-14T13:29:42.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -746,14 +746,7 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/Redux/</loc>
-        <lastmod>2017-05-19T13:31:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/Source-Code/</loc>
-        <lastmod>2017-05-19T13:31:34.000Z</lastmod>
+        <lastmod>2017-05-22T08:39:34.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

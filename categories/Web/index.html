@@ -75,10 +75,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Web/Redux/Redux 原始碼解析" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Web/Redux/Redux 實作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/19/Web/Redux/Redux 原始碼解析/" class="article-date">
-  <time datetime="2017-05-19T08:21:58.000Z" itemprop="datePublished">5月 19 2017</time>
+    <a href="/2017/05/22/Web/Redux/Redux 實作/" class="article-date">
+  <time datetime="2017-05-22T08:24:47.000Z" itemprop="datePublished">5月 22 2017</time>
 </a>
     
   <div class="article-category">
@@ -93,7 +93,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/Web/Redux/Redux 原始碼解析/">[Redux] Redux 原始碼解析</a>
+      <a class="article-title" href="/2017/05/22/Web/Redux/Redux 實作/">[Redux] Redux 實作</a>
     </h1>
   
 
@@ -101,21 +101,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近仔細研究了一下<code>Redux</code>的原始碼發現其實蠻短的，在這邊紀錄一下。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前陣子寫的<code>Redux</code>解析感覺寫不清楚，因此重寫一篇如何實作<code>Redux</code>。</p>
+<p>這邊必須對<code>Redux</code>有些基本認識，而實作的部分都先不做錯誤處理。</p>
         
           <p class="article-more-link">
-            <a href="/2017/05/19/Web/Redux/Redux 原始碼解析/#more">Read More</a>
+            <a href="/2017/05/22/Web/Redux/Redux 實作/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/05/19/Web/Redux/Redux 原始碼解析/" data-id="cj2vtg5r8008aot17isgoyh2v" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/05/22/Web/Redux/Redux 實作/" data-id="cj2zvcxl3004jbz3hdqye8w0n" class="article-share-link">Share</a>
       
-        <a href="http://jeno5980515.github.io/2017/05/19/Web/Redux/Redux 原始碼解析/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://jeno5980515.github.io/2017/05/22/Web/Redux/Redux 實作/#disqus_thread" class="article-comment-link">Comments</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Source-Code/">Source Code</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redux/">Redux</a></li></ul>
 
     </footer>
   </div>
@@ -159,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/" data-id="cj2vtg5qk007uot175a4f6wmv" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/" data-id="cj2zvcxmv0075bz3h6fikbpmn" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -208,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/" data-id="cj2vtg5o5005cot17jmvc5dxl" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/" data-id="cj2zvcxkj003obz3hwqz05wqz" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -257,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD及效能調校/" data-id="cj2vtg5qr0082ot17h6s8jzxd" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD及效能調校/" data-id="cj2zvcxnd007mbz3h9x5cs20h" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD及效能調校/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -306,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/" data-id="cj2vtg5qn007yot17zc2sbq4t" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/" data-id="cj2zvcxn3007bbz3h3fist71y" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -355,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/" data-id="cj2vtg5p90068ot17pzdmnv57" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/" data-id="cj2zvcxlj005abz3hxmjxvnkt" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -404,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/" data-id="cj2vtg5ps006vot17nh0w6aqg" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/" data-id="cj2zvcxlz0060bz3h8qjekd68" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/09/22/Web/Front-End/自動調整Contenteditable邊界/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -453,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass和addClass/" data-id="cj2vtg5pc006bot17jo1blepg" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass和addClass/" data-id="cj2zvcxlm005gbz3h3plmli38" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/09/12/Web/Front-End/removeClass和addClass/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -502,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/" data-id="cj2vtg5pr006sot17vw5zcbvx" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/" data-id="cj2zvcxlu005sbz3hglg75kxp" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/09/08/Web/Front-End/利用window.open傳值/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -551,7 +552,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL及crossOrigin/" data-id="cj2vtg5pe006dot173eg48en9" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL及crossOrigin/" data-id="cj2zvcxlo005hbz3hatgafgvp" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2015/09/07/Web/Front-End/toDataURL及crossOrigin/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -590,7 +591,7 @@
       <ul class="recent">
         
           <li>
-            <a href="/2017/05/19/Web/Redux/Redux 原始碼解析/">[Redux] Redux 原始碼解析</a>
+            <a href="/2017/05/22/Web/Redux/Redux 實作/">[Redux] Redux 實作</a>
           </li>
         
           <li>
