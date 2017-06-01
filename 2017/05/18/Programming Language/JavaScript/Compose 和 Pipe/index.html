@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://jeno5980515.github.io/2017/05/18/Programming Language/JavaScript/Compose 和 Pipe/index.html">
 <meta property="og:site_name" content="Jeno's Blog">
 <meta property="og:description" content="ComposeCompose把多個函式組合成一個函式，關係式如下。 1F(x) = f(g(x))">
-<meta property="og:updated_time" content="2017-06-01T08:43:11.000Z">
+<meta property="og:updated_time" content="2017-06-01T08:45:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[JavaScript] Compose 和 Pipe">
 <meta name="twitter:description" content="ComposeCompose把多個函式組合成一個函式，關係式如下。 1F(x) = f(g(x))">
@@ -105,7 +105,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">F(x) = f(g(x))</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>程式範例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x + <span class="number">1</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x * <span class="number">2</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(g(<span class="number">1</span>)); <span class="comment">// 3</span></div><div class="line"><span class="keyword">var</span> F = compose(a,b);</div><div class="line">F(<span class="number">1</span>); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x + <span class="number">1</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x * <span class="number">2</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line">f(g(<span class="number">1</span>)); <span class="comment">// 3</span></div><div class="line"><span class="keyword">var</span> F = compose(f,g);</div><div class="line">F(<span class="number">1</span>); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
 <h3 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h3><p>首先回傳一個函式，並利用閉包將傳入的函式紀錄起來。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> compose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> fns = <span class="built_in">arguments</span> ;</div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>這個回傳的函式要依次執行函式參數，注意要從最後一個開始執行。</p>
 <p>這裡使用 call 而不直接呼叫是為了以防函式使用到 this 的情形。</p>
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jeno5980515.github.io/2017/05/18/Programming Language/JavaScript/Compose 和 Pipe/" data-id="cj3e6bevs0010x23hz3xb5tku" class="article-share-link">Share</a>
+      <a data-url="http://jeno5980515.github.io/2017/05/18/Programming Language/JavaScript/Compose 和 Pipe/" data-id="cj3e6e7xy0040z83hdyck66np" class="article-share-link">Share</a>
       
         <a href="http://jeno5980515.github.io/2017/05/18/Programming Language/JavaScript/Compose 和 Pipe/#disqus_thread" class="article-comment-link">Comments</a>
       
