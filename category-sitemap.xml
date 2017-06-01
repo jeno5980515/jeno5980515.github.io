@@ -232,20 +232,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/categories/Programming-Language/</loc>
-        <lastmod>2017-05-19T05:47:11.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/categories/Programming-Language/JavaScript/</loc>
-        <lastmod>2017-05-19T05:47:11.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/categories/Web/</loc>
         <lastmod>2017-05-23T07:24:34.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -255,6 +241,20 @@
     <url>
         <loc>http://jeno5980515.github.io/categories/Web/Redux/</loc>
         <lastmod>2017-05-23T07:24:34.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Programming-Language/</loc>
+        <lastmod>2017-06-01T08:43:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Programming-Language/JavaScript/</loc>
+        <lastmod>2017-06-01T08:43:11.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
