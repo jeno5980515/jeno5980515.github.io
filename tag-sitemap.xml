@@ -745,15 +745,22 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <loc>http://jeno5980515.github.io/tags/Method-Chaining/</loc>
         <lastmod>2017-07-23T11:28:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Method-Chaining/</loc>
-        <lastmod>2017-07-23T11:28:00.000Z</lastmod>
+        <loc>http://jeno5980515.github.io/tags/JavaScript/</loc>
+        <lastmod>2017-07-26T06:45:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Symbol/</loc>
+        <lastmod>2017-07-26T06:45:21.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

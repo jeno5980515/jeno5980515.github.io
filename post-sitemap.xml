@@ -8,7 +8,15 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/2017/07/23/Method%20Chaining/</loc>
+        <loc>http://jeno5980515.github.io/2017/07/26/Programming%20Language/JavaScript/Symbol/</loc>
+        <lastmod>2017-07-26T06:45:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/2017/07/23/Programming%20Language/JavaScript/Method%20Chaining/</loc>
         <lastmod>2017-07-23T11:28:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
