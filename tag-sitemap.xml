@@ -276,13 +276,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Socket/</loc>
-        <lastmod>2017-04-14T13:28:33.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/Huffman-Coding/</loc>
         <lastmod>2017-04-14T13:28:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -761,6 +754,27 @@
     <url>
         <loc>http://jeno5980515.github.io/tags/Symbol/</loc>
         <lastmod>2017-07-26T06:45:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Socket/</loc>
+        <lastmod>2017-08-05T06:40:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Phoenix/</loc>
+        <lastmod>2017-08-05T06:40:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Elixir/</loc>
+        <lastmod>2017-08-05T06:40:11.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
