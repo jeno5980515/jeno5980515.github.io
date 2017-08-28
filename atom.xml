@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-08-05T06:43:15.000Z</updated>
+  <updated>2017-08-28T03:29:14.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[JavaScript] forEach, map, reduce 實作</title>
+    <link href="http://jeno5980515.github.io/2017/08/28/Programming%20Language/JavaScript/forEach,%20map,%20reduce%20%E5%AF%A6%E4%BD%9C/"/>
+    <id>http://jeno5980515.github.io/2017/08/28/Programming Language/JavaScript/forEach, map, reduce 實作/</id>
+    <published>2017-08-28T03:25:28.000Z</published>
+    <updated>2017-08-28T03:29:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>紀錄一下內建函式的實作。</p>
+<a id="more"></a>
+<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i ++ )&#123;</div><div class="line">    fn(<span class="keyword">this</span>[i], i);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype.map = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> newArray = [];</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length ; i++ )&#123;</div><div class="line">    newArray.push(fn(<span class="keyword">this</span>[i], i));</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> newArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.prototype.reduce = <span class="function"><span class="keyword">function</span>(<span class="params">fn, initValue</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> result = initValue || <span class="keyword">this</span>[<span class="number">0</span>] ;</div><div class="line">  <span class="keyword">var</span> initIndex = initValue ? <span class="number">0</span> : <span class="number">1</span>;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = initIndex; i &lt; <span class="keyword">this</span>.length; i ++ )&#123;</div><div class="line">    result = fn(result, <span class="keyword">this</span>[i], i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;紀錄一下內建函式的實作。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>[Phoenix] Socket Server</title>
@@ -965,32 +993,6 @@
       <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
     
       <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Front-End] mouseDown手機上運行</title>
-    <link href="http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%81%8B%E8%A1%8C/"/>
-    <id>http://jeno5980515.github.io/2015/11/06/Web/Front-End/mouseDown手機上運行/</id>
-    <published>2015-11-06T09:53:39.000Z</published>
-    <updated>2017-04-14T13:33:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>手機上無法使用<code>mouseDown</code>等等的事件，必須使用<code>touchStart</code>，網路上找到別人寫的替換方法。</p>
-<a id="more"></a>
-<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mouseEventTypes = &#123;</div><div class="line">	<span class="attr">touchstart</span> : <span class="string">"mousedown"</span>,</div><div class="line">	<span class="attr">touchmove</span> : <span class="string">"mousemove"</span>,</div><div class="line">	<span class="attr">touchend</span> : <span class="string">"mouseup"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (originalType <span class="keyword">in</span> mouseEventTypes) &#123;</div><div class="line">	<span class="built_in">document</span>.addEventListener(originalType, <span class="function"><span class="keyword">function</span>(<span class="params">originalEvent</span>) </span>&#123;</div><div class="line">		event = <span class="built_in">document</span>.createEvent(<span class="string">"MouseEvents"</span>);</div><div class="line">		touch = originalEvent.changedTouches[<span class="number">0</span>];</div><div class="line">		event.initMouseEvent(mouseEventTypes[originalEvent.type], <span class="literal">true</span>, <span class="literal">true</span>,</div><div class="line">		<span class="built_in">window</span>, <span class="number">0</span>, touch.screenX, touch.screenY, touch.clientX,</div><div class="line">		touch.clientY, touch.ctrlKey, touch.altKey, touch.shiftKey,</div><div class="line">		touch.metaKey, <span class="number">0</span>, <span class="literal">null</span>);</div><div class="line">		originalEvent.target.dispatchEvent(event);</div><div class="line">	&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;手機上無法使用&lt;code&gt;mouseDown&lt;/code&gt;等等的事件，必須使用&lt;code&gt;touchStart&lt;/code&gt;，網路上找到別人寫的替換方法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Front-End" scheme="http://jeno5980515.github.io/categories/Web/Front-End/"/>
     
     
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>

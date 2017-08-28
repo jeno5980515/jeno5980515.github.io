@@ -239,20 +239,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/categories/Programming-Language/</loc>
-        <lastmod>2017-07-26T06:45:21.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/categories/Programming-Language/JavaScript/</loc>
-        <lastmod>2017-07-26T06:45:21.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/categories/Web/</loc>
         <lastmod>2017-08-05T06:43:15.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -262,6 +248,20 @@
     <url>
         <loc>http://jeno5980515.github.io/categories/Web/Phoenix/</loc>
         <lastmod>2017-08-05T06:43:15.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Programming-Language/</loc>
+        <lastmod>2017-08-28T03:29:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Programming-Language/JavaScript/</loc>
+        <lastmod>2017-08-28T03:29:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
