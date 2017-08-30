@@ -211,13 +211,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/categories/Online-Judge/</loc>
-        <lastmod>2017-05-12T02:54:13.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/categories/Online-Judge/LeetCode/</loc>
         <lastmod>2017-05-12T02:54:13.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -262,6 +255,20 @@
     <url>
         <loc>http://jeno5980515.github.io/categories/Programming-Language/JavaScript/</loc>
         <lastmod>2017-08-28T03:29:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Online-Judge/</loc>
+        <lastmod>2017-08-30T01:20:27.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/categories/Online-Judge/Pwnable-kr/</loc>
+        <lastmod>2017-08-30T01:20:27.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

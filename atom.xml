@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-08-28T03:29:14.000Z</updated>
+  <updated>2017-08-30T01:20:27.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Pwnable.kr] fd</title>
+    <link href="http://jeno5980515.github.io/2017/08/30/Online%20Judge/Pwnable.kr/fd/"/>
+    <id>http://jeno5980515.github.io/2017/08/30/Online Judge/Pwnable.kr/fd/</id>
+    <published>2017-08-30T00:48:07.000Z</published>
+    <updated>2017-08-30T01:20:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h1><p>Mommy! what is a file descriptor in Linux?</p>
+<a id="more"></a>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>首先利用 <code>SSH</code> 進入主機後，可以看到有三個檔案個別是 <code>fd</code> ， <code>fd.c</code> 及 <code>flag</code>。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-r-sr-x--- <span class="number">1</span> fd_pwn fd   <span class="number">7322</span> Jun <span class="number">11</span>  <span class="number">2014</span> fd</div><div class="line">-rw-r--r-- <span class="number">1</span> root   root  <span class="number">418</span> Jun <span class="number">11</span>  <span class="number">2014</span> fd.c</div><div class="line">-r--r----- <span class="number">1</span> fd_pwn root   <span class="number">50</span> Jun <span class="number">11</span>  <span class="number">2014</span> flag</div></pre></td></tr></table></figure>
+<p>我們需要 <code>flag</code> 的內容，但我們只是 <code>fd</code> 因此只能執行 fd 檔案。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function">fd@ubuntu:~$ <span class="title">whoami</span></span></div><div class="line"><span class="title">fd</span></div></pre></td></tr></table></figure>
+<p>題目將原始碼附上了，查看有沒有可以使用的地方。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="keyword">char</span> buf[<span class="number">32</span>];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;</div><div class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">    len = read(fd, buf, <span class="number">32</span>);</div><div class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</div><div class="line">        system(<span class="string">"/bin/cat flag"</span>);</div><div class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"learn about Linux file IO\n"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先看到得到 flag 的地方，在這邊必須讓 <code>buf</code> 和 <code>LETMEWIN\n&quot;</code> 相等。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</div><div class="line">    system(<span class="string">"/bin/cat flag"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查看 <a href="https://linux.die.net/man/2/read" target="_blank" rel="external">read</a> 函式知道可以將<code>檔案</code>寫入 buf 中。</p>
+<p>因此可以將 <a href="https://en.wikipedia.org/wiki/File_descriptor" target="_blank" rel="external">File descriptor</a> 設為 <code>0</code> ，則可以將使用者輸入寫入 buf。</p>
+<p>接著看到 fd 的值相當於執行程式的參數減去 <code>0x1234 (4660)</code>。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;</div></pre></td></tr></table></figure></p>
+<p>因此首先執行 fd 且帶入 4660 參數 。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./fd 4660</div></pre></td></tr></table></figure></p>
+<p>此時會等待使用者輸入，這時輸入 <code>LETMEWIN</code> 即可得到 flag 。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">LETMEWIN</div><div class="line">good job :)</div><div class="line">mommy! I think I know what a file descriptor is!!</div></pre></td></tr></table></figure></p>
+<p>flag 就是 <code>mommy! I think I know what a file descriptor is!!</code> </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題目&quot;&gt;&lt;a href=&quot;#題目&quot; class=&quot;headerlink&quot; title=&quot;題目&quot;&gt;&lt;/a&gt;題目&lt;/h1&gt;&lt;p&gt;Mommy! what is a file descriptor in Linux?&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="Pwnable.kr" scheme="http://jeno5980515.github.io/categories/Online-Judge/Pwnable-kr/"/>
+    
+    
+      <category term="Pwnable.kr" scheme="http://jeno5980515.github.io/tags/Pwnable-kr/"/>
+    
+      <category term="fd" scheme="http://jeno5980515.github.io/tags/fd/"/>
+    
+  </entry>
   
   <entry>
     <title>[JavaScript] forEach, map, reduce 實作</title>
@@ -966,36 +1006,6 @@
       <category term="Security" scheme="http://jeno5980515.github.io/tags/Security/"/>
     
       <category term="C" scheme="http://jeno5980515.github.io/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Web] 一頁式網站</title>
-    <link href="http://jeno5980515.github.io/2015/11/19/Web/Overall/%E4%B8%80%E9%A0%81%E5%BC%8F%E7%B6%B2%E7%AB%99/"/>
-    <id>http://jeno5980515.github.io/2015/11/19/Web/Overall/一頁式網站/</id>
-    <published>2015-11-19T12:51:42.000Z</published>
-    <updated>2017-04-14T13:35:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>網站可以利用多個HTML檔切換，也可以利用<code>#</code>來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。</p>
-<a id="more"></a>
-<h1 id="切換"><a href="#切換" class="headerlink" title="切換"></a>切換</h1><p>利用CSS的<code>display:none</code>，使用jQuery則可以使用<code>show()</code>和<code>hide()</code>。</p>
-<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1><p>加上<code>location.href=&quot;#xxx&quot;</code>則可以在網址加上<code>#</code>和值，可以用來標示不同的頁面，而上一頁下一頁也會有作用。</p>
-<h1 id="onhashchange"><a href="#onhashchange" class="headerlink" title="onhashchange"></a>onhashchange</h1><p>單純這樣子會使瀏覽器的上一頁和下一頁無作用，僅造成網址的改變，因此要加入事件偵測，再取得當前的頁面做不同的事件即可。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onhashchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>)); <span class="comment">//取得tag後的value</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// or jQuery</span></div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'hashchange'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	alert(<span class="built_in">window</span>.location.hash.slice(<span class="number">1</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h1 id="返回首頁"><a href="#返回首頁" class="headerlink" title="返回首頁"></a>返回首頁</h1><p>若不希望可以直接進入子頁面，除了做事件偵測外還要改網址。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> ( <span class="built_in">window</span>.location.hash )&#123;</div><div class="line">	<span class="built_in">window</span>.location.href = <span class="string">""</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;網站可以利用多個HTML檔切換，也可以利用&lt;code&gt;#&lt;/code&gt;來達到一頁式的網站，一頁式的網站載入時間會因為檔案大較久，但載入完畢後切換頁面則不需要再載入，另外若有資料必須在多個頁面使用也不需要傳遞。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
   </entry>
   
