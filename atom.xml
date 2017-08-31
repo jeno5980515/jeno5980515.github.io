@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-08-31T03:42:31.000Z</updated>
+  <updated>2017-08-31T04:03:41.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Codewars] 4 kyu - Sum Strings as Numbers</title>
+    <link href="http://jeno5980515.github.io/2017/08/31/Online%20Judge/Codewars/4%20kyu%20-%20Sum%20Strings%20as%20Numbers/"/>
+    <id>http://jeno5980515.github.io/2017/08/31/Online Judge/Codewars/4 kyu - Sum Strings as Numbers/</id>
+    <published>2017-08-31T04:00:03.000Z</published>
+    <updated>2017-08-31T04:03:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>大數相加。</p>
+<a id="more"></a>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumStrings</span>(<span class="params">a,b</span>) </span>&#123; </div><div class="line">  <span class="keyword">if</span> ( b.length &gt; a.length )&#123;</div><div class="line">    <span class="keyword">var</span> temp = a ;</div><div class="line">    a = b ;</div><div class="line">    b = temp ;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">while</span> ( b.length &lt; a.length )&#123;</div><div class="line">    b = <span class="string">'0'</span> + b ;</div><div class="line">  &#125;</div><div class="line">  a = a.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</div><div class="line">  b = b.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>);</div><div class="line">  <span class="keyword">var</span> c = <span class="string">''</span> , i = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> carry = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; a.length ; i ++ ) &#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="built_in">parseInt</span>(a[i]) + <span class="built_in">parseInt</span>(b[i]) + carry ;</div><div class="line">    carry = <span class="number">0</span> ;</div><div class="line">    <span class="keyword">if</span> ( result &gt;= <span class="number">10</span> )&#123;</div><div class="line">      result -= <span class="number">10</span> ;</div><div class="line">      carry ++ ;</div><div class="line">    &#125;</div><div class="line">    c = c + result;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> ( carry !== <span class="number">0</span> )&#123;</div><div class="line">    c = c + <span class="string">'1'</span> ;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">while</span> ( c[c.length<span class="number">-1</span>] === <span class="string">'0'</span> )&#123;</div><div class="line">    c = c.slice(<span class="number">0</span>,c.length<span class="number">-1</span>) ;</div><div class="line">  &#125;</div><div class="line">  c = c.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) ;</div><div class="line">  <span class="keyword">return</span> c ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;大數相加。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/categories/Online-Judge/Codewars/"/>
+    
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/tags/Codewars/"/>
+    
+      <category term="4 kyu" scheme="http://jeno5980515.github.io/tags/4-kyu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Codewars] 5 kyu - Maximum subarray sum</title>
+    <link href="http://jeno5980515.github.io/2017/08/31/Online%20Judge/Codewars/5%20kyu%20-%20Maximum%20subarray%20sum/"/>
+    <id>http://jeno5980515.github.io/2017/08/31/Online Judge/Codewars/5 kyu - Maximum subarray sum/</id>
+    <published>2017-08-31T03:58:03.000Z</published>
+    <updated>2017-08-31T04:04:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求最大子序列。</p>
+<a id="more"></a>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> maxSequence = <span class="function"><span class="keyword">function</span>(<span class="params">arr</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> max = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> sum = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; arr.length ; i ++ )&#123;</div><div class="line">    sum += arr[i] ;</div><div class="line">    <span class="keyword">if</span> ( sum &gt; max )&#123;</div><div class="line">      max = sum ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ( sum &lt; <span class="number">0</span> )&#123;</div><div class="line">      sum = <span class="number">0</span> ;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> max ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;求最大子序列。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/categories/Online-Judge/Codewars/"/>
+    
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/tags/Codewars/"/>
+    
+      <category term="5 kyu" scheme="http://jeno5980515.github.io/tags/5-kyu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[Codewars] 4 kyu - Human readable duration format</title>
+    <link href="http://jeno5980515.github.io/2017/08/31/Online%20Judge/Codewars/4%20kyu%20-%20Human%20readable%20duration%20format/"/>
+    <id>http://jeno5980515.github.io/2017/08/31/Online Judge/Codewars/4 kyu - Human readable duration format/</id>
+    <published>2017-08-31T03:54:10.000Z</published>
+    <updated>2017-08-31T04:03:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>將秒數轉換成可讀的字串。</p>
+<a id="more"></a>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">seconds</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( seconds === <span class="number">0</span> ) <span class="keyword">return</span> <span class="string">'now'</span> ;</div><div class="line">  <span class="keyword">var</span> typeArr = [<span class="string">'year'</span>,<span class="string">'day'</span>,<span class="string">'hour'</span>,<span class="string">'minute'</span>,<span class="string">'second'</span>] ;</div><div class="line">  <span class="keyword">var</span> sec = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> minute = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> hour = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> day = <span class="number">0</span> ;</div><div class="line">  <span class="keyword">var</span> year = <span class="number">0</span> ;</div><div class="line">  minute = <span class="built_in">Math</span>.floor(seconds / <span class="number">60</span>) ;</div><div class="line">  sec = seconds % <span class="number">60</span> ;</div><div class="line">  </div><div class="line">  hour = <span class="built_in">Math</span>.floor(minute / <span class="number">60</span>) ;</div><div class="line">  minute = minute % <span class="number">60</span> ;</div><div class="line">  </div><div class="line">  day = <span class="built_in">Math</span>.floor(hour / <span class="number">24</span>) ;</div><div class="line">  hour = hour % <span class="number">24</span> ;</div><div class="line">  </div><div class="line">  year = <span class="built_in">Math</span>.floor(day / <span class="number">365</span>) ;</div><div class="line">  day = day % <span class="number">365</span> ;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> resultArr = [year,day,hour,minute,sec] ;</div><div class="line">  <span class="keyword">var</span> resultStrArr = [] ;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; resultArr.length ; i ++ )&#123;</div><div class="line">    <span class="keyword">if</span> ( resultArr[i] === <span class="number">1</span> )&#123;</div><div class="line">      resultStrArr.push(resultArr[i]+<span class="string">' '</span> + typeArr[i]) ;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( resultArr[i] &gt;= <span class="number">2</span> )&#123;</div><div class="line">      resultStrArr.push(resultArr[i]+<span class="string">' '</span> + typeArr[i]+<span class="string">'s'</span>) ;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> resultStr = <span class="string">''</span> ;</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; resultStrArr.length ; i ++ )&#123;</div><div class="line">    <span class="keyword">if</span> ( i === resultStrArr.length - <span class="number">2</span> )&#123;</div><div class="line">      resultStr += resultStrArr[i] + <span class="string">' and '</span> + resultStrArr[i+<span class="number">1</span>] ;</div><div class="line">      <span class="keyword">break</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> ( i !== resultStrArr.length <span class="number">-1</span> )&#123;</div><div class="line">      resultStr += resultStrArr[i] + <span class="string">', '</span> ;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      resultStr += resultStrArr[i];</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> resultStr ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;將秒數轉換成可讀的字串。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/categories/Online-Judge/Codewars/"/>
+    
+    
+      <category term="Codewars" scheme="http://jeno5980515.github.io/tags/Codewars/"/>
+    
+      <category term="4 kyu" scheme="http://jeno5980515.github.io/tags/4-kyu/"/>
+    
+  </entry>
   
   <entry>
     <title>[LeetCode] 54 - Spiral Matrix</title>
@@ -867,127 +954,6 @@
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
       <category term="Promise" scheme="http://jeno5980515.github.io/tags/Promise/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Cordova] Cordova插件開發</title>
-    <link href="http://jeno5980515.github.io/2017/04/20/Mobile%20Application/Cordova/Cordova%E6%8F%92%E4%BB%B6%E9%96%8B%E7%99%BC/"/>
-    <id>http://jeno5980515.github.io/2017/04/20/Mobile Application/Cordova/Cordova插件開發/</id>
-    <published>2017-04-20T02:54:24.000Z</published>
-    <updated>2017-04-20T03:53:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。</p>
-<p>在這邊只放了部分內容而完整檔案放在GitHub上。</p>
-<p><span style="color:red;">此插件為兩年前寫的，所以一些細節可能與現在版本不同！</span></p>
-<a id="more"></a>
-<h1 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h1><p>由於Cordova像是一層接口，所以必須寫js端的接口以及Java原生內容，而這邊則是直接在Java端製作好GIF再將路徑經由接口回傳。</p>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>首先可以先去官方網站上下載範例做修改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</div></pre></td></tr></table></figure></p>
-<h1 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a>plugin.xml</h1><p>在<code>plugin.xml</code>修改插件相關的配置。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span><span class="meta">?&gt;</span></span></div><div class="line"><span class="tag">&lt;<span class="name">plugin</span> <span class="attr">xmlns</span>=<span class="string">"http://apache.org/cordova/ns/plugins/1.0"</span></span></div><div class="line">        <span class="attr">id</span>=<span class="string">"cordova-plugin-gif"</span>       //這邊<span class="attr">id</span>是給外部安裝的名稱</div><div class="line">        <span class="attr">version</span>=<span class="string">"1.0.0"</span>&gt;</div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>GIF<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">js-module</span> <span class="attr">src</span>=<span class="string">"www/GIF.js"</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span> //js接口檔案的位置及名稱</div><div class="line">    <span class="tag">&lt;<span class="name">clobbers</span> <span class="attr">target</span>=<span class="string">"window.plugins.gif"</span> /&gt;</span>  //外部使用的接口名稱</div><div class="line">  <span class="tag">&lt;/<span class="name">js-module</span>&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">platform</span> <span class="attr">name</span>=<span class="string">"android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"res/xml/config.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">feature</span> <span class="attr">name</span>=<span class="string">"GIF"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"android-package"</span> <span class="attr">value</span>=<span class="string">"jeno5980515.cordova.GIF"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">feature</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span> </div><div class="line">    //平台上需要用到的設置</div><div class="line">    <span class="tag">&lt;<span class="name">config-file</span> <span class="attr">target</span>=<span class="string">"AndroidManifest.xml"</span> <span class="attr">parent</span>=<span class="string">"/*"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">config-file</span>&gt;</span></div><div class="line">    //需要用到的其他檔案</div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/libs/commons-codec-1.10.jar"</span> <span class="attr">target-dir</span>=<span class="string">"libs"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/AnimatedGifEncoder.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source-file</span> <span class="attr">src</span>=<span class="string">"src/android/GIF.java"</span> <span class="attr">target-dir</span>=<span class="string">"src/jeno5980515/cordova/"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">platform</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> PLUGIN_NAME = <span class="string">"GIF"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">GIF</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//呼叫原生的結構 </span></div><div class="line"><span class="comment">//cordova.exec(successCallback, errorCallback, 插件名稱, 插件動作, [參數陣列]);</span></div><div class="line">GIF.prototype.finish = <span class="function"><span class="keyword">function</span>(<span class="params">successCallback,errorCallback,data</span>)</span>&#123;</div><div class="line">	cordova.exec(successCallback, errorCallback, PLUGIN_NAME, <span class="string">"finish"</span>, [] );</div><div class="line">&#125;</div><div class="line"></div><div class="line">GIF.install = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (!<span class="built_in">window</span>.plugins) &#123;</div><div class="line">		<span class="built_in">window</span>.plugins = &#123;&#125;;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="built_in">window</span>.plugins.gif = <span class="keyword">new</span> GIF();</div><div class="line"> 	<span class="keyword">return</span> <span class="built_in">window</span>.plugins.gif;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">cordova.addConstructor(GIF.install);</div></pre></td></tr></table></figure>
-<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GIF</span> <span class="keyword">extends</span> <span class="title">CordovaPlugin</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">execute</span><span class="params">(String action, JSONArray args, CallbackContext callbackContext)</span> <span class="keyword">throws</span> JSONException </span>&#123;</div><div class="line">    	<span class="comment">//判斷進來的動作為何</span></div><div class="line">		<span class="keyword">if</span> ( action.equals(<span class="string">"finish"</span>) )&#123;</div><div class="line">			...</div><div class="line">			String arg1 = args.getString(<span class="number">0</span>);  <span class="comment">//取得剛剛傳進來的參數</span></div><div class="line">			...</div><div class="line"></div><div class="line">			<span class="comment">//將內容傳回callback</span></div><div class="line">			callbackContext.success(<span class="string">"XXX"</span>);</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><p>如此一來經由指令即可安裝至專案中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cordova plugin add 來源</div></pre></td></tr></table></figure></p>
-<h1 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h1><p><a href="https://github.com/jeno5980515/cordova-plugin-gif" target="_blank" rel="external">cordova-plugin-gif</a></p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://github.com/nbadal/android-gif-encoder" target="_blank" rel="external">android-gif-encoder</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前一個Cordova的專案需要製作GIF的功能，因為沒有現成插件的所以自己試著寫了一個，目前只做了Android版本。&lt;/p&gt;
-&lt;p&gt;在這邊只放了部分內容而完整檔案放在GitHub上。&lt;/p&gt;
-&lt;p&gt;&lt;span style=&#39;color:red;&#39;&gt;此插件為兩年前寫的，所以一些細節可能與現在版本不同！&lt;/span&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Mobile Application" scheme="http://jeno5980515.github.io/categories/Mobile-Application/"/>
-    
-      <category term="Cordova" scheme="http://jeno5980515.github.io/categories/Mobile-Application/Cordova/"/>
-    
-    
-      <category term="Android" scheme="http://jeno5980515.github.io/tags/Android/"/>
-    
-      <category term="Cordova" scheme="http://jeno5980515.github.io/tags/Cordova/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Hexo] 主題設置</title>
-    <link href="http://jeno5980515.github.io/2017/04/18/Web/Hexo/%E4%B8%BB%E9%A1%8C%E8%A8%AD%E7%BD%AE/"/>
-    <id>http://jeno5980515.github.io/2017/04/18/Web/Hexo/主題設置/</id>
-    <published>2017-04-18T02:04:12.000Z</published>
-    <updated>2017-04-20T03:55:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了一下Hexo主題的寫法，在這邊紀錄一下。</p>
-<a id="more"></a>
-<h1 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h1><p>Hexo使用<code>EJS</code>和<code>Stylus</code>。</p>
-<p>EJS在<code>layout</code>而Stylus在<code>source</code>裡，靜態產生後的來源都可以放在<code>source</code>資料夾裡。</p>
-<h1 id="New-Page"><a href="#New-Page" class="headerlink" title="New Page"></a>New Page</h1><p>想要新增一個頁面可以輸入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;xxx&quot;</div></pre></td></tr></table></figure></p>
-<p>並且在主題內的<code>_config.yml</code>的<code>menu</code>加上頁面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">	home: /</div><div class="line">	archives: archives</div><div class="line">	tags: tags</div><div class="line">	xxx: xxx</div></pre></td></tr></table></figure></p>
-<h1 id="EJS"><a href="#EJS" class="headerlink" title="EJS"></a>EJS</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//只執行</div><div class="line">&lt;% %&gt;</div><div class="line">//將執行結果轉成字串</div><div class="line">&lt;%- %&gt;</div><div class="line">//引入其他ejs</div><div class="line">&lt;%- partial(&apos;article&apos;) %&gt;</div></pre></td></tr></table></figure>
-<h1 id="Hexo變數及函式"><a href="#Hexo變數及函式" class="headerlink" title="Hexo變數及函式"></a>Hexo變數及函式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//當前是否首頁</span></div><div class="line">is_home()</div><div class="line"><span class="comment">//當前是否在某個頁面</span></div><div class="line">is_current(<span class="string">"xxx"</span>)</div><div class="line"><span class="comment">//路徑前加根路徑</span></div><div class="line">url_for()</div><div class="line"><span class="comment">//當前頁面變數</span></div><div class="line">page</div><div class="line"><span class="comment">//當前頁面路徑</span></div><div class="line">page.path</div><div class="line"><span class="comment">//網站變數</span></div><div class="line">site</div><div class="line"><span class="comment">//網站所有文章</span></div><div class="line">site.posts</div></pre></td></tr></table></figure>
-<h1 id="Nav"><a href="#Nav" class="headerlink" title="Nav"></a>Nav</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//當初設在主題_config.yml的menu內容</div><div class="line">&lt;% for (var i in theme.menu)&#123; %&gt;</div><div class="line">	&lt;a href=&quot;&lt;%- url_for(theme.menu[i]) %&gt;&quot; &gt;&lt;%- i  %&gt;&lt;/a&gt;</div><div class="line">&lt;% &#125; %&gt;</div></pre></td></tr></table></figure>
-<h1 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h1><p>Hexo的文章似乎沒有不同分頁屬性的結構，只能使用md的屬性或者來源來分辨。</p>
-<p>文章有預設的屬性不能自己新增，在這邊使用屬性中的資料夾來源辨別。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;% </div><div class="line">site.posts.forEach(function(post)&#123;</div><div class="line">	var slug = post.slug.split(&quot;/&quot;)[0] ;</div><div class="line">	if ( slug === &quot;xxx&quot; )&#123; %&gt;</div><div class="line">		&lt;img src=&lt;%- post.photos[0] %&gt; /&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.title %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.description %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">		&lt;div &gt;</div><div class="line">			&lt;%- post.content %&gt;</div><div class="line">		&lt;/div&gt;</div><div class="line">	&lt;% &#125;</div><div class="line">&#125;) %&gt;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近研究了一下Hexo主題的寫法，在這邊紀錄一下。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Hexo" scheme="http://jeno5980515.github.io/categories/Web/Hexo/"/>
-    
-    
-      <category term="Hexo" scheme="http://jeno5980515.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Web] AMD及效能調校</title>
-    <link href="http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD%E5%8F%8A%E6%95%88%E8%83%BD%E8%AA%BF%E6%A0%A1/"/>
-    <id>http://jeno5980515.github.io/2017/04/13/Web/Overall/AMD及效能調校/</id>
-    <published>2017-04-13T11:50:46.000Z</published>
-    <updated>2017-04-14T05:46:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近另一個專案的網站一上線馬上就崩潰了，紀錄一下關於效能上的解決方法。</p>
-<a id="more"></a>
-<h2 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h2><p>該網站的效能瓶頸在於會載入大量js寫成的動畫效果，因此利用模組化將程式碼拆開且動態載入需要的效果即可。</p>
-<p>使用<code>createElement</code>產生<code>script</code>，再綁定<code>load</code>事件來偵測是否載入完畢達到非同步的效果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> jsFile = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</div><div class="line">jsFile.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);</div><div class="line">jsFile.setAttribute(<span class="string">"src"</span>, <span class="string">"js/jquery.js"</span>);</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(jsFile);</div><div class="line"></div><div class="line">jsFile.addEventListener(<span class="string">"load"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log($);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>若是像以前在HTML逐步利用tag載入script，這樣子同步載入會照成阻塞以及非必要的載入，而<a href="https://en.wikipedia.org/wiki/Asynchronous_module_definition" target="_blank" rel="external">AMD</a> ( Asynchronous Module Definition ) 就是希望可以達到模組化以及異步載入的效果。</p>
-<h3 id="RequireJS"><a href="#RequireJS" class="headerlink" title="RequireJS"></a>RequireJS</h3><p>若不想像這樣一個一個綁事件，則可以利用<a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>這個函式庫達到AMD的效果。</p>
-<p>在HTML中設置<code>data-main</code>屬性註明主要的js檔(.js可省略)，<code>defer</code>和<code>async=&quot;true&quot;</code>則是註明需要異步載入(非必需)。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/require.js"</span> <span class="attr">defer</span> <span class="attr">async</span>=<span class="string">"true"</span> <span class="attr">data-main</span>=<span class="string">"/js/main"</span> &gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>使用<code>require</code>函數載入模組，可利用陣列一次載入多個模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log($);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>若想要將模組導出，則要使用<code>define</code>函數。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">getName</span> : getName</div><div class="line">	&#125;　　　</div><div class="line">&#125;);</div><div class="line"><span class="comment">// main.js</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'module1'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">m1</span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(m1.getName);  <span class="comment">// Jeno</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>若這個要導出的模組同時需要依賴其他模組，將<code>define</code>第一個參數如同<code>require</code>使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line">define([<span class="string">'jquery'</span>],<span class="function"><span class="keyword">function</span> (<span class="params">$</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">getName</span> : getName</div><div class="line">	&#125;　　　</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<h3 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h3><p>ES6中則是直接新增了<code>import</code>及<code>export</code>來使用模組。</p>
-<p>利用<code>export</code>導出模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module1.js</span></div><div class="line"><span class="comment">// default代表預設導出</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> getName()&#123;</div><div class="line">	<span class="keyword">return</span> <span class="string">"Jeno"</span> ;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getWord</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"Hello"</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>利用<code>import</code>導入模組。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">foo(); <span class="comment">//Jeno</span></div></pre></td></tr></table></figure></p>
-<p>載入模組特定的元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; getName , getWord &#125; <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">getName(); <span class="comment">//Jeno</span></div><div class="line">getWord(); <span class="comment">//Hello</span></div></pre></td></tr></table></figure></p>
-<p>載入模組所有元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Module1 <span class="keyword">from</span> <span class="string">'./module1.js'</span> ;</div><div class="line">Module1.default(); <span class="comment">//Jeno</span></div><div class="line">Module1.getWord(); <span class="comment">//Hello</span></div></pre></td></tr></table></figure></p>
-<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>調校前<br><img src="/img/Web/AMD及效能調校2.png" alt=""><br>調校後<br><img src="/img/Web/AMD及效能調校.png" alt=""><br>原本大概50人左右反應時間就需要20秒左右，改善後則是50人也不超過2秒，沒想到人數一多在效能上會有如此大的差距！</p>
-<h2 id="壓力測試"><a href="#壓力測試" class="headerlink" title="壓力測試"></a>壓力測試</h2><p><a href="https://loadimpact.com/" target="_blank" rel="external">Load Impact</a>是個免費壓力測試的服務，超過一定次數或者需要更高的要求則需要付費。</p>
-<h2 id="Slow-Query-Log"><a href="#Slow-Query-Log" class="headerlink" title="Slow Query Log"></a>Slow Query Log</h2><p><code>MySQL</code>可以在<code>my.cnf</code>加入設定記錄較慢的query。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">slow_query_log = 1 //開啟設定</div><div class="line">slow_query_log_file = /var/log/mysql-slow.log //log檔位置</div><div class="line">long_query_time = 1 //超出幾秒儲存</div></pre></td></tr></table></figure></p>
-<h2 id="Time-Log-Pivot"><a href="#Time-Log-Pivot" class="headerlink" title="Time Log Pivot"></a>Time Log Pivot</h2><p>在程式執行間隔前後紀錄當下時間，利用差值則可找出程式的效能瓶頸。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近另一個專案的網站一上線馬上就崩潰了，紀錄一下關於效能上的解決方法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
-    
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/tags/Web/"/>
-    
-      <category term="Performance" scheme="http://jeno5980515.github.io/tags/Performance/"/>
     
   </entry>
   
