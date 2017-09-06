@@ -227,13 +227,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/dp/</loc>
-        <lastmod>2017-04-14T13:27:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/%E8%83%8C%E5%8C%85/</loc>
         <lastmod>2017-04-14T13:27:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -242,13 +235,6 @@
 
     <url>
         <loc>http://jeno5980515.github.io/tags/UVa/</loc>
-        <lastmod>2017-04-14T13:27:37.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jeno5980515.github.io/tags/Tree/</loc>
         <lastmod>2017-04-14T13:27:37.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -647,14 +633,14 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Palindrome/</loc>
+        <loc>http://jeno5980515.github.io/tags/5/</loc>
         <lastmod>2017-05-09T06:04:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/5/</loc>
+        <loc>http://jeno5980515.github.io/tags/Palindrome/</loc>
         <lastmod>2017-05-09T06:04:50.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -822,15 +808,64 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/LeetCode/</loc>
+        <loc>http://jeno5980515.github.io/tags/59/</loc>
         <lastmod>2017-09-03T06:57:18.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/59/</loc>
-        <lastmod>2017-09-03T06:57:18.000Z</lastmod>
+        <loc>http://jeno5980515.github.io/tags/dp/</loc>
+        <lastmod>2017-09-06T03:19:16.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/64/</loc>
+        <lastmod>2017-09-06T03:19:16.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/94/</loc>
+        <lastmod>2017-09-06T04:19:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Tree/</loc>
+        <lastmod>2017-09-06T05:33:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/98/</loc>
+        <lastmod>2017-09-06T05:33:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/141/</loc>
+        <lastmod>2017-09-06T05:41:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/LeetCode/</loc>
+        <lastmod>2017-09-06T07:09:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/142/</loc>
+        <lastmod>2017-09-06T07:09:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

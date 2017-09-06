@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jeno5980515.github.io/"/>
-  <updated>2017-09-03T06:57:18.000Z</updated>
+  <updated>2017-09-06T07:09:40.000Z</updated>
   <id>http://jeno5980515.github.io/</id>
   
   <author>
@@ -14,6 +14,195 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[LeetCode] 142 - Linked List Cycle II</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/142%20-%20Linked%20List%20Cycle%20II/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/142 - Linked List Cycle II/</id>
+    <published>2017-09-06T05:41:47.000Z</published>
+    <updated>2017-09-06T07:09:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>在沒有額外空間且不修改的情況下判斷 Linked List 是否有環，並且回傳該環的起點。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>先同第一題一樣先使用兩個指標，一個一次一步，另一個則一次兩步直到會合。</p>
+<p>假設<br>從 Linked List 的起點到環的起點為 A<br>從 環的起點到相遇處為 B<br>從 相遇處到環的起點為 C </p>
+<p>則可以得出下列式子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2(A + B + n(B+C)) = A + B + m(B+C) , 其中 n, m 個別代表慢指針及快指針所繞的圈數</div><div class="line">=&gt; 2A + 2B + 2n(B+C) = A + B + m(B+C)</div><div class="line">=&gt; A + B = (B+C)(m-2n)</div></pre></td></tr></table></figure></p>
+<p>當題目生成時 A, B+C 已經固定，找尋是否有存在 n, m, B 使等式成立<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">n = 0 時， m = A, 而 B = A(B+C) - A</div><div class="line">=&gt; A + A(B+C) - A = A(B+C)  </div><div class="line">=&gt; A(B+C) = A(B+C)</div></pre></td></tr></table></figure></p>
+<p>因此<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">A + B = (B+C)(m-2n)</div><div class="line">=&gt; A + B + C = (B+C)(m-2n) + C</div><div class="line">=&gt; A = (B+C)(m-2n-1) + C </div><div class="line">=&gt; A = (B+C)(A-1) + C</div></pre></td></tr></table></figure></p>
+<p>因此從 Linked List 起點開始的指針必定會和從相會處開始的指針交於環的起點。</p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * function ListNode(val) &#123;</div><div class="line"> *     this.val = val;</div><div class="line"> *     this.next = null;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;ListNode&#125; head</div><div class="line"> * @return &#123;ListNode&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> detectCycle = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( head === <span class="literal">null</span> ) <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">let</span> fast = head;</div><div class="line">  <span class="keyword">let</span> slow = head;</div><div class="line">  <span class="keyword">while</span> ( fast.next &amp;&amp; fast.next.next )&#123;</div><div class="line">    fast = fast.next.next;</div><div class="line">    slow = slow.next;</div><div class="line">    <span class="keyword">if</span> ( fast === slow )&#123;</div><div class="line">      slow = head;</div><div class="line">      <span class="keyword">while</span> ( slow !== fast )&#123;</div><div class="line">        slow = slow.next;</div><div class="line">        fast = fast.next;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> slow;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;在沒有額外空間且不修改的情況下判斷 Linked List 是否有環，並且回傳該環的起點。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="142" scheme="http://jeno5980515.github.io/tags/142/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 141 - Linked List Cycle</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/141%20-%20Linked%20List%20Cycle/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/141 - Linked List Cycle/</id>
+    <published>2017-09-06T05:36:43.000Z</published>
+    <updated>2017-09-06T05:41:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>在沒有額外空間的情況下判斷 Linked List 是否有環。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>使用兩個指針遍歷這個 Linked List 。一個一次走兩步，另一個則一次走一步，若有環則必定會合同一個點。</p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * function ListNode(val) &#123;</div><div class="line"> *     this.val = val;</div><div class="line"> *     this.next = null;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;ListNode&#125; head</div><div class="line"> * @return &#123;boolean&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> hasCycle = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( head === <span class="literal">null</span> ) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">let</span> fast = head;</div><div class="line">  <span class="keyword">let</span> slow = head;</div><div class="line">  <span class="keyword">while</span> ( fast.next &amp;&amp; fast.next.next )&#123;</div><div class="line">    fast = fast.next.next;</div><div class="line">    slow = slow.next;</div><div class="line">    <span class="keyword">if</span> ( fast === slow )&#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;在沒有額外空間的情況下判斷 Linked List 是否有環。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="141" scheme="http://jeno5980515.github.io/tags/141/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 102 - Binary Tree Level Order Traversal</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/102%20-%20Binary%20Tree%20Level%20Order%20Traversal/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/102 - Binary Tree Level Order Traversal/</id>
+    <published>2017-09-06T04:30:05.000Z</published>
+    <updated>2017-09-06T05:33:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p><code>Level Order Traversal</code> 二元樹。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>BFS。</p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * function TreeNode(val) &#123;</div><div class="line"> *     this.val = val;</div><div class="line"> *     this.left = this.right = null;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;TreeNode&#125; root</div><div class="line"> * @return &#123;number[][]&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> levelOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( !root ) <span class="keyword">return</span> [];</div><div class="line">  <span class="keyword">let</span> queue = [root];</div><div class="line">  <span class="keyword">let</span> levels = [];</div><div class="line">  <span class="keyword">while</span>( queue.length !== <span class="number">0</span> )&#123;</div><div class="line">    <span class="keyword">let</span> length = queue.length;</div><div class="line">    levels.push([]);</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i ++ )&#123;</div><div class="line">      <span class="keyword">let</span> node = queue.shift();</div><div class="line">      levels[levels.length<span class="number">-1</span>].push(node.val);</div><div class="line">      <span class="keyword">if</span> ( node.left ) queue.push(node.left);</div><div class="line">      <span class="keyword">if</span> ( node.right ) queue.push(node.right);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> levels;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Level Order Traversal&lt;/code&gt; 二元樹。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="Tree" scheme="http://jeno5980515.github.io/tags/Tree/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="98" scheme="http://jeno5980515.github.io/tags/98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 98 - Validate Binary Search Tree</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/98%20-%20Validate%20Binary%20Search%20Tree/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/98 - Validate Binary Search Tree/</id>
+    <published>2017-09-06T04:19:53.000Z</published>
+    <updated>2017-09-06T04:29:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>判斷是否為二元搜尋樹。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>二元搜尋樹對於任一節點來說，左子樹必小於且右子樹必大於該節點。</p>
+<p>利用 <code>Inorder Traversal</code> 的特性「左子樹-&gt;根-&gt;右子樹」，判斷該結果是否為升序排列即可。</p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * function TreeNode(val) &#123;</div><div class="line"> *     this.val = val;</div><div class="line"> *     this.left = this.right = null;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;TreeNode&#125; root</div><div class="line"> * @return &#123;boolean&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> isValidBST = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</div><div class="line">    </div><div class="line">  <span class="keyword">let</span> stack = [];</div><div class="line">  <span class="keyword">let</span> result = [];</div><div class="line">  <span class="keyword">let</span> node = root;</div><div class="line"></div><div class="line">  <span class="keyword">while</span>( stack.length !== <span class="number">0</span> || node !== <span class="literal">null</span> )&#123;</div><div class="line">    <span class="keyword">while</span> ( node !== <span class="literal">null</span> )&#123;</div><div class="line">      stack.push(node);</div><div class="line">      node = node.left;</div><div class="line">    &#125;</div><div class="line">    node = stack.pop();</div><div class="line">    result.push(node.val);</div><div class="line">    node = node.right;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">1</span> ; i &lt; result.length ; i ++ )&#123;</div><div class="line">    <span class="keyword">if</span> ( result[i] &lt;= result[i<span class="number">-1</span>] )&#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;判斷是否為二元搜尋樹。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="Tree" scheme="http://jeno5980515.github.io/tags/Tree/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="98" scheme="http://jeno5980515.github.io/tags/98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 94 - Binary Tree Inorder Traversal</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/94%20-%20Binary%20Tree%20Inorder%20Traversal/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/94 - Binary Tree Inorder Traversal/</id>
+    <published>2017-09-06T03:09:44.000Z</published>
+    <updated>2017-09-06T04:19:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>使用非遞迴的方式 <code>Inorder Traversal</code> 二元樹。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>Inorder 順序是左子樹、根、右子樹，利用 <code>stack</code> 來完成 Traversal 。</p>
+<p>往左子樹下看並同時將一路上的根放入 stack，當碰到 null 時代表該節點左子樹已到底，pop 出該節點（此時視為根）且紀錄，因此接著進入該節點右子樹重複步驟上述步驟，直到該節點右子樹遍歷完，代表該節點的根之左子樹遍歷完畢，再依此類推。</p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * function TreeNode(val) &#123;</div><div class="line"> *     this.val = val;</div><div class="line"> *     this.left = this.right = null;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;TreeNode&#125; root</div><div class="line"> * @return &#123;number[]&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> inorderTraversal = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> ( !root ) <span class="keyword">return</span> [];</div><div class="line">  </div><div class="line">  <span class="keyword">let</span> stack = [];</div><div class="line">  <span class="keyword">let</span> result = [];</div><div class="line">  <span class="keyword">let</span> node = root;</div><div class="line">  </div><div class="line">  <span class="keyword">while</span>( stack.length !== <span class="number">0</span> || node !== <span class="literal">null</span> )&#123;</div><div class="line">    <span class="keyword">while</span> ( node !== <span class="literal">null</span> )&#123;</div><div class="line">      stack.push(node);</div><div class="line">      node = node.left;</div><div class="line">    &#125;</div><div class="line">    node = stack.pop();</div><div class="line">    result.push(node.val);</div><div class="line">    node = node.right;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;使用非遞迴的方式 &lt;code&gt;Inorder Traversal&lt;/code&gt; 二元樹。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="Tree" scheme="http://jeno5980515.github.io/tags/Tree/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="94" scheme="http://jeno5980515.github.io/tags/94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[LeetCode] 64 - Minimum Path Sum</title>
+    <link href="http://jeno5980515.github.io/2017/09/06/Online%20Judge/LeetCode/64%20-%20Minimum%20Path%20Sum/"/>
+    <id>http://jeno5980515.github.io/2017/09/06/Online Judge/LeetCode/64 - Minimum Path Sum/</id>
+    <published>2017-09-06T03:09:44.000Z</published>
+    <updated>2017-09-06T03:19:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>給一個 m x n 填滿非負數的矩陣，從左上方開始往右下走且每一步只能往右或往下走，求最小數字總和。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>DP。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dp(i,j) = dp[i][j<span class="number">-1</span>] + grid[i][j] <span class="keyword">if</span> i = <span class="number">0</span></div><div class="line">	= dp[i<span class="number">-1</span>][j] + grid[i][j] <span class="keyword">if</span> j = <span class="number">0</span></div><div class="line">	= min(dp[i<span class="number">-1</span>][j], dp[i][j<span class="number">-1</span>]) + grid[i][j] <span class="keyword">else</span></div></pre></td></tr></table></figure></p>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[][]&#125; grid</div><div class="line"> * @return &#123;number&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> minPathSum = <span class="function"><span class="keyword">function</span>(<span class="params">grid</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> m = grid.length, n = grid[<span class="number">0</span>].length;</div><div class="line">  <span class="keyword">const</span> dp = <span class="built_in">Array</span>.apply(<span class="literal">null</span>, <span class="built_in">Array</span>(m+<span class="number">1</span>)).map(<span class="function"><span class="params">row</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Array</span>(n+<span class="number">1</span>).fill(<span class="number">0</span>));</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">let</span> i = <span class="number">1</span> ; i &lt; dp.length ; i ++ )&#123;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">let</span> j = <span class="number">1</span> ; j &lt; dp[i].length ; j ++ )&#123;</div><div class="line">      <span class="keyword">if</span> ( i === <span class="number">1</span> ) dp[i][j] = dp[i][j<span class="number">-1</span>] + grid[i<span class="number">-1</span>][j<span class="number">-1</span>];</div><div class="line">      <span class="keyword">else</span> <span class="keyword">if</span> ( j === <span class="number">1</span> ) dp[i][j] = dp[i<span class="number">-1</span>][j] + grid[i<span class="number">-1</span>][j<span class="number">-1</span>];</div><div class="line">      <span class="keyword">else</span> dp[i][j] = <span class="built_in">Math</span>.min(dp[i<span class="number">-1</span>][j], dp[i][j<span class="number">-1</span>]) + grid[i<span class="number">-1</span>][j<span class="number">-1</span>]; </div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> dp[m][n];</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h2&gt;&lt;p&gt;給一個 m x n 填滿非負數的矩陣，從左上方開始往右下走且每一步只能往右或往下走，求最小數字總和。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
+    
+    
+      <category term="dp" scheme="http://jeno5980515.github.io/tags/dp/"/>
+    
+      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
+    
+      <category term="64" scheme="http://jeno5980515.github.io/tags/64/"/>
+    
+  </entry>
   
   <entry>
     <title>[LeetCode] 59 - Spiral Matrix II</title>
@@ -550,382 +739,6 @@
       <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
     
       <category term="Curry" scheme="http://jeno5980515.github.io/tags/Curry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Other] Untrusted</title>
-    <link href="http://jeno5980515.github.io/2017/05/12/Other/Untrusted/"/>
-    <id>http://jeno5980515.github.io/2017/05/12/Other/Untrusted/</id>
-    <published>2017-05-12T10:44:20.000Z</published>
-    <updated>2017-05-12T11:27:29.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://alexnisnevich.github.io/untrusted/" target="_blank" rel="external">Untrusted</a> 這個小遊戲必須由玩家編寫 JavaScript 來完成任務，遊戲目的只要操作角色到出口即可。</p>
-<p>其中必須觀察現有的程式，大部分的程式是不能做修改的，必須在黑色的地方新增或修改程式讓遊戲可以順利進行。</p>
-<a id="more"></a>
-<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><h3 id="1-cellBlockA"><a href="#1-cellBlockA" class="headerlink" title="1. cellBlockA"></a>1. cellBlockA</h3><p>直接將黑色部分的程式刪除即可</p>
-<h3 id="2-theLongWayOut"><a href="#2-theLongWayOut" class="headerlink" title="2. theLongWayOut"></a>2. theLongWayOut</h3><p>將 maze 重設大小 (非必要)，另外新增一個出口</p>
-<h3 id="3-validationEngaged"><a href="#3-validationEngaged" class="headerlink" title="3. validationEngaged"></a>3. validationEngaged</h3><p>在維持一定數量的 block 情況下修改位置</p>
-<h3 id="4-multiplicity"><a href="#4-multiplicity" class="headerlink" title="4. multiplicity"></a>4. multiplicity</h3><p>新增一個出口</p>
-<h3 id="5-minesweeper"><a href="#5-minesweeper" class="headerlink" title="5. minesweeper"></a>5. minesweeper</h3><p>修改地雷的顏色</p>
-<h3 id="6-drones101"><a href="#6-drones101" class="headerlink" title="6. drones101"></a>6. drones101</h3><p>新增一長條的 block 來阻擋 d 的去路</p>
-<h3 id="7-colors"><a href="#7-colors" class="headerlink" title="7. colors"></a>7. colors</h3><p>這邊的電話可以讓你按Q或Ctrl+6執行callback，因此在callback裡每次呼叫都改變顏色即可</p>
-<h3 id="8-intoTheWoods"><a href="#8-intoTheWoods" class="headerlink" title="8. intoTheWoods"></a>8. intoTheWoods</h3><p>將callback函式改成<code>generateForest</code>，如此一來一邊行動一邊重新產生樹林即可到達終點</p>
-<h3 id="9-fordingTheRiver"><a href="#9-fordingTheRiver" class="headerlink" title="9. fordingTheRiver"></a>9. fordingTheRiver</h3><p>重新定義一個raft，然後放一堆到水面上穿過</p>
-<h3 id="10-ambush"><a href="#10-ambush" class="headerlink" title="10. ambush"></a>10. ambush</h3><p>全部改成向右移動，並在出口的平行左邊放一個 block 阻擋 d 繼續向右擋到出口</p>
-<h3 id="11-robot"><a href="#11-robot" class="headerlink" title="11. robot"></a>11. robot</h3><p>若機器人可以向右則向右，否則向下，接著跟機器人會合拿到鑰匙即可</p>
-<h3 id="12-robotNav"><a href="#12-robotNav" class="headerlink" title="12. robotNav"></a>12. robotNav</h3><p>在第一個 # 柱子放四個直的，然後再第二個左邊放置一個4個 block 類似閃電的圖形，接著機器人行動判斷向右-&gt;向下-&gt;向上即可。</p>
-<h3 id="13-robotMaze"><a href="#13-robotMaze" class="headerlink" title="13. robotMaze"></a>13. robotMaze</h3><p>這關運氣好，只有讓機器人先向下然後向右，某次產生的地圖可以過關</p>
-<h3 id="14-crispsContest"><a href="#14-crispsContest" class="headerlink" title="14. crispsContest"></a>14. crispsContest</h3><p>修改的地方改成藍色鑰匙，行動順序如下</p>
-<p>左邊<span style="color:blue;">⊗</span>-&gt;<span style="color:green;">⊗</span>-&gt;<span style="color:blue;">⊗</span>-&gt;右上<span style="color:red;">⊗</span>-&gt;<span style="color:green;">⊗</span>-&gt;<span style="color:red;">⊗</span>-&gt;右下<span style="color:yellow;">⊗</span>-&gt;<span style="color:blue;">⊗</span>-&gt;<span style="color:yellow;">⊗</span></p>
-<h3 id="15-exceptionalCrossing"><a href="#15-exceptionalCrossing" class="headerlink" title="15. exceptionalCrossing"></a>15. exceptionalCrossing</h3><p>修改的地方改成一個未宣告的變數，如此一來就可以穿越水面到終點</p>
-<h3 id="16-lasers"><a href="#16-lasers" class="headerlink" title="16. lasers"></a>16. lasers</h3><p>在最下面重寫<code>getRandomInt</code>函式，每次回傳到同一個數字例如0，如此一來雷射都會產生在那個點而已。</p>
-<h3 id="17-pointers"><a href="#17-pointers" class="headerlink" title="17. pointers"></a>17. pointers</h3><p>這關莫名其妙過了，目前想法是一定要讓傳送點傳到傳送點不可以直接傳到 trap ，然後就會到出口附近的傳送點了。</p>
-<h3 id="18-superDrEvalBros"><a href="#18-superDrEvalBros" class="headerlink" title="18. superDrEvalBros"></a>18. superDrEvalBros</h3><p>在callback裡面另外寫一個反重力函式讓角色不斷向上且註冊 timer 即可。</p>
-<h3 id="19-documentObjectMadness"><a href="#19-documentObjectMadness" class="headerlink" title="19. documentObjectMadness"></a>19. documentObjectMadness</h3><p>這關不知道在幹麻亂動就過了 ….</p>
-<h3 id="20-bossFight"><a href="#20-bossFight" class="headerlink" title="20. bossFight"></a>20. bossFight</h3><p>可以發現只有在最一開始限制了 dynamic 數量，並且非 dynamic 數量還允許你建一個，因此 define 一個 boss2 和 bullet2 ， 讓使用者碰觸到 boss2 的時候會發射向上的 bullet2 來炸光所有 boss 即可得到 Algorithm</p>
-<h3 id="21-endOfTheLine"><a href="#21-endOfTheLine" class="headerlink" title="21. endOfTheLine"></a>21. endOfTheLine</h3><p>進入 menu 的 scripts 的 object.js，把 exit 裡的判斷 finalLevel 拿掉即可。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://alexnisnevich.github.io/untrusted/&quot;&gt;Untrusted&lt;/a&gt; 這個小遊戲必須由玩家編寫 JavaScript 來完成任務，遊戲目的只要操作角色到出口即可。&lt;/p&gt;
-&lt;p&gt;其中必須觀察現有的程式，大部分的程式是不能做修改的，必須在黑色的地方新增或修改程式讓遊戲可以順利進行。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Other" scheme="http://jeno5980515.github.io/categories/Other/"/>
-    
-    
-      <category term="Game" scheme="http://jeno5980515.github.io/tags/Game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[LeetCode] 136 - Single Number</title>
-    <link href="http://jeno5980515.github.io/2017/05/12/Online%20Judge/LeetCode/136%20-%20Single%20Number/"/>
-    <id>http://jeno5980515.github.io/2017/05/12/Online Judge/LeetCode/136 - Single Number/</id>
-    <published>2017-05-12T02:47:30.000Z</published>
-    <updated>2017-05-12T02:54:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>有一個陣列裡面的元素皆出現兩次，只有一個元素為一次，找出獨立的那個元素。</p>
-<a id="more"></a>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>利用XOR運算，兩個相同的元素XOR運算結果為0，所以剩下的那一個就是答案。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>^<span class="number">2</span>^<span class="number">3</span>^<span class="number">4</span>^<span class="number">3</span>^<span class="number">2</span>^<span class="number">1</span> = <span class="number">1</span>^<span class="number">1</span>^<span class="number">2</span>^<span class="number">2</span>^<span class="number">3</span>^<span class="number">3</span>^<span class="number">4</span> = <span class="number">4</span></div></pre></td></tr></table></figure></p>
-<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;number[]&#125; nums</div><div class="line"> * @return &#123;number&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> singleNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> number = nums[<span class="number">0</span>] ;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">1</span> ; i &lt; nums.length ; i ++ )&#123;</div><div class="line">        number ^= nums[i] ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> number ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;有一個陣列裡面的元素皆出現兩次，只有一個元素為一次，找出獨立的那個元素。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
-    
-      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
-    
-    
-      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
-    
-      <category term="136" scheme="http://jeno5980515.github.io/tags/136/"/>
-    
-      <category term="XOR" scheme="http://jeno5980515.github.io/tags/XOR/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[LeetCode] 5 - Longest Palindromic Substring</title>
-    <link href="http://jeno5980515.github.io/2017/05/09/Online%20Judge/LeetCode/5%20-%20Longest%20Palindromic%20Substring/"/>
-    <id>http://jeno5980515.github.io/2017/05/09/Online Judge/LeetCode/5 - Longest Palindromic Substring/</id>
-    <published>2017-05-09T05:51:34.000Z</published>
-    <updated>2017-05-09T06:04:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h1><p>求最長回文子字串。</p>
-<a id="more"></a>
-<h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><p>假設<code>dp(i,j)</code>代表從i到j的子字串是否為回文，得到下列遞迴式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dp(i,j) = <span class="number">1</span> , <span class="keyword">if</span> ( s[i] == s[j] &amp;&amp; dp(i+<span class="number">1</span>,j<span class="number">-1</span>) == <span class="number">1</span> ) </div><div class="line">	= <span class="number">0</span> , <span class="keyword">else</span></div></pre></td></tr></table></figure></p>
-<h1 id="心得"><a href="#心得" class="headerlink" title="心得"></a>心得</h1><p>不得不說JavaScript真的是慢了許多 … </p>
-<h1 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;string&#125; s</div><div class="line"> * @return &#123;string&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> longestPalindrome = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( s.length &lt;= <span class="number">1</span> ) <span class="keyword">return</span> s ;</div><div class="line">    <span class="keyword">var</span> nowMax = <span class="number">1</span> , nowString = s[s.length<span class="number">-1</span>] ;</div><div class="line">    <span class="keyword">var</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length+<span class="number">1</span>);</div><div class="line">    <span class="keyword">var</span> copy = <span class="keyword">new</span> <span class="built_in">Array</span>(s.length+<span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s.length+<span class="number">1</span> ; i++) &#123;</div><div class="line">        copy[i] = <span class="literal">true</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; s.length+<span class="number">1</span>; i++)&#123;</div><div class="line">        dp[i] = copy.slice(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = s.length - <span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i -- )&#123;</div><div class="line">        <span class="keyword">for</span> ( <span class="keyword">var</span> j = i + <span class="number">1</span> ; j &lt; s.length ; j ++ )&#123;</div><div class="line">            <span class="keyword">if</span> ( s[i] === s[j] &amp;&amp; dp[i+<span class="number">1</span>][j<span class="number">-1</span>] !== <span class="literal">false</span> )&#123;</div><div class="line">                dp[i][j] = <span class="literal">true</span> ;</div><div class="line">                <span class="keyword">if</span> ( j - i + <span class="number">1</span> &gt; nowMax )&#123;</div><div class="line">                    nowMax = j - i + <span class="number">1</span> ;</div><div class="line">                    nowString = s.substring(i,j+<span class="number">1</span>) ;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                dp[i][j] = <span class="literal">false</span> ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> nowString ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;題意&quot;&gt;&lt;a href=&quot;#題意&quot; class=&quot;headerlink&quot; title=&quot;題意&quot;&gt;&lt;/a&gt;題意&lt;/h1&gt;&lt;p&gt;求最長回文子字串。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Online Judge" scheme="http://jeno5980515.github.io/categories/Online-Judge/"/>
-    
-      <category term="LeetCode" scheme="http://jeno5980515.github.io/categories/Online-Judge/LeetCode/"/>
-    
-    
-      <category term="LeetCode" scheme="http://jeno5980515.github.io/tags/LeetCode/"/>
-    
-      <category term="Palindrome" scheme="http://jeno5980515.github.io/tags/Palindrome/"/>
-    
-      <category term="5" scheme="http://jeno5980515.github.io/tags/5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[JavaScript] V8 和 Event Loop</title>
-    <link href="http://jeno5980515.github.io/2017/05/08/Programming%20Language/JavaScript/V8%20%E5%92%8C%20Event%20Loop/"/>
-    <id>http://jeno5980515.github.io/2017/05/08/Programming Language/JavaScript/V8 和 Event Loop/</id>
-    <published>2017-05-08T08:55:36.000Z</published>
-    <updated>2017-05-11T03:29:26.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近研究了下 V8 和 Event Loop，以下圖片和程式碼皆引用自影片中。</p>
-<a id="more"></a>
-<h2 id="V8"><a href="#V8" class="headerlink" title="V8"></a>V8</h2><p>以往JavaScript是透過直譯式的方式執行，而 V8 會直接將 JavaScript 轉換成電腦看的懂的<code>Machine Code</code> 再執行，目前在 Chrome 和 Node.js 都是使用這套引擎。</p>
-<hr>
-<h3 id="Hidden-Class"><a href="#Hidden-Class" class="headerlink" title="Hidden Class"></a>Hidden Class</h3><p>JavaScript是動態語言，這帶來了便利但也造成效能問題，以往類似引擎會採用類似<code>Hash Table</code>的方式來編譯，而V8則會在<code>Runtime</code>的時候建立<code>Hidden Class</code>。</p>
-<p>若物件有相同的<code>Hidden Class</code>，則可以使用相同的<code>Machine Code</code>，稱之為<code>Inline Caches</code>。</p>
-<p><img src="/img/JavaScript/about/v8_1.PNG" alt=""><br>依照程式的執行順序，我們會依序創建<code>Hidden Class</code>。</p>
-<p>p1：<br><code>Point</code>-&gt;<code>Point,x</code>-&gt;<code>Point,x,y</code><br>p2：<br>由於創建過所以可以直接指到<code>Point,x,y</code>，這時候如果我們給p2一個新的值z，則會創建一個<code>Point,x,y,z</code></p>
-<h4 id="優化"><a href="#優化" class="headerlink" title="優化"></a>優化</h4><ol>
-<li>經由構造函數創建所有的物件</li>
-<li>使用同順序創建物件的元素</li>
-</ol>
-<hr>
-<h3 id="數字"><a href="#數字" class="headerlink" title="數字"></a>數字</h3><p><img src="/img/JavaScript/about/v8_2.PNG" alt=""><br>V8會用32 bits的空間<br>用最後一個bit來判別是不是數字，1為物件指標而0則為數字。</p>
-<p>萬一這個數字超過31個bits，這時候會將數字放在Box裡並轉換為double，再存到物件中。</p>
-<h4 id="優化-1"><a href="#優化-1" class="headerlink" title="優化"></a>優化</h4><ul>
-<li>使用31 bits的有符號整數</li>
-</ul>
-<hr>
-<h3 id="陣列"><a href="#陣列" class="headerlink" title="陣列"></a>陣列</h3><h4 id="Fast-Elements"><a href="#Fast-Elements" class="headerlink" title="Fast Elements"></a>Fast Elements</h4><p>緊密的陣列會使用線性的儲存。</p>
-<h4 id="Dictionary-Elements"><a href="#Dictionary-Elements" class="headerlink" title="Dictionary Elements"></a>Dictionary Elements</h4><p>寬鬆的陣列會使用<code>Hash Table</code>儲存。 </p>
-<h4 id="優化-2"><a href="#優化-2" class="headerlink" title="優化"></a>優化</h4><ol>
-<li>使用連續的陣列並且起始為0</li>
-<li>不要宣告一個過大的陣列</li>
-<li>別刪除陣列的元素  </li>
-<li><p>別使用未宣告或者已刪除的元素</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bad</span></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> b = <span class="number">0</span> ; b &lt; <span class="number">10</span> ; b ++ )&#123;</div><div class="line">	a[<span class="number">0</span>] |= b ;</div><div class="line">&#125;</div><div class="line"><span class="comment">//good</span></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line">a[<span class="number">0</span>] = <span class="number">0</span> ;</div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> b = <span class="number">0</span> ; b &lt; <span class="number">10</span> ; b ++ )&#123;</div><div class="line">	a[<span class="number">0</span>] |= b ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>若陣列中值的類型都是<code>Double</code>，陣列會將Double unbox且直接存在Double類型的buffer。</p>
-</li>
-<li>若陣列的元素類型不一致會產生不同的<code>Hidden Class</code>，因此造成效能上的花費。<br><img src="/img/JavaScript/about/v8_4.PNG" alt=""></li>
-<li><p>事先宣告可在compile時讓V8優化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = [ <span class="number">77</span> , <span class="number">88</span> , <span class="number">0.5</span> , <span class="literal">true</span> ] ;</div></pre></td></tr></table></figure>
-</li>
-<li><p>小陣列中事先宣告正確大小</p>
-</li>
-</ol>
-<hr>
-<h3 id="Compilers"><a href="#Compilers" class="headerlink" title="Compilers"></a>Compilers</h3><p>V8有兩種Compilers。</p>
-<h4 id="Full-Compiler"><a href="#Full-Compiler" class="headerlink" title="Full Compiler"></a>Full Compiler</h4><ol>
-<li>盡快產生可以執行的程式</li>
-<li>在<code>Compile Time</code>幾乎不做類別分析</li>
-<li>使用<code>Inline Caches</code>在<code>Runtime</code>做類別分析且最佳化，同樣的<code>Hidden Class</code>可以使用同樣的最佳化程式。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"> x , y </span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> x + y ;</div><div class="line">&#125;</div><div class="line">add(<span class="number">1</span>,<span class="number">2</span>);	<span class="comment">// Monomorphic</span></div><div class="line">add(<span class="string">"a"</span>,<span class="string">"b"</span>);	<span class="comment">// Polymorphic</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="Optimizing-Compiler"><a href="#Optimizing-Compiler" class="headerlink" title="Optimizing Compiler"></a>Optimizing Compiler</h4><ol>
-<li>Optimizing Compiler會收集<code>Inline Caches</code>的資訊來對於常使用的函式重新編譯。</li>
-<li><code>try/catch</code>區塊無法最佳化 (影片為2012年，不曉得目前是否仍是如此)</li>
-<li>若要使用<code>try/catch</code>則使用下列方式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">perf</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">// do work here</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	perf();</div><div class="line">&#125; <span class="keyword">catch</span> (e)&#123;</div><div class="line">	<span class="comment">// handle exceptions here</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<h3 id="反最佳化"><a href="#反最佳化" class="headerlink" title="反最佳化"></a>反最佳化</h3><p>若 V8 發現最佳化的效果不佳會自動反最佳化，如此一來會造成效能上的損失。</p>
-<h4 id="優化-3"><a href="#優化-3" class="headerlink" title="優化"></a>優化</h4><ul>
-<li>不要改變最佳化的function造成<code>Hidden Class</code>的改變。</li>
-</ul>
-<hr>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.isPrimeDivisible = <span class="function"><span class="keyword">function</span>(<span class="params">candidate</span>)</span>&#123;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">1</span> ; i &lt;= <span class="keyword">this</span>.prime_count ; ++i )&#123;</div><div class="line">		<span class="keyword">if</span> ( candidate % <span class="keyword">this</span>.primes[i] === <span class="number">0</span> ) </div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>這段程式碼中由於超出邊界，如此一來造成效能上的影響<br><img src="/img/JavaScript/about/v8_9.PNG" alt=""><br>修正邊界後<br><img src="/img/JavaScript/about/v8_10.PNG" alt=""></p>
-<p>演算法上的影響也很重要。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.isPrimeDivisible = <span class="function"><span class="keyword">function</span>(<span class="params">candidate</span>)</span>&#123;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">1</span> ; i &lt;= <span class="keyword">this</span>.prime_count ; ++i )&#123;</div><div class="line">		<span class="keyword">var</span> current_prime = <span class="keyword">this</span>.primes[i] ;</div><div class="line">		<span class="keyword">if</span> ( current_prime * current_prime &gt; candidate )&#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> ( candidate % current_prime === <span class="number">0</span> ) </div><div class="line">			<span class="keyword">return</span> <span class="literal">true</span> ;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>改進後的效能差異<br><img src="/img/JavaScript/about/v8_13.PNG" alt=""></p>
-<hr>
-<h2 id="單執行緒"><a href="#單執行緒" class="headerlink" title="單執行緒"></a>單執行緒</h2><p>由於起初做為瀏覽器的語言，JavaScript被設計為單執行緒，如此才不會在多執行緒的情況下造成 DOM 操作上的問題。</p>
-<p>HTML5的<code>Web Worker</code>可以另外建立執行緒，但新的執行緒仍不能操作 DOM。</p>
-<h2 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h2><p>現在知道了JavaScript是如何編譯運行的，那JavaScript是如何處理異步事件像是DOM、HTTP Request、Timer等等呢？</p>
-<p><img src="/img/JavaScript/about/event_1.PNG" alt=""><br>前面提到的V8就負責了<code>heap</code>和<code>stack</code>操作，那些WebAPIs則不包含在V8裡頭。 (瀏覽器端的WebAPIs和Node.js的API不同，但<code>Event Loop</code>原理是差不多的。)</p>
-<p>單執行緒代表了只有一個<code>call stack</code>，也代表了一次只能做一件事情。</p>
-<p>而其他API的事件則會經由其他的執行緒來運行，等執行完成再觸發callback。</p>
-<p>下列一段程式碼在stack的情形。<br><img src="/img/JavaScript/about/event_2.PNG" alt=""></p>
-<hr>
-<p>stack 的情形也常在 console 中看到。<br><img src="/img/JavaScript/about/event_3.PNG" alt=""></p>
-<p>無窮遞迴的情形。<br><img src="/img/JavaScript/about/event_4.PNG" alt=""></p>
-<hr>
-<h3 id="Task-Queue"><a href="#Task-Queue" class="headerlink" title="Task Queue"></a>Task Queue</h3><p><code>task queue</code>用來儲存需要執行的程式。</p>
-<p>setTimeout 經由 API 在別的執行緒進行。<br><img src="/img/JavaScript/about/event_5.PNG" alt=""></p>
-<p>一但 API 執行完，則把 callback 放回<code>task queue</code>等待運行<br><img src="/img/JavaScript/about/event_6.PNG" alt=""></p>
-<p>這時stack中的函式可能還在運行或者已完成，但要等到stack中的函式運行完才將<code>task queue</code>的任務放進 stack 運行<br><img src="/img/JavaScript/about/event_7.PNG" alt=""></p>
-<hr>
-<p>DOM事件的監聽情形。<br><img src="/img/JavaScript/about/event_8.PNG" alt=""></p>
-<p>按下按鈕後<br><img src="/img/JavaScript/about/event_9.PNG" alt=""><br>逐步執行<br><img src="/img/JavaScript/about/event_10.PNG" alt=""></p>
-<hr>
-<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><p><a href="https://www.youtube.com/watch?v=UJPdhx5zTaw" target="_blank" rel="external">Google I/O 2012 - Breaking the JavaScript Speed Limit with V8</a><br><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ" target="_blank" rel="external">Philip Roberts: What the heck is the event loop anyway? | JSConf EU 2014</a><br><a href="https://vimeo.com/96425312" target="_blank" rel="external">Philip Roberts: Help, I’m stuck in an event-loop</a><br><a href="https://github.com/v8/v8/wiki" target="_blank" rel="external">V8’s public wiki</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近研究了下 V8 和 Event Loop，以下圖片和程式碼皆引用自影片中。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Programming Language" scheme="http://jeno5980515.github.io/categories/Programming-Language/"/>
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/categories/Programming-Language/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="http://jeno5980515.github.io/tags/JavaScript/"/>
-    
-      <category term="V8" scheme="http://jeno5980515.github.io/tags/V8/"/>
-    
-      <category term="Event Loop" scheme="http://jeno5980515.github.io/tags/Event-Loop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Other] Sitemap Parsing Error</title>
-    <link href="http://jeno5980515.github.io/2017/04/28/Other/Sitemap%20Parsing%20Error/"/>
-    <id>http://jeno5980515.github.io/2017/04/28/Other/Sitemap Parsing Error/</id>
-    <published>2017-04-28T08:45:30.000Z</published>
-    <updated>2017-04-28T09:01:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近送sitemap到網站管理員總是出現Parsing Error，看了官方文件<a href="https://support.google.com/webmasters/answer/183668?visit_id=1-636289544946475704-2472833756&amp;rd=1" target="_blank" rel="external">Build and submit a sitemap</a>才發現原來是有些特殊字元沒處理到。</p>
-<p><code>&lt; &gt; &amp; &#39; &quot;</code></p>
-<p>文件上說得處理這五個符號。</p>
-<a id="more"></a>
-<h2 id="escape"><a href="#escape" class="headerlink" title="escape"></a>escape</h2><p>escape可以妥善的處理特殊符號，但對URL做escape會連<code>:</code>都做處理，因此在URL上不適用。</p>
-<h2 id="encodeURI"><a href="#encodeURI" class="headerlink" title="encodeURI"></a>encodeURI</h2><p>encodeURI不會對<code>, / ? : @ &amp; = + $ #</code>這些做處理。</p>
-<h2 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent"></a>encodeURIComponent</h2><p>encodeURIComponent連<code>:</code>和<code>/</code>都做處理了，因此也不適用。</p>
-<h2 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h2><p>既然如此就只能自己做處理了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">encodeURI</span>(url).replace(<span class="regexp">/&amp;/</span>,<span class="string">"%26"</span>).replace(<span class="regexp">/&lt;/</span>,<span class="string">"%3C"</span>).replace(<span class="regexp">/&gt;/</span>,<span class="string">"%3E"</span>).replace(<span class="regexp">/'/</span>,<span class="string">"%27"</span>).replace(<span class="regexp">/"/</span>,<span class="string">"%22"</span>);</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近送sitemap到網站管理員總是出現Parsing Error，看了官方文件&lt;a href=&quot;https://support.google.com/webmasters/answer/183668?visit_id=1-636289544946475704-2472833756&amp;amp;rd=1&quot;&gt;Build and submit a sitemap&lt;/a&gt;才發現原來是有些特殊字元沒處理到。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;&amp;lt; &amp;gt; &amp;amp; &amp;#39; &amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;文件上說得處理這五個符號。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Other" scheme="http://jeno5980515.github.io/categories/Other/"/>
-    
-    
-      <category term="Sitemap" scheme="http://jeno5980515.github.io/tags/Sitemap/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Web] Performance</title>
-    <link href="http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/"/>
-    <id>http://jeno5980515.github.io/2017/04/28/Web/Overall/Performance/</id>
-    <published>2017-04-28T03:43:34.000Z</published>
-    <updated>2017-05-01T22:29:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近看了Google的<a href="https://developers.google.com/web/" target="_blank" rel="external">Learn How to Develop the Next Generation of Applications for the Web</a>和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。</p>
-<a id="more"></a>
-<h1 id="DOM-amp-CSSOM"><a href="#DOM-amp-CSSOM" class="headerlink" title="DOM &amp; CSSOM"></a>DOM &amp; CSSOM</h1><p>HTML轉換成DOM (Document Object Model) 的流程如下圖<br><img src="/img/Web/Performance/html2dom.PNG" alt=""><br>首先會先將HTML字串<br><img src="/img/Web/Performance/html2dom1.PNG" alt=""><br>轉換成一個一個的token<br><img src="/img/Web/Performance/html2dom2.PNG" alt=""><br>再將這些token轉換成一個一個的node<br><img src="/img/Web/Performance/html2dom3.PNG" alt=""><br>最後就形成了DOM<br><img src="/img/Web/Performance/html2dom4.PNG" alt=""></p>
-<p>CSS轉換成CSSOM (CSS Object Model) 的流程如下圖<br><img src="/img/Web/Performance/css2cssom.PNG" alt=""><br>直接看到轉換成node的部分<br><img src="/img/Web/Performance/css2cssom1.PNG" alt=""><br>p是body的子節點，因為所有可見的內容都是body的一部份。</p>
-<p>其中子節點會繼承父節點的屬性。</p>
-<h1 id="CSS-Selector"><a href="#CSS-Selector" class="headerlink" title="CSS Selector"></a>CSS Selector</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>以下兩種選擇會是哪一種比較快？<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">h1 &#123; ... &#125;</div><div class="line">div p &#123; ... &#125;</div></pre></td></tr></table></figure></p>
-<p>第一種會找所有的h1並且設置屬性，第二種則是找到所有的p且往上找是否父節點為div。</p>
-<p>因此直接選擇h1會比較快。</p>
-<p>CSS是從右到左，因為從右邊讀取效率會比較高，從左到右會浪費許多時間在錯誤的查找上。</p>
-<p><a href="http://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left" target="_blank" rel="external">Why do browsers match CSS selectors from right to left?</a></p>
-<h1 id="渲染樹"><a href="#渲染樹" class="headerlink" title="渲染樹"></a>渲染樹</h1><p>建立渲染樹的過程中，會從DOM中找node且在CSSOM找是否有相對應的node然後加到渲染樹上。<br><img src="/img/Web/Performance/render_tree.PNG" alt=""><br>由於渲染樹只會加上可見的元素，因此<code>display:none</code>的span不會加到樹上，但Pseudo Elements則會。</p>
-<h1 id="Attribute"><a href="#Attribute" class="headerlink" title="Attribute"></a>Attribute</h1><p><code>viewport</code>可以告知瀏覽器Layout的寬度應該多長，若沒告知則為預設的980px。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width;"</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="media"><a href="#media" class="headerlink" title="media"></a>media</h2><p>若是不希望阻塞渲染，可在css來源的tag加上media屬性，如此一來檔案仍會下載但不會阻塞。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"print.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"print"</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><p>可在不需要依賴DOM的script上加上async屬性，如此一來就不會阻塞渲染。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"app.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h1 id="Critical-Rendering-Path-Diagrams"><a href="#Critical-Rendering-Path-Diagrams" class="headerlink" title="Critical Rendering Path Diagrams"></a>Critical Rendering Path Diagrams</h1><p><img src="/img/Web/Performance/diagram.png" alt=""><br>發出HTML請求-&gt;發出CSS請求並同時建立DOM-&gt;建立CSSOM-&gt;渲染</p>
-<p><img src="/img/Web/Performance/diagram2.png" alt=""><br>發出HTML請求-&gt;發出CSS、JavaScript請求並同時建立DOM(遇到JavaScript處則暫停建立DOM)-&gt;建立CSSOM-&gt;執行JavaScript-&gt;繼續建立DOM-&gt;渲染</p>
-<p>瀏覽器會使用<code>preload scanner</code>將所有css和js一起載入。</p>
-<h1 id="Pixel-Pipeline"><a href="#Pixel-Pipeline" class="headerlink" title="Pixel Pipeline"></a>Pixel Pipeline</h1><p>利用js修改DOM渲染的流程可以分為以下三種</p>
-<ol>
-<li><p>JS / CSS &gt; Style &gt; Layout &gt; Paint &gt; Composite<br><img src="/img/Web/Performance/pipeline1.jpg" alt=""><br>像是修改<code>margin-left</code>、<code>width</code>等等。</p>
-</li>
-<li><p>JS / CSS &gt; Style &gt; Paint &gt; Composite<br><img src="/img/Web/Performance/pipeline2.jpg" alt=""><br>像是修改<code>background-image</code>、<code>color</code>等等。</p>
-</li>
-<li><p>JS / CSS &gt; Style &gt; Composite<br><img src="/img/Web/Performance/pipeline3.jpg" alt=""><br>像是修改<code>transform</code>等等。</p>
-</li>
-</ol>
-<p>需要的流程越少成本就越小，因此要盡量選擇第三種方法。</p>
-<p><a href="https://csstriggers.com/" target="_blank" rel="external">CSS Triggers</a>可以查看每個style所會觸發的流程。</p>
-<h1 id="Load-Idle-Animate-Response"><a href="#Load-Idle-Animate-Response" class="headerlink" title="Load, Idle, Animate, Response"></a>Load, Idle, Animate, Response</h1><p>我們必須把真正需要的在Load載入來減少時間，像是基本架構、重要的文字等等。</p>
-<p>在Idle的時候則可以載入等一下可能會使用到的東西。</p>
-<h1 id="Chrome-DevTools"><a href="#Chrome-DevTools" class="headerlink" title="Chrome DevTools"></a>Chrome DevTools</h1><p>最近Chrome的Timeline和Profiles等等似乎都合併到Performance裡了。</p>
-<p>FPS Metor用來查看即時的狀況<br><img src="/img/Web/Performance/devtool1.PNG" alt=""></p>
-<p>Paint Flashing用來查看即時Paint的情形<br><img src="/img/Web/Performance/devtool12.PNG" alt=""></p>
-<p>經由左上角的錄製鈕來逐Frame檢視<br><img src="/img/Web/Performance/devtool2.PNG" alt=""></p>
-<p>Screenshots用來查看每個Frame的當前畫面直接鎖定需要的地方<br><img src="/img/Web/Performance/devtool3.PNG" alt=""></p>
-<p>若是大量動畫的狀態要盡量保持在60fps也就是16ms以下(1000/60)才會順暢。<br><img src="/img/Web/Performance/devtool4.PNG" alt=""></p>
-<p>Summary圖表顯示了所花的時間<br><img src="/img/Web/Performance/devtool5.PNG" alt=""></p>
-<p>Event Log則可以看細部所花的時間，Self Time代表在程式內部的，Total Time則是包含了內部呼叫的其他函式。<br><img src="/img/Web/Performance/devtool6.PNG" alt=""></p>
-<p>開啟Memory選項則可以看到內存的使用情形。<br><img src="/img/Web/Performance/devtool9.PNG" alt=""></p>
-<h1 id="實機測試-Chrome-DevTools"><a href="#實機測試-Chrome-DevTools" class="headerlink" title="實機測試 + Chrome DevTools"></a>實機測試 + Chrome DevTools</h1><p>若希望使用開發者工具來檢視手機上的結果<br>可開啟<code>設定-&gt;開發者選項-&gt;USB偵錯</code><br><img src="/img/Web/Performance/devtool7.png" alt=""><br>在Chrome上連結設<code>chrome://inspect</code>即可看見手機上的網頁，在需要測試的按<code>inspect</code>即可進入開發者模式。</p>
-<p>若想要直接在手機上開啟本機伺服器檔案，則可以Port forwarding設置且按下<code>Enable port forwarding</code>即可。<br><img src="/img/Web/Performance/devtool8.png" alt=""></p>
-<h1 id="Micro-Optimizations"><a href="#Micro-Optimizations" class="headerlink" title="Micro Optimizations"></a>Micro Optimizations</h1><p>由於JavaScript不見得是照我們寫的運行，我們無法知道如何引擎是做最佳化，所以不需要花時間在微最佳化上。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Don't waste time between them</span></div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; len ; i ++ ) ...</div><div class="line"></div><div class="line">while ( ++ i &lt; len ) ...</div></pre></td></tr></table></figure>
-<h1 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h1><p>雖然60fps換算下來是16ms，但我們實際上必須要在更短的時間內執行完程式，因為會有額外的時間拿來做style計算、layer管理等等。</p>
-<p>setTimeout和setInterval不適合拿來處理動畫，因為若我們在像是style計算中突然要執行JavaScript，如此一來整個渲染流程又會重新執行而造成頻率不一致，而requestAnimationFrame可以妥善的安排JavaScript執行的時間。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">time</span>) </span>&#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> requestId = requestAnimationFrame(render);</div><div class="line"><span class="comment">//取消動畫</span></div><div class="line">cancelAnimationFrame(requestId);</div></pre></td></tr></table></figure>
-<h1 id="Web-Workers"><a href="#Web-Workers" class="headerlink" title="Web Workers"></a>Web Workers</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="external">Web Workers</a>可以讓js運行在不同的thread而不會造成阻塞。</p>
-<h1 id="Memory-Management"><a href="#Memory-Management" class="headerlink" title="Memory Management"></a>Memory Management</h1><ol>
-<li>盡量別用delete，因為JavaScript引擎會自動最佳化，若是delete其中的元素則得重新計算。</li>
-<li>null不會真的清空物件，只會讓物件指向null</li>
-<li>全域變數不會被GC回收</li>
-<li>取消綁定事件若不再需要</li>
-<li>若使用資料快取要妥善管理</li>
-</ol>
-<p>考慮以下的情況<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myObj = &#123;</div><div class="line">    <span class="attr">callMeMaybe</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> myRef = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">var</span> val = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'Time is running out!'</span>); </div><div class="line">            myRef.callMeMaybe();</div><div class="line">        &#125;, <span class="number">1000</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">myObj.callMeMaybe();</div><div class="line">myObj = <span class="literal">null</span>;</div></pre></td></tr></table></figure></p>
-<p>即使設為null，setTimeout仍會持續進行，這是因為myRef在closure中指向myObj，因此myObj不會被GC回收。</p>
-<p><a href="https://www.smashingmagazine.com/2012/11/writing-fast-memory-efficient-javascript/" target="_blank" rel="external">How To Write Fast, Memory-Efficient JavaScript</a></p>
-<h1 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h1><p>當Selector條件越多效能就越受影響，使用<code>.box-three</code>會比<code>:nth-child(3)</code>的選擇好。</p>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://dl.dropboxusercontent.com/u/2272348/codez/udacity/box-recalc-style-slow.html" target="_blank" rel="external">box-recalc-style-slow</a></p>
-<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span><span class="selector-class">.toggled</span> <span class="selector-tag">main</span> <span class="selector-class">.box-container</span> <span class="selector-class">.box</span><span class="selector-pseudo">:nth-child(2n)</span> &#123;</div><div class="line">	<span class="attribute">background</span>: <span class="number">#777</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>JavaScript<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">button.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">document</span>.body.classList.toggle(<span class="string">'toggled'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>如此一來每個<code>.box</code>都會看且判斷是否是偶數個，再逐一往上(左)找是否符合</p>
-<p>效能<br><img src="/img/Web/Performance/performance2.png" alt=""></p>
-<p>改進方法如下</p>
-<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.box</span><span class="selector-class">.gray</span> &#123;</div><div class="line">	<span class="attribute">background-color</span>: <span class="number">#777</span> <span class="meta">!important</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p> JavaScript<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">button.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">document</span>.body.classList.toggle(<span class="string">'toggled'</span>);</div><div class="line">	<span class="keyword">var</span> boxes = container.querySelectorAll(<span class="string">".box"</span>) ;</div><div class="line">	<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; boxes.length ; i += <span class="number">2</span> )&#123;</div><div class="line">		boxes[i].classList.toggle(<span class="string">'gray'</span>,<span class="built_in">document</span>.body.classList.contains(<span class="string">'toggled'</span>));</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p> 如此一來會直接先找到<code>.gray</code>才找<code>.box</code>，省去了一半的數量</p>
-<p> 效能<br> <img src="/img/Web/Performance/performance.png" alt=""></p>
-<h1 id="Forced-Synchronous-Layouts"><a href="#Forced-Synchronous-Layouts" class="headerlink" title="Forced Synchronous Layouts"></a>Forced Synchronous Layouts</h1><p>若我們每次都要取得Layout再重新計算，這樣會造成<code>Forced Synchronous Layouts</code>。</p>
-<h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo"></a>Demo</h2><p><a href="http://output.jsbin.com/aqavin/2/quiet" target="_blank" rel="external">Slow stuff</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (goSlow) &#123;</div><div class="line">	<span class="keyword">while</span> (i--) &#123;</div><div class="line">		ps[i].style.width = sizer.offsetWidth + <span class="string">'px'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">	size = sizer.offsetWidth;</div><div class="line">	<span class="keyword">while</span> (i--) &#123;</div><div class="line">		ps[i].style.width = size + <span class="string">'px'</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到先把Node的寬度快取住會比每次都要重新取得快的許多。</p>
-<h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://github.com/udacity/pizza-perf/blob/master/pizza.html" target="_blank" rel="external">pizza-perf</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>).length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> dx = determineDx(<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i], size);</div><div class="line">		<span class="keyword">var</span> newwidth = (<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i].offsetWidth + dx) + <span class="string">'px'</span>;</div><div class="line">		<span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>)[i].style.width = newwidth;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>改為<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> randomPizzas = <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>) ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; randomPizzas.length; i++) &#123;</div><div class="line">		<span class="keyword">var</span> dx = determineDx(randomPizzas[i], size);</div><div class="line">		<span class="keyword">var</span> newwidth = (randomPizzas[i].offsetWidth + dx) + <span class="string">'px'</span>;</div><div class="line">		randomPizzas[i].style.width = newwidth;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>查看determineDx函式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">determineDx</span> (<span class="params">elem, size</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> oldwidth = elem.offsetWidth;</div><div class="line">	<span class="keyword">var</span> windowwidth = <span class="built_in">document</span>.querySelector(<span class="string">"#randomPizzas"</span>).offsetWidth;</div><div class="line">	<span class="keyword">var</span> oldsize = oldwidth / windowwidth;</div><div class="line"></div><div class="line">	<span class="comment">// Changes the slider value to a percent width</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">sizeSwitcher</span> (<span class="params">size</span>) </span>&#123;</div><div class="line">		<span class="keyword">switch</span>(size) &#123;</div><div class="line">			<span class="keyword">case</span> <span class="string">"1"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.25</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"2"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.3333</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"3"</span>:</div><div class="line">			<span class="keyword">return</span> <span class="number">0.5</span>;</div><div class="line">			<span class="keyword">default</span>:</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"bug in sizeSwitcher"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> newsize = sizeSwitcher(size);</div><div class="line">	<span class="keyword">var</span> dx = (newsize - oldsize) * windowwidth;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> dx;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>發現原本是計算差值然後加上去，這樣子可以改寫成直接給予新的值即可，因此改寫為<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changePizzaSizes</span>(<span class="params">size</span>) </span>&#123;</div><div class="line">	<span class="keyword">switch</span>(size) &#123;</div><div class="line">		<span class="keyword">case</span> <span class="string">"1"</span>:</div><div class="line">		newWidth = <span class="number">0.25</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">"2"</span>:</div><div class="line">		newWidth = <span class="number">0.3333</span>;</div><div class="line">		<span class="keyword">case</span> <span class="string">"3"</span>:</div><div class="line">		newWidth = <span class="number">0.5</span>;</div><div class="line">		<span class="keyword">default</span>:</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">"bug in sizeSwitcher"</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> randomPizzas = <span class="built_in">document</span>.querySelectorAll(<span class="string">".randomPizzaContainer"</span>) ;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; randomPizzas.length; i++) &#123;</div><div class="line">		randomPizzas[i].style.width = newWidth + <span class="string">"%"</span> ;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="CSS-or-JavaScript"><a href="#CSS-or-JavaScript" class="headerlink" title="CSS or JavaScript?"></a>CSS or JavaScript?</h1><p>動畫究竟該用CSS還是JavaScript?</p>
-<ol>
-<li>當元素是單一的用CSS</li>
-<li>當需要信號控制像是stop、slow down、reverse等等則用JavaScript</li>
-<li>更改Layout(位置)或需要Paint是相當耗效能的</li>
-<li>盡量用transforms或opacity</li>
-<li>原則上CSS動畫會在<code>compositor thread</code>上執行，所以當主執行緒有繁重的任務時動畫不會被干擾，JavaScript則會佔用主執行緒</li>
-<li>不論CSS或JavaScript動畫只要觸發Layout或Paint都會在主執行緒上執行</li>
-</ol>
-<p><a href="https://developers.google.com/web/fundamentals/design-and-ui/animations/css-vs-javascript" target="_blank" rel="external">CSS Versus JavaScript Animations</a><br><a href="https://developers.google.com/web/fundamentals/design-and-ui/animations/animations-and-performance" target="_blank" rel="external">Animations and Performance</a></p>
-<h1 id="will-change"><a href="#will-change" class="headerlink" title="will-change"></a>will-change</h1><p>利用多個Layer可以讓元素跳過Layout和Paint而直接到Composite，但過多的Layer會造成管理Layer上效能的問題。</p>
-<p><code>will-change</code>屬性會告知瀏覽器即將運行的事件，讓瀏覽器建立一個Layer<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.circle</span> &#123;</div><div class="line">	<span class="attribute">will-change </span>: transform;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>也可以在will-change上設置top、left等等，雖然會增加一層Layer但仍得進行Layout和Paint，因此不會有太大的改善。</p>
-<p>在舊的瀏覽器上可以使用<code>translateZ</code>達到同樣的效果，一樣會告知瀏覽器建立Layer。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.circle</span>&#123;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(0) ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>可以用Chrome的DevTools的Layer標籤查看網頁Layer情形。<br><img src="/img/Web/Performance/devtool10.PNG" alt=""></p>
-<p>可在Detail看到形成Layer的原因。<br><img src="/img/Web/Performance/devtool11.PNG" alt=""></p>
-<h2 id="Demo-3"><a href="#Demo-3" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://dl.dropboxusercontent.com/u/2272348/codez/parallax/demo-promo/index.html" target="_blank" rel="external">demo-promo</a></p>
-<p>在<code>section#background</code>加上<code>will-change:transform;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">section#background &#123;</div><div class="line">	will-change: transform;</div><div class="line">	background: #1e2124 url(&quot;../../images/parallax-bg.jpg&quot;) center 0 no-repeat;</div><div class="line">	width: 960px;</div><div class="line">	height: 3000px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>可以在發現原本Paint整個頁面的變成只剩下Paint滾動條。</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://developers.google.com/web/" target="_blank" rel="external">Learn How to Develop the Next Generation of Applications for the Web</a><br><a href="https://classroom.udacity.com/courses/ud884" target="_blank" rel="external">Website Performance Optimization</a><br><a href="https://classroom.udacity.com/courses/ud860" target="_blank" rel="external">Browser Rendering Optimization</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近看了Google的&lt;a href=&quot;https://developers.google.com/web/&quot;&gt;Learn How to Develop the Next Generation of Applications for the Web&lt;/a&gt;和Udacity上介紹關於Performance的影片在此紀錄一下，範例及圖片大多取自於其中。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/categories/Web/"/>
-    
-      <category term="Overall" scheme="http://jeno5980515.github.io/categories/Web/Overall/"/>
-    
-    
-      <category term="Web" scheme="http://jeno5980515.github.io/tags/Web/"/>
-    
-      <category term="Performance" scheme="http://jeno5980515.github.io/tags/Performance/"/>
     
   </entry>
   
