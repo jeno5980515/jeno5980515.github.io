@@ -836,13 +836,6 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/Tree/</loc>
-        <lastmod>2017-09-06T05:33:21.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jeno5980515.github.io/tags/98/</loc>
         <lastmod>2017-09-06T05:33:21.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -857,15 +850,120 @@
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/LeetCode/</loc>
+        <loc>http://jeno5980515.github.io/tags/142/</loc>
         <lastmod>2017-09-06T07:09:40.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jeno5980515.github.io/tags/142/</loc>
-        <lastmod>2017-09-06T07:09:40.000Z</lastmod>
+        <loc>http://jeno5980515.github.io/tags/144/</loc>
+        <lastmod>2017-09-07T01:40:22.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/BST/</loc>
+        <lastmod>2017-09-07T01:44:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/230/</loc>
+        <lastmod>2017-09-07T01:44:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/287/</loc>
+        <lastmod>2017-09-07T02:07:44.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/442/</loc>
+        <lastmod>2017-09-07T02:15:37.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/451/</loc>
+        <lastmod>2017-09-07T02:18:29.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/508/</loc>
+        <lastmod>2017-09-07T02:23:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/513/</loc>
+        <lastmod>2017-09-07T02:27:18.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/515/</loc>
+        <lastmod>2017-09-07T03:18:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/647/</loc>
+        <lastmod>2017-09-07T03:22:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Palindromic/</loc>
+        <lastmod>2017-09-07T03:22:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/String/</loc>
+        <lastmod>2017-09-07T03:22:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/Tree/</loc>
+        <lastmod>2017-09-07T03:25:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/654/</loc>
+        <lastmod>2017-09-07T03:25:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/LeetCode/</loc>
+        <lastmod>2017-09-07T03:29:52.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jeno5980515.github.io/tags/670/</loc>
+        <lastmod>2017-09-07T03:29:52.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

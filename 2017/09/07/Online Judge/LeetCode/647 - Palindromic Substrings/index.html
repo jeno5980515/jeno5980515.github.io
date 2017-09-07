@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[LeetCode] 647 - Palindromic Substrings | Jeno&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="題意輸出字串中回文子字串的個數。">
+<meta name="keywords" content="LeetCode,647,Palindromic,String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode] 647 - Palindromic Substrings">
+<meta property="og:url" content="http://jeno5980515.github.io/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/index.html">
+<meta property="og:site_name" content="Jeno's Blog">
+<meta property="og:description" content="題意輸出字串中回文子字串的個數。">
+<meta property="og:updated_time" content="2017-09-07T03:22:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[LeetCode] 647 - Palindromic Substrings">
+<meta name="twitter:description" content="題意輸出字串中回文子字串的個數。">
+  
+    <link rel="alternative" href="/atom.xml" title="Jeno&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-61809976-1', 'auto');
+	ga('send', 'pageview');
+  </script>  
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo"></a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+          <a class="main-nav-link" href="/">Tags</a>
+        
+          <a class="main-nav-link" href="/">Works</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jeno5980515.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Online Judge/LeetCode/647 - Palindromic Substrings" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/" class="article-date">
+  <time datetime="2017-09-07T03:18:30.000Z" itemprop="datePublished">9月 7 2017</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Online-Judge/">Online Judge</a>►<a class="article-category-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode] 647 - Palindromic Substrings
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="題意"><a href="#題意" class="headerlink" title="題意"></a>題意</h2><p>輸出字串中回文子字串的個數。</p>
+<a id="more"></a>
+<h2 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h2><p>DP。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dp(i, j) 代表從 i 開始至 j 的子字串是否為回文</div><div class="line">dp(i, j) = true if s(i) = s(j) &amp; dp(i+1, j-1) = true</div><div class="line">	 = false else</div></pre></td></tr></table></figure>
+<h2 id="程式"><a href="#程式" class="headerlink" title="程式"></a>程式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * @param &#123;string&#125; s</div><div class="line"> * @return &#123;number&#125;</div><div class="line"> */</div><div class="line"><span class="keyword">var</span> countSubstrings = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</div><div class="line">  <span class="keyword">let</span> bool = <span class="built_in">Array</span>.apply(<span class="literal">null</span>, <span class="built_in">Array</span>(s.length+<span class="number">1</span>)).map(<span class="function"><span class="params">row</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Array</span>(s.length+<span class="number">1</span>).fill(<span class="literal">true</span>));</div><div class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = s.length - <span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i -- )&#123;</div><div class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> j = i + <span class="number">1</span> ; j &lt; s.length ; j ++ )&#123;</div><div class="line">      <span class="keyword">if</span> ( s[i] === s[j] &amp;&amp; bool[i+<span class="number">1</span>][j<span class="number">-1</span>] === <span class="literal">true</span> )&#123;</div><div class="line">        bool[i+<span class="number">1</span>][j<span class="number">-1</span>] = <span class="literal">true</span>;</div><div class="line">        count ++;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        bool[i][j] = <span class="literal">false</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> count + s.length;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jeno5980515.github.io/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/" data-id="cj79vvqbc00va0v3ho47d2mho" class="article-share-link">Share</a>
+      
+        <a href="http://jeno5980515.github.io/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/647/">647</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Palindromic/">Palindromic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String/">String</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/07/Online Judge/LeetCode/560 - Subarray Sum Equals K/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [LeetCode] 560 - Subarray Sum Equals K
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/07/Online Judge/LeetCode/654 - Maximum Binary Tree/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[LeetCode] 654 - Maximum Binary Tree</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/">Content Management System</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Content-Management-System/Joomla/">Joomla</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/">Learning Note</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Learning-Note/Machine-Learning/">Machine Learning</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/">Mobile Application</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Android/">Android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mobile-Application/Cordova/">Cordova</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/">Online Judge</a><span class="category-list-count">47</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Codewars/">Codewars</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Google-Code-Jam/">Google Code Jam</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/LeetCode/">LeetCode</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/Pwnable-kr/">Pwnable.kr</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Online-Judge/UVa/">UVa</a><span class="category-list-count">11</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Other/">Other</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/">Programming Language</a><span class="category-list-count">19</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/C-C/">C/C++</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Java/">Java</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/JavaScript/">JavaScript</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-Language/Python/">Python</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Security/">Security</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Server/">Server</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Server/CentOS/">CentOS</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/">Tool</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/">Parser</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Parser/Bison/">Bison</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/">Scanner</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tool/Scanner/Flex/">Flex</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">44</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Front-End/">Front-End</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Hexo/">Hexo</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Markdown/">Markdown</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Node-js/">Node.js</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Other/">Other</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Overall/">Overall</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/PHP/">PHP</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Phoenix/">Phoenix</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/Redux/">Redux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/jQuery/">jQuery</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul class="recent">
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/670 - Maximum Swap/">[LeetCode] 670 - Maximum Swap</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/654 - Maximum Binary Tree/">[LeetCode] 654 - Maximum Binary Tree</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/">[LeetCode] 647 - Palindromic Substrings</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/560 - Subarray Sum Equals K/">[LeetCode] 560 - Subarray Sum Equals K</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/515 - Find Largest Value in Each Tree Row/">[LeetCode] 515 - Find Largest Value in Each Tree Row</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/513 - Find Bottom Left Tree Value/">[LeetCode] 513 - Find Bottom Left Tree Value</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/508 - Most Frequent Subtree Sum/">[LeetCode] 508 - Most Frequent Subtree Sum</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/451 - Sort Characters By Frequency/">[LeetCode] 451 - Sort Characters By Frequency</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/442 - Find All Duplicates in an Array/">[LeetCode] 442 - Find All Duplicates in an Array</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/Online Judge/LeetCode/287 - Find the Duplicate Number/">[LeetCode] 287 - Find the Duplicate Number</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+      <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+		<li><a href="http://elefanfan.com:8080/avalon/" target="_blank" >Online Avalon</a></li>
+		<li><a href="http://jeno5980515.github.io/MapleStory-Defense/" target="_blank" >MapleStory Defense</a></li>
+		<li><a href="https://rawgit.com/jeno5980515/TowerGame/master/index.html" target="_blank" >Building House</a></li>
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+  	  <div class="loader"></div>
+	  <div class="socialgroup">
+		  <span calss="loader"></span>
+		  <a href="https://github.com/jeno5980515" target="_blank" title="github" ><span class="icon-github"></span></a>
+		  <a href="https://www.facebook.com/profile.php?id=100000234360427" target="_blank" title="facebook" ><span class="icon-facebook"></span></a>
+		  <a href="http://uhunt.felix-halim.net/id/437494" target="_blank" title="uhunt" ><span class="icon-uhunt"></span></a>
+		  <a href="http://tw.linkedin.com/in/jeno5980515" target="_blank" title="linkedin" ><span class="icon-linkedin"></span></a>
+	  </div>
+	  <div id="footer-info" class="inner">
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and Theme by 
+	  <a href="http://hexo.io/hexo-theme-landscape/" >landscape</a> &copy; Chi-Wei Liu 
+	  </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+    <a href="/" class="mobile-nav-link">Tags</a>
+  
+    <a href="/" class="mobile-nav-link">Works</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'jeno5980515';
+  
+  var disqus_url = 'http://jeno5980515.github.io/2017/09/07/Online Judge/LeetCode/647 - Palindromic Substrings/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
